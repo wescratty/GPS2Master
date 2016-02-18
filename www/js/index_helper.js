@@ -304,7 +304,7 @@ function tryEmail(){
             bcc:     [],
             subject: 'Cordova data',
             body:    this.the_message,
-            attachments: ['file:/'+logOb.fullPath + "/" + "data.csv"]
+            attachments: [logOb.fullPath + "/" + "data.csv"]
 //            .fullPath + "/" + fileName
 //             attachments: ['file:/'+logOb.fullPath]
 //             attachments: ['file://css/data.csv']
