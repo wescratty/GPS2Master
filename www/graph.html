@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <title> Graph view</title>
+    </head>
+
+    <body>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+            <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+            <script src="//www.chartjs.org/assets/Chart.min.js"></script>
+            <script src="js/Chart.js"></script>
+            <script src="js/Chart.js"></script>
+            <script src="js/location.js"></script>
+            <script src="js/index_helper.js"></script>
+            <script src="js/graph.js"></script>
+            <script src = "js/io.js"></script>
+            
+                
+    <body>
+        <div class="wrapper">
+         <!-- <div class="chart"> -->
+
+        <canvas id="updating-chart" width="500px" height="200px"></canvas>
+       
+            
+        
+         <!-- </div> -->
+         <div id="sidebuttomPanel"> 
+        </div>
+
+
+            <button id = "pos" style="width:100;height:100;background-color:red"onclick="pos()">D</button>
+            <button id = "vol" style="width:100;height:100;background-color:blue"onclick="vol()">V</button>
+            <button id = "acc" style="width:100;height:100;background-color:green"onclick="acc()">A</button>
+            <button id = "dis" style="width:100;height:100;background-color:yellow"onclick="dis()">P</button>
+            <button onclick="startLocationPoints()">Start/Stop location</button>
+            <button onclick="setLocation()">Set location</button>
+            <button onclick="load_test_data()">load testdata</button>
+            <button onclick="reset()">Reset Graph</button>
+        
+        
+            <br/>
+            <script type="text/javascript">
+                
+                
+                <!-- Start of Jquerry -->
+                
+                $("document").ready(function() {
+                                    // $("#wrapper").css("width", 300);
+                                    // $("#wrapper").css("margin", "auto");
+                                    // $("#latLonWrapper").css("float", "left");
+                                    // $("#tableWrapper").css("float", "right");
+                                    // $("#sidebuttomPanel").css("float", "right");
+                                    // $("#lineOne").css("color", "red");
+                                    // $("#lineTwo").css("color", "blue");
+                                    // $("#lineThree").css("color", "green");
+                                    // $.getScript('/index_helper.js');
+                                    
+                                    });
+                                    
+                                    <!-- End of Jquerry -->
+                                    
+                </script>
+            
+           <!--  <div id="latLonWrapper">
+                <p id="geolocation">Finding geolocation...</p>
+            </div> -->
+           <!--  <div id="tableWrapper">
+                <div id = "tableDiv">
+                </div>
+                <button id="create">Create CSV</button> <a download="data.csv" id="downloadlink" style="display: none">Download</a>
+            </div> -->
+            <!-- <div>
+                <a href="#" id='lineOne'>Toggle Position</a>
+            </div>
+            <div>
+                <a href="#" id='lineTwo'>Toggle Volocity</a>
+            </div>
+            <div>
+                <a href="#" id='lineThree'>Toggle Exceleration</a>
+            </div> -->
+            
+            
+        </div> <!-- End of Wrapper -->
+        
+        <!-- <input type="file" id="file-input" />
+        <h3>Contents of the file:</h3>
+        <pre id="file-content"></pre> -->
+        
+        <div class="input-area ch30">
+            <input class="inputBox" id="fileNameInput" value="//data.csv"/>
+            <input class="inputBox" id="textInput" placeholder="Add message"/>
+        </div>
+        <div class="action-area ch30">
+            <button class="button" id="writeFileButton">Write</button>
+            <button class="button" id="readFileButton">Read</button>
+            <button class="button" id="deleteFileButton">Delete</button>
+            <button class="button" id="emailFileButton">Email</button>
+            <!-- <button onclick="tryEmail();">email data</button> -->
+        </div>
+        <div class="result-area ch40">
+            <div class="results">
+                <div id="result" class="desc"></div>
+            </div>
+            <div class="separator"></div>
+        </div>
+        </div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+    </body>
+</html>
