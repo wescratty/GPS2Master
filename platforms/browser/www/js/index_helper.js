@@ -100,19 +100,7 @@ console.log(device.platform);
         });
     
     }else if (device.platform == "browser") {
-      //     window.resolveLocalFileSystemURL = window.resolveLocalFileSystemURL ||
-      //                                window.webkitResolveLocalFileSystemURL;
-
-  
-    
-      // window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dir) {
-      //       console.log("Main Dir:", dir);
-      //       dir.getFile("data.csv", {create: true}, function (file) {
-      //           console.log("File: ", file);
-      //           logOb = file;
-      //           //writeLog("App started");
-      //       });
-      //   });
+      //  Was thinking in here that we could change to a file selector 
         
     }
     

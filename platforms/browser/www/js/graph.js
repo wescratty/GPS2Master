@@ -186,7 +186,7 @@ function addDataToChart(aPoint){
         distance.push(total_distance);
 
         if (num_dis_points>1) {
-            rat = dv_dt(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2]);
+            rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
             rate.push(rat);
             ratePoints.push(new point(num_dis_points-2,rat));
             var  num_rate_points = ratePoints.length;
@@ -201,7 +201,9 @@ function addDataToChart(aPoint){
     };
 
     if (num_dis_points>2) {
-      lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
+            lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],time);
+
+      // lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
     time = time+1;
     };
     
@@ -224,7 +226,6 @@ function reset(){
              rate = [];
              acceleration = [];
 
-
              startTime;
              count = 0;
              time = 0;
@@ -233,24 +234,6 @@ function reset(){
             time = 0;
             window.lineChart.destroy();
             createGraph();
-            
-
-            // GROWL
-            // growl("danger", dataset.title);
-         // } 
-         // else {
-
-        //     // GROWL
-        //     growl("info", "Kept latest");
-        // }
-// console.log(lineChart.datasets.length);
-// console.log(lineChart.datasets[0].length);
-//   for (var i = 0; i< lineChart.datasets.length; i++) {
-    
-//       lineChart.datasets.pop();
-    
-    
-//   };
     
     lineChart.update();
 }
@@ -265,13 +248,15 @@ function add_graph_line(){
     
 }
 
-// unimplemented and maybe depricated
-function flow(){
-    var tempPoint = getGeoPosition();
+// // unimplemented and maybe depricated
+// function flow(){
+//     var tempPoint = getGeoPosition();
     
-}
+// }
 
 function getGeoPosition(position){
+  //if failure increment time and retry to get position and do not return until
+  // look at chart.js to input to x
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
     return new point(lat,lon);
