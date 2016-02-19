@@ -74,6 +74,7 @@ function onDeviceReady() {
     var fileApp = new FileApp();
     fileApp.run();
 console.log(device.platform);
+    console.log(device.platform);
      if (device.platform == "Android") {
         window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dir) {
             console.log("Main Dir android:", dir);
@@ -84,109 +85,25 @@ console.log(device.platform);
             });
         });
     }
-    else if (device.platform == "ios") {
+    else if (device.platform == "iOS") {
+       
+            window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
+            console.log("Main Dir:", dir);
+            dir.getFile("data.csv", {create: true}, function (file) {
+                console.log("File: ", file);
+                logOb = file;
+                //writeLog("App started");
+            });
+        });
+    
+    }else if (device.platform == "browser") {
         window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-
-        // window.resolveLocalFileSystemURL(cordova.file.applicationDirectory, function (dir) {
-        //     console.log("Main Dir ios:", dir);
-        //     dir.getFile("data.csv", {create: true}, function (file) {
-        //         console.log("File: ", file);
-        //         logOb = file;
-        //         //writeLog("App started");
-        //     });
-        // });
-    }else if (device.platform == "browser") { 
-        window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, gotFS, fail);
-        console.log("Main Dir browser:");
-        // window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + "www/index.html", function (dir){
-
-
-        // // window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
-        //     console.log("Main Dir browser:", dir);
-        //     dir.getFile("export.csv", {create: true}, function (file) {
-        //         console.log("File: ", file);
-        //         logOb = file;
-        //         //writeLog("App started");
-        //     });
-        // });
+        console.log("Main Dir browser:", dir);
+        
     }
     
 }
-
-
-   
-
-    // function fail() {
-    //     console.log("failed to get filesystem");
-    // }
-
-    function gotFS(fileSystem) {
-        console.log("got filesystem");
-
-          
-        // fileSystem.root.getFile("data.csv", {create: true, exclusive: false}, gotFileEntry, fail);
-
-    }
-
-    // function gotFileEntry(fileEntry) {
-    //     fileEntry.file(gotFile, fail);
-    // }
-
-    // function gotFile(file){
-    //     logOb = file;
-    //     // readDataUrl(file);
-    //     // readAsText(file);
-    // }
-
-    function gotFileEntry(fileEntry) {
-        logOb = fileEntry;
-        console.log(logOb.fullPath);
-        // fileEntry.createWriter(gotFileWriter, fail);
-    }
-
-    function gotFileWriter(writer) {
-        writer.onwriteend = function(evt) {
-            console.log("contents of file now 'some sample text'");
-            writer.truncate(11);
-            writer.onwriteend = function(evt) {
-                console.log("contents of file now 'some sample'");
-                writer.seek(4);
-                writer.write(" different text");
-                writer.onwriteend = function(evt){
-                    console.log("contents of file now 'some different text'");
-                }
-            };
-        };
-        writer.write("some sample text");
-    }
-
-    function fail(error) {
-        console.log(error.code);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function startLocationPoints(){
@@ -201,6 +118,7 @@ function startLocationPoints(){
 
 function load_test_data(){
 
+// how to change a point
 
     // console.log(dv_dt(new point(3,20),new point(0,0)));
     //  console.log("\n");
@@ -260,9 +178,6 @@ function printPointsArray(){
 }
 
 
-
-
-
 function makeCSVString(an_array){
     var temp ;
     var dat = an_array[0];
@@ -291,12 +206,13 @@ function loadCSVString(aString){
 
 
 function tryEmail(){
+    console.log(logOb.nativeURL);
 
     this.the_message = "some stuff";
     cordova.plugins.email.isAvailable(
     function (isAvailable) {
         // alert('Service is not available') unless isAvailable;
-        console.log("logOb.fullPath");
+
         
         cordova.plugins.email.open({
             to:      'wescratty@gmail.com',
@@ -304,90 +220,12 @@ function tryEmail(){
             bcc:     [],
             subject: 'Cordova data',
             body:    this.the_message,
-            attachments: ['file:/'+logOb.fullPath + "/" + data.csv]
-//            .fullPath + "/" + fileName
-//             attachments: ['file:/'+logOb.fullPath]
-//             attachments: ['file://css/data.csv']
+            attachments: [logOb.nativeURL]
     
         });
     }
 );
-
-//     cordova.plugins.email.open({
-//     to:      'max@mustermann.de',
-//     cc:      'erika@mustermann.de',
-//     bcc:     ['john@doe.com', 'jane@doe.com'],
-//     subject: 'Greetings',
-//     body:    'How are you? Nice greetings from Leipzig',
-//     attachments: 'file://resources/data.csv'
-// });
-    
 }
-
-
-
-
-
-function writeF() {
-    if(!logOb) return;
-    //var log = str + " [" + (new Date()) + "]\n";
-    var text = "Distance"+"%0D%0A"+makeCSVString(distancePoints)+"Velocity"+"%0D%0A"+makeCSVString(ratePoints)+"Acceleration"+"%0D%0A"+makeCSVString(accelerationPoints);
-    console.log("Writing to file: "+text);
-    logOb.createWriter(function(fileWriter) {
-
-        fileWriter.seek(fileWriter.length);
-
-        var blob = new Blob([text], {type:'text/csv'});
-        fileWriter.write(blob);
-        console.log("Finished writing");
-    }, fail);
-}
-
-function readF() {
-    logOb.file(function(file) {
-        var reader = new FileReader();
-
-        reader.onloadend = function(e) {
-            console.log(this.result);
-        };
-
-        reader.readAsText(file);
-
-        var notificationBox = document.getElementById("result");
-    notificationBox.textContent = reader.readAsText(file);
-    }, fail);
-}
-
-function deleteF() {
-/*    if(!logOb) return;
-    logOb.createWriter(function(fileWriter) {
-        fileWriter.seek(fileWriter.length);
-        var blob = new Blob("", {type:'text/csv'});
-        fileWriter.write(blob);
-        console.log("Finished deleting");
-    }, fail);*/
-    logOb.clearData();
-}
-/*
-function emailMessage() {
-    console.log(logOb.nativeURL)
-    window.plugin.email.open({
-        to:      ['andrew.maclean@umontana.edu'],
-        subject: 'atty',
-        body:    'log file',
-    });
-}*/
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -396,7 +234,7 @@ function FileApp() {
 
 FileApp.prototype = {
 fileSystemHelper: null,
-fileNameField: "data.csv",
+fileNameField: null,
 textField: null,
     
 run: function() {
@@ -471,7 +309,7 @@ _writeTextToFile: function() {
      fileName = that.fileNameField.value,
     text = makeCSVString(distancePoints);
     // text = that.textField.value;
-    console.log(fileName);
+//    console.log(fileName);
 
 
     
@@ -509,65 +347,4 @@ _isValidFileName: function(fileName) {
     return fileName.length > 2;
 }
 }
-
-// function sendCSV(){
-//     var anArray = distancePoints;
-    
-    
-//     // var data = $.parseJSON( txt ).dataOutArray;
-    
-//     var $table = $( "<table></table>" );
-    
-//     for ( var i = 0; i < anArray.length; i++ ) {
-//         var dat = anArray[i];
-//         var $line = $( "<tr></tr>" );
-//         $line.append( $( "<td></td>" ).html( dat.info()[0]+", "+dat.info()[1]) );
-//         $table.append( $line );
-//     }
-    
-//     $table.appendTo( $( "#tableDiv" ) );
-    
-    
-//     var csvFile = null,
-//     makeCsvFile = function (csv) {
-//         var data = new Blob([csv], {type: 'csv'});
-        
-//         // If we are replacing a previously generated file we need to
-//         // manually revoke the object URL to avoid memory leaks.
-//         if (csvFile !== null) {
-//             window.URL.revokeObjectURL(csvFile);
-//         }
-        
-//         csvFile = window.URL.createObjectURL(data);
-        
-//         return csvFile;
-//     };
-    
-//     // console.log("hi there");
-    
-//     var dataOut = anArray.join("")
-//     var create = document.getElementById('create'),
-//     tableVal = document.getElementById('tableDiv');
-    
-//     create.addEventListener('click', function () {
-//                             var link = document.getElementById('downloadlink');
-//                             link.href = makeCsvFile(makeCSVString(distancePoints));
-                            
-//                             link.style.display = 'table';
-//                             }, false);
-    
-    
-    
-    
-    
-//     // var snd = new Audio("/resources/notify.wav"); // buffers automatically when created
-//     // snd.play();
-// }
-
-
-
-
-
-
-
 

@@ -59,9 +59,13 @@ FileSystemHelper.prototype = {
 		};
 
 		fileSystem.root.getFile(fileName, options,
-								function(fileEntry) {
-									that._createFileWriter.call(that, fileEntry, text, onSuccess, onError);
-									logOb = fileSystem.root;
+								function(logOb) {
+									that._createFileWriter.call(that, logOb, text, onSuccess, onError);
+									//--------------------------- Is this the
+									// logOb = fileSystem.root;
+//									logOb = fileEntry;
+
+                                console.log("line 65");
 
 								},
 								function (error) {
@@ -72,10 +76,9 @@ FileSystemHelper.prototype = {
 
 
     
-	_createFileWriter: function(fileEntry, text, onSuccess, onError) {
+	_createFileWriter: function(logOb, text, onSuccess, onError) {
 		var that = this;
-		fileEntry.createWriter(function(fileWriter) {
-			console.log(fileEntry.fullPath);
+		logOb.createWriter(function(fileWriter) {
                                     var len = fileWriter.length;
                                     fileWriter.seek(len);
                                     fileWriter.write(text + '\n');
@@ -109,8 +112,8 @@ FileSystemHelper.prototype = {
 		var that = this;
 		// Get existing file, don't create a new one.
 		fileSystem.root.getFile(fileName, null,
-								function(fileEntry) {
-									that._getFile.call(that, fileEntry, onSuccess, onError);
+								function(logOb) {
+									that._getFile.call(that, logOb, onSuccess, onError);
 								}, 
 								function(error) {
 									error.message = "Unable to get file entry for reading.";
@@ -120,7 +123,7 @@ FileSystemHelper.prototype = {
 
 	_getFile: function(fileEntry, onSuccess, onError) { 
 		var that = this; 
-		fileEntry.file(
+		logOb.file(
 			function(file) { 
 				that._getFileReader.call(that, file, onSuccess);
 				// console.log(file);
@@ -163,7 +166,7 @@ FileSystemHelper.prototype = {
 		fileSystem.root.getFile(fileName, 
                                 null, 
 								function (fileEntry) {
-									that._removeFile.call(that, fileEntry, onSuccess, onError);
+									that._removeFile.call(that, logOb, onSuccess, onError);
 								},
 								function(error) {
 									error.message = "Unable to find the file.";
@@ -173,7 +176,7 @@ FileSystemHelper.prototype = {
     
 	_removeFile : function(fileEntry, onSuccess, onError) {
 		var that = this;
-		fileEntry.remove(function (entry) {
+		logOb.remove(function (entry) {
                 			var message = "File removed.";
                 			onSuccess.call(that, message);
                 		}, function (error) {
