@@ -197,6 +197,7 @@ function makeCSVString(an_array){
         temp = dat.info()+"\r\n";
 
     for (var i = 1; i< an_array.length; i++) {
+        console.log(an_array.length);
         dat = an_array[i];
         temp = temp+dat.info()+"\r\n";
     }
@@ -208,12 +209,18 @@ function makeCSVString(an_array){
 
 function loadCSVString(aString){
     var strArr = aString.split(/\n/);
+    testdata = [];
     var tempArr = []
+    var temp;
     for (var i = 0; i < strArr.length; i++) {
-        tempArr[i]= [i,strArr[i]];
+        // console.log(strArr[i]);
+        temp= strArr[i].split(/,/);
+        console.log(strArr.length);
+        tempArr[i]=[parseFloat(temp[0]),parseFloat(temp[1])];
+        if (!tempArr[i][0]&&!tempArr[i][1]) {continue};
+        console.log(tempArr[i]);
+        testdata.push(tempArr[i]);
     };
-
-    testdata = tempArr;
 }
 
 
