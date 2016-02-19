@@ -125,8 +125,8 @@ h1 {
 }
 
 .buttonPanel{
-    margin: 0;
-  padding: 0;
+    margin: 2;
+  padding: 2;
 
 }
 .inputBox{
@@ -148,7 +148,9 @@ h1 {
     
   vertical-align: middle or top
 }
-
+.results{
+    font-variant: #ffffff;
+}
 
 
 
