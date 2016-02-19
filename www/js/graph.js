@@ -179,11 +179,11 @@ function addDataToChart(aPoint){
     if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
       dist=distancePoints[num_dis_points-1].info()[1];
        if(!total_distance){
-      total_distance = dist;
+      total_distance = Math.abs(dist);
     }
         
-        total_distance = total_distance+dist;
-        distance.push(total_distance);
+        total_distance = total_distance+Math.abs(dist);
+        distance.push(new point(time,total_distance));// make this a point
 
         if (num_dis_points>1) {
             rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
@@ -201,7 +201,7 @@ function addDataToChart(aPoint){
     };
 
     if (num_dis_points>2) {
-            lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],time);
+            lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time],distancePoints[time].info()[1]],time);
 
       // lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
     time = time+1;
