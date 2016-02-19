@@ -1,29 +1,32 @@
 
 var refreshIntervalId = null;
 var myLiveChart;
+
 var dataOutArray = [];
 var pointsArray = [];
-var startTime;
-var count = 0;
-var time = 0;
-
 var coorPoints = [];
 var non_lat_long_Points = [];
 var distancePoints = [];
 var accelerationPoints = [];
 var positionPoints = [];
-
 var ratePoints = [];
-var total_distance = 0;
+var distance = [];
+var rate = [];
+var acceleration = [];
 
+
+var startTime;
+var count = 0;
+var time = 0;
+
+var total_distance;
 var lineChart;
+
 var canvas;
 var ctx;
 var logOb;
 
-var distance = [];
-var rate = [];
-var acceleration = [];
+
 var _setLocation = false;
 
 
@@ -97,19 +100,19 @@ console.log(device.platform);
         });
     
     }else if (device.platform == "browser") {
-          window.resolveLocalFileSystemURL = window.resolveLocalFileSystemURL ||
-                                     window.webkitResolveLocalFileSystemURL;
+      //     window.resolveLocalFileSystemURL = window.resolveLocalFileSystemURL ||
+      //                                window.webkitResolveLocalFileSystemURL;
 
   
     
-      window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dir) {
-            console.log("Main Dir:", dir);
-            dir.getFile("data.csv", {create: true}, function (file) {
-                console.log("File: ", file);
-                logOb = file;
-                //writeLog("App started");
-            });
-        });
+      // window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dir) {
+      //       console.log("Main Dir:", dir);
+      //       dir.getFile("data.csv", {create: true}, function (file) {
+      //           console.log("File: ", file);
+      //           logOb = file;
+      //           //writeLog("App started");
+      //       });
+      //   });
         
     }
     
@@ -191,11 +194,12 @@ function printPointsArray(){
 function makeCSVString(an_array){
     var temp ;
     var dat = an_array[0];
-        temp = dat.info()[1]+"~";
+        temp = dat.info()+"\r\n";
 
     for (var i = 1; i< an_array.length; i++) {
+        console.log(an_array.length);
         dat = an_array[i];
-        temp = temp+dat.info()[1]+"~";
+        temp = temp+dat.info()+"\r\n";
     }
     
     return temp;
@@ -204,19 +208,25 @@ function makeCSVString(an_array){
 
 
 function loadCSVString(aString){
-    var strArr = aString.split(/~/);
+    var strArr = aString.split(/\n/);
+    testdata = [];
     var tempArr = []
+    var temp;
     for (var i = 0; i < strArr.length; i++) {
-        tempArr[i]= [i,strArr[i]];
+        // console.log(strArr[i]);
+        temp= strArr[i].split(/,/);
+        console.log(strArr.length);
+        tempArr[i]=[parseFloat(temp[0]),parseFloat(temp[1])];
+        if (!tempArr[i][0]&&!tempArr[i][1]) {continue};
+        console.log(tempArr[i]);
+        testdata.push(tempArr[i]);
     };
-
-    testdata = tempArr;
 }
 
 
 
 function tryEmail(){
-    console.log(logOb.nativeURL);
+    // console.log(logOb.nativeURL);
 
     this.the_message = "some stuff";
     cordova.plugins.email.isAvailable(

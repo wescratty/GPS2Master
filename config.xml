@@ -16,6 +16,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <preference name="BackupWebStorage" value="local"/>
 
     <platform name="android">
     <gap:plugin name="de.martinreinhardt.cordova.plugins.email" version="0.8.2" />
@@ -28,7 +29,6 @@
         <preference name="Orientation" value="sensorLandscape" />
     </platform>
     <platform name="ios">
-        <preference name="BackupWebStorage" value="local"/>
         <preference name="Orientation" value="all" />
     </platform>
 

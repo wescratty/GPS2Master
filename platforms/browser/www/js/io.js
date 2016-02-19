@@ -57,6 +57,9 @@ FileSystemHelper.prototype = {
 			create: true, 
 			exclusive: false
 		};
+		if(!logOb){
+			logOb=fileSystem;
+		}
 
 		fileSystem.root.getFile(fileName, options,
 								function(logOb) {
@@ -97,8 +100,8 @@ FileSystemHelper.prototype = {
 		var that = this;
         
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-								 function(fileSystem) {
-									 that._getFileEntry.call(that, fileSystem, fileName, onSuccess, onError);
+								 function(logOb) {
+									 that._getFileEntry.call(that, logOb, fileName, onSuccess, onError);
 									 // console.log(fileSystem);
 								 },
 								 function(error) {
@@ -107,11 +110,11 @@ FileSystemHelper.prototype = {
 								 });
 	},
     
-	_getFileEntry: function(fileSystem, fileName, onSuccess, onError) {
+	_getFileEntry: function(logOb, fileName, onSuccess, onError) {
         
 		var that = this;
 		// Get existing file, don't create a new one.
-		fileSystem.root.getFile(fileName, null,
+		logOb.root.getFile(fileName, null,
 								function(logOb) {
 									that._getFile.call(that, logOb, onSuccess, onError);
 								}, 
@@ -121,7 +124,7 @@ FileSystemHelper.prototype = {
 								});
 	},
 
-	_getFile: function(fileEntry, onSuccess, onError) { 
+	_getFile: function(logOb, onSuccess, onError) { 
 		var that = this; 
 		logOb.file(
 			function(file) { 
@@ -165,7 +168,7 @@ FileSystemHelper.prototype = {
 		var that = this;
 		fileSystem.root.getFile(fileName, 
                                 null, 
-								function (fileEntry) {
+								function (logOb) {
 									that._removeFile.call(that, logOb, onSuccess, onError);
 								},
 								function(error) {
@@ -174,7 +177,7 @@ FileSystemHelper.prototype = {
 								});
 	},
     
-	_removeFile : function(fileEntry, onSuccess, onError) {
+	_removeFile : function(logOb, onSuccess, onError) {
 		var that = this;
 		logOb.remove(function (entry) {
                 			var message = "File removed.";

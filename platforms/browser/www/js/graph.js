@@ -170,15 +170,18 @@ function addDataToChart(aPoint){
     var pos = 0.0;
     
     
-    
+
 
    distancePoints.push(this.aPoint);
    
     
     var  num_dis_points = distancePoints.length;
     if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
-       
-        dist=distancePoints[num_dis_points-1].info()[1];
+      dist=distancePoints[num_dis_points-1].info()[1];
+       if(!total_distance){
+      total_distance = dist;
+    }
+        
         total_distance = total_distance+dist;
         distance.push(total_distance);
 
@@ -198,7 +201,7 @@ function addDataToChart(aPoint){
     };
 
     if (num_dis_points>2) {
-      lineChart.addData([distance[time],rate[time],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
+      lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
     time = time+1;
     };
     
@@ -209,6 +212,24 @@ function addDataToChart(aPoint){
 function reset(){
   // if (lineChart.dataSets.length > 0) {
             // REMOVE LATEST DATASET AND VALIDATE
+             dataOutArray = [];
+             pointsArray = [];
+             coorPoints = [];
+             non_lat_long_Points = [];
+             distancePoints = [];
+             accelerationPoints = [];
+             positionPoints = [];
+             ratePoints = [];
+             distance = [];
+             rate = [];
+             acceleration = [];
+
+
+             startTime;
+             count = 0;
+             time = 0;
+
+             total_distance = 0;
             time = 0;
             window.lineChart.destroy();
             createGraph();
