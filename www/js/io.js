@@ -15,7 +15,46 @@ function loadCSV(){
 
 
 document.addEventListener('deviceready', function () {
-    console.log("device is ready in io");}, false);
+    console.log("device is ready in io");
+
+var fileApp = new FileApp();
+    fileApp.run();
+
+}, false);
+
+
+
+function makeCSVString(an_array){
+    var temp ;
+    var dat = an_array[0];
+        temp = dat.info()+"\r\n";
+
+    for (var i = 1; i< an_array.length; i++) {
+        console.log(an_array.length);
+        dat = an_array[i];
+        temp = temp+dat.info()+"\r\n";
+    }
+    
+    return temp;
+    
+}
+
+
+function loadCSVString(aString){
+    var strArr = aString.split(/\n/);
+    testdata = [];
+    var tempArr = []
+    var temp;
+    for (var i = 0; i < strArr.length; i++) {
+        // console.log(strArr[i]);
+        temp= strArr[i].split(/,/);
+        console.log(strArr.length);
+        tempArr[i]=[parseFloat(temp[0]),parseFloat(temp[1])];
+        if (!tempArr[i][0]&&!tempArr[i][1]) {continue};// might cause error
+        console.log(tempArr[i]);
+        testdata.push(tempArr[i]);
+    };
+}
 
 //todo wes does this look rightish?
 function load_data(data){
@@ -28,6 +67,130 @@ function load_data(data){
     };
     return resultArray;
 }
+
+
+function FileApp() {
+}
+
+FileApp.prototype = {
+fileSystemHelper: null,
+fileNameField: null,
+textField: null,
+    
+run: function() {
+    var that = this,
+    writeFileButton = document.getElementById("writeFileButton"),
+    readFileButton = document.getElementById("readFileButton"),
+    deleteFileButton = document.getElementById("deleteFileButton");
+    
+    that.fileNameField = document.getElementById("fileNameInput");
+    that.textField = document.getElementById("textInput");
+    
+     writeFileButton.addEventListener("click",
+                                         function() { 
+                                             that._writeTextToFile.call(that);
+                                             // writeF();
+                                         });
+        
+        readFileButton.addEventListener("click",
+                                        function() {
+                                            that._readTextFromFile.call(that);
+                                            // readF();
+                                        });
+        
+        deleteFileButton.addEventListener("click",
+                                          function() {
+                                              that._deleteFile.call(that)
+                                              // tryEmail();
+                                          });
+
+
+
+         emailFileButton.addEventListener("click",
+            function() {
+                //that._deleteFile.call(that)
+                tryEmail();
+            });
+
+
+    fileSystemHelper = new FileSystemHelper();
+},
+    
+_deleteFile: function () {
+    var that = this,
+    fileName = that.fileNameField.value;
+    
+    if (that._isValidFileName(fileName)) {
+        fileSystemHelper.deleteFile(fileName, that._onSuccess, that._onError);
+    }
+    else {
+        var error = { code: 44, message: "Invalid filename"};
+        that._onError(error);
+    }
+},
+    
+_readTextFromFile: function() {
+    var that = this,
+    fileName = that.fileNameField.value;
+    
+    if (that._isValidFileName(fileName)) {
+        fileSystemHelper.readTextFromFile(fileName, that._onSuccess, that._onError);
+    }
+    else {
+        var error = { code: 44, message: "Invalid filename"};
+        that._onError(error);
+    }
+},
+    
+    
+    
+_writeTextToFile: function() {
+    var that = this,
+     fileName = that.fileNameField.value,
+    text = makeCSVString(distancePoints);
+    // text = that.textField.value;
+//    console.log(fileName);
+
+
+    
+    if (that._isValidFileName(fileName)) {
+        fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
+    }
+    else {
+        var error = { code: 44, message: "Invalid filename"};
+        that._onError(error);
+    }
+},
+    
+_onSuccess: function(value) {
+    var notificationBox = document.getElementById("result");
+    notificationBox.textContent = value;
+},
+    
+_onError: function(error) {
+    
+    var errorCodeDiv = document.createElement("div"),
+    errorMessageDiv = document.createElement("div"),
+    notificationBox = document.getElementById("result");
+    
+    errorCodeDiv.textContent = "Error code: " + error.name;
+    errorMessageDiv.textContent = "Message: " + error.message;
+    
+    notificationBox.innerHTML = "";
+    notificationBox.appendChild(errorCodeDiv);
+    notificationBox.appendChild(errorMessageDiv);
+},
+    
+_isValidFileName: function(fileName) {
+    //var patternFileName = /^[\w]+\.[\w]{1,5}$/;
+    
+    return fileName.length > 2;
+}
+}
+
+
+
+
 
 
 function FileSystemHelper() { 

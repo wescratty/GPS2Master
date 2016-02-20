@@ -39,87 +39,70 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
-        <script src="//www.chartjs.org/assets/Chart.min.js"></script>
+        <!-- <script src="//www.chartjs.org/assets/Chart.min.js"></script> -->
         <script src="js/Chart.js"></script>
         <script src="js/location.js"></script>
         <script src="js/index_helper.js"></script>
         <script src="js/graph.js"></script>
-        <!-- <script src="js/io.js"></script> -->
-        <script src="tableView.html"></script>
+        <script src = "js/io.js"></script>
         <script src="/js/location.js"></script>
+        <!-- <script src="graph.html"></script> -->
+        
         <title> Graph view</title>
     </head>
 
     <body>
             
-            <script type="text/javascript" language="JavaScript">
-
-            function goToTableView(){
-                window.location = 'tableView.html'
-            }
-            </script>
+            
                 
     
-        <div class="wrapper">
+        <!-- <div class="wrapper"> -->
          <!-- <div class="chart"> -->
 
-        <canvas id="updating-chart" width="600px" height="220px"></canvas>
-
+        <!-- <canvas id="updating-chart" width="600px" height="220px"></canvas> -->
        
             
         
          <!-- </div> -->
          <!-- <div class="SBP">  -->
-         <div class="buttonPanel">        
+         <!-- <div class="buttonPanel">         -->
 
 
-            <button class="SBP"style="background-color:red"onclick="pos()">D</button>
+            <!-- <button class="SBP"style="background-color:red"onclick="pos()">D</button>
             <button class="SBP"style="background-color:blue"onclick="vol()">V</button>
             <button class="SBP"style="background-color:green"onclick="acc()">A</button>
             <button class="SBP"style="background-color:yellow"onclick="dis()">P</button>
             <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="startLocationPoints()">GPS</button>
             <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="setLocation()">Mark</button>
             <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="load_test_data()">Upload</button>
-            <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="reset()">Reset</button>
-            <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="passData(distancePoints);goToTableView()">Export</button>
+            <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="reset()">Reset</button> -->
         <!-- </div> -->
-        </div>
-            <div/>
-            <script type="text/javascript">
-                
-                
-                <!-- Start of Jquerry -->
-                
-                $("document").ready(function() {
-                                   
-                                    
-                                    });
-                                    
-                                    <!-- End of Jquerry -->
-                                    
-                </script>
+        <!-- </div> -->
+            <!-- <div/> -->
+            
             
         
-       <!--  <div class="input-area ch30">
+        <div class="input-area ch30">
             <input class="inputBox" id="fileNameInput" value="data.csv"/>
             <input class="inputBox" id="textInput" placeholder="Add message"/>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="writeFileButton">Write</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="readFileButton">Read</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="deleteFileButton">Delete</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="emailFileButton">Email</button>
-        </div> -->
-        <!-- <div class="action-area ch30">
+
+        </div>
+        <div class="action-area ch30">
             
-            <button onclick="tryEmail();">email data</button>
-        </div> -->
-        <!-- <div class="result-area ch40">
+            <!-- <button onclick="tryEmail();">email data</button> -->
+        </div>
+        <div class="result-area ch40">
             <div class="results"content-type: "text/plain">
                 <div id="result" style="color:white"class="desc"></div>
             </div>
             <div class="separator"></div>
-        </div> -->
-        
+        </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        
     </body>
 </html>
