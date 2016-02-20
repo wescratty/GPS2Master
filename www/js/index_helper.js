@@ -119,13 +119,7 @@ function startLocationPoints(){
 
 function load_test_data(){
 
-// how to change a point
 
-    // console.log(dv_dt(new point(3,20),new point(0,0)));
-    //  console.log("\n");
-    // console.log(dv_dt(new point(6,33),new point(3,20)));
-    // console.log("\n");
-    // console.log(dv_dt(new point(9,43),new point(6,33)));
 
     for (var i = 0;i< testdata.length;i++) {
         var temp_arr = testdata[i];
@@ -148,7 +142,6 @@ function getNew(){
 
 function onSuccess(position) {
    
-
     buildLatLonPoints(getGeoPosition(position));
     var len = coorPoints.length;
     if (len>1) {
@@ -168,15 +161,15 @@ function onError(error) {
 
 
 
-function printPointsArray(){
-    sessionStorage.setItem('pointsArray', pointsArray);
+// function printPointsArray(){
+//     sessionStorage.setItem('pointsArray', pointsArray);
     
     
-    for(var i = 0; i<pointsArray.length;i++){
-        var pnt = pointsArray[i];
-        document.write(pnt.info()+"<br />");
-    }
-}
+//     for(var i = 0; i<pointsArray.length;i++){
+//         var pnt = pointsArray[i];
+//         document.write(pnt.info()+"<br />");
+//     }
+// }
 
 
 function makeCSVString(an_array){
@@ -205,7 +198,7 @@ function loadCSVString(aString){
         temp= strArr[i].split(/,/);
         console.log(strArr.length);
         tempArr[i]=[parseFloat(temp[0]),parseFloat(temp[1])];
-        if (!tempArr[i][0]&&!tempArr[i][1]) {continue};
+        if (!tempArr[i][0]&&!tempArr[i][1]) {continue};// might cause error
         console.log(tempArr[i]);
         testdata.push(tempArr[i]);
     };
