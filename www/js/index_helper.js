@@ -1,4 +1,4 @@
-
+// globa vars 
 var refreshIntervalId = null;
 var myLiveChart;
 
@@ -14,21 +14,18 @@ var distance = [];
 var rate = [];
 var acceleration = [];
 
-
 var startTime;
 var count = 0;
 var time = 0;
 
 var total_distance;
 var lineChart;
-
 var canvas;
 var ctx;
 var logOb;
-
-
 var _setLocation = false;
-
+const METERTOFEET = 3.28084;
+const K_MILL_SEC = 1000;
 
 // this is x^3
 var testdata = [
@@ -58,10 +55,6 @@ var testdata = [
 [ 23 ,  -0.258819 ],
 [ 24 ,  0.0 ]
                 ];
-
-
-const METERTOFEET = 3.28084;
-const K_MILL_SEC = 1000;
 
 
 
@@ -130,31 +123,11 @@ function load_test_data(){
 }
 
 
-
-
-
-// function printPointsArray(){
-//     sessionStorage.setItem('pointsArray', pointsArray);
-    
-    
-//     for(var i = 0; i<pointsArray.length;i++){
-//         var pnt = pointsArray[i];
-//         document.write(pnt.info()+"<br />");
-//     }
-// }
-
-
-
-
-
 function tryEmail(){
-    // console.log(logOb.nativeURL);
 
     this.the_message = "some stuff";
     cordova.plugins.email.isAvailable(
     function (isAvailable) {
-        // alert('Service is not available') unless isAvailable;
-
         
         cordova.plugins.email.open({
             to:      'wescratty@gmail.com',
@@ -163,7 +136,6 @@ function tryEmail(){
             subject: 'Cordova data',
             body:    this.the_message,
             attachments: [logOb.nativeURL]
-    
         });
     }
 );
