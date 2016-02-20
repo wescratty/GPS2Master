@@ -149,7 +149,7 @@ h1 {
   vertical-align: middle or top
 }
 .results{
-/*style:color:red*/
+    white-space: pre;
 }
 
 

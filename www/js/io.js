@@ -40,13 +40,13 @@ var fileApp = new FileApp();
 function makeCSVString(an_array){
     var temp ;
     var dat = an_array[0];
-        temp = dat.info()+"\r\n"; //the array is passed from line 150 but is lost when we 
+        temp = dat.info()+"\n"; //the array is passed from line 150 but is lost when we 
         // switch windows. We need to save the data. maybe jquery?
 
     for (var i = 1; i< an_array.length; i++) {
         console.log(an_array.length);
         dat = an_array[i];
-        temp = temp+dat.info()+"\r\n";
+        temp = temp+dat.info()+"\n";
     }
     
     return temp;
