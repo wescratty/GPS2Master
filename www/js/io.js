@@ -17,19 +17,14 @@ function loadCSV(){
 document.addEventListener('deviceready', function () {
     console.log("device is ready in io");
 
-if(!localStorage.getItem('x')) {
-  console.log("no storage");
-} else {
-  // distancePoints = localStorage.getItem('x');
-  var dp = JSON.parse(localStorage["x"]);
-}
-for (var i = 0; i < dp.length; i++) {
-	distancePoints.push(new point(dp[i].x,dp[i].y));
-	// console.log(p.info());
-}
+// This retrieves data from array on previous page 
 
-    // distancePoints = window.localStorage.getItem("passVal");
+distancePoints=receiving('distancePoints');
 
+
+
+    
+// Start up the file app
 var fileApp = new FileApp();
     fileApp.run();
 
@@ -82,7 +77,7 @@ function load_data(data){
     return resultArray;
 }
 
-
+// ********* File read and right below only **********
 function FileApp() {
 }
 
