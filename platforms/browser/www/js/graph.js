@@ -285,8 +285,36 @@ function dv_dt(a_point,b_point){
     
 }
 
+function passData(){
+var storage = window['localStorage'];
+// ,x=distancePoints;
+//   storage.setItem("x", x);
+
+storage["x"] = JSON.stringify(distancePoints);
+
+//   if (storageAvailable('localStorage')) {
+//   console.log(" Yippee! We can use localStorage awesomeness");
+// }
+// else {
+//   console.log(" Too bad, no localStorage for us");
+// }
+//   var passVal = distancePoints;
+// window.localStorage.setItem("passVal", passVal);
+}
 
 
+function storageAvailable(type) {
+  try {
+    var storage = window[type],
+      x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  }
+  catch(e) {
+    return false;
+  }
+}
 
 
 

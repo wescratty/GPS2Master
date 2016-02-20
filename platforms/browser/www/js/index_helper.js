@@ -129,9 +129,7 @@ function load_test_data(){
     };
 }
 
-function passData(an_array){
-    distancePoints = an_array;
-}
+
 
 
 

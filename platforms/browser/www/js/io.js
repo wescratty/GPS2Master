@@ -17,6 +17,19 @@ function loadCSV(){
 document.addEventListener('deviceready', function () {
     console.log("device is ready in io");
 
+if(!localStorage.getItem('x')) {
+  console.log("no storage");
+} else {
+  // distancePoints = localStorage.getItem('x');
+  var dp = JSON.parse(localStorage["x"]);
+}
+for (var i = 0; i < dp.length; i++) {
+	distancePoints.push(new point(dp[i].x,dp[i].y));
+	// console.log(p.info());
+}
+
+    // distancePoints = window.localStorage.getItem("passVal");
+
 var fileApp = new FileApp();
     fileApp.run();
 
@@ -27,7 +40,8 @@ var fileApp = new FileApp();
 function makeCSVString(an_array){
     var temp ;
     var dat = an_array[0];
-        temp = dat.info()+"\r\n";
+        temp = dat.info()+"\r\n"; //the array is passed from line 150 but is lost when we 
+        // switch windows. We need to save the data. maybe jquery?
 
     for (var i = 1; i< an_array.length; i++) {
         console.log(an_array.length);
