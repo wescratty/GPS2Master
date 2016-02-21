@@ -6,6 +6,12 @@
 // ------- Usage example for an array: 
 
 // ------- send:  before leaving window -------
+// in the button that leaves the window create a function such as passToTableView() 
+// that is called before goTo...
+// <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="passToTableView();goToTableView()">Export</button>
+
+
+
 // shipper(String packageName, Array package)
 
 // example: shipper('distancePoints',distancePoints);
