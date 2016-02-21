@@ -44,8 +44,8 @@
         <script src="js/location.js"></script>
         <script src="js/index_helper.js"></script>
         <script src="js/graph.js"></script>
-        <script src = "js/io.js"></script>
-        <script src="/js/location.js"></script>
+        <script src="js/io.js"></script>
+        <script src="js/location.js"></script>
         <script src="js/shipping.js"></script>
         <!-- <script src="graph.html"></script> -->
         
@@ -86,10 +86,26 @@
         <div class="input-area ch30">
             <input class="inputBox" id="fileNameInput" value="data.csv"/>
             <input class="inputBox" id="textInput" placeholder="Add message"/>
+            Select a file: <input type="file"id="input"name="img"onchange="handleFiles(this.files)">
+<script type="text/javascript">
+function handleFiles(aFile){
+    selectedFile =  aFile[0];
+    document.getElementById('fileNameInput').value = selectedFile.name;
+    FileSystemHelper.prototype._getFileReader2(selectedFile,FileSystemHelper.prototype.onSuccess);
+
+}
+function loadgraph(){
+    // take data from result and load in a points array and store thru shipping and then load into testdataarray
+}
+</script>
+
+            <br />
+            <br />
             <button class="button"style="background-color:rgb(0, 153, 204)" id="writeFileButton">Write</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="readFileButton">Read</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="deleteFileButton">Delete</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="emailFileButton">Email</button>
+            <button class="button"style="background-color:rgb(0, 153, 204)" id="loadFileToGraph" onClick= "loadGraph()">Load</button>
 
         </div>
         <div class="action-area ch30">

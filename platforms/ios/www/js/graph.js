@@ -1,6 +1,7 @@
 
 
 document.addEventListener('deviceready', function () {
+
     console.log("device is ready in graph");}, false);
 
 function createGraph() {
@@ -51,7 +52,8 @@ function createGraph() {
         // String - Template string for single tooltips
     tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
         // String - Template string for multiple tooltips
-    multiTooltipTemplate: "<%= value + ' %' %>",
+    multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,scaleGridLineColor : "rgba(255, 255, 0,.05)",    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+
     };
     
     var ctx = document.getElementById("updating-chart").getContext("2d");
@@ -163,6 +165,10 @@ function createGraph() {
 
 //------------------Attention Brian------------------
 function addDataToChart(aPoint){
+  if (!lineChart) {
+    createGraph();
+  }
+  
     this.aPoint = aPoint;
     var dist = 0.0;
     var rat = 0.0;
@@ -180,13 +186,16 @@ function addDataToChart(aPoint){
       dist=distancePoints[num_dis_points-1].info()[1];
        if(!total_distance){
       total_distance = dist;
+      distance.push(new point(time,total_distance));// make this a point
+    }else{
+      total_distance = total_distance+dist;
+        distance.push(new point(time,total_distance));// make this a point
     }
         
-        total_distance = total_distance+dist;
-        distance.push(total_distance);
+        
 
         if (num_dis_points>1) {
-            rat = dv_dt(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2]);
+            rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
             rate.push(rat);
             ratePoints.push(new point(num_dis_points-2,rat));
             var  num_rate_points = ratePoints.length;
@@ -201,7 +210,10 @@ function addDataToChart(aPoint){
     };
 
     if (num_dis_points>2) {
-      lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
+      // console.log(distancePoints[time].info()[1]);
+            lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time],distancePoints[time].info()[1]],time);
+
+      // lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
     time = time+1;
     };
     
@@ -224,7 +236,6 @@ function reset(){
              rate = [];
              acceleration = [];
 
-
              startTime;
              count = 0;
              time = 0;
@@ -233,24 +244,6 @@ function reset(){
             time = 0;
             window.lineChart.destroy();
             createGraph();
-            
-
-            // GROWL
-            // growl("danger", dataset.title);
-         // } 
-         // else {
-
-        //     // GROWL
-        //     growl("info", "Kept latest");
-        // }
-// console.log(lineChart.datasets.length);
-// console.log(lineChart.datasets[0].length);
-//   for (var i = 0; i< lineChart.datasets.length; i++) {
-    
-//       lineChart.datasets.pop();
-    
-    
-//   };
     
     lineChart.update();
 }
@@ -265,63 +258,12 @@ function add_graph_line(){
     
 }
 
-// unimplemented and maybe depricated
-function flow(){
-    var tempPoint = getGeoPosition();
+// // unimplemented and maybe depricated
+// function flow(){
+//     var tempPoint = getGeoPosition();
     
-}
+// }
 
-function getGeoPosition(position){
-    var lat = position.coords.latitude;
-    var lon = position.coords.longitude;
-    return new point(lat,lon);
-    
-}
-
-function buildLatLonPoints(aPoint){
-    this.aPoint = aPoint;
-    coorPoints.push(aPoint);
-    
-}
-
-function coorPoints_to_distance (index) {
-    this.index  = index;
-    var point_a = coorPoints[this.index].info();  //last point in array
-    var point_b = coorPoints[this.index-1].info();// second to last point
-    
-    //creates a point that is the distance covered
-    var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]); 
-    
-    return temp_dis;
-}
-
-
-function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-    var R = 6371; // Radius of the earth in km
-    var dLat = deg2rad(lat2-lat1);  // deg2rad below
-    var dLon = deg2rad(lon2-lon1); 
-    var a = 
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-    Math.sin(dLon/2) * Math.sin(dLon/2)
-    ; 
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-    var d = R * c; // Distance in km
-    return d;
-}
-
-function deg2rad(deg) {
-    return deg * (Math.PI/180);
-}
-
-
-function point(x,y){
-    this.y = y;
-    this.x = x;
-    this.info = function(){
-        return [this.x,this.y];
-    }
-}
 
 // takes derivitave of two points
 function dv_dt(a_point,b_point){
@@ -343,6 +285,11 @@ function dv_dt(a_point,b_point){
     
 }
 
+
+function passToTableView(){
+  shipper('distancePoints',distancePoints);
+ 
+}
 
 
 

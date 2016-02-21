@@ -33,30 +33,39 @@
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
         <link rel="stylesheet" type="text/css" href="css/index.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+        <!-- <script src="//www.chartjs.org/assets/Chart.min.js"></script> -->
+        <script src="js/Chart.js"></script>
+
+        <script src="js/location.js"></script>
+        <script src="js/index_helper.js"></script>
+        <script src="js/graph.js"></script>
+        <script src="js/shipping.js"></script>
+        <script src="tableView.html"></script>
+        <script src="js/location.js"></script>
         <title> Graph view</title>
     </head>
 
     <body>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
-            <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-
-            <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-
-            <script src="//www.chartjs.org/assets/Chart.min.js"></script>
-            <script src="js/Chart.js"></script>
-            <script src="js/Chart.js"></script>
-            <script src="js/location.js"></script>
-            <script src="js/index_helper.js"></script>
-            <script src="js/graph.js"></script>
-            <script src = "js/io.js"></script>
             
+            <script type="text/javascript" language="JavaScript">
+
+            function goToTableView(){
+                window.location = 'tableView.html'
+            }
+            </script>
                 
     
         <div class="wrapper">
          <!-- <div class="chart"> -->
 
         <canvas id="updating-chart" width="600px" height="220px"></canvas>
+
        
             
         
@@ -73,6 +82,7 @@
             <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="setLocation()">Mark</button>
             <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="load_test_data()">Upload</button>
             <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="reset()">Reset</button>
+            <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="passToTableView();goToTableView()">Export</button>
         <!-- </div> -->
         </div>
             <div/>
@@ -91,24 +101,24 @@
                 </script>
             
         
-        <div class="input-area ch30">
+       <!--  <div class="input-area ch30">
             <input class="inputBox" id="fileNameInput" value="data.csv"/>
             <input class="inputBox" id="textInput" placeholder="Add message"/>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="writeFileButton">Write</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="readFileButton">Read</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="deleteFileButton">Delete</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="emailFileButton">Email</button>
-        </div>
-        <div class="action-area ch30">
+        </div> -->
+        <!-- <div class="action-area ch30">
             
-            <!-- <button onclick="tryEmail();">email data</button> -->
-        </div>
-        <div class="result-area ch40">
+            <button onclick="tryEmail();">email data</button>
+        </div> -->
+        <!-- <div class="result-area ch40">
             <div class="results"content-type: "text/plain">
                 <div id="result" style="color:white"class="desc"></div>
             </div>
             <div class="separator"></div>
-        </div>
+        </div> -->
         
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>

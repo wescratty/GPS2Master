@@ -115,7 +115,7 @@ h1 {
 
 }
 .SBP{
-    width:69px;
+    width:60px;
     height:30px;
     border-radius: 8px;
     /*font-size:12px;*/
@@ -130,12 +130,13 @@ h1 {
 
 }
 .inputBox{
-     width:120px;
+     width:130px;
     height:30px;
     border-radius: 2px;
     font-size:16px;
     font-weight: bold;
-    
+    margin:0px 5px;
+    padding:2px 0px;
   vertical-align: middle or top
 }
 
@@ -149,7 +150,8 @@ h1 {
   vertical-align: middle or top
 }
 .results{
-/*style:color:red*/
+    white-space: pre;
+    font-weight: bold;
 }
 
 

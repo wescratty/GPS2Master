@@ -1,33 +1,202 @@
 //handles phone data persistence and phone file readin
 
 //todo I know wes had this working
-function savetoCSV(Filename){
+// function savetoCSV(Filename){
 
-}
+// }
 
-function readinCSV(Filename){
+// function readinCSV(Filename){
 
-}
+// }
 
-function loadCSV(){
+// function loadCSV(){
 
-}
+// }
 
 
 document.addEventListener('deviceready', function () {
-    console.log("device is ready in io");}, false);
+    console.log("device is ready in io");
+
+// This retrieves data from array on previous page 
+
+distancePoints=receivingArray('distancePoints');
+
+
+
+    
+// Start up the file app
+var fileApp = new FileApp();
+    fileApp.run();
+
+}, false);
+
+
+
+function arrayToCsv(an_array){
+    var temp ;
+    var dat = an_array[0];
+        temp = dat.info()+"\n"; 
+
+    for (var i = 1; i< an_array.length; i++) {
+        dat = an_array[i];
+        temp = temp+dat.info()+"\n";
+    }
+    return temp; 
+}
+
+
+function csvToarray(aString){
+    var strArr = aString.split(/\n/);
+    testdata = [];
+    var tempArr = []
+    var temp;
+    for (var i = 0; i < strArr.length; i++) {
+        temp= strArr[i].split(/,/);
+        tempArr[i]=[parseFloat(temp[0]),parseFloat(temp[1])];
+        if (!tempArr[i][0]&&!tempArr[i][1]) {continue};// might cause error
+        testdata.push(tempArr[i]);
+    };
+}
+
+
+function csvTohtmlTable(aString){
+
+}
 
 //todo wes does this look rightish?
-function load_data(data){
-    var resultArray = []
-    for (var i = 0;i< data.length;i++) {
-        var temp_arr = data[i];
-        var a_point = new point(temp_arr[0],temp_arr[1]);
+ // For what? is this old?
+// function load_data(data){
+//     var resultArray = []
+//     for (var i = 0;i< data.length;i++) {
+//         var temp_arr = data[i];
+//         var a_point = new point(temp_arr[0],temp_arr[1]);
 
-        resultArray.push(a_point);
-    };
-    return resultArray;
+//         resultArray.push(a_point);
+//     };
+//     return resultArray;
+// }
+
+// ********* File read and right below only **********
+function FileApp() {}
+
+FileApp.prototype = {
+fileSystemHelper: null,
+fileNameField: null,
+textField: null,
+    
+run: function() {
+    var that = this,
+    writeFileButton = document.getElementById("writeFileButton"),
+    readFileButton = document.getElementById("readFileButton"),
+    deleteFileButton = document.getElementById("deleteFileButton");
+    
+    that.fileNameField = document.getElementById("fileNameInput");
+    that.textField = document.getElementById("textInput");
+    
+     writeFileButton.addEventListener("click",
+                                         function() { 
+                                             that._writeTextToFile.call(that);
+                                        });
+        
+        readFileButton.addEventListener("click",
+                                        function() {
+                                            that._readTextFromFile.call(that);
+                                        });
+        
+        deleteFileButton.addEventListener("click",
+                                          function() {
+                                            that._deleteFile.call(that)
+                                        });
+
+
+
+         emailFileButton.addEventListener("click",
+         								  function() {
+                							tryEmail();
+            							});
+
+
+    fileSystemHelper = new FileSystemHelper();
+},
+    
+_deleteFile: function () {
+    var that = this,
+    fileName = that.fileNameField.value;
+    
+    if (that._isValidFileName(fileName)) {
+        fileSystemHelper.deleteFile(fileName, that._onSuccess, that._onError);
+    }
+    else {
+        var error = { code: 44, message: "Invalid filename"};
+        that._onError(error);
+    }
+},
+    
+_readTextFromFile: function() {
+    var that = this,
+    fileName = that.fileNameField.value;
+    
+    if (that._isValidFileName(fileName)) {
+        fileSystemHelper.readTextFromFile(fileName, that._onSuccess, that._onError);
+    }
+    else {
+        var error = { code: 44, message: "Invalid filename"};
+        that._onError(error);
+    }
+},
+    
+    
+    
+_writeTextToFile: function() {
+    var that = this,
+     fileName = that.fileNameField.value,
+    text = arrayToCsv(distancePoints);
+    var body = that.textInput.value;
+    if (!body) {
+    	console.log("no body message.")
+
+    }else{shipper('body',body);}
+    
+
+    
+    if (that._isValidFileName(fileName)) {
+        fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
+    }
+    else {
+        var error = { code: 44, message: "Invalid filename"};
+        that._onError(error);
+    }
+},
+    
+_onSuccess: function(value) {
+    var notificationBox = document.getElementById("result");
+    notificationBox.textContent = value;
+},
+    
+_onError: function(error) {
+    
+    var errorCodeDiv = document.createElement("div"),
+    errorMessageDiv = document.createElement("div"),
+    notificationBox = document.getElementById("result");
+    
+    errorCodeDiv.textContent = "Error code: " + error.name;
+    errorMessageDiv.textContent = "Message: " + error.message;
+    
+    notificationBox.innerHTML = "";
+    notificationBox.appendChild(errorCodeDiv);
+    notificationBox.appendChild(errorMessageDiv);
+},
+    
+_isValidFileName: function(fileName) {
+    //var patternFileName = /^[\w]+\.[\w]{1,5}$/;
+    
+    return fileName.length > 2;
 }
+}
+
+
+
+
 
 
 function FileSystemHelper() { 
@@ -142,9 +311,7 @@ FileSystemHelper.prototype = {
 		var reader = new FileReader();
 		reader.onloadend = function(evt) { 
 			var textToWrite = evt.target.result;
-			console.log("isAvailable2");
-			loadCSVString(textToWrite);
-			console.log("isAvailable3");
+			csvToarray(textToWrite);
 			onSuccess.call(that, textToWrite);
 		};
         

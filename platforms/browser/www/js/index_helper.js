@@ -24,8 +24,10 @@ var canvas;
 var ctx;
 var logOb;
 var _setLocation = false;
+var fileSelector = false;
 const METERTOFEET = 3.28084;
 const K_MILL_SEC = 1000;
+
 
 // this is x^3
 var testdata = [
@@ -124,17 +126,18 @@ function load_test_data(){
 
 
 function tryEmail(){
+    var _body = receiverString('body');
+    var userinfo = receiverString('userinfo').split(/~/);
 
-    this.the_message = "some stuff";
     cordova.plugins.email.isAvailable(
     function (isAvailable) {
         
         cordova.plugins.email.open({
-            to:      'wescratty@gmail.com',
+            to:      userinfo[2],
             cc:      '',
             bcc:     [],
-            subject: 'Cordova data',
-            body:    this.the_message,
+            subject: 'Chart data from '+userinfo[0],
+            body:    _body,
             attachments: [logOb.nativeURL]
         });
     }

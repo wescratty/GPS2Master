@@ -26,27 +26,47 @@
 
 
 function shipper(packageName,package){
-    var package = tag('packageName',packageName);
-    passData(package);
+  this.packageName = packageName;
+  this.package = package;
+  console.log("packageName = "+this.packageName+"   \npackage = "+this.package);
+    var bag = tag(this.packageName,this.package);
+    passData(bag);
+}
+
+function receiverString(strng){
+  this.strng = strng;
+  if(!localStorage.getItem(this.strng)) {
+  console.log("no storage");
+  return null;
+} else {
+  // gets JSON from local storage. This seems contrived but its the only way I was able to make it work.
+  var str = JSON.parse(localStorage[this.strng]);
+  return str;
+}
+
 }
 
 function receivingArray(obName){
   this.obName = obName;
   if(!localStorage.getItem(this.obName)) {
   console.log("no storage");
+  return null;
 } else {
+  
   // gets JSON from local storage. This seems contrived but its the only way I was able to make it work.
   var dp = JSON.parse(localStorage[this.obName]);
-}
-// for some reason JSON turns it into a dictionary
-// loads it back to an array of points
-var tempArr = [];
+  console.log(dp);
+  var tempArr = [];
 for (var i = 0; i < dp.length; i++) {
   // pushes points and rebuilds array
   tempArr.push(new point(dp[i].x,dp[i].y));
   
 }
 return tempArr;
+}
+// for some reason JSON turns it into a dictionary
+// loads it back to an array of points
+
 
 }
 
@@ -58,7 +78,7 @@ function passData(bagTag_ClassOb){
 var storage = window['localStorage'];
 
 storage[this.bagTag_ClassOb.getName()] = JSON.stringify(this.bagTag_ClassOb.getPackage());
-
+// receivingArray('distancePoints');
 }
 
  function tag(tag,bag){

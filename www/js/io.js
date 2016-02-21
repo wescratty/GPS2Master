@@ -1,17 +1,17 @@
 //handles phone data persistence and phone file readin
 
 //todo I know wes had this working
-function savetoCSV(Filename){
+// function savetoCSV(Filename){
 
-}
+// }
 
-function readinCSV(Filename){
+// function readinCSV(Filename){
 
-}
+// }
 
-function loadCSV(){
+// function loadCSV(){
 
-}
+// }
 
 
 document.addEventListener('deviceready', function () {
@@ -32,54 +32,52 @@ var fileApp = new FileApp();
 
 
 
-function makeCSVString(an_array){
+function arrayToCsv(an_array){
     var temp ;
     var dat = an_array[0];
-        temp = dat.info()+"\n"; //the array is passed from line 150 but is lost when we 
-        // switch windows. We need to save the data. maybe jquery?
+        temp = dat.info()+"\n"; 
 
     for (var i = 1; i< an_array.length; i++) {
-        console.log(an_array.length);
         dat = an_array[i];
         temp = temp+dat.info()+"\n";
     }
-    
-    return temp;
-    
+    return temp; 
 }
 
 
-function loadCSVString(aString){
+function csvToarray(aString){
     var strArr = aString.split(/\n/);
     testdata = [];
     var tempArr = []
     var temp;
     for (var i = 0; i < strArr.length; i++) {
-        // console.log(strArr[i]);
         temp= strArr[i].split(/,/);
-        console.log(strArr.length);
         tempArr[i]=[parseFloat(temp[0]),parseFloat(temp[1])];
         if (!tempArr[i][0]&&!tempArr[i][1]) {continue};// might cause error
-        console.log(tempArr[i]);
         testdata.push(tempArr[i]);
     };
 }
 
-//todo wes does this look rightish?
-function load_data(data){
-    var resultArray = []
-    for (var i = 0;i< data.length;i++) {
-        var temp_arr = data[i];
-        var a_point = new point(temp_arr[0],temp_arr[1]);
 
-        resultArray.push(a_point);
-    };
-    return resultArray;
+function csvTohtmlTable(aString){
+
 }
+
+//todo wes does this look rightish?
+ // For what? is this old?
+// function load_data(data){
+//     var resultArray = []
+//     for (var i = 0;i< data.length;i++) {
+//         var temp_arr = data[i];
+//         var a_point = new point(temp_arr[0],temp_arr[1]);
+
+//         resultArray.push(a_point);
+//     };
+//     return resultArray;
+// }
 
 // ********* File read and right below only **********
-function FileApp() {
-}
+function FileApp() {}
 
 FileApp.prototype = {
 fileSystemHelper: null,
@@ -98,28 +96,24 @@ run: function() {
      writeFileButton.addEventListener("click",
                                          function() { 
                                              that._writeTextToFile.call(that);
-                                             // writeF();
-                                         });
+                                        });
         
         readFileButton.addEventListener("click",
                                         function() {
                                             that._readTextFromFile.call(that);
-                                            // readF();
                                         });
         
         deleteFileButton.addEventListener("click",
                                           function() {
-                                              that._deleteFile.call(that)
-                                              // tryEmail();
-                                          });
+                                            that._deleteFile.call(that)
+                                        });
 
 
 
          emailFileButton.addEventListener("click",
-            function() {
-                //that._deleteFile.call(that)
-                tryEmail();
-            });
+         								  function() {
+                							tryEmail();
+            							});
 
 
     fileSystemHelper = new FileSystemHelper();
@@ -142,6 +136,8 @@ _readTextFromFile: function() {
     var that = this,
     fileName = that.fileNameField.value;
     
+
+
     if (that._isValidFileName(fileName)) {
         fileSystemHelper.readTextFromFile(fileName, that._onSuccess, that._onError);
     }
@@ -155,16 +151,35 @@ _readTextFromFile: function() {
     
 _writeTextToFile: function() {
     var that = this,
-     fileName = that.fileNameField.value,
-    text = makeCSVString(distancePoints);
-    // text = that.textField.value;
-//    console.log(fileName);
+     fileName = that.fileNameField.value;
+     if (distancePoints.length>0) {
+     	text = arrayToCsv(distancePoints);
+     }else{
+        text = document.getElementById("result").textContent;
+      //   notificationBox.textContent = textToWrite;
+     	// text = that.textField.value;
+     }
+    
+    var body = that.textField.value;
+    if (!body) {
+    	console.log("no body message");
 
+    }else{
+    	shipper('body',body);
+    }
+    
 
     
-    if (that._isValidFileName(fileName)) {
+    if (that._isValidFileName(fileName)&&!fileSelector) {
         fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
+    }else if(fileSelector){
+    	// fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
+console.log("landed in here");
+
+
     }
+
+
     else {
         var error = { code: 44, message: "Invalid filename"};
         that._onError(error);
@@ -314,11 +329,24 @@ FileSystemHelper.prototype = {
 		var reader = new FileReader();
 		reader.onloadend = function(evt) { 
 			var textToWrite = evt.target.result;
-			console.log("isAvailable2");
-			loadCSVString(textToWrite);
-			console.log("isAvailable3");
+			csvToarray(textToWrite);
 			onSuccess.call(that, textToWrite);
 		};
+        
+		reader.readAsText(file);
+	},
+	_getFileReader2: function(file, onSuccess) {
+		console.log(file);
+		var reader = new FileReader();
+		reader.onload = function(e) { 
+			var textToWrite = reader.result;
+		// 	csvToarray(textToWrite);
+			console.log(textToWrite);
+			var notificationBox = document.getElementById("result");
+        notificationBox.textContent = textToWrite;
+
+		};
+		
         
 		reader.readAsText(file);
 	},
