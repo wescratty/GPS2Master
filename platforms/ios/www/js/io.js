@@ -136,6 +136,8 @@ _readTextFromFile: function() {
     var that = this,
     fileName = that.fileNameField.value;
     
+
+
     if (that._isValidFileName(fileName)) {
         fileSystemHelper.readTextFromFile(fileName, that._onSuccess, that._onError);
     }
@@ -149,19 +151,35 @@ _readTextFromFile: function() {
     
 _writeTextToFile: function() {
     var that = this,
-     fileName = that.fileNameField.value,
-    text = arrayToCsv(distancePoints);
-    var body = that.textInput.value;
+     fileName = that.fileNameField.value;
+     if (distancePoints.length>0) {
+     	text = arrayToCsv(distancePoints);
+     }else{
+        text = document.getElementById("result").textContent;
+      //   notificationBox.textContent = textToWrite;
+     	// text = that.textField.value;
+     }
+    
+    var body = that.textField.value;
     if (!body) {
-    	console.log("no body message.")
+    	console.log("no body message");
 
-    }else{shipper('body',body);}
-    
-
-    
-    if (that._isValidFileName(fileName)) {
-        fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
+    }else{
+    	shipper('body',body);
     }
+    
+
+    
+    if (that._isValidFileName(fileName)&&!fileSelector) {
+        fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
+    }else if(fileSelector){
+    	// fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
+console.log("landed in here");
+
+
+    }
+
+
     else {
         var error = { code: 44, message: "Invalid filename"};
         that._onError(error);
@@ -314,6 +332,21 @@ FileSystemHelper.prototype = {
 			csvToarray(textToWrite);
 			onSuccess.call(that, textToWrite);
 		};
+        
+		reader.readAsText(file);
+	},
+	_getFileReader2: function(file, onSuccess) {
+		console.log(file);
+		var reader = new FileReader();
+		reader.onload = function(e) { 
+			var textToWrite = reader.result;
+		// 	csvToarray(textToWrite);
+			console.log(textToWrite);
+			var notificationBox = document.getElementById("result");
+        notificationBox.textContent = textToWrite;
+
+		};
+		
         
 		reader.readAsText(file);
 	},

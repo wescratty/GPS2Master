@@ -68,21 +68,22 @@
                 
             }
             </script>
-
+<div id="page-wrapper">
+<h1>Sign In</h1>
             <form id = "get_email" action='getArray(); MAILTO:email' method="post" enctype="text/plain">
             <br>
             <br>
                 Name:<br>
                     <input type="text" name="textname" id = "myName" placeholder="your name"><br>
                 E-mail:<br>
-                    <input type='text' name="textmyEmail" id = "myEmail" placeholder="your email"><br>
+                    <input type='email' name="textmyEmail" id = "myEmail" placeholder="your email"><br>
                 Receivers E-mail:<br>
-                    <input type='text' name="textemailTo" id = "emailTo" placeholder="myTeacher@gmail.com"><br>
+                    <input type='email' name="textemailTo" id = "emailTo" placeholder="myTeacher@gmail.com"><br><br/><br/>
                     <input class="SBP"style="background-color:rgb(0, 153, 204)" type="button" value="Submit" onClick="saveInfo();clickedButton()"/>
 
                     <input class="SBP"style="background-color:rgb(0, 153, 204)"type="reset" value="Reset">
             </form>
-            
+            </div>
             
         <!-- </div> -->
         <script type="text/javascript" src="cordova.js"></script>

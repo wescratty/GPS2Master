@@ -24,8 +24,10 @@ var canvas;
 var ctx;
 var logOb;
 var _setLocation = false;
+var fileSelector = false;
 const METERTOFEET = 3.28084;
 const K_MILL_SEC = 1000;
+
 
 // this is x^3
 var testdata = [
