@@ -1,8 +1,17 @@
 // ------- global set up to pass data between windows  ----------
 
+// include script in html that is receiving or sending
+//           <script src="js/shipping.js"></script>
+
 // ------- Usage example for an array: 
 
 // ------- send:  before leaving window -------
+// in the button that leaves the window create a function such as passToTableView() 
+// that is called before goTo...
+// <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="passToTableView();goToTableView()">Export</button>
+
+
+
 // shipper(String packageName, Array package)
 
 // example: shipper('distancePoints',distancePoints);
@@ -21,7 +30,7 @@ function shipper(packageName,package){
     passData(package);
 }
 
-function receiving(obName){
+function receivingArray(obName){
   this.obName = obName;
   if(!localStorage.getItem(this.obName)) {
   console.log("no storage");

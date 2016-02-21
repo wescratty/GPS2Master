@@ -19,7 +19,7 @@ document.addEventListener('deviceready', function () {
 
 // This retrieves data from array on previous page 
 
-distancePoints=receiving('distancePoints');
+distancePoints=receivingArray('distancePoints');
 
 
 

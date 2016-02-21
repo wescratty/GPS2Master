@@ -30,7 +30,7 @@ function shipper(packageName,package){
     passData(package);
 }
 
-function receiving(obName){
+function receivingArray(obName){
   this.obName = obName;
   if(!localStorage.getItem(this.obName)) {
   console.log("no storage");
