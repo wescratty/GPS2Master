@@ -188,7 +188,7 @@ function addDataToChart(aPoint){
       total_distance = dist;
       distance.push(new point(time,total_distance));// make this a point
     }else{
-      total_distance = total_distance+dist;
+      total_distance = total_distance+dist-distance[num_dis_points-1] ;
         distance.push(new point(time,total_distance));// make this a point
     }
         
