@@ -18,6 +18,8 @@
     <allow-intent href="geo:*" />
     <preference name="BackupWebStorage" value="local"/>
 
+    <access origin="cdvfile://*" />
+
 
     <gap:plugin name="de.martinreinhardt.cordova.plugins.email" version="0.8.2" />
     <plugin name="File" value="CDVFile" />

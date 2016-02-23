@@ -17,18 +17,107 @@
 document.addEventListener('deviceready', function () {
     console.log("device is ready in io");
 
-// This retrieves data from array on previous page 
 
-distancePoints=receivingArray('distancePoints');
+// ------ need to use shipper to get the file we want and set as global file name else data.csv will get over ridden. -------
+	var locFileName;
+if (window.name =='graph') {
+		console.log('graph opened io');
+		distancePoints=receivingArray('distancePoints');
+		locFileName = "export.csv";
+	}else if(window.name =='tableView'){
+		console.log('tableView opened io');
+		locFileName = "export.csv";
+	}else if (window.name == "index"){
+		console.log('index opened io');
+		locFileName = "username.txt";
+	}
 
+
+
+ console.log(device.platform);
+     if (device.platform == "Android") {
+        window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dir) {
+            console.log("Main Dir android:", dir);
+            dir.getFile(locFileName, {create: true}, function (file) {
+                console.log("File: ", file);
+                logOb = file;
+                //writeLog("App started");
+            });
+        });
+    }
+    else if (device.platform == "iOS") {
+       
+            window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
+            console.log("Main Dir:", dir);
+            dir.getFile(locFileName, {create: true}, function (file) {
+                console.log("File: ", file);
+                logOb = file;
+                //writeLog("App started");
+            });
+        });
+    
+    }else if (device.platform == "browser") {
+
+
+    	// resolveLocalFileSystemURL('cdvfile://localhost/temporary/path/to/file.mp4', function(entry) {
+	    // var nativePath = entry.toURL();
+	    // console.log('Native URI: ' + nativePath);
+	    // document.getElementById('video').src = nativePath;
+
+
+
+
+
+    	window.initPersistentFileSystem(10*1024*1024, function() {
+	    var fs = cordova.file.applicationDirectory;
+	    console.log(fs.toURL);// breaking here
+	    window.resolveLocalFileSystemURL('cdvfile:/'+fs + "www/"+locFileName, function (dir) {
+            console.log("Main Dir:", dir);
+            dir.getFile(locFileName, {create: true}, function (file) {
+                console.log("File: ", file);
+                logOb = file;
+                //writeLog("App started");
+            });
+        });
+
+
+      //  Was thinking in here that we could change to a file selector 
+        });
+
+
+        window.addEventListener('filePluginIsReady', function(){
+	        console.log('File plugin is ready');
+	        var fileApp = new FileApp();
+		    fileApp.run();
+		    setUP();
+     }, false);
+
+    }// end of iff
+
+
+
+
+// This gets window name that is opening the page as they need differant things 
+	
+	
 
 
     
-// Start up the file app
-var fileApp = new FileApp();
-    fileApp.run();
+	// Start up the file app
+	
 
-}, false);
+});
+
+
+function chromeHelper(){
+  window.initPersistentFileSystem(10*1024*1024, function() {
+    var fs = cordova.file.applicationDirectory;
+    console.log(fs);
+    window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + "www/"+locFileName, gotFile, fail);
+  },function (e) {
+    console.log(e);
+  });
+}
 
 
 
@@ -85,6 +174,7 @@ fileNameField: null,
 textField: null,
     
 run: function() {
+	if(window.name == "tableView"){
     var that = this,
     writeFileButton = document.getElementById("writeFileButton"),
     readFileButton = document.getElementById("readFileButton"),
@@ -117,6 +207,7 @@ run: function() {
 
 
     fileSystemHelper = new FileSystemHelper();
+}
 },
     
 _deleteFile: function () {
@@ -173,7 +264,6 @@ _writeTextToFile: function() {
     if (that._isValidFileName(fileName)&&!fileSelector) {
         fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
     }else if(fileSelector){
-    	// fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
 console.log("landed in here");
 
 
@@ -211,7 +301,6 @@ _isValidFileName: function(fileName) {
     return fileName.length > 2;
 }
 }
-
 
 
 
@@ -281,6 +370,8 @@ FileSystemHelper.prototype = {
                     			});
         
 	},
+
+
     
     //Reading operations
 	readTextFromFile : function(fileName, onSuccess, onError) {

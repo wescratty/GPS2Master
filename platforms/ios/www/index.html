@@ -40,7 +40,7 @@
         <!-- <script src="//www.chartjs.org/assets/Chart.min.js"></script> -->
         <script src="graph.html"></script>
         <script src="js/shipping.js"></script>
-
+        <script src="js/io.js"></script>
         <script src="tableView.html"></script>
         
         <title>GPS Master</title>
@@ -53,9 +53,23 @@
             </div> -->
 
             <script type="text/javascript" language="JavaScript">
+            document.addEventListener('deviceIsready', function () {}
+            function deviceIsready(){
+                FileSystemHelper.prototype.readTextFromFile(_myName+".txt", success, errorsave);
+
+            }
 
             function clickedButton(){
                 window.location = 'graph.html'
+            }
+            function success() {
+                alert("Your credentials have been saved")
+            }
+            function errorsave() {
+                alert("Didnt find file");
+            }
+            function errorfound() {
+                alert("Nothing  wrote");
             }
             function saveInfo(){
                 var _myName = document.getElementById("myName");
@@ -65,8 +79,8 @@
                 shipper('userinfo',_myName.value+"~"+_myEmail.value+"~"+_emailTo.value);
                 // shipper('userEmail',_myEmail.value);
                 // shipper('emailofTeacher',_emailTo.value);
-                
-            }
+                    FileSystemHelper.prototype.writeLine(_myName+".txt", _myName.value+"~"+_myEmail.value+"~"+_emailTo.value, success, errorfound);  
+                              }
             </script>
 <div id="page-wrapper">
 <h1>Sign In</h1>

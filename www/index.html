@@ -40,9 +40,15 @@
         <!-- <script src="//www.chartjs.org/assets/Chart.min.js"></script> -->
         <script src="graph.html"></script>
         <script src="js/shipping.js"></script>
-
+        <!-- <script src="js/io.js"></script> -->
+        <script src="js/location.js"></script>
         <script src="tableView.html"></script>
-        
+
+
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap:cdvfile:https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+
+         <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; media-src *;style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+         -->
         <title>GPS Master</title>
     </head>
     <body>
@@ -52,21 +58,61 @@
                 <p class="event received">Device is Ready</p> 
             </div> -->
 
-            <script type="text/javascript" language="JavaScript">
+            <script type="text/javascript">
+                var _myName; 
+                var _myEmail; 
+                var _emailTo; 
 
-            function clickedButton(){
-                window.location = 'graph.html'
-            }
-            function saveInfo(){
-                var _myName = document.getElementById("myName");
-                var _myEmail = document.getElementById("myEmail");
-                var _emailTo = document.getElementById("emailTo");
+                document.addEventListener('deviceready', function () {
+                    window.name = "index";
+                    
+                    // clickedButton();
 
-                shipper('userinfo',_myName.value+"~"+_myEmail.value+"~"+_emailTo.value);
-                // shipper('userEmail',_myEmail.value);
-                // shipper('emailofTeacher',_emailTo.value);
-                
-            }
+                });
+                function setUP(){
+                    // console.log("setUp");
+                    // FileSystemHelper.prototype.readTextFromFile("username.txt", success, errorsave);
+                    // alert("this is from device ready in index");
+                }
+
+                function clickedButton(){
+                    
+                    // var head= document.getElementsByTagName('head')[0];
+                    // var script= document.createElement('script');
+                    // script.type= 'text/javascript';
+                    // script.src= "js/io.js";
+                    // head.appendChild(script);
+
+                    // setUP();
+                    window.location = 'graph.html'
+                }
+
+                function success() {
+                    alert("Your credentials have been saved");
+                }
+
+                function errorsave() {
+                    alert("Didnt find file------------------------------------");
+                }
+
+                function errorfound() {
+                    alert("Nothing  wrote");
+                }
+
+                function getInfo(){
+                     _myName = document.getElementById("myName");
+                     _myEmail = document.getElementById("myEmail");
+                     _emailTo = document.getElementById("emailTo");
+
+                }
+
+                function saveInfo(){
+                    // getInfo();
+                    // shipper('userinfo',_myName.value+"~"+_myEmail.value+"~"+_emailTo.value);
+                    // // shipper('userEmail',_myEmail.value);
+                    // // shipper('emailofTeacher',_emailTo.value);
+                    //     FileSystemHelper.prototype.writeLine(_myName+".txt", _myName.value+"~"+_myEmail.value+"~"+_emailTo.value, success, errorfound);  
+                              }
             </script>
 <div id="page-wrapper">
 <h1>Sign In</h1>

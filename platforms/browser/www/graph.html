@@ -49,29 +49,34 @@
         <script src="tableView.html"></script>
         <script src="js/location.js"></script>
         <title> Graph view</title>
+
     </head>
 
     <body>
-            
+            <h1>Graph View</h1>
             <script type="text/javascript" language="JavaScript">
+            document.addEventListener('deviceready', function () {setUP();});
+            function setUP(){
+                window.name = "graph";
+
+            }
 
             function goToTableView(){
                 window.location = 'tableView.html'
             }
             </script>
                 
+                <!-- <input class="inputBox" id="fi" value="data.c"/> -->
     <div id="page-wrapper">
+    
+
+    
         <div class="wrapper">
-         <!-- <div class="chart"> -->
+         
+         <canvas id="updating-chart" width="590px" height="280px"></canvas>
+            </div>
 
-        <canvas id="updating-chart" width="600px" height="220px"></canvas>
-
-       
-            
-        
-         <!-- </div> -->
-         <!-- <div class="SBP">  -->
-         <div class="buttonPanel">        
+<div class="buttonPanel">        
 
 
             <button class="SBP"style="background-color:red"onclick="pos()">D</button>
@@ -85,40 +90,26 @@
             <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="passToTableView();goToTableView()">Export</button>
         <!-- </div> -->
         </div>
-            </div></div>
-            <script type="text/javascript">
+
+            </div>
+            
+            
+        
+      <script type="text/javascript">
                 
                 
                 <!-- Start of Jquerry -->
                 
                 $("document").ready(function() {
-                                   
+                    // var pageWidth = document.getElementById('page-wrapper').width;
+                    // document.getElementById('updating-chart').width = pageWidth;
                                     
                                     });
                                     
                                     <!-- End of Jquerry -->
                                     
                 </script>
-            
-        
-       <!--  <div class="input-area ch30">
-            <input class="inputBox" id="fileNameInput" value="data.csv"/>
-            <input class="inputBox" id="textInput" placeholder="Add message"/>
-            <button class="button"style="background-color:rgb(0, 153, 204)" id="writeFileButton">Write</button>
-            <button class="button"style="background-color:rgb(0, 153, 204)" id="readFileButton">Read</button>
-            <button class="button"style="background-color:rgb(0, 153, 204)" id="deleteFileButton">Delete</button>
-            <button class="button"style="background-color:rgb(0, 153, 204)" id="emailFileButton">Email</button>
-        </div> -->
-        <!-- <div class="action-area ch30">
-            
-            <button onclick="tryEmail();">email data</button>
-        </div> -->
-        <!-- <div class="result-area ch40">
-            <div class="results"content-type: "text/plain">
-                <div id="result" style="color:white"class="desc"></div>
-            </div>
-            <div class="separator"></div>
-        </div> -->
+
         
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>

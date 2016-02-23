@@ -128,6 +128,13 @@ function load_test_data(){
 function tryEmail(){
     var _body = receiverString('body');
     var userinfo = receiverString('userinfo').split(/~/);
+    var attachment;
+
+    if (!logOb) {
+        // attachment = image 
+    }else{
+        attachment = logOb.nativeURL;
+    }
 
     cordova.plugins.email.isAvailable(
     function (isAvailable) {
@@ -138,7 +145,7 @@ function tryEmail(){
             bcc:     [],
             subject: 'Chart data from '+userinfo[0],
             body:    _body,
-            attachments: [logOb.nativeURL]
+            attachments: [attachment]
         });
     }
 );

@@ -91,6 +91,19 @@
             Select a file: <input type="file"id="input"name="img"onchange="handleFiles(this.files)">
 
             <script type="text/javascript">
+
+                document.addEventListener('deviceready', function () {setUP();});
+            function setUP(){
+                window.name = "tableView";
+
+            }
+
+            
+
+
+
+
+
                 function handleFiles(aFile){
                     selectedFile =  aFile[0];
                     document.getElementById('fileNameInput').value = selectedFile.name;
@@ -99,12 +112,12 @@
                     FileSystemHelper.prototype._getFileReader2(selectedFile,FileSystemHelper.prototype.onSuccess);
 
                     }else{
-                    //send image to email
+                    //TODO send image to email
                     }
                 }
                 function loadGraph(){
                     window.location = 'graph.html'
-                // take data from result and load in a points array and store thru shipping and then load into testdataarray
+                // TODO take data from result and load in a points array and store thru shipping and then load into testdataarray
                 }
             </script>
 

@@ -30,32 +30,49 @@ const K_MILL_SEC = 1000;
 
 
 // this is x^3
+// var testdata = [
+// [ 0 ,  0 ],
+// [ 1 ,  0.258819 ],
+// [ 2 ,  0.5 ],
+// [ 3 ,  0.7071068 ],
+// [ 4 ,  0.8660254 ],
+// [ 5 ,  0.9659258 ],
+// [ 6 ,  1 ],
+// [ 7 ,  0.9659258 ],
+// [ 8 ,  0.8660254 ],
+// [ 9 ,  0.7071068 ],
+// [ 10 ,  0.5 ],
+// [ 11 ,  0.258819 ],
+// [ 12 ,  0.0 ],
+// [ 13 ,  -0.258819 ],
+// [ 14 ,  -0.5 ],
+// [ 15 ,  -0.7071068 ],
+// [ 16 ,  -0.8660254 ],
+// [ 17 ,  -0.9659258 ],
+// [ 18 ,  -1 ],
+// [ 19 ,  -0.9659258 ],
+// [ 20 ,  -0.8660254 ],
+// [ 21 ,  -0.7071068 ],
+// [ 22 ,  -0.5 ],
+// [ 23 ,  -0.258819 ],
+// [ 24 ,  0.0 ]
+//                 ];
+
 var testdata = [
-[ 0 ,  0 ],
-[ 1 ,  0.258819 ],
-[ 2 ,  0.5 ],
-[ 3 ,  0.7071068 ],
-[ 4 ,  0.8660254 ],
-[ 5 ,  0.9659258 ],
-[ 6 ,  1 ],
-[ 7 ,  0.9659258 ],
-[ 8 ,  0.8660254 ],
-[ 9 ,  0.7071068 ],
-[ 10 ,  0.5 ],
-[ 11 ,  0.258819 ],
-[ 12 ,  0.0 ],
-[ 13 ,  -0.258819 ],
-[ 14 ,  -0.5 ],
-[ 15 ,  -0.7071068 ],
-[ 16 ,  -0.8660254 ],
-[ 17 ,  -0.9659258 ],
-[ 18 ,  -1 ],
-[ 19 ,  -0.9659258 ],
-[ 20 ,  -0.8660254 ],
-[ 21 ,  -0.7071068 ],
-[ 22 ,  -0.5 ],
-[ 23 ,  -0.258819 ],
-[ 24 ,  0.0 ]
+[ 0 ,  3 ],
+[ 1 ,  6 ],
+[ 2 ,  9 ],
+[ 3 ,  12 ],
+[ 4 ,  15 ],
+[ 5,  18 ],
+[ 6 ,  21 ],
+[ 7 ,  8 ],
+[ 8 ,  0 ],
+[ 9 ,  0 ],
+[ 10 ,  0 ],
+[ 11 ,  0 ],
+[ 12 ,  0 ],
+[ 13 ,  0 ]
                 ];
 
 
@@ -70,33 +87,8 @@ function onDeviceReady() {
     
     
     
-console.log(device.platform);
-    console.log(device.platform);
-     if (device.platform == "Android") {
-        window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dir) {
-            console.log("Main Dir android:", dir);
-            dir.getFile("export.csv", {create: true}, function (file) {
-                console.log("File: ", file);
-                logOb = file;
-                //writeLog("App started");
-            });
-        });
-    }
-    else if (device.platform == "iOS") {
-       
-            window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
-            console.log("Main Dir:", dir);
-            dir.getFile("data.csv", {create: true}, function (file) {
-                console.log("File: ", file);
-                logOb = file;
-                //writeLog("App started");
-            });
-        });
-    
-    }else if (device.platform == "browser") {
-      //  Was thinking in here that we could change to a file selector 
-        
-    }
+
+   
     
 }
 
@@ -141,7 +133,7 @@ function tryEmail(){
         
         cordova.plugins.email.open({
             to:      userinfo[2],
-            cc:      '',
+            cc:      userinfo[1],
             bcc:     [],
             subject: 'Chart data from '+userinfo[0],
             body:    _body,
