@@ -182,13 +182,13 @@ function addDataToChart(aPoint){
    
     
     var  num_dis_points = distancePoints.length;
-    if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
+    if (num_dis_points>1) {        // once we have atleast 2 lat long we can get a distance
       dist=distancePoints[num_dis_points-1].info()[1];
        if(!total_distance){
       total_distance = dist;
       distance.push(new point(time,total_distance));// make this a point
     }else{
-      total_distance = total_distance+dist;
+      total_distance = total_distance+(Math.abs(dist-distancePoints[num_dis_points-2].info()[1]));
         distance.push(new point(time,total_distance));// make this a point
     }
         
@@ -210,9 +210,9 @@ function addDataToChart(aPoint){
         
     };
 
-    if (num_dis_points>3) {
+    if (num_dis_points>4) {
       // console.log(distancePoints[time].info()[1]);
-            lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time].info()[1]],time);
+            lineChart.addData([distance[time].info()[1],rate[time],acceleration[time],distancePoints[time].info()[1]],time);
 
       // lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
     time = time+1;
