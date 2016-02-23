@@ -40,9 +40,15 @@
         <!-- <script src="//www.chartjs.org/assets/Chart.min.js"></script> -->
         <script src="graph.html"></script>
         <script src="js/shipping.js"></script>
-        <script src="js/io.js"></script>
+        <!-- <script src="js/io.js"></script> -->
+        <!-- <script src="js/location.js"></script> -->
         <script src="tableView.html"></script>
-        
+
+
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap:cdvfile:https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+
+         <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; media-src *;style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+         -->
         <title>GPS Master</title>
     </head>
     <body>
@@ -52,42 +58,93 @@
                 <p class="event received">Device is Ready</p> 
             </div> -->
 
-            <script type="text/javascript" language="JavaScript">
-            document.addEventListener('deviceIsready', function () {}
-            function deviceIsready(){
-                FileSystemHelper.prototype.readTextFromFile(_myName+".txt", success, errorsave);
+            <script type="text/javascript">
+                var _myName; 
+                var _myEmail; 
+                var _emailTo; 
 
-            }
+                document.addEventListener('deviceready', function () {
+                    window.name = "index";
+                    // var head= document.getElementsByTagName('head')[0];
+                    // var script= document.createElement('script');
+                    // script.type= 'text/javascript';
+                    // script.src= "js/io.js";
+                    // head.appendChild(script);
+                    
+                    // clickedButton();
 
-            function clickedButton(){
-                window.location = 'graph.html'
-            }
-            function success() {
-                alert("Your credentials have been saved")
-            }
-            function errorsave() {
-                alert("Didnt find file");
-            }
-            function errorfound() {
-                alert("Nothing  wrote");
-            }
-            function saveInfo(){
-                var _myName = document.getElementById("myName");
-                var _myEmail = document.getElementById("myEmail");
-                var _emailTo = document.getElementById("emailTo");
+                });
+                function sendUserInfo(textToWrite){
+                    var info = textToWrite.split(/~/);
+                    if (info.length>2) {
+                        document.getElementsByTagName("fname").value = info[0];
+                        document.getElementsByTagName("email").value = info[1];
+                        document.getElementsByTagName("emailTo").value = info[2];
+                    }
+                }
+                function setUP(){
+                    //  console.log("setUp called");
+                    // FileSystemHelper.prototype.readTextFromFile("username.txt", success, errorsave);
+                    // alert("this is from device ready in index");
+                }
 
-                shipper('userinfo',_myName.value+"~"+_myEmail.value+"~"+_emailTo.value);
-                // shipper('userEmail',_myEmail.value);
-                // shipper('emailofTeacher',_emailTo.value);
-                    FileSystemHelper.prototype.writeLine(_myName+".txt", _myName.value+"~"+_myEmail.value+"~"+_emailTo.value, success, errorfound);  
-                              }
+                function clickedButton(){
+                    
+                    // var head= document.getElementsByTagName('head')[0];
+                    // var script= document.createElement('script');
+                    // script.type= 'text/javascript';
+                    // script.src= "js/io.js";
+                    // head.appendChild(script);
+
+                    // setUP();
+                    console.log("clickedButton called");
+                    window.location = 'graph.html';
+                }
+
+                function success() {
+                    alert("Your credentials have been saved");
+                }
+
+                function errorsave() {
+                    alert("Didnt find file------------------------------------");
+                }
+
+                function errorfound() {
+                    alert("Nothing  wrote");
+                }
+
+                function getInfo(){
+                     _myName = document.getElementsByTagName("fname");
+                     _myEmail = document.getElementsByTagName("email");
+                     _emailTo = document.getElementsByTagName("emailTo");
+
+                }
+
+                function saveInfo(){
+                    getInfo();
+                    shipper('userinfo',_myName.value+"~"+_myEmail.value+"~"+_emailTo.value);
+                    console.log("saveInfo called");
+                    // clickedButton();
+                    // // shipper('userEmail',_myEmail.value);
+                    // // shipper('emailofTeacher',_emailTo.value);
+                        // FileSystemHelper.prototype.writeLine("username.txt", _myName.value+"~"+_myEmail.value+"~"+_emailTo.value, success, errorfound);  
+                }
             </script>
 <div id="page-wrapper">
 <h1>Sign In</h1>
-            <form id = "get_email" action='getArray(); MAILTO:email' method="post" enctype="text/plain">
+            <!-- <form id = "get_email" action="demo_form.asp" method="get"autocomplete="on" enctype="text/plain"> -->
+            <!-- <form id = "get_email" action=' MAILTO:email'autocomplete="on" method="post" enctype="text/plain"> -->
+            <form id = "get_email" action='graph.html'autocomplete="on" method="post" enctype="text/plain">
             <br>
             <br>
-                Name:<br>
+            <!-- <form   autocomplete="on" > -->
+                  First name:<br> <input type="text" name="fname"><br><br>
+                  E-mail:<br>     <input type="email" name="email"><br><br>
+                  E-mail to:<br>  <input type="email" name="emailTo"><br><br>
+                  <input class="SBP"style="background-color:rgb(0, 153, 204)" type="submit" onclick ="saveInfo();clickedButton()" >
+                  <input class="SBP"style="background-color:rgb(0, 153, 204)"type="reset" value="Reset">
+                
+                <!-- Name:<br>
                     <input type="text" name="textname" id = "myName" placeholder="your name"><br>
                 E-mail:<br>
                     <input type='email' name="textmyEmail" id = "myEmail" placeholder="your email"><br>
@@ -95,7 +152,7 @@
                     <input type='email' name="textemailTo" id = "emailTo" placeholder="myTeacher@gmail.com"><br><br/><br/>
                     <input class="SBP"style="background-color:rgb(0, 153, 204)" type="button" value="Submit" onClick="saveInfo();clickedButton()"/>
 
-                    <input class="SBP"style="background-color:rgb(0, 153, 204)"type="reset" value="Reset">
+                    <input class="SBP"style="background-color:rgb(0, 153, 204)"type="reset" value="Reset"> -->
             </form>
             </div>
             

@@ -111,21 +111,21 @@
                                     el.className="off";
                                 } else {
                                     el.className="on";
-                                    createGraph();
-                                    var a_point = new point(0,1);
-                                    var b_point = new point(0,0);
-                                    var c_point = new point(0,-1);
+                                    // createGraph();
+                                    // var a_point = new point(0,1);
+                                    // var b_point = new point(0,0);
+                                    // var c_point = new point(0,-1);
                                     
-                                    addDataToChart(b_point);
-                                    addDataToChart(b_point);
-                                    addDataToChart(b_point);
+                                    // addDataToChart(b_point);
+                                    // addDataToChart(b_point);
+                                    // addDataToChart(b_point);
                                     $(document).mousemove(function(e) {
                                         
                                         if(e.which==1)
                                              {
                                               var div = document.getElementById('updating-chart');
                                               var x = e.pageX - div.offsetLeft;
-                                              var y = (e.pageY - div.offsetTop-100)*-1;
+                                              var y = (e.pageY - div.offsetTop-150)*-1;
                                                 $("#left").val(x);
                                                 $("#bottom").val(y);
                                                 drawArray.push(new point(x,y));

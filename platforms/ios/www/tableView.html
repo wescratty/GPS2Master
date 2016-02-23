@@ -91,6 +91,19 @@
             Select a file: <input type="file"id="input"name="img"onchange="handleFiles(this.files)">
 
             <script type="text/javascript">
+
+                document.addEventListener('deviceready', function () {setUP();});
+            function setUP(){
+                window.name = "tableView";
+
+            }
+
+            
+
+
+
+
+
                 function handleFiles(aFile){
                     selectedFile =  aFile[0];
                     document.getElementById('fileNameInput').value = selectedFile.name;
@@ -113,10 +126,21 @@
             <button class="button"style="background-color:rgb(0, 153, 204)" id="writeFileButton">Write</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="readFileButton">Read</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="deleteFileButton">Delete</button>
-            <button class="button"style="background-color:rgb(0, 153, 204)" id="emailFileButton">Email</button>
+            <button class="button"style="background-color:rgb(0, 153, 204)"action=' MAILTO:email' id="emailFileButton">Email</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="loadFileToGraph" onClick= "loadGraph()">Load</button>
 
+
+            
+
         </div>
+
+
+
+
+
+
+
+
         <div class="action-area ch30">
             
             <!-- <button onclick="tryEmail();">email data</button> -->

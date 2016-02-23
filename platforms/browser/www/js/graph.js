@@ -195,7 +195,8 @@ function addDataToChart(aPoint){
         
 
         if (num_dis_points>1) {
-            rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
+            rat = dv_dt(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2]);
+            console.log(rat);
             rate.push(rat);
             ratePoints.push(new point(num_dis_points-2,rat));
             var  num_rate_points = ratePoints.length;
@@ -209,9 +210,9 @@ function addDataToChart(aPoint){
         
     };
 
-    if (num_dis_points>2) {
+    if (num_dis_points>3) {
       // console.log(distancePoints[time].info()[1]);
-            lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time],distancePoints[time].info()[1]],time);
+            lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time].info()[1]],time);
 
       // lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
     time = time+1;
