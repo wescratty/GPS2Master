@@ -52,7 +52,10 @@ function createGraph() {
         // String - Template string for single tooltips
     tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
         // String - Template string for multiple tooltips
-    multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,scaleGridLineColor : "rgba(255, 255, 0,.05)",    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+    multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
+    scaleGridLineColor : "#000000",
+    scaleFontColor: "#000000",
+        legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 
     };
     
