@@ -25,9 +25,16 @@ var canvas;
 var ctx;
 var logOb;
 var _setLocation = false;
+var startPoss;
 var fileSelector = false;
-const METERTOFEET = 3.28084;
+const KILOMETERTOFEET = 3280.84;
+const KILOTOMILE = 0.621371
 const K_MILL_SEC = 1000;
+
+var goodPoint = false;
+var currentLoc;
+var lastLoc = new point(0,0);
+var needsStarted = true;
 
 
 // this is x^3
@@ -60,21 +67,35 @@ const K_MILL_SEC = 1000;
 //                 ];
 
 var testdata = [
+
 [ 0 ,  3 ],
 [ 1 ,  6 ],
-[ 2 ,  9 ],
-[ 3 ,  12 ],
-[ 4 ,  15 ],
-[ 5,  18 ],
-[ 6 ,  21 ],
-[ 7 ,  8 ],
-[ 8 ,  0 ],
-[ 9 ,  0 ],
-[ 10 ,  0 ],
-[ 11 ,  0 ],
-[ 12 ,  0 ],
-[ 13 ,  0 ]
+[ 2 ,  8 ],
+[ 3 ,  8 ],
+[ 4 ,  7 ],
+[ 5 ,  7 ],
+[ 6 ,  7 ],
+[ 7 ,  7 ],
+[ 8 ,  7 ],
+[ 9 ,  7 ],
+[ 10 ,  7 ],
+[ 10 ,  7 ],[ 10 ,  7 ],[ 10 ,  7 ]
+
                 ];
+// var testdata = [
+// [ 0 ,  3 ],
+// [ 1 ,  6 ],
+// [ 2 ,  9 ],
+// [ 3 ,  12 ],
+// [ 4 ,  15 ],
+// [ 5 ,  18 ],
+// [ 6 ,  21 ],
+// [ 7 ,  24 ],
+// [ 8 ,  27 ],
+// [ 9 ,  30 ],
+// [ 10 ,  33 ]
+
+//                 ];
 
 
 

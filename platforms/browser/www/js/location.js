@@ -9,23 +9,67 @@ function getGeoPosition(position){
 
 
 function setLocation(){
+    if (!_setLocation) {
     _setLocation = true;
+    getNew();
+    }else{
+        _setLocation = false;
+    }
 }
 
 function getNew(){
+    console.log("getting new");
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 
 
 
 function onSuccess(position) {
+    if (_setLocation&&!goodPoint) {
+        console.log("!goodPoint");
+        
+        // while(!goodPoint){
+            currentLoc=getGeoPosition(position);
+            var a_point = currentLoc.info();
+            var b_point = lastLoc.info();
+            
+            var a_x = a_point[0];
+            var a_y = a_point[1];
+            var b_x = b_point[0];
+            var b_y = b_point[1];
+            var ax_bx = a_x -b_x;
+            var ay_by = a_y -b_y;
+
+
+            if (ax_bx==0&&ay_by==0 ) {
+                console.log("We have a lock on your position! "+ax_bx);
+                goodPoint = true;
+                alert("We have a lock on your position!");
+                startPoss = currentLoc;
+                startLocationPoints();
+            }else{
+                console.log(ax_bx);
+                lastLoc = currentLoc;
+                if (needsStarted) {
+                    needsStarted = false;
+                    startLocationPoints();
+
+                }
+                
+            }
+        // }
+        
+        
+
+    }else{
    
-    buildLatLonPoints(getGeoPosition(position));
-    var len = coorPoints.length;
-    if (len>1) {
-        var dis_point = new point(time, coorPoints_to_distance(len-1));
-        addDataToChart(dis_point);
-    };
+        buildLatLonPoints(getGeoPosition(position));
+        var len = coorPoints.length;
+        if (len>1) {
+            var dis_point = new point(time, coorPoints_to_distance(len-1));
+            addDataToChart(dis_point);
+        };
+    }
 
 }
 
@@ -59,6 +103,10 @@ function coorPoints_to_distance (index) {
     
     return temp_dis;
 }
+function kiloToMile(temp_dis){
+    return temp_dis*KILOTOMILE;
+
+}
 
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -72,7 +120,7 @@ function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     ; 
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     var d = R * c; // Distance in km
-    return d;
+    return d*KILOMETERTOFEET;
 }
 
 function deg2rad(deg) {
