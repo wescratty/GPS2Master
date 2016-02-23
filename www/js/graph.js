@@ -203,7 +203,7 @@ function addDataToChart(aPoint){
       lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time],distancePoints[time].info()[1]],time);
       // lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
       time = time+1;
-    }
+}
     // var  num_dis_points = distancePoints.length;
     // if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
     //   dist=distancePoints[num_dis_points-1].info()[1];
@@ -211,7 +211,7 @@ function addDataToChart(aPoint){
     //   total_distance = dist;
     //   distance.push(new point(time,total_distance));// make this a point
     // }else{
-    //   total_distance = total_distance+dist-distance ;
+    //    total_distance = total_distance+dist-distance[num_dis_points-1].info()[1] ;
     //     distance.push(new point(time,total_distance));// make this a point
     // }
         
