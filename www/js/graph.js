@@ -165,6 +165,7 @@ function createGraph() {
 
 //------------------Attention Brian------------------
 function addDataToChart(aPoint){
+  console.log("in data add");
   if (!lineChart) {
     createGraph();
   }
@@ -183,14 +184,14 @@ function addDataToChart(aPoint){
    var num_dis_points = distancePoints.length;
     if (num_dis_points>0) {  
       pos= distancePoints[num_dis_points-1].info()[1];
-      if(!total_distance){
+      if(distance.length == 0){
         dist = pos;
         distance.push(new point(time, dist))    
       }
     }
     if (num_dis_points>1){
-      dist = getDistance(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2])
-        distance.push(new point(time, dist));
+      dist = getDistance(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2]);
+      distance.push(new point(time, dist));
       rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
       ratePoints.push(new point(num_dis_points-2,rat));
       rate.push(rat);
@@ -202,7 +203,11 @@ function addDataToChart(aPoint){
       acceleration.push(acc);
       accelerationPoints.push(new point(num_rate_points-2,acc));
 
-
+      console.log(distance[time+2].info()[1]);
+      console.log(rat);
+      console.log(acc);
+      console.log(time);
+      
       lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time],distancePoints[time].info()[1]],time);
       // lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
       time = time+1;
