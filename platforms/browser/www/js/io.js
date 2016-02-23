@@ -1,17 +1,4 @@
-//handles phone data persistence and phone file readin
 
-//todo I know wes had this working
-// function savetoCSV(Filename){
-
-// }
-
-// function readinCSV(Filename){
-
-// }
-
-// function loadCSV(){
-
-// }
 
 
 document.addEventListener('deviceready', function () {
@@ -70,19 +57,23 @@ if (window.name =='graph') {
 
     	window.initPersistentFileSystem(10*1024*1024, function() {
 	    var fs = cordova.file.applicationDirectory;
-	    console.log(fs.toURL);// breaking here
-	    window.resolveLocalFileSystemURL('cdvfile:/'+fs + "www/"+locFileName, function (dir) {
+	    console.log(fs);// breaking here
+	    window.resolveLocalFileSystemURL(fs, function (dir) {
             console.log("Main Dir:", dir);
             dir.getFile(locFileName, {create: true}, function (file) {
                 console.log("File: ", file);
                 logOb = file;
+
+                //cdvfile:/http://localhost:8000/
                 //writeLog("App started");
             });
         });
 
 
       //  Was thinking in here that we could change to a file selector 
-        });
+        },function (e) {
+    console.log(e);
+  });
 
 
         window.addEventListener('filePluginIsReady', function(){
@@ -420,8 +411,13 @@ FileSystemHelper.prototype = {
 		var reader = new FileReader();
 		reader.onloadend = function(evt) { 
 			var textToWrite = evt.target.result;
+			if (window.name == "index") {
+				// sendUserInfo(textToWrite);
+			}else{
+			
 			csvToarray(textToWrite);
 			onSuccess.call(that, textToWrite);
+		}
 		};
         
 		reader.readAsText(file);

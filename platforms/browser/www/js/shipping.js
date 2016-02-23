@@ -104,4 +104,41 @@ storage[this.bagTag_ClassOb.getName()] = JSON.stringify(this.bagTag_ClassOb.getP
     return this.package;
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
   

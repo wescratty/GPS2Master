@@ -13,6 +13,7 @@ var ratePoints = [];
 var distance = [];
 var rate = [];
 var acceleration = [];
+var drawArray = [];
 
 var startTime;
 var count = 0;
@@ -84,12 +85,6 @@ document.addEventListener("touchstart", function() {}, false);
 function onDeviceReady() {
   console.log("device is ready in helper");
     
-    
-    
-    
-
-   
-    
 }
 
 
@@ -118,12 +113,14 @@ function load_test_data(){
 
 
 function tryEmail(){
+    console.log("tryEmail called");
     var _body = receiverString('body');
     var userinfo = receiverString('userinfo').split(/~/);
     var attachment;
 
     if (!logOb) {
         // attachment = image 
+        console.log("no log ob");
     }else{
         attachment = logOb.nativeURL;
     }

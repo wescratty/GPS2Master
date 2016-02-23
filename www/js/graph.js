@@ -235,6 +235,7 @@ function reset(){
              distance = [];
              rate = [];
              acceleration = [];
+             drawArray = [];
 
              startTime;
              count = 0;
