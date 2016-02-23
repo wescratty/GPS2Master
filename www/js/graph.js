@@ -179,43 +179,66 @@ function addDataToChart(aPoint){
 
 
    distancePoints.push(this.aPoint);
-   
-    
-    var  num_dis_points = distancePoints.length;
-    if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
-      dist=distancePoints[num_dis_points-1].info()[1];
-       if(!total_distance){
-      total_distance = dist;
-      distance.push(new point(time,total_distance));// make this a point
-    }else{
-      total_distance = total_distance+dist-distance[num_dis_points-1] ;
-        distance.push(new point(time,total_distance));// make this a point
+
+   var num_dis_points = distancePoints.length
+    if (num_dis_points>0) {  
+      pos= distancePoints[num_dis_points-1].info()[1];
+      if(!total_distance){
+        dist = pos;
+        distance.push(new point(time, dist))    
+      }
+    if (num_dis_points>1){
+      dist = getDistance(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2])
+        distance.push(new point(time, dist))
+      rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
+      rate.push(new point(time, rat))  
     }
-        
-        
+    if (num_rate_points>2){
+      var  num_rate_points = ratePoints.length;
+      acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
+      acceleration.push(acc);
+      accelerationPoints.push(new point(num_rate_points-2,acc));
 
-        if (num_dis_points>1) {
-            rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
-            rate.push(rat);
-            ratePoints.push(new point(num_dis_points-2,rat));
-            var  num_rate_points = ratePoints.length;
-            if (num_rate_points>1) {
-                acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
-                acceleration.push(acc);
-                accelerationPoints.push(new point(num_rate_points-2,acc));
-                
-            };
-        };
-        
-    };
 
-    if (num_dis_points>2) {
-      // console.log(distancePoints[time].info()[1]);
-            lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time],distancePoints[time].info()[1]],time);
-
+      lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time],distancePoints[time].info()[1]],time);
       // lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
-    time = time+1;
-    };
+      time = time+1;
+    }
+    // var  num_dis_points = distancePoints.length;
+    // if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
+    //   dist=distancePoints[num_dis_points-1].info()[1];
+    //    if(!total_distance){
+    //   total_distance = dist;
+    //   distance.push(new point(time,total_distance));// make this a point
+    // }else{
+    //   total_distance = total_distance+dist-distance ;
+    //     distance.push(new point(time,total_distance));// make this a point
+    // }
+        
+        
+
+    //     if (num_dis_points>1) {
+    //         rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
+    //         rate.push(rat);
+    //         ratePoints.push(new point(num_dis_points-2,rat));
+    //         var  num_rate_points = ratePoints.length;
+    //         if (num_rate_points>1) {
+    //             acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
+    //             acceleration.push(acc);
+    //             accelerationPoints.push(new point(num_rate_points-2,acc));
+                
+    //         };
+    //     };
+        
+    // };
+
+    // if (num_dis_points>2) {
+    //   // console.log(distancePoints[time].info()[1]);
+    //         lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time],distancePoints[time].info()[1]],time);
+
+    //   // lineChart.addData([distance[time+2],rate[time+1],acceleration[time],distancePoints[time].info()[1]],distancePoints[time].info()[0]);
+    // time = time+1;
+    // };
     
     
     
@@ -283,6 +306,13 @@ function dv_dt(a_point,b_point){
     return new_rate;
     };
     
+}
+
+function getDistance(a_point, b_point){
+  var a_pos = a_point[1]
+  var b_pos = b_point[1]
+  delta_pos = b_pos - a_pos
+  return abs(delta_pos)
 }
 
 
