@@ -166,12 +166,19 @@ function createGraph() {
                           }     
 // }
 
-//------------------Attention Brian------------------
+
+
+
+
+
+
+
+
 function addDataToChart(aPoint){
-  if (!lineChart) {
-    createGraph();
-  }
-  
+    if (!lineChart) {
+        createGraph();
+    }
+    
     this.aPoint = aPoint;
     var dist = 0.0;
     var rat = 0.0;
@@ -179,105 +186,176 @@ function addDataToChart(aPoint){
     var pos = 0.0;
     
     
-
-
-   distancePoints.push(this.aPoint);
-   
+    
+    
+    distancePoints.push(this.aPoint);
+    
     
     var  num_dis_points = distancePoints.length;
-    
-
-    
-
-
-
-      if (_setLocation) {
-        if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
-            dist=distancePoints[num_dis_points-1].info()[1];
-             if(!total_distance){
+    if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
+        dist=distancePoints[num_dis_points-1].info()[1];
+        if(!total_distance){
             total_distance = dist;
             distance.push(new point(time,total_distance));// make this a point
-          }else{
-
-
-
-
-
-
-
-            var point_a = startPoss.info();  //last point in array
-            var len = coorPoints.length-1;
-            var point_b = coorPoints[len].info();// second to last point
-            var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]); 
-            
-            total_distance = temp_dis;
-            // total_distance+(temp_dis-dist);
-            distance.push(new point(time,total_distance));// make this a point
-
-
-
-
-
-          }
-              if (num_dis_points>1) {
-                  rat = dv_dt(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2]);
-                  console.log(rat);
-                  rate.push(rat);
-                  ratePoints.push(new point(num_dis_points-2,rat));
-                  var  num_rate_points = ratePoints.length;
-                  if (num_rate_points>1) {
-                      acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
-                      acceleration.push(acc);
-                      accelerationPoints.push(new point(num_rate_points-2,acc));
-                      
-                  };
-              };
-        
-    };
-
-        
-
-
-      }else{
-            if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
-      dist=distancePoints[num_dis_points-1].info()[1];
-       if(!total_distance){
-      total_distance = dist;
-      distance.push(new point(time,total_distance));// make this a point
-    }else{
-      total_distance = total_distance+(Math.abs(dist-distancePoints[num_dis_points-2].info()[1]));
-        distance.push(new point(time,total_distance));// make this a point
-    }
-        if (num_dis_points>1) {
-            rat = dv_dt(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2]);
-            console.log(rat);
-            rate.push(rat);
-            ratePoints.push(new point(num_dis_points-2,rat));
-            var  num_rate_points = ratePoints.length;
-            if (num_rate_points>1) {
-                acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
-                acceleration.push(acc);
-                accelerationPoints.push(new point(num_rate_points-2,acc));
+        }else{
+            if (_setLocation) {
+                var point_a = startPoss.info();  //last point in array
+                var len = coorPoints.length-1;
+                var point_b = coorPoints[len].info();// second to last point
+                var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]);
                 
+                total_distance = temp_dis;
+                distance.push(new point(time,total_distance));// make this a point
+                
+            }else{
+                total_distance = total_distance+(Math.abs(dist-distancePoints[num_dis_points-2].info()[1]));
+                distance.push(new point(time,total_distance));// make this a point
+            }
+            
+            if (num_dis_points>1) {
+                rat = dv_dt(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2]);
+                console.log(rat);
+                rate.push(rat);
+                ratePoints.push(new point(num_dis_points-2,rat));
+                var  num_rate_points = ratePoints.length;
+                if (num_rate_points>1) {
+                    acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
+                    acceleration.push(acc);
+                    accelerationPoints.push(new point(num_rate_points-2,acc));
+                    
+                };
             };
-        };
+            
+            
+            if (num_dis_points>4) {
+                lineChart.addData([distance[time+1].info()[1],rate[time],acceleration[time],distancePoints[time].info()[1]],time);
+                time = time+1;
+            }
+
+            if (lineChart.datasets.length>15) {
+              lineChart.removeData();
+            }
+            
+        }
         
-    };
-
-
-    };
-
-    if (num_dis_points>4) {
-            lineChart.addData([distance[time].info()[1],rate[time],acceleration[time],distancePoints[time].info()[1]],time);
-            time = time+1;
-          }
-
-    
-    
-    
-    
-    
+    }
 }
+
+
+
+
+//------------------Attention Brian------------------
+// function addDataToChart(aPoint){
+//   if (!lineChart) {
+//     createGraph();
+//   }
+  
+//     this.aPoint = aPoint;
+//     var dist = 0.0;
+//     var rat = 0.0;
+//     var acc = 0.0;
+//     var pos = 0.0;
+    
+    
+
+
+//    distancePoints.push(this.aPoint);
+   
+    
+//     var  num_dis_points = distancePoints.length;
+    
+
+    
+
+
+
+//       if (_setLocation) {
+//         if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
+//             dist=distancePoints[num_dis_points-1].info()[1];
+//              if(!total_distance){
+//             total_distance = dist;
+//             distance.push(new point(time,total_distance));// make this a point
+//           }else{
+
+
+
+
+
+
+
+//             var point_a = startPoss.info();  //last point in array
+//             var len = coorPoints.length-1;
+//             var point_b = coorPoints[len].info();// second to last point
+//             var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]); 
+            
+//             total_distance = temp_dis;
+//             // total_distance+(temp_dis-dist);
+//             distance.push(new point(time,total_distance));// make this a point
+
+
+
+
+
+//           }
+//               if (num_dis_points>1) {
+//                   rat = dv_dt(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2]);
+//                   console.log(rat);
+//                   rate.push(rat);
+//                   ratePoints.push(new point(num_dis_points-2,rat));
+//                   var  num_rate_points = ratePoints.length;
+//                   if (num_rate_points>1) {
+//                       acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
+//                       acceleration.push(acc);
+//                       accelerationPoints.push(new point(num_rate_points-2,acc));
+                      
+//                   };
+//               };
+        
+//     };
+
+        
+
+
+//       }else{
+//             if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
+//       dist=distancePoints[num_dis_points-1].info()[1];
+//        if(!total_distance){
+//       total_distance = dist;
+//       distance.push(new point(time,total_distance));// make this a point
+//     }else{
+//       total_distance = total_distance+(Math.abs(dist-distancePoints[num_dis_points-2].info()[1]));
+//         distance.push(new point(time,total_distance));// make this a point
+//     }
+//         if (num_dis_points>1) {
+//             rat = dv_dt(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2]);
+//             console.log(rat);
+//             rate.push(rat);
+//             ratePoints.push(new point(num_dis_points-2,rat));
+//             var  num_rate_points = ratePoints.length;
+//             if (num_rate_points>1) {
+//                 acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
+//                 acceleration.push(acc);
+//                 accelerationPoints.push(new point(num_rate_points-2,acc));
+                
+//             };
+//         };
+        
+//     };
+
+
+//     };
+
+//     if (num_dis_points>4) {
+//             lineChart.addData([distance[time].info()[1],rate[time],acceleration[time],distancePoints[time].info()[1]],time);
+//             time = time+1;
+//           }
+
+    
+    
+    
+    
+    
+// }
 function reset(){
   // if (lineChart.dataSets.length > 0) {
             // REMOVE LATEST DATASET AND VALIDATE
@@ -302,6 +380,8 @@ function reset(){
             time = 0;
             window.lineChart.destroy();
             createGraph();
+            _setLocation = false;
+            startPoss = new point (0,0);
     
     lineChart.update();
 }

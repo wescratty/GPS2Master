@@ -55,6 +55,7 @@ function createGraph() {
     multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
     scaleGridLineColor : "#000000",
     scaleFontColor: "#000000",
+
         legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 
     };
@@ -204,6 +205,7 @@ function addDataToChart(aPoint){
                 var point_b = coorPoints[len].info();// second to last point
                 var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]);
                 
+                
                 total_distance = temp_dis;
                 distance.push(new point(time,total_distance));// make this a point
                 
@@ -228,8 +230,12 @@ function addDataToChart(aPoint){
             
             
             if (num_dis_points>4) {
-                lineChart.addData([distance[time].info()[1],rate[time],acceleration[time],distancePoints[time].info()[1]],time);
+                lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
                 time = time+1;
+            }
+
+            if (lineChart.datasets.length>15) {
+              lineChart.removeData();
             }
             
         }
@@ -382,6 +388,8 @@ function reset(){
     lineChart.update();
 }
 
+
+getDistanceFromLatLonInKm
 // this was just to test changing existing data on graph
 function add_graph_line(){
     lineChart.datasets[1].points[0].value = 50;

@@ -88,6 +88,8 @@
             <input class="inputBox" id="textInput" placeholder="Add message"/>
             <br/>
             <br/>
+            <!-- <div class"filechooser">
+            </div> -->
             Select a file: <input type="file"id="input"name="img"onchange="handleFiles(this.files)">
 
             <script type="text/javascript">
@@ -95,11 +97,27 @@
                 document.addEventListener('deviceready', function () {setUP();});
             function setUP(){
                 window.name = "tableView";
+                
+                // var div= document.getElementsByClassName('filechooser')[0];
+                // var script= document.createElement('input');
+                // script.type= 'file';
+                // script.onchange="handleFiles(this.files)";
+                // script.name = "img";
+                // div.firstNode(script);
+
+
+
+
 
             }
 
             
+                function checkPlatform(){
+                    if (device.platform == "browser") {
+                        
+                    }
 
+                }
 
 
 
@@ -130,7 +148,7 @@
             <button class="button"style="background-color:rgb(0, 153, 204)" id="loadFileToGraph" onClick= "loadGraph()">Load</button>
 
 
-            
+
 
         </div>
 

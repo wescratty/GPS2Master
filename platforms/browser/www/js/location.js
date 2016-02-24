@@ -18,7 +18,7 @@ function setLocation(){
 }
 
 function getNew(){
-    console.log("getting new");
+    // console.log("getting new");
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 
@@ -26,7 +26,7 @@ function getNew(){
 
 function onSuccess(position) {
     if (_setLocation&&!goodPoint) {
-        console.log("!goodPoint");
+        // console.log("!goodPoint");
         
         // while(!goodPoint){
             currentLoc=getGeoPosition(position);
@@ -42,13 +42,13 @@ function onSuccess(position) {
 
 
             if (ax_bx==0&&ay_by==0 ) {
-                console.log("We have a lock on your position! "+ax_bx);
+                // console.log("We have a lock on your position! "+ax_bx);
                 goodPoint = true;
                 alert("We have a lock on your position!");
                 startPoss = currentLoc;
                 startLocationPoints();
             }else{
-                console.log(ax_bx);
+                // console.log(ax_bx);
                 lastLoc = currentLoc;
                 if (needsStarted) {
                     needsStarted = false;
@@ -62,19 +62,60 @@ function onSuccess(position) {
         
 
     }else{
-   
-        buildLatLonPoints(getGeoPosition(position));
         var len = coorPoints.length;
-        if (len>1) {
-            var dis_point = new point(time, coorPoints_to_distance(len-1));
-            addDataToChart(dis_point);
-        };
+        console.log(len);
+        if (len==0) {
+            buildLatLonPoints(getGeoPosition(position));
+
+        }else{
+            currentLoc=getGeoPosition(position);
+            var a_point = currentLoc.info();
+            var b_point = coorPoints[len-1].info();
+            var temp_dis =getDistanceFromLatLonInKm(a_point[0],a_point[1],b_point[0],b_point[1]);
+         
+
+            if (!modeOfTrans(mode,temp_dis)) {
+                console.log(temp_dis);
+                  return;
+            }else{
+                buildLatLonPoints(currentLoc);
+                
+
+                var dis_point = new point(time, temp_dis);
+                addDataToChart(dis_point);
+        }
+        
+   
+        // // buildLatLonPoints(getGeoPosition(position));
+        // var len = coorPoints.length;
+        // if (len>1) {
+        //     // var newDist = coorPoints_to_distance(len-1)
+        //     if (!modeOfTrans(mode,newDist)) {
+        //         console.log(newDist);
+        //           return;
+        //     }else{
+        //         var temp_dis =getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]);
+
+        //         var dis_point = new point(time, newDist);
+        //         addDataToChart(dis_point);
+        // }
+        // };
+    }
     }
 
 }
 
 
-
+function coorDist(now,then) {
+    
+    var point_a = now.info();  //last point 
+    var point_b = then.info();// second to last point
+    
+    //creates a point that is the distance covered
+    var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]); 
+    
+    return temp_dis;
+}
 
 function onError(error) {
     alert('code: '    + error.code    + '\n' +
@@ -89,7 +130,7 @@ function onError(error) {
 
 function buildLatLonPoints(aPoint){
     this.aPoint = aPoint;
-    coorPoints.push(aPoint);
+    coorPoints.push(this.aPoint);
     
 }
 
@@ -103,10 +144,10 @@ function coorPoints_to_distance (index) {
     
     return temp_dis;
 }
-function kiloToMile(temp_dis){
-    return temp_dis*KILOTOMILE;
+// function kiloToMile(temp_dis){
+//     return temp_dis*KILOTOMILE;
 
-}
+// }
 
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -134,4 +175,30 @@ function point(x,y){
     this.info = function(){
         return [this.x,this.y];
     }
+}
+
+function modeOfTrans(mode,dist){
+    var tolerance;
+    if (mode =="walk") {
+        tolerance = 8;
+    }else if (mode =="bike") {
+        tolerance = 20;
+    }else if (mode =="auto") {
+        tolerance = 70;
+    }
+     
+    // var a = twoPointArr(now,then);
+
+    if(dist<tolerance) {
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function twoPointArr(aPoint,bPoint){
+    this.a_point = a_point.info();
+    this.b_point = b_point.info();
+    
+    return [this.a_point[0],this.a_point[1],this.b_point[0],this.b_point[1]];
 }

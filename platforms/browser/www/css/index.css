@@ -127,6 +127,7 @@ h1 {
     border-radius: 8px;
     /*font-size:12px;*/
     font-weight: bold;
+    font-size:16px;
     
   vertical-align: middle or top
 }
@@ -209,5 +210,24 @@ background:#efefef;
 color:#369;
 background-color:rgb(0, 153, 204)
 }
+
+.xy{
+
+width:25px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
