@@ -55,6 +55,7 @@ function createGraph() {
     multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
     scaleGridLineColor : "#000000",
     scaleFontColor: "#000000",
+    // animationSteps: 15,
 
         legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 
@@ -204,7 +205,7 @@ function addDataToChart(aPoint){
                 var len = coorPoints.length-1;
                 var point_b = coorPoints[len].info();// second to last point
                 var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]);
-                
+
                 
                 total_distance = temp_dis;
                 distance.push(new point(time,total_distance));// make this a point
@@ -234,7 +235,8 @@ function addDataToChart(aPoint){
                 time = time+1;
             }
 
-            if (lineChart.datasets.length>15) {
+            if (time>20) {
+              // console.log("lineChart.datasets.length:"+lineChart.datasets[0].length);
               lineChart.removeData();
             }
             
