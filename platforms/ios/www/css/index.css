@@ -112,21 +112,22 @@ h1 {
     /*position:absolute; */
     /*z-index: 1; position:absolute;*/
     overflow: 0;
-    background-color:#4F628E;
+    /*background-color:#4F628E;*/
     width: 100%;
 }
 .chart{
-    cursor: pointer;
-    background-color:#4F628E;
+   /* cursor: pointer;
+    background-color:#4F628E;*/
     /*width: 505px;*/
 
 }
 .SBP{
-    width:69px;
+    width:70px;
     height:30px;
     border-radius: 8px;
     /*font-size:12px;*/
     font-weight: bold;
+    font-size:14px;
     
   vertical-align: middle or top
 }
@@ -200,14 +201,50 @@ h1 {
 
 .off { 
 /*border:1px outset;*/
-color:#369;
-background:#efefef; 
+/*color:#369;*/
+background-color:rgb(230, 242, 255);
+width:70px;
+height:30px;
+border-radius: 8px;
+/*font-size:12px;*/
+font-weight: bold;
+font-size:16px;
+    
+/*vertical-align: middle or top*/
 }
 
 .on {
 /*border:1px outset;*/
-color:#369;
-background-color:rgb(0, 153, 204)
+/*color:#369;*/
+background-color:rgb(0, 153, 204);
+width:70px;
+height:30px;
+border-radius: 8px;
+/*font-size:12px;*/
+font-weight: bold;
+font-size:16px;
+
+/*vertical-align: middle or top*/
+
 }
+
+.xy{
+
+width:25px;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

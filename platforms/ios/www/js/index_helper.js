@@ -1,7 +1,5 @@
 // globa vars 
 var refreshIntervalId = null;
-var myLiveChart;
-
 var dataOutArray = [];
 var pointsArray = [];
 var coorPoints = [];
@@ -27,14 +25,19 @@ var logOb;
 var _setLocation = false;
 var startPoss;
 var fileSelector = false;
-const KILOMETERTOFEET = 3280.84;
-const KILOTOMILE = 0.621371
-const K_MILL_SEC = 1000;
-
 var goodPoint = false;
 var currentLoc;
 var lastLoc = new point(0,0);
 var needsStarted = true;
+
+
+const KILOMETERTOFEET = 3280.84;
+const KILOTOMILE = 0.621371
+const K_MILL_SEC = 1000;
+
+
+
+var mode = "walk"
 
 
 // this is x^3
@@ -67,21 +70,25 @@ var needsStarted = true;
 //                 ];
 
 var testdata = [
-
-[ 0 ,  3 ],
-[ 1 ,  6 ],
-[ 2 ,  8 ],
-[ 3 ,  8 ],
-[ 4 ,  7 ],
-[ 5 ,  7 ],
+[ 0 ,  -3 ],
+[ 1 ,  0 ],
+[ 2 ,  3 ],
+[ 3 ,  6 ],
+[ 4 ,  8 ],
+[ 5 ,  8 ],
 [ 6 ,  7 ],
 [ 7 ,  7 ],
 [ 8 ,  7 ],
 [ 9 ,  7 ],
 [ 10 ,  7 ],
-[ 10 ,  7 ],[ 10 ,  7 ],[ 10 ,  7 ]
-
-                ];
+[ 11 ,  7 ],
+[ 12 ,  7 ],
+[ 13 ,  7 ],
+[ 14 ,  7 ],
+[ 15 ,  7 ],
+[ 16 ,  7 ],
+[ 17 ,  7 ],
+[ 18 ,  7 ] ];
 // var testdata = [
 // [ 0 ,  3 ],
 // [ 1 ,  6 ],
@@ -109,15 +116,7 @@ function onDeviceReady() {
 }
 
 
-function startLocationPoints(){
-    
-    if (refreshIntervalId == null){
-        refreshIntervalId = setInterval(getNew, K_MILL_SEC);
-    }else{
-        clearInterval(refreshIntervalId);
-        refreshIntervalId = null;
-    }
-}
+
 
 function load_test_data(){
 

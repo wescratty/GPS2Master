@@ -1,7 +1,5 @@
 // globa vars 
 var refreshIntervalId = null;
-var myLiveChart;
-
 var dataOutArray = [];
 var pointsArray = [];
 var coorPoints = [];
@@ -27,14 +25,17 @@ var logOb;
 var _setLocation = false;
 var startPoss;
 var fileSelector = false;
-const KILOMETERTOFEET = 3280.84;
-const KILOTOMILE = 0.621371
-const K_MILL_SEC = 1000;
-
 var goodPoint = false;
 var currentLoc;
 var lastLoc = new point(0,0);
 var needsStarted = true;
+
+
+const KILOMETERTOFEET = 3280.84;
+const KILOTOMILE = 0.621371
+const K_MILL_SEC = 1000;
+
+
 
 var mode = "walk"
 
@@ -115,15 +116,7 @@ function onDeviceReady() {
 }
 
 
-function startLocationPoints(){
-    
-    if (refreshIntervalId == null){
-        refreshIntervalId = setInterval(getNew, K_MILL_SEC);
-    }else{
-        clearInterval(refreshIntervalId);
-        refreshIntervalId = null;
-    }
-}
+
 
 function load_test_data(){
 

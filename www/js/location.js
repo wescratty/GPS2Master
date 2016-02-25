@@ -11,7 +11,7 @@ function getGeoPosition(position){
 function setLocation(){
     if (!_setLocation) {
     _setLocation = true;
-    getNew();
+    startLocationPoints();
     }else{
         _setLocation = false;
     }
@@ -22,14 +22,18 @@ function getNew(){
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 
+function startLocationPoints(){
+    
+    if (refreshIntervalId == null){
+        refreshIntervalId = setInterval(getNew, K_MILL_SEC);
+    }else{
+        clearInterval(refreshIntervalId);
+        refreshIntervalId = null;
+    }
+}
 
-
-function onSuccess(position) {
-    if (_setLocation&&!goodPoint) {
-        // console.log("!goodPoint");
-        
-        // while(!goodPoint){
-            currentLoc=getGeoPosition(position);
+function locationLock(position){
+    currentLoc=getGeoPosition(position);
             var a_point = currentLoc.info();
             var b_point = lastLoc.info();
             
@@ -46,26 +50,59 @@ function onSuccess(position) {
                 goodPoint = true;
                 alert("We have a lock on your position!");
                 startPoss = currentLoc;
-                startLocationPoints();
+                // startLocationPoints();
             }else{
                 // console.log(ax_bx);
                 lastLoc = currentLoc;
-                if (needsStarted) {
-                    needsStarted = false;
-                    startLocationPoints();
+                // if (needsStarted) {
+                //     needsStarted = false;
+                //     startLocationPoints();
 
-                }
+                // }
                 
             }
-        // }
-        
-        
+            return goodPoint;
+
+}
+
+function onSuccess(position) {
+    if (!goodPoint) {
+        locationLock(position);
+            // currentLoc=getGeoPosition(position);
+            // var a_point = currentLoc.info();
+            // var b_point = lastLoc.info();
+            
+            // var a_x = a_point[0];
+            // var a_y = a_point[1];
+            // var b_x = b_point[0];
+            // var b_y = b_point[1];
+            // var ax_bx = a_x -b_x;
+            // var ay_by = a_y -b_y;
+
+
+            // if (ax_bx==0&&ay_by==0 ) {
+            //     // console.log("We have a lock on your position! "+ax_bx);
+            //     goodPoint = true;
+            //     alert("We have a lock on your position!");
+            //     startPoss = currentLoc;
+            //     startLocationPoints();
+            // }else{
+            //     // console.log(ax_bx);
+            //     lastLoc = currentLoc;
+            //     if (needsStarted) {
+            //         needsStarted = false;
+            //         startLocationPoints();
+
+            //     }
+                
+            // }
 
     }else{
+        // if(locationLock(position)){
         var len = coorPoints.length;
         console.log(len);
         if (len==0) {
-            buildLatLonPoints(getGeoPosition(position));
+            buildLatLonPoints(currentLoc);
 
         }else{
             currentLoc=getGeoPosition(position);
@@ -80,28 +117,12 @@ function onSuccess(position) {
             }else{
                 buildLatLonPoints(currentLoc);
                 
-
                 var dis_point = new point(time, temp_dis);
                 addDataToChart(dis_point);
-        }
-        
-   
-        // // buildLatLonPoints(getGeoPosition(position));
-        // var len = coorPoints.length;
-        // if (len>1) {
-        //     // var newDist = coorPoints_to_distance(len-1)
-        //     if (!modeOfTrans(mode,newDist)) {
-        //         console.log(newDist);
-        //           return;
-        //     }else{
-        //         var temp_dis =getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]);
-
-        //         var dis_point = new point(time, newDist);
-        //         addDataToChart(dis_point);
-        // }
-        // };
-    }
-    }
+            }
+        }// end inner else if
+    // }// end iff
+    }// end outer else if
 
 }
 

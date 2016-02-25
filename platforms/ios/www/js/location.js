@@ -11,25 +11,29 @@ function getGeoPosition(position){
 function setLocation(){
     if (!_setLocation) {
     _setLocation = true;
-    getNew();
+    startLocationPoints();
     }else{
         _setLocation = false;
     }
 }
 
 function getNew(){
-    console.log("getting new");
+    // console.log("getting new");
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 
+function startLocationPoints(){
+    
+    if (refreshIntervalId == null){
+        refreshIntervalId = setInterval(getNew, K_MILL_SEC);
+    }else{
+        clearInterval(refreshIntervalId);
+        refreshIntervalId = null;
+    }
+}
 
-
-function onSuccess(position) {
-    if (_setLocation&&!goodPoint) {
-        console.log("!goodPoint");
-        
-        // while(!goodPoint){
-            currentLoc=getGeoPosition(position);
+function locationLock(position){
+    currentLoc=getGeoPosition(position);
             var a_point = currentLoc.info();
             var b_point = lastLoc.info();
             
@@ -42,39 +46,97 @@ function onSuccess(position) {
 
 
             if (ax_bx==0&&ay_by==0 ) {
-                console.log("We have a lock on your position! "+ax_bx);
+                // console.log("We have a lock on your position! "+ax_bx);
                 goodPoint = true;
                 alert("We have a lock on your position!");
                 startPoss = currentLoc;
-                startLocationPoints();
+                // startLocationPoints();
             }else{
-                console.log(ax_bx);
+                // console.log(ax_bx);
                 lastLoc = currentLoc;
-                if (needsStarted) {
-                    needsStarted = false;
-                    startLocationPoints();
+                // if (needsStarted) {
+                //     needsStarted = false;
+                //     startLocationPoints();
 
-                }
+                // }
                 
             }
-        // }
-        
-        
+            return goodPoint;
+
+}
+
+function onSuccess(position) {
+    if (!goodPoint) {
+        locationLock(position);
+            // currentLoc=getGeoPosition(position);
+            // var a_point = currentLoc.info();
+            // var b_point = lastLoc.info();
+            
+            // var a_x = a_point[0];
+            // var a_y = a_point[1];
+            // var b_x = b_point[0];
+            // var b_y = b_point[1];
+            // var ax_bx = a_x -b_x;
+            // var ay_by = a_y -b_y;
+
+
+            // if (ax_bx==0&&ay_by==0 ) {
+            //     // console.log("We have a lock on your position! "+ax_bx);
+            //     goodPoint = true;
+            //     alert("We have a lock on your position!");
+            //     startPoss = currentLoc;
+            //     startLocationPoints();
+            // }else{
+            //     // console.log(ax_bx);
+            //     lastLoc = currentLoc;
+            //     if (needsStarted) {
+            //         needsStarted = false;
+            //         startLocationPoints();
+
+            //     }
+                
+            // }
 
     }else{
-   
-        buildLatLonPoints(getGeoPosition(position));
+        // if(locationLock(position)){
         var len = coorPoints.length;
-        if (len>1) {
-            var dis_point = new point(time, coorPoints_to_distance(len-1));
-            addDataToChart(dis_point);
-        };
-    }
+        console.log(len);
+        if (len==0) {
+            buildLatLonPoints(currentLoc);
+
+        }else{
+            currentLoc=getGeoPosition(position);
+            var a_point = currentLoc.info();
+            var b_point = coorPoints[len-1].info();
+            var temp_dis =getDistanceFromLatLonInKm(a_point[0],a_point[1],b_point[0],b_point[1]);
+         
+
+            if (!modeOfTrans(mode,temp_dis)) {
+                console.log(temp_dis);
+                  return;
+            }else{
+                buildLatLonPoints(currentLoc);
+                
+                var dis_point = new point(time, temp_dis);
+                addDataToChart(dis_point);
+            }
+        }// end inner else if
+    // }// end iff
+    }// end outer else if
 
 }
 
 
-
+function coorDist(now,then) {
+    
+    var point_a = now.info();  //last point 
+    var point_b = then.info();// second to last point
+    
+    //creates a point that is the distance covered
+    var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]); 
+    
+    return temp_dis;
+}
 
 function onError(error) {
     alert('code: '    + error.code    + '\n' +
@@ -89,7 +151,7 @@ function onError(error) {
 
 function buildLatLonPoints(aPoint){
     this.aPoint = aPoint;
-    coorPoints.push(aPoint);
+    coorPoints.push(this.aPoint);
     
 }
 
@@ -103,10 +165,10 @@ function coorPoints_to_distance (index) {
     
     return temp_dis;
 }
-function kiloToMile(temp_dis){
-    return temp_dis*KILOTOMILE;
+// function kiloToMile(temp_dis){
+//     return temp_dis*KILOTOMILE;
 
-}
+// }
 
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -134,4 +196,30 @@ function point(x,y){
     this.info = function(){
         return [this.x,this.y];
     }
+}
+
+function modeOfTrans(mode,dist){
+    var tolerance;
+    if (mode =="walk") {
+        tolerance = 8;
+    }else if (mode =="bike") {
+        tolerance = 20;
+    }else if (mode =="auto") {
+        tolerance = 70;
+    }
+     
+    // var a = twoPointArr(now,then);
+
+    if(dist<tolerance) {
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function twoPointArr(aPoint,bPoint){
+    this.a_point = a_point.info();
+    this.b_point = b_point.info();
+    
+    return [this.a_point[0],this.a_point[1],this.b_point[0],this.b_point[1]];
 }

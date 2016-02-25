@@ -250,35 +250,51 @@ function addDataToChart(aPoint){
 function reset(){
   // if (lineChart.dataSets.length > 0) {
             // REMOVE LATEST DATASET AND VALIDATE
-             dataOutArray = [];
-             pointsArray = [];
-             coorPoints = [];
-             non_lat_long_Points = [];
-             distancePoints = [];
-             accelerationPoints = [];
-             positionPoints = [];
-             ratePoints = [];
-             distance = [];
-             rate = [];
-             acceleration = [];
-             drawArray = [];
+    dataOutArray = [];
+    pointsArray = [];
+    coorPoints = [];
+    non_lat_long_Points = [];
+    distancePoints = [];
+    accelerationPoints = [];
+    positionPoints = [];
+    ratePoints = [];
+    distance = [];
+    rate = [];
+    acceleration = [];
+    drawArray = [];
 
-             startTime;
-             count = 0;
-             time = 0;
+    startTime;
+    count = 0;
+    time = 0;
 
-             total_distance = 0;
-            time = 0;
-            window.lineChart.destroy();
-            createGraph();
-            _setLocation = false;
-            startPoss = new point (0,0);
+    total_distance = 0;
+    time = 0;
     
-    lineChart.update();
+    
+    _setLocation = false;
+    startPoss = new point (0,0);
+
+    goodPoint = false;
+    currentLoc;
+    lastLoc = new point(0,0);
+    needsStarted = true;
+        
+    if (lineChart) {
+      window.lineChart.destroy();
+      var nothing;
+      lineChart =nothing;
+      
+    // createGraph();
+    }
+
+
+
+
+    // lineChart.update();
 }
 
 
-getDistanceFromLatLonInKm
+// getDistanceFromLatLonInKm
 // this was just to test changing existing data on graph
 function add_graph_line(){
     lineChart.datasets[1].points[0].value = 50;
