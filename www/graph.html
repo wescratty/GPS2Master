@@ -111,12 +111,14 @@
         
       <script type="text/javascript">
       var modeCount = 0;
+      var drawCount = 0;
 
 
 
               function changeMode(){
                 modeCount ++;
                 modeCount = modeCount%3;
+
                 console.log(modeCount);
                 var s = document.getElementsByName('Mode')[0];
 
@@ -147,14 +149,18 @@
                             
                             if(e.which==1&&el.className == "on")
                                  {
+                                    drawCount++;
+                                    if (drawCount%3==0) {
                                   var div = document.getElementById('updating-chart');
                                   var x = e.pageX - div.offsetLeft;
                                   var y = (e.pageY - div.offsetTop-150)*-1;
                                     $("#left").val(x);
                                     $("#bottom").val(y);
-                                    drawArray.push(new point(x,y));
                                     var a_point = new point(x,y);
+                                    drawArray.push(a_point);
+                                    
                                     addDataToChart(a_point);
+                                }
                                  }
                         
                       });
