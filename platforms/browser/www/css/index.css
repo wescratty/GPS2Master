@@ -112,12 +112,12 @@ h1 {
     /*position:absolute; */
     /*z-index: 1; position:absolute;*/
     overflow: 0;
-    background-color:#4F628E;
+    /*background-color:#4F628E;*/
     width: 100%;
 }
 .chart{
-    cursor: pointer;
-    background-color:#4F628E;
+   /* cursor: pointer;
+    background-color:#4F628E;*/
     /*width: 505px;*/
 
 }
