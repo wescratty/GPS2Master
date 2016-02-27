@@ -55,9 +55,7 @@ function createGraph() {
     multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
     scaleGridLineColor : "#000000",
     scaleFontColor: "#000000",
-    // animationSteps: 15,
-
-        // legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+    
 
     };
     
@@ -67,7 +65,7 @@ function createGraph() {
     window.lineChart.store = new Array();
 }
     
-    // $('#pos').click(function () {
+    
         function pos(){
                         var label = 'First';
                         var chart = window.lineChart;
@@ -92,7 +90,7 @@ function createGraph() {
                         }
                         chart.update();
                         }
-    // $('#vol').click(function () {
+    
          function vol(){
                         var label = 'Second';
                         var chart = window.lineChart;
@@ -117,7 +115,7 @@ function createGraph() {
                         }
                         chart.update();
                         }
-    // $('#acc').click(function () {
+    
          function acc(){
                           var label = 'Third';
                           var chart = window.lineChart;
@@ -166,7 +164,7 @@ function createGraph() {
                           }
                           chart.update();
                           }     
-// }
+
 
 
 
@@ -185,7 +183,7 @@ function addDataToChart(aPoint){
     var dist = 0.0;
     var rat = 0.0;
     var acc = 0.0;
-    var pos = 0.0;
+    var pos = 0.0; // this is not used
     
     
     
@@ -194,8 +192,10 @@ function addDataToChart(aPoint){
     
     
     var  num_dis_points = distancePoints.length;
+
     if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
-        dist=distancePoints[num_dis_points-1].info()[1];
+        dist = distancePoints[num_dis_points-1].info()[1];
+
         if(!total_distance){
             total_distance = dist;
             distance.push(new point(time,total_distance));// make this a point
@@ -248,8 +248,7 @@ function addDataToChart(aPoint){
 
 
 function reset(){
-  // if (lineChart.dataSets.length > 0) {
-            // REMOVE LATEST DATASET AND VALIDATE
+            
     dataOutArray = [];
     pointsArray = [];
     coorPoints = [];
@@ -267,12 +266,12 @@ function reset(){
     count = 0;
     time = 0;
 
-    total_distance = 0;
+    total_distance = un;
     time = 0;
     
     
     _setLocation = false;
-    startPoss = new point (0,0);
+    startPoss = un;
 
     goodPoint = false;
     currentLoc;
@@ -281,16 +280,8 @@ function reset(){
         
     if (lineChart) {
       window.lineChart.destroy();
-      var nothing;
-      lineChart =nothing;
-      
-    // createGraph();
+      lineChart =un;
     }
-
-
-
-
-    // lineChart.update();
 }
 
 
@@ -304,12 +295,6 @@ function add_graph_line(){
     lineChart.update();
     
 }
-
-// // unimplemented and maybe depricated
-// function flow(){
-//     var tempPoint = getGeoPosition();
-    
-// }
 
 
 // takes derivitave of two points

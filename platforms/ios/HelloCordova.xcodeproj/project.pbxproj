@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		0207DA581B56EA530066E2B4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0207DA571B56EA530066E2B4 /* Images.xcassets */; };
 		06D7CA3CC7184EE3AC2BF140 /* CDVLocalFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3C9EC1E85B4EE08C144FDF /* CDVLocalFilesystem.m */; };
@@ -20,9 +19,9 @@
 		5F34490E407C4FA59C85DF7C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2069B9A3A3834F02BCCA7BC0 /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		7D55C9B468F04732A734FEBC /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = B9A173C497654E0CAAC3B831 /* CDVDevice.m */; };
 		C25DF492DAEF43A895F6BB72 /* CDVFileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = C3C16FB013ED4615AAB5C38C /* CDVFileTransfer.m */; };
-		EDC9D0A8B6CB406D9343615F /* APPEmailComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 35E70E27263B49F88EDBB083 /* APPEmailComposer.m */; };
 		F680576660F64620B6377C39 /* CDVLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = E676C4966F01428F8C24C75F /* CDVLocation.m */; };
 		FAEAA6497C4C4BA495451A67 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = EA3B303FE5534420894CC6B5 /* CDVLogger.m */; };
+		7DFF9572D6694905BFCB54C4 /* APPEmailComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A32E53204240F1A6753241 /* APPEmailComposer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,7 +61,6 @@
 		3047A5101AB8059700498E2A /* build-release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = "build-release.xcconfig"; path = "cordova/build-release.xcconfig"; sourceTree = SOURCE_ROOT; };
 		3047A5111AB8059700498E2A /* build.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = build.xcconfig; path = cordova/build.xcconfig; sourceTree = SOURCE_ROOT; };
 		32CA4F630368D1EE00C91783 /* HelloCordova-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HelloCordova-Prefix.pch"; sourceTree = "<group>"; };
-		35E70E27263B49F88EDBB083 /* APPEmailComposer.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = APPEmailComposer.m; path = "cordova-plugin-email/APPEmailComposer.m"; sourceTree = "<group>"; };
 		3E27DF6AF103447A84237985 /* CDVAssetLibraryFilesystem.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVAssetLibraryFilesystem.h; path = "cordova-plugin-file/CDVAssetLibraryFilesystem.h"; sourceTree = "<group>"; };
 		4A3C9EC1E85B4EE08C144FDF /* CDVLocalFilesystem.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVLocalFilesystem.m; path = "cordova-plugin-file/CDVLocalFilesystem.m"; sourceTree = "<group>"; };
 		4ECD36DA001E445A93D080BD /* CDVAssetLibraryFilesystem.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVAssetLibraryFilesystem.m; path = "cordova-plugin-file/CDVAssetLibraryFilesystem.m"; sourceTree = "<group>"; };
@@ -71,7 +69,6 @@
 		B9A173C497654E0CAAC3B831 /* CDVDevice.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; };
 		C3C16FB013ED4615AAB5C38C /* CDVFileTransfer.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVFileTransfer.m; path = "cordova-plugin-file-transfer/CDVFileTransfer.m"; sourceTree = "<group>"; };
 		D8B0E4F0BF6B4B1FBD544735 /* CoreLocation.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		DB68B639B9634549B20E8BE2 /* APPEmailComposer.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = APPEmailComposer.h; path = "cordova-plugin-email/APPEmailComposer.h"; sourceTree = "<group>"; };
 		E676C4966F01428F8C24C75F /* CDVLocation.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVLocation.m; path = "cordova-plugin-geolocation/CDVLocation.m"; sourceTree = "<group>"; };
 		EA3B303FE5534420894CC6B5 /* CDVLogger.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVLogger.m; path = "cordova-plugin-console/CDVLogger.m"; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
@@ -80,6 +77,8 @@
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		ED7E9BA607614FADBC7BE220 /* CDVFileTransfer.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVFileTransfer.h; path = "cordova-plugin-file-transfer/CDVFileTransfer.h"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = HelloCordova/config.xml; sourceTree = "<group>"; };
+		38A32E53204240F1A6753241 /* APPEmailComposer.m */ = {isa = PBXFileReference; name = "APPEmailComposer.m"; path = "cordova-plugin-email/APPEmailComposer.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		186B5266B3CF4F86962BD448 /* APPEmailComposer.h */ = {isa = PBXFileReference; name = "APPEmailComposer.h"; path = "cordova-plugin-email/APPEmailComposer.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,8 +187,6 @@
 			children = (
 				B9A173C497654E0CAAC3B831 /* CDVDevice.m */,
 				28CBB4441C454F28910540D2 /* CDVDevice.h */,
-				35E70E27263B49F88EDBB083 /* APPEmailComposer.m */,
-				DB68B639B9634549B20E8BE2 /* APPEmailComposer.h */,
 				2939141CD5214B4B87C13433 /* CDVFile.m */,
 				4A3C9EC1E85B4EE08C144FDF /* CDVLocalFilesystem.m */,
 				4ECD36DA001E445A93D080BD /* CDVAssetLibraryFilesystem.m */,
@@ -202,6 +199,8 @@
 				244612127E1945D6BB8AB019 /* CDVLocation.h */,
 				EA3B303FE5534420894CC6B5 /* CDVLogger.m */,
 				EC810FDADCBA4B798D88F3FC /* CDVLogger.h */,
+				38A32E53204240F1A6753241 /* APPEmailComposer.m */,
+				186B5266B3CF4F86962BD448 /* APPEmailComposer.h */,
 			);
 			name = Plugins;
 			path = HelloCordova/Plugins;
@@ -317,13 +316,13 @@
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				7D55C9B468F04732A734FEBC /* CDVDevice.m in Sources */,
-				EDC9D0A8B6CB406D9343615F /* APPEmailComposer.m in Sources */,
 				43F47EB0E2E642E3A9C8D9F4 /* CDVFile.m in Sources */,
 				06D7CA3CC7184EE3AC2BF140 /* CDVLocalFilesystem.m in Sources */,
 				088CA8684CD84D7D99DD00F6 /* CDVAssetLibraryFilesystem.m in Sources */,
 				C25DF492DAEF43A895F6BB72 /* CDVFileTransfer.m in Sources */,
 				F680576660F64620B6377C39 /* CDVLocation.m in Sources */,
 				FAEAA6497C4C4BA495451A67 /* CDVLogger.m in Sources */,
+				7DFF9572D6694905BFCB54C4 /* APPEmailComposer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

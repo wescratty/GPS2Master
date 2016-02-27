@@ -16,6 +16,7 @@ var drawArray = [];
 var startTime;
 var count = 0;
 var time = 0;
+var un;// used to reset things
 
 var total_distance;
 var lineChart;
@@ -89,25 +90,12 @@ var testdata = [
 [ 16 ,  7 ],
 [ 17 ,  7 ],
 [ 18 ,  7 ] ];
-// var testdata = [
-// [ 0 ,  3 ],
-// [ 1 ,  6 ],
-// [ 2 ,  9 ],
-// [ 3 ,  12 ],
-// [ 4 ,  15 ],
-// [ 5 ,  18 ],
-// [ 6 ,  21 ],
-// [ 7 ,  24 ],
-// [ 8 ,  27 ],
-// [ 9 ,  30 ],
-// [ 10 ,  33 ]
 
-//                 ];
 
 
 
 document.addEventListener("deviceready", onDeviceReady, false);
-document.addEventListener("touchstart", function() {}, false);
+// document.addEventListener("touchstart", function() {}, false);
 
 
 function onDeviceReady() {
@@ -115,50 +103,76 @@ function onDeviceReady() {
     
 }
 
-
-
-
 function load_test_data(){
-
-
-
     for (var i = 0;i< testdata.length;i++) {
         var temp_arr = testdata[i];
         var a_point = new point(temp_arr[0],temp_arr[1])
         
         addDataToChart(a_point);
-        
     };
 }
 
 
-function tryEmail(){
-    console.log("tryEmail called");
-    var _body = receiverString('body');
-    var userinfo = receiverString('userinfo').split(/~/);
-    var attachment;
+// function tryEmail(){
+//     console.log("tryEmail called");
+//     var _body = receiverString('body');
+//     var userinfo = receiverString('userinfo').split(/~/);
+//     var attachment;
 
-    if (!logOb) {
-        // attachment = image 
-        console.log("no log ob");
-    }else{
-        attachment = logOb.nativeURL;
-    }
+//     if (!logOb) {
+//         // attachment = image 
+//         console.log("no log ob");
+//     }else{
+//         attachment = logOb.nativeURL;
+//     }
 
-    cordova.plugins.email.isAvailable(
-    function (isAvailable) {
+//     cordova.plugins.email.isAvailable(
+//     function (isAvailable) {
         
-        cordova.plugins.email.open({
-            to:      userinfo[2],
-            cc:      userinfo[1],
-            bcc:     [],
-            subject: 'Chart data from '+userinfo[0],
-            body:    _body,
-            attachments: [attachment]
-        });
-    }
-);
+//         cordova.plugins.email.open({
+//             to:      userinfo[2],
+//             cc:      userinfo[1],
+//             bcc:     [],
+//             subject: 'Chart data from '+userinfo[0],
+//             body:    _body,
+//             attachments: [attachment]
+//         });
+//     }
+// );
+// }
+function tryEmail(){
+    cordova.plugins.email.open({
+                    to:          ['person1@domain.com'],
+                    cc:          ['person2@domain.com'],
+                    bcc:         ['person3@domain.com', 'person4@domain.com'],
+                    attachments: ['file://styles/images/logo.png', 'file://styles/images/logo2x.png'],
+                    subject:     'EmailComposer plugin test',
+                    body:        '<h2>Hello!</h2>This is a nice <strong>HTML</strong> email with two attachments.',
+                    isHtml:      true
+                }, this);
+        
+
+        
+//     console.log("tryEmail called");
+
+//     cordova.plugins.email.isAvailable(
+//     function (isAvailable) {
+//         console.log("tryEmail isAvailable");
+        
+//         cordova.plugins.email.open({
+//             to:      "soandso@gmail.com",
+//             cc:      [],
+//             bcc:     [],
+//             subject: 'Chart data from ',
+//             body:    "word",
+//             attachments: []
+//         });
+//     }
+// );
 }
+
+
+
 
 
 

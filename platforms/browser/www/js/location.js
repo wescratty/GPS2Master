@@ -50,6 +50,7 @@ function locationLock(position){
                 goodPoint = true;
                 alert("We have a lock on your position!");
                 startPoss = currentLoc;
+                currentLoc = un;
                 // startLocationPoints();
             }else{
                 // console.log(ax_bx);
@@ -68,47 +69,19 @@ function locationLock(position){
 function onSuccess(position) {
     if (!goodPoint) {
         locationLock(position);
-            // currentLoc=getGeoPosition(position);
-            // var a_point = currentLoc.info();
-            // var b_point = lastLoc.info();
             
-            // var a_x = a_point[0];
-            // var a_y = a_point[1];
-            // var b_x = b_point[0];
-            // var b_y = b_point[1];
-            // var ax_bx = a_x -b_x;
-            // var ay_by = a_y -b_y;
-
-
-            // if (ax_bx==0&&ay_by==0 ) {
-            //     // console.log("We have a lock on your position! "+ax_bx);
-            //     goodPoint = true;
-            //     alert("We have a lock on your position!");
-            //     startPoss = currentLoc;
-            //     startLocationPoints();
-            // }else{
-            //     // console.log(ax_bx);
-            //     lastLoc = currentLoc;
-            //     if (needsStarted) {
-            //         needsStarted = false;
-            //         startLocationPoints();
-
-            //     }
-                
-            // }
-
     }else{
         // if(locationLock(position)){
         var len = coorPoints.length;
-        console.log(len);
-        if (len==0) {
-            buildLatLonPoints(currentLoc);
+        // console.log(len);
+        if (len < 1) {
+            buildLatLonPoints(getGeoPosition(position));
 
         }else{
-            currentLoc=getGeoPosition(position);
+            currentLoc = getGeoPosition(position);
             var a_point = currentLoc.info();
             var b_point = coorPoints[len-1].info();
-            var temp_dis =getDistanceFromLatLonInKm(a_point[0],a_point[1],b_point[0],b_point[1]);
+            var temp_dis = getDistanceFromLatLonInKm(a_point[0],a_point[1],b_point[0],b_point[1]);
          
 
             if (!modeOfTrans(mode,temp_dis)) {
@@ -201,11 +174,11 @@ function point(x,y){
 function modeOfTrans(mode,dist){
     var tolerance;
     if (mode =="walk") {
-        tolerance = 8;
-    }else if (mode =="bike") {
         tolerance = 20;
+    }else if (mode =="bike") {
+        tolerance = 100;
     }else if (mode =="auto") {
-        tolerance = 70;
+        tolerance = 1000;
     }
      
     // var a = twoPointArr(now,then);

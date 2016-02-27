@@ -22,10 +22,10 @@
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-plugin-email": {
+        "cordova-plugin-console": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-plugin-console": {
+        "cordova-plugin-email": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
