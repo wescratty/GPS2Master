@@ -44,71 +44,22 @@ if (window.name =='graph') {
         });
     
     }else if (device.platform == "browser") {
-
-
-    	// resolveLocalFileSystemURL('cdvfile://localhost/temporary/path/to/file.mp4', function(entry) {
-	    // var nativePath = entry.toURL();
-	    // console.log('Native URI: ' + nativePath);
-	    // document.getElementById('video').src = nativePath;
-
-
-
-
-
-    	window.initPersistentFileSystem(10*1024*1024, function() {
-	    var fs = cordova.file.applicationDirectory;
-	    console.log(fs);// breaking here
-	    window.resolveLocalFileSystemURL(fs, function (dir) {
-            console.log("Main Dir:", dir);
-            dir.getFile(locFileName, {create: true}, function (file) {
-                console.log("File: ", file);
-                logOb = file;
-
-                //cdvfile:/http://localhost:8000/
-                //writeLog("App started");
-            });
-        });
-
-
-      //  Was thinking in here that we could change to a file selector 
-        },function (e) {
-    console.log(e);
-  });
-
-
-        window.addEventListener('filePluginIsReady', function(){
-	        console.log('File plugin is ready');
-	        var fileApp = new FileApp();
-		    fileApp.run();
-		    setUP();
-     }, false);
+		    
+     
 
     }// end of iff
 
 
+console.log("Right before run call ");
+var fileApp = new FileApp();
+            fileApp.run();
+            console.log("Right after run call ");
+            setUP();
 
 
-// This gets window name that is opening the page as they need differant things 
-	
-	
-
-
-    
-	// Start up the file app
 	
 
 });
-
-
-function chromeHelper(){
-  window.initPersistentFileSystem(10*1024*1024, function() {
-    var fs = cordova.file.applicationDirectory;
-    console.log(fs);
-    window.resolveLocalFileSystemURL(cordova.file.applicationDirectory + "www/"+locFileName, gotFile, fail);
-  },function (e) {
-    console.log(e);
-  });
-}
 
 
 
@@ -139,24 +90,8 @@ function csvToarray(aString){
 }
 
 
-function csvTohtmlTable(aString){
 
-}
-
-//todo wes does this look rightish?
- // For what? is this old?
-// function load_data(data){
-//     var resultArray = []
-//     for (var i = 0;i< data.length;i++) {
-//         var temp_arr = data[i];
-//         var a_point = new point(temp_arr[0],temp_arr[1]);
-
-//         resultArray.push(a_point);
-//     };
-//     return resultArray;
-// }
-
-// ********* File read and right below only **********
+// ********* File read and right below **********
 function FileApp() {}
 
 FileApp.prototype = {
@@ -165,7 +100,6 @@ fileNameField: null,
 textField: null,
     
 run: function() {
-	if(window.name == "tableView"){
     var that = this,
     writeFileButton = document.getElementById("writeFileButton"),
     readFileButton = document.getElementById("readFileButton"),
@@ -177,6 +111,7 @@ run: function() {
      writeFileButton.addEventListener("click",
                                          function() { 
                                              that._writeTextToFile.call(that);
+                                             
                                         });
         
         readFileButton.addEventListener("click",
@@ -198,7 +133,7 @@ run: function() {
 
 
     fileSystemHelper = new FileSystemHelper();
-}
+
 },
     
 _deleteFile: function () {
@@ -218,8 +153,6 @@ _readTextFromFile: function() {
     var that = this,
     fileName = that.fileNameField.value;
     
-
-
     if (that._isValidFileName(fileName)) {
         fileSystemHelper.readTextFromFile(fileName, that._onSuccess, that._onError);
     }
@@ -232,15 +165,17 @@ _readTextFromFile: function() {
     
     
 _writeTextToFile: function() {
+    console.log("success, _writeTextToFile");
     var that = this,
      fileName = that.fileNameField.value;
      if (distancePoints.length>0) {
      	text = arrayToCsv(distancePoints);
      }else{
         text = document.getElementById("result").textContent;
-      //   notificationBox.textContent = textToWrite;
+        
      	// text = that.textField.value;
      }
+     
     
     var body = that.textField.value;
     if (!body) {
@@ -254,12 +189,8 @@ _writeTextToFile: function() {
     
     if (that._isValidFileName(fileName)&&!fileSelector) {
         fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
-    }else if(fileSelector){
-console.log("landed in here");
-
 
     }
-
 
     else {
         var error = { code: 44, message: "Invalid filename"};
@@ -304,6 +235,7 @@ FileSystemHelper.prototype = {
 	
     //Writing operations
     writeLine: function(fileName, text, onSuccess, onError) {
+        console.log("success, writeLine");
 		var that = this;
 		var grantedBytes = 0;
 
@@ -319,6 +251,7 @@ FileSystemHelper.prototype = {
 	},
     
 	_createFile: function(fileSystem, fileName, text, onSuccess, onError) { 
+        console.log("success, _createFile");
 		var that = this;
 		var options = {
 			create: true, 
@@ -347,6 +280,7 @@ FileSystemHelper.prototype = {
 
     
 	_createFileWriter: function(logOb, text, onSuccess, onError) {
+        console.log("success, _createFileWriter");
 		var that = this;
 		logOb.createWriter(function(fileWriter) {
                                     var len = fileWriter.length;
@@ -367,11 +301,10 @@ FileSystemHelper.prototype = {
     //Reading operations
 	readTextFromFile : function(fileName, onSuccess, onError) {
 		var that = this;
-        
+        console.log("success, readTextFromFile");
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
 								 function(logOb) {
 									 that._getFileEntry.call(that, logOb, fileName, onSuccess, onError);
-									 // console.log(fileSystem);
 								 },
 								 function(error) {
 									 error.message = "Unable to request file system.";
@@ -380,7 +313,7 @@ FileSystemHelper.prototype = {
 	},
     
 	_getFileEntry: function(logOb, fileName, onSuccess, onError) {
-        
+        console.log("success, _getFileEntry");
 		var that = this;
 		// Get existing file, don't create a new one.
 		logOb.root.getFile(fileName, null,
@@ -394,11 +327,12 @@ FileSystemHelper.prototype = {
 	},
 
 	_getFile: function(logOb, onSuccess, onError) { 
+        console.log("success, _getFile");
 		var that = this; 
 		logOb.file(
 			function(file) { 
 				that._getFileReader.call(that, file, onSuccess);
-				// console.log(file);
+				
 			},
 			function(error) {
 				error.message = "Unable to get file for reading.";
@@ -407,17 +341,18 @@ FileSystemHelper.prototype = {
 	},
 
 	_getFileReader: function(file, onSuccess) {
+        console.log("success, _getFileReader");
 		var that = this;
 		var reader = new FileReader();
 		reader.onloadend = function(evt) { 
 			var textToWrite = evt.target.result;
-			if (window.name == "index") {
-				// sendUserInfo(textToWrite);
-			}else{
+		// 	if (window.name == "index") {
+		// 		// sendUserInfo(textToWrite);
+		// 	}else{
 			
-			csvToarray(textToWrite);
+			// csvToarray(textToWrite);
 			onSuccess.call(that, textToWrite);
-		}
+		// }
 		};
         
 		reader.readAsText(file);
@@ -427,7 +362,6 @@ FileSystemHelper.prototype = {
 		var reader = new FileReader();
 		reader.onload = function(e) { 
 			var textToWrite = reader.result;
-		// 	csvToarray(textToWrite);
 			console.log(textToWrite);
 			var notificationBox = document.getElementById("result");
         notificationBox.textContent = textToWrite;

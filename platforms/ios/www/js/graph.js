@@ -54,7 +54,7 @@ function createGraph() {
         // String - Template string for multiple tooltips
     multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
     scaleGridLineColor : "#000000",
-    scaleFontColor: "#000000",
+    scaleFontColor: "#000000"
     
 
     };
@@ -185,11 +185,7 @@ function addDataToChart(aPoint){
     var acc = 0.0;
     var pos = 0.0; // this is not used
     
-    
-    
-    
     distancePoints.push(this.aPoint);
-    
     
     var  num_dis_points = distancePoints.length;
 

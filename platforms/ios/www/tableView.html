@@ -38,8 +38,6 @@
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
 
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-
-        <!-- <script src="//www.chartjs.org/assets/Chart.min.js"></script> -->
         <script src="js/Chart.js"></script>
         <script src="js/location.js"></script>
         <script src="js/index_helper.js"></script>
@@ -47,42 +45,11 @@
         <script src="js/io.js"></script>
         <script src="js/location.js"></script>
         <script src="js/shipping.js"></script>
-        <!-- <script src="js/emailComposer.js"></script> -->
-        <!-- <script src="graph.html"></script> -->
         
         <title> Table view</title>
     </head>
 
     <body>
-            
-            
-                
-    
-        <!-- <div class="wrapper"> -->
-         <!-- <div class="chart"> -->
-
-        <!-- <canvas id="updating-chart" width="600px" height="220px"></canvas> -->
-       
-            
-        
-         <!-- </div> -->
-         <!-- <div class="SBP">  -->
-         <!-- <div class="buttonPanel">         -->
-
-
-            <!-- <button class="SBP"style="background-color:red"onclick="pos()">D</button>
-            <button class="SBP"style="background-color:blue"onclick="vol()">V</button>
-            <button class="SBP"style="background-color:green"onclick="acc()">A</button>
-            <button class="SBP"style="background-color:yellow"onclick="dis()">P</button>
-            <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="startLocationPoints()">GPS</button>
-            <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="setLocation()">Mark</button>
-            <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="load_test_data()">Upload</button>
-            <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="reset()">Reset</button> -->
-        <!-- </div> -->
-        <!-- </div> -->
-            <!-- <div/> -->
-
-
             
         <div id="page-wrapper">    
         <h1>CSV File Reader</h1>
@@ -97,21 +64,11 @@
 
             <script type="text/javascript">
 
-                document.addEventListener('deviceready', function () {setUP();});
+                document.addEventListener('deviceready', function () {setUP();
+                });
             function setUP(){
+                console.log("success, setUP");
                 window.name = "tableView";
-                
-                // var div= document.getElementsByClassName('filechooser')[0];
-                // var script= document.createElement('input');
-                // script.type= 'file';
-                // script.onchange="handleFiles(this.files)";
-                // script.name = "img";
-                // div.firstNode(script);
-
-
-
-
-
             }
 
             
@@ -121,9 +78,6 @@
                     }
 
                 }
-
-
-
 
                 function handleFiles(aFile){
                     selectedFile =  aFile[0];
@@ -150,21 +104,10 @@
             <button class="button"style="background-color:rgb(0, 153, 204)" id="emailFileButton">Email</button>
             <button class="button"style="background-color:rgb(0, 153, 204)" id="loadFileToGraph" onClick= "loadGraph()">Load</button>
 
-
-
-
         </div>
-
-
-
-
-
-
-
-
         <div class="action-area ch30">
             
-            <!-- <button onclick="tryEmail();">email data</button> -->
+            
         </div>
         <div class="result-area ch40">
             <div class="results"content-type: "text/plain">

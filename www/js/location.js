@@ -86,7 +86,7 @@ function onSuccess(position) {
 
             if (!modeOfTrans(mode,temp_dis)) {
                 console.log(temp_dis);
-                  return;
+                  return;// were we need to add a point or something
             }else{
                 buildLatLonPoints(currentLoc);
                 
