@@ -124,8 +124,6 @@ run: function() {
                                             that._deleteFile.call(that)
                                         });
 
-
-
          emailFileButton.addEventListener("click",
          								  function() {
                 							tryEmail();

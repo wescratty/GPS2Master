@@ -119,6 +119,12 @@ function tryEmail(){
     var userinfo = receiverString('userinfo').split(/~/);
     var attachment;
 
+    console.log("userinfo:",userinfo);
+    console.log("_body:",_body);
+    console.log("userinfo[0]:",userinfo[0]);
+    console.log("userinfo[1]:",userinfo[1]);
+    console.log("userinfo[2]:",userinfo[2]);
+
     if (!logOb) {
         // attachment = image 
         console.log("no log ob");
