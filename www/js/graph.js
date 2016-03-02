@@ -61,7 +61,7 @@ function createGraph() {
     
     var ctx = document.getElementById("updating-chart").getContext("2d");
     
-    window.lineChart = new Chart(ctx).Line(data, options);
+    window.lineChart = new Chart(ctx).Scatter(data, options);
     window.lineChart.store = new Array();
 }
     
