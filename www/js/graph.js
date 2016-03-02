@@ -317,8 +317,8 @@ function dv_dt(a_point,b_point){
 }
 
 function getDistance(a_point, b_point){
-  var a_pos = a_point[1]
-  var b_pos = b_point[1]
+  var a_pos = a_point.info()[1]
+  var b_pos = b_point.info()[1]
   delta_pos = b_pos - a_pos
   return abs(delta_pos)
 }
