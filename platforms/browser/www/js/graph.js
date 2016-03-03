@@ -7,7 +7,6 @@ document.addEventListener('deviceready', function () {
 function createGraph() {
     
     var data = {
-    labels: [],
     datasets: [{
                label: "First",
                fillColor: "rgba(220,220,220,0.2)",
@@ -16,7 +15,7 @@ function createGraph() {
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(220,220,220,1)",
-               data: []
+               data: [{x : 0,y : 0}]
                },{
                label: "Second",
                fillColor: "rgba(0, 191, 255,0.2)",
@@ -25,7 +24,7 @@ function createGraph() {
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(0, 191, 255,1)",
-               data: []
+               data: [{x : 0,y : 0}]
                }, {
                label: "Third",
                fillColor: "rgba(151,187,205,0.2)",
@@ -34,7 +33,7 @@ function createGraph() {
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(151,187,205,1)",
-               data: []
+               data: [{x : 0,y : 0}]
                }, {
                 label: "Forth",
                fillColor: "rgba(255, 255, 0,0.2)",
@@ -43,7 +42,7 @@ function createGraph() {
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(255, 255, 0,1)",
-               data: []
+               data: [{x : 0,y : 0}]
                }]
     };
     
@@ -61,8 +60,7 @@ function createGraph() {
     
     var ctx = document.getElementById("updating-chart").getContext("2d");
     
-    window.lineChart = new Chart(ctx).Line(data, options);
-    window.lineChart.store = new Array();
+    window.lineChart = new Chart(ctx).Scatter(data, options);
 }
     
     
@@ -169,11 +167,6 @@ function createGraph() {
 
 
 
-
-
-
-
-
 function addDataToChart(aPoint){
     if (!lineChart) {
         createGraph();
@@ -227,13 +220,23 @@ function addDataToChart(aPoint){
             
             
             if (num_dis_points>4) {
-                lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
+                lineChart.datasets[0].addPoint(time, distancePoints[time+3].info()[1]);
+                lineChart.datasets[1].addPoint(time, rate[time+1]);
+                lineChart.datasets[2].addPoint(time, acceleration[time]);
+                lineChart.datasets[3].addPoint(time, distance[time+3].info()[1]);
+                
+                //lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
                 time = time+1;
             }
 
             if (time>20) {
               // console.log("lineChart.datasets.length:"+lineChart.datasets[0].length);
-              lineChart.removeData();
+              lineChart.datasets[0].removePoint();
+              lineChart.datasets[1].removePoint();
+              lineChart.datasets[2].removePoint();
+              lineChart.datasets[3].removePoint();
+              
+ 
             }
             
         }

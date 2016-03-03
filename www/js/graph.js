@@ -15,7 +15,7 @@ function createGraph() {
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(220,220,220,1)",
-               data: [{x = 0,y = 0}]
+               data: [{x : 0,y : 0}]
                },{
                label: "Second",
                fillColor: "rgba(0, 191, 255,0.2)",
@@ -24,7 +24,7 @@ function createGraph() {
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(0, 191, 255,1)",
-               data: [{x = 0,y = 0}]
+               data: [{x : 0,y : 0}]
                }, {
                label: "Third",
                fillColor: "rgba(151,187,205,0.2)",
@@ -33,7 +33,7 @@ function createGraph() {
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(151,187,205,1)",
-               data: [{x = 0,y = 0}]
+               data: [{x : 0,y : 0}]
                }, {
                 label: "Forth",
                fillColor: "rgba(255, 255, 0,0.2)",
@@ -42,7 +42,7 @@ function createGraph() {
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(255, 255, 0,1)",
-               data: [{x = 0,y = 0}]
+               data: [{x : 0,y : 0}]
                }]
     };
     
