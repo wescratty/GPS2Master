@@ -61,6 +61,7 @@ function createGraph() {
     var ctx = document.getElementById("updating-chart").getContext("2d");
     
     window.lineChart = new Chart(ctx).Scatter(data, options);
+    if (!lineChart) {console.log("no line");}
 }
     
     
@@ -170,6 +171,7 @@ function createGraph() {
 function addDataToChart(aPoint){
     if (!lineChart) {
         createGraph();
+        console.log("creating chart");
     }
     
     this.aPoint = aPoint;
@@ -220,21 +222,24 @@ function addDataToChart(aPoint){
             
             
             if (num_dis_points>4) {
+              
                 lineChart.datasets[0].addPoint(time, distancePoints[time+3].info()[1]);
                 lineChart.datasets[1].addPoint(time, rate[time+1]);
                 lineChart.datasets[2].addPoint(time, acceleration[time]);
                 lineChart.datasets[3].addPoint(time, distance[time+3].info()[1]);
+                // lineChart.update();
                 
-                //lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
+                // lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
                 time = time+1;
             }
 
             if (time>20) {
               // console.log("lineChart.datasets.length:"+lineChart.datasets[0].length);
-              lineChart.datasets[0].removePoint();
-              lineChart.datasets[1].removePoint();
-              lineChart.datasets[2].removePoint();
-              lineChart.datasets[3].removePoint();
+              lineChart.datasets[0].removePoint(time-21);
+              lineChart.datasets[1].removePoint(time-21);
+              lineChart.datasets[2].removePoint(time-21);
+              lineChart.datasets[3].removePoint(time-21);
+              // lineChart.update();
               
  
             }
