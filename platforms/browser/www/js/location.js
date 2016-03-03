@@ -174,7 +174,7 @@ function point(x,y){
 function modeOfTrans(mode,dist){
     var tolerance;
     if (mode =="walk") {
-        tolerance = 20;
+        tolerance = 50;
     }else if (mode =="bike") {
         tolerance = 100;
     }else if (mode =="auto") {

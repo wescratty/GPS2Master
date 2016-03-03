@@ -227,7 +227,7 @@ function addDataToChart(aPoint){
                 lineChart.datasets[1].addPoint(time, rate[time+1]);
                 lineChart.datasets[2].addPoint(time, acceleration[time]);
                 lineChart.datasets[3].addPoint(time, distance[time+3].info()[1]);
-                // lineChart.update();
+                lineChart.update();
                 
                 // lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
                 time = time+1;
@@ -239,7 +239,7 @@ function addDataToChart(aPoint){
               lineChart.datasets[1].removePoint(time-21);
               lineChart.datasets[2].removePoint(time-21);
               lineChart.datasets[3].removePoint(time-21);
-              // lineChart.update();
+              lineChart.update();
               
  
             }
