@@ -89,7 +89,33 @@ function csvToarray(aString){
     };
 }
 
+function CSVTable(){
+    var anArray = distancePoints;
 
+    
+    // var data = $.parseJSON( txt ).dataOutArray;
+
+    var $table = $( "<table id=\"t01\"><caption>Data Points</caption></table>" );
+    
+
+    for ( var i = 0; i < anArray.length; i++ ) {
+        var dat = anArray[i];
+        var $line = $( "<tr></tr>" );
+        $line.append( $( "<td></td>" ).html( dat.info()[0]) );
+        $line.append( $( "<td></td>" ).html( dat.info()[1]) );
+        $table.append( $line );
+    }
+
+    // $table.appendTo( $( "#tableDiv" ) );
+    // var notificationBox = document.getElementById("result");
+    $table.appendTo( $( "#result" ) );
+    // notificationBox.textContent = $table;
+
+
+
+// var snd = new Audio("resources/notify.wav"); // buffers automatically when created
+// snd.play();  
+}
 
 // ********* File read and right below **********
 function FileApp() {}
@@ -344,13 +370,9 @@ FileSystemHelper.prototype = {
 		var reader = new FileReader();
 		reader.onloadend = function(evt) { 
 			var textToWrite = evt.target.result;
-		// 	if (window.name == "index") {
-		// 		// sendUserInfo(textToWrite);
-		// 	}else{
-			
-			// csvToarray(textToWrite);
-			onSuccess.call(that, textToWrite);
-		// }
+		CSVTable();
+			// onSuccess.call(that, textToWrite);
+		
 		};
         
 		reader.readAsText(file);

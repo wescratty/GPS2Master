@@ -18,7 +18,7 @@ function setLocation(){
 }
 
 function getNew(){
-    // console.log("getting new");
+    
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 
@@ -46,21 +46,14 @@ function locationLock(position){
 
 
             if (ax_bx==0&&ay_by==0 ) {
-                // console.log("We have a lock on your position! "+ax_bx);
                 goodPoint = true;
                 alert("We have a lock on your position!");
                 startPoss = currentLoc;
                 currentLoc = un;
-                // startLocationPoints();
-            }else{
-                // console.log(ax_bx);
-                lastLoc = currentLoc;
-                // if (needsStarted) {
-                //     needsStarted = false;
-                //     startLocationPoints();
-
-                // }
                 
+            }else{
+                
+                lastLoc = currentLoc;
             }
             return goodPoint;
 
@@ -71,9 +64,9 @@ function onSuccess(position) {
         locationLock(position);
             
     }else{
-        // if(locationLock(position)){
+        
         var len = coorPoints.length;
-        // console.log(len);
+        
         if (len < 1) {
             buildLatLonPoints(getGeoPosition(position));
 
@@ -138,10 +131,7 @@ function coorPoints_to_distance (index) {
     
     return temp_dis;
 }
-// function kiloToMile(temp_dis){
-//     return temp_dis*KILOTOMILE;
 
-// }
 
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -181,7 +171,7 @@ function modeOfTrans(mode,dist){
         tolerance = 1000;
     }
      
-    // var a = twoPointArr(now,then);
+    
 
     if(dist<tolerance) {
         return true;
