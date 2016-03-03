@@ -47,6 +47,7 @@
         <script src="js/graph.js"></script>
         <script src="js/shipping.js"></script>
         <script src="tableView.html"></script>
+        <script src="js/addSet.js"></script>
         <title> Graph view</title>
 
     </head>
@@ -93,6 +94,26 @@
             <button id = "drawToggle"class="off"onclick="toggledraw(this)">Draw</button>
         <!-- </div> -->
         </div>
+
+        <script src="//cdn.amcharts.com/lib/3/amcharts.js" type="text/javascript"></script>
+<script src="//cdn.amcharts.com/lib/3/serial.js" type="text/javascript"></script>
+<script src="//cdn.amcharts.com/lib/3/amstock.js" type="text/javascript"></script>
+<div class="growl"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <p>
+                <button class="btn btn-default btn-dataset-add">Add Dataset</button>
+                <button class="btn btn-default btn-dataset-remove">Remove Dataset</button>
+                <button class="btn btn-default btn-panel-add">Add Panel</button>
+                <button class="btn btn-default btn-panel-remove">Remove Panel</button>
+            </p>
+            <div class="well">
+                <div id="chartdiv"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
         
 
