@@ -166,14 +166,6 @@ function createGraph() {
                           }     
 
 
-
-
-
-
-
-
-
-
 function addDataToChart(aPoint){
     if (!lineChart) {
         createGraph();
@@ -226,24 +218,28 @@ function addDataToChart(aPoint){
             };
             
             
-            // if (num_dis_points>4) {
-            //     lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
-            //     time = time+1;
-            // }
+            if (num_dis_points>4) {
+                lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
+                time = time+1;
+            }
 
-            // turnary option
-            num_dis_points>4 ? (lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time),time = time+1):false;
+            // turnary option works but see below
+            // num_dis_points>4 ? (lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time),time = time+1):false;
 
             // if (time>20) {
             //   // console.log("lineChart.datasets.length:"+lineChart.datasets[0].length);
             //   lineChart.removeData();
             // }
 
-            // turnary option
-            time>20 ? lineChart.removeData():false;
+            //-------------------------------------------
+            // turnary option works but inproper usage
+            //http://stackoverflow.com/questions/2932754/ternary-operators-in-javascript-without-an-else
+            // time>20 ? lineChart.removeData():false;
+
+            // supposidly better syntex
+            void(time>20&&lineChart.removeData());
             
         }
-        
     }
 }
 

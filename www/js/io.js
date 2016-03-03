@@ -12,6 +12,7 @@ if (window.name =='graph') {
 		distancePoints=receivingArray('distancePoints');
 		locFileName = "export.csv";
 	}else if(window.name =='tableView'){
+
 		console.log('tableView opened io');
 		locFileName = "export.csv";
 	}else if (window.name == "index"){
@@ -44,7 +45,8 @@ if (window.name =='graph') {
         });
     
     }else if (device.platform == "browser") {
-		    
+		    var $chooser = $( "<input type=\"file\"id=\"input\"name=\"img\"onchange=\"handleFiles(this.files)\">" );
+        $chooser.appendTo( $( "#fileChooser" ) );
      
 
     }// end of iff
@@ -92,9 +94,6 @@ function csvToarray(aString){
 function CSVTable(){
     var anArray = distancePoints;
 
-    
-    // var data = $.parseJSON( txt ).dataOutArray;
-
     var $table = $( "<table id=\"t01\"><caption>Data Points</caption></table>" );
     
 
@@ -106,13 +105,8 @@ function CSVTable(){
         $table.append( $line );
     }
 
-    // $table.appendTo( $( "#tableDiv" ) );
-    // var notificationBox = document.getElementById("result");
     $table.appendTo( $( "#result" ) );
-    // notificationBox.textContent = $table;
-
-
-
+    
 // var snd = new Audio("resources/notify.wav"); // buffers automatically when created
 // snd.play();  
 }
