@@ -1,3 +1,5 @@
+var LOC = module.exports = {};
+
 function getGeoPosition(position){
   //if failure increment time and retry to get position and do not return until
   // look at chart.js to input to x
@@ -153,7 +155,7 @@ function deg2rad(deg) {
 }
 
 
-function point(x,y){
+LOC.point = function (x,y){
     this.y = y;
     this.x = x;
     this.info = function(){

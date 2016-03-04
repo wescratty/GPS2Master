@@ -1,3 +1,6 @@
+// for testing 
+var IH = module.exports = {};
+
 // globa vars 
 var refreshIntervalId = null;
 var dataOutArray = [];
@@ -103,9 +106,9 @@ function onDeviceReady() {
     
 }
 
-function load_test_data(){
-    for (var i = 0;i< testdata.length;i++) {
-        var temp_arr = testdata[i];
+IH.load_test_data = function (data_arr){
+    for (var i = 0;i< data_arr.length;i++) {
+        var temp_arr = data_arr[i];
         var a_point = new point(temp_arr[0],temp_arr[1])
         
         addDataToChart(a_point);
@@ -113,7 +116,7 @@ function load_test_data(){
 }
 
 
-function tryEmail(){
+IH.tryEmail = function (){
     console.log("tryEmail called");
     var _body = receiverString('body');
     var userinfo = receiverString('userinfo').split(/~/);
@@ -146,10 +149,3 @@ function tryEmail(){
     }
 );
 }
-
-
-
-
-
-
-
