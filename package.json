@@ -1,0 +1,23 @@
+{
+  "name": "start",
+  "version": "1.0.0",
+  "description": "initial",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wescratty/GPS2Master.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wescratty/GPS2Master/issues"
+  },
+  "homepage": "https://github.com/wescratty/GPS2Master#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
+  }
+}
