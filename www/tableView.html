@@ -84,13 +84,13 @@
                 function handleFiles(aFile){
                     selectedFile =  aFile[0];
                     document.getElementById('fileNameInput').value = selectedFile.name;
-                    if (!selectedFile.name.match(/\.(jpg|jpeg|png|gif)$/)){
+                    // if (!selectedFile.name.match(/\.(jpg|jpeg|png|gif)$/)){
 
                     FileSystemHelper.prototype._getFileReader2(selectedFile,FileSystemHelper.prototype.onSuccess);
 
-                    }else{
+                    // }else{
                     //TODO send image to email
-                    }
+                    // }
                 }
                 function loadGraph(){
                     window.location = 'graph.html'

@@ -10,12 +10,12 @@ function createGraph() {
     labels: [],
     datasets: [{
                label: "First",
-               fillColor: "rgba(220,220,220,0.2)",
+               fillColor: "rgba(220,20,20,0.2)",
                strokeColor: "rgba(220,20,20,1)",
                pointColor: "rgba(220,20,20,1)",
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
-               pointHighlightStroke: "rgba(220,220,220,1)",
+               pointHighlightStroke: "rgba(220,20,20,1)",
                data: []
                },{
                label: "Second",
@@ -28,12 +28,12 @@ function createGraph() {
                data: []
                }, {
                label: "Third",
-               fillColor: "rgba(151,187,205,0.2)",
+               fillColor: "rgba(15,187,25,0.2)",
                strokeColor: "rgba(15,187,25,1)",
                pointColor: "rgba(15,187,25,1)",
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
-               pointHighlightStroke: "rgba(151,187,205,1)",
+               pointHighlightStroke: "rgba(15,187,25,1)",
                data: []
                }, {
                 label: "Forth",
@@ -50,9 +50,10 @@ function createGraph() {
     
     var options = {
         // String - Template string for single tooltips
-    tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
+    // tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
         // String - Template string for multiple tooltips
-    multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
+    // multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
+    pointDotRadius : 3,
     scaleGridLineColor : "#000000",
     scaleFontColor: "#000000"
     
@@ -234,7 +235,7 @@ function addDataToChart(aPoint){
             //-------------------------------------------
             // turnary option works but inproper usage
             //http://stackoverflow.com/questions/2932754/ternary-operators-in-javascript-without-an-else
-            // time>20 ? lineChart.removeData():false;
+             // time>20 ? lineChart.removeData():false;
 
             // supposidly better syntex
             void(time>20&&lineChart.removeData());
