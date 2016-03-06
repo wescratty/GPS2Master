@@ -10,12 +10,12 @@ function createGraph() {
     labels: [],
     datasets: [{
                label: "First",
-               fillColor: "rgba(220,220,220,0.2)",
+               fillColor: "rgba(220,20,20,0.2)",
                strokeColor: "rgba(220,20,20,1)",
                pointColor: "rgba(220,20,20,1)",
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
-               pointHighlightStroke: "rgba(220,220,220,1)",
+               pointHighlightStroke: "rgba(220,20,20,1)",
                data: []
                },{
                label: "Second",
@@ -28,12 +28,12 @@ function createGraph() {
                data: []
                }, {
                label: "Third",
-               fillColor: "rgba(151,187,205,0.2)",
+               fillColor: "rgba(15,187,25,0.2)",
                strokeColor: "rgba(15,187,25,1)",
                pointColor: "rgba(15,187,25,1)",
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
-               pointHighlightStroke: "rgba(151,187,205,1)",
+               pointHighlightStroke: "rgba(15,187,25,1)",
                data: []
                }, {
                 label: "Forth",
@@ -50,9 +50,10 @@ function createGraph() {
     
     var options = {
         // String - Template string for single tooltips
-    tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
+    // tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
         // String - Template string for multiple tooltips
-    multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
+    // multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
+    pointDotRadius : 3,
     scaleGridLineColor : "#000000",
     scaleFontColor: "#000000"
     
@@ -166,13 +167,68 @@ function createGraph() {
                           }     
 
 
+// function addDataToChart(aPoint){
+//     if (!lineChart) {
+//         createGraph();
+//     }
+    
+//     this.aPoint = aPoint;
+//     var dist = 0.0;
+//     var rat = 0.0;
+//     var acc = 0.0;
+//     var pos = 0.0; // this is not used
+    
+//     distancePoints.push(this.aPoint);
+    
+//     var  num_dis_points = distancePoints.length;
 
+//     if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
+//         dist = distancePoints[num_dis_points-1].info()[1];
 
+//         if(!total_distance){
+//             total_distance = dist;
+//             distance.push(new point(time,total_distance));// make this a point
+//         }else{
+//             if (_setLocation) {
+//                 var point_a = startPoss.info();  //last point in array
+//                 var len = coorPoints.length-1;
+//                 var point_b = coorPoints[len].info();// second to last point
+//                 var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]);
 
+                
+//                 total_distance = temp_dis;
+//                 distance.push(new point(time,total_distance));// make this a point
+                
+//             }else{
+//                 total_distance = total_distance+(Math.abs(dist-distancePoints[num_dis_points-2].info()[1]));
+//                 distance.push(new point(time,total_distance));// make this a point
+//             }
+            
+//             if (num_dis_points>1) {
+//                 rat = dv_dt(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2]);
+//                 console.log(rat);
+//                 rate.push(rat);
+//                 ratePoints.push(new point(num_dis_points-2,rat));
+//                 var  num_rate_points = ratePoints.length;
+//                 if (num_rate_points>1) {
+//                     acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
+//                     acceleration.push(acc);
+//                     accelerationPoints.push(new point(num_rate_points-2,acc));
+                    
+//                 };
+//             };
+            
+            
+//             if (num_dis_points>4) {
+//                 lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
+//                 time = time+1;
+//             }
 
-
-
-
+//             void(time>20&&lineChart.removeData());
+            
+//         }
+//     }
+// }
 
 function addDataToChart(aPoint){
     if (!lineChart) {
@@ -231,16 +287,11 @@ function addDataToChart(aPoint){
                 time = time+1;
             }
 
-            if (time>20) {
-              // console.log("lineChart.datasets.length:"+lineChart.datasets[0].length);
-              lineChart.removeData();
-            }
+            void(time>20&&lineChart.removeData());
             
         }
-        
     }
 }
-
 
 
 function reset(){
