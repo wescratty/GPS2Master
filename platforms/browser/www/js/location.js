@@ -136,19 +136,8 @@ function onSuccess(position) {
         currentLoc = getGeoPosition(position);
         // var a_point = currentLoc.info();
         // var b_point = coorPoints[len-1].info();
-        checkPoint(currentLoc,coorPoints[len-1]);
-        // var temp_dis = getDistanceFromLatLonInKm(a_point[0],a_point[1],b_point[0],b_point[1]);
-     
-
-        // if (!modeOfTrans(mode,temp_dis)) {
-        //     console.log(temp_dis);
-        //       return;
-        // }else{
-        //     buildLatLonPoints(currentLoc);
-            
-        //     var dis_point = new point(time, temp_dis);
-        //     addDataToChart(dis_point);
-        // }
+        checkPoint(currentLoc,coorPoints[len-1],coorPoints[0]);
+       
         
     
     }// end outer else if
@@ -156,13 +145,15 @@ function onSuccess(position) {
 
 
 
-function checkPoint(now,then){
+function checkPoint(now,then,start){
 
 
     var a_point = now.info();  
     var b_point = then.info();
+    var c_point = start.info();
 
         var temp_dis = getDistanceFromLatLonInKm(a_point[0],a_point[1],b_point[0],b_point[1]);
+        var disFromStart = getDistanceFromLatLonInKm(a_point[0],a_point[1],c_point[0],c_point[1]);
      
 
         if (!modeOfTrans(mode,temp_dis)) {
@@ -174,8 +165,9 @@ function checkPoint(now,then){
             // }
             
             
-            var dis_point = new point(time, temp_dis);
-            addDataToChart(dis_point);
+            var last_point = new point(time, temp_dis);
+            var start_point = new point(time, disFromStart)
+            addDataToChart(last_point, start_point);
         }
 
 }
@@ -274,7 +266,7 @@ function modeOfTrans(mode,dist){
     }else if (mode =="bike") {
         tolerance = 100;
     }else if (mode =="auto") {
-        tolerance = 1000;
+        tolerance = 10000;
     }
      
     

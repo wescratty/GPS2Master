@@ -35,16 +35,18 @@ function createGraph() {
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(15,187,25,1)",
                data: []
-               }, {
-                label: "Forth",
-               fillColor: "rgba(255, 255, 0,0.2)",
-               strokeColor: "rgba(255, 255, 0,1)",
-               pointColor: "rgba(255, 255, 0,1)",
-               pointStrokeColor: "#fff",
-               pointHighlightFill: "#fff",
-               pointHighlightStroke: "rgba(255, 255, 0,1)",
-               data: []
-               }]
+               }
+               // , {
+               //  label: "Forth",
+               // fillColor: "rgba(255, 255, 0,0.2)",
+               // strokeColor: "rgba(255, 255, 0,1)",
+               // pointColor: "rgba(255, 255, 0,1)",
+               // pointStrokeColor: "#fff",
+               // pointHighlightFill: "#fff",
+               // pointHighlightStroke: "rgba(255, 255, 0,1)",
+               // data: []
+               // }
+               ]
     };
     
     
@@ -141,157 +143,92 @@ function createGraph() {
                           }
                           chart.update();
                           } 
-        function dis(){
-                          var label = 'Forth';
-                          var chart = window.lineChart;
-                          var store = chart.store;
-                          var finded = false;
-                          for (var i = 0; i < store.length; i++) {
-                          console.log("Store name " + store[i][2]);
-                          if (store[i][0] === label) {
-                          finded = true;
-                          var restored = store.splice(i, 1)[0][1];
-                          chart.datasets.push(restored);
-                          }
-                          }
+        // function dis(){
+        //                   var label = 'Forth';
+        //                   var chart = window.lineChart;
+        //                   var store = chart.store;
+        //                   var finded = false;
+        //                   for (var i = 0; i < store.length; i++) {
+        //                   console.log("Store name " + store[i][2]);
+        //                   if (store[i][0] === label) {
+        //                   finded = true;
+        //                   var restored = store.splice(i, 1)[0][1];
+        //                   chart.datasets.push(restored);
+        //                   }
+        //                   }
                           
-                          if (!finded) {
-                          console.log('Start search dataset with label = ' + label);
-                          for (var i = 0; i < chart.datasets.length; i++) {
-                          if (chart.datasets[i].label === label) {
-                          chart.store.push([label, chart.datasets.splice(i, 1)[0]]);
-                          }
-                          }
-                          }
-                          chart.update();
-                          }     
+        //                   if (!finded) {
+        //                   console.log('Start search dataset with label = ' + label);
+        //                   for (var i = 0; i < chart.datasets.length; i++) {
+        //                   if (chart.datasets[i].label === label) {
+        //                   chart.store.push([label, chart.datasets.splice(i, 1)[0]]);
+        //                   }
+        //                   }
+        //                   }
+        //                   chart.update();
+        //                   }     
 
 
-// function addDataToChart(aPoint){
-//     if (!lineChart) {
-//         createGraph();
-//     }
-    
-//     this.aPoint = aPoint;
-//     var dist = 0.0;
-//     var rat = 0.0;
-//     var acc = 0.0;
-//     var pos = 0.0; // this is not used
-    
-//     distancePoints.push(this.aPoint);
-    
-//     var  num_dis_points = distancePoints.length;
-
-//     if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
-//         dist = distancePoints[num_dis_points-1].info()[1];
-
-//         if(!total_distance){
-//             total_distance = dist;
-//             distance.push(new point(time,total_distance));// make this a point
-//         }else{
-//             if (_setLocation) {
-//                 var point_a = startPoss.info();  //last point in array
-//                 var len = coorPoints.length-1;
-//                 var point_b = coorPoints[len].info();// second to last point
-//                 var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]);
-
-                
-//                 total_distance = temp_dis;
-//                 distance.push(new point(time,total_distance));// make this a point
-                
-//             }else{
-//                 total_distance = total_distance+(Math.abs(dist-distancePoints[num_dis_points-2].info()[1]));
-//                 distance.push(new point(time,total_distance));// make this a point
-//             }
-            
-//             if (num_dis_points>1) {
-//                 rat = dv_dt(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2]);
-//                 console.log(rat);
-//                 rate.push(rat);
-//                 ratePoints.push(new point(num_dis_points-2,rat));
-//                 var  num_rate_points = ratePoints.length;
-//                 if (num_rate_points>1) {
-//                     acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
-//                     acceleration.push(acc);
-//                     accelerationPoints.push(new point(num_rate_points-2,acc));
-                    
-//                 };
-//             };
-            
-            
-//             if (num_dis_points>4) {
-//                 lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
-//                 time = time+1;
-//             }
-
-//             void(time>20&&lineChart.removeData());
-            
-//         }
-//     }
-// }
-
-function addDataToChart(aPoint){
+function addDataToChart(disFromLastPoint, disFromStartPoint){
     if (!lineChart) {
         createGraph();
     }
-    
-    this.aPoint = aPoint;
+
+    var lastPoint = disFromLastPoint;
+    var startPoint = disFromStartPoint;
     var dist = 0.0;
     var rat = 0.0;
     var acc = 0.0;
-    var pos = 0.0; // this is not used
-    
-    distancePoints.push(this.aPoint);
-    
+    var pointToUse = _fromStartPoint ? startPoint : lastPoint;
+
+
+    distancePoints.push(lastPoint); // distance from the last point
+
     var  num_dis_points = distancePoints.length;
 
-    if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
-        dist = distancePoints[num_dis_points-1].info()[1];
 
-        if(!total_distance){
-            total_distance = dist;
-            distance.push(new point(time,total_distance));// make this a point
-        }else{
-            if (_setLocation) {
-                var point_a = startPoss.info();  //last point in array
-                var len = coorPoints.length-1;
-                var point_b = coorPoints[len].info();// second to last point
-                var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]);
+    dist = pointToUse.info()[1];
 
-                
-                total_distance = temp_dis;
-                distance.push(new point(time,total_distance));// make this a point
-                
-            }else{
-                total_distance = total_distance+(Math.abs(dist-distancePoints[num_dis_points-2].info()[1]));
-                distance.push(new point(time,total_distance));// make this a point
-            }
-            
-            if (num_dis_points>1) {
-                rat = dv_dt(distancePoints[num_dis_points-1],distancePoints[num_dis_points-2]);
-                console.log(rat);
-                rate.push(rat);
-                ratePoints.push(new point(num_dis_points-2,rat));
-                var  num_rate_points = ratePoints.length;
-                if (num_rate_points>1) {
-                    acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
-                    acceleration.push(acc);
-                    accelerationPoints.push(new point(num_rate_points-2,acc));
-                    
-                };
-            };
-            
-            
-            if (num_dis_points>4) {
-                lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
-                time = time+1;
-            }
+    if(!total_distance){
+        total_distance = dist;
+    }else{
 
-            void(time>20&&lineChart.removeData());
-            
-        }
+        // var disFromStart = 
+        total_distance = _fromStartPoint ? dist : total_distance+dist;
+        // total_distance = total_distance+dist;
     }
+
+    distance.push(new point(time,total_distance));// make this a point
+
+
+    if (num_dis_points>1) {
+        rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
+        console.log(rat);
+        rate.push(rat);
+        ratePoints.push(new point(num_dis_points-2,rat));
+        // var  num_rate_points = ratePoints.length;
+        
+    };
+
+    if (num_dis_points>2) {
+            acc =dv_dt(ratePoints[num_dis_points-2],ratePoints[num_dis_points-3]);
+            acceleration.push(acc);
+            accelerationPoints.push(new point(num_dis_points-3,acc));
+            
+    };
+            
+            
+    if (num_dis_points>4) {
+        lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time]],time);
+        // lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time],distancePoints[time+2].info()[1]],time);
+        time = time+1;
+    }
+
+    void(time>20&&lineChart.removeData());
+        
 }
+
+
 
 
 function reset(){
@@ -316,7 +253,7 @@ function reset(){
     total_distance = un;
     time = 0;
     
-    
+    transferingData = false;
     _setLocation = false;
     startPoss = un;
 
@@ -327,7 +264,8 @@ function reset(){
         
     if (lineChart) {
       window.lineChart.destroy();
-      lineChart =un;
+      createGraph();
+      // lineChart =un;
     }
 }
 

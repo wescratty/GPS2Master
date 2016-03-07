@@ -23,13 +23,16 @@ var lineChart;
 var canvas;
 var ctx;
 var logOb;
-var _setLocation = false;
+var _fromStartPoint = false;
+var _gpsLocation = false;
 var startPoss;
 var fileSelector = false;
 var goodPoint = false;
 var currentLoc;
 var lastLoc = new point(0,0);
 var needsStarted = true;
+var fromStartPoint = false;
+var transferingData = false;
 
 
 const KILOMETERTOFEET = 3280.84;
@@ -92,6 +95,19 @@ var testdata = [
 // [ 18 ,  7 ] ];
 
 
+// var testdata = [
+// [0 ,  0.3114525280390794],
+// [1 ,  0.3114525280390794],
+// [2 ,  10.949671641027079],
+// [3 ,  0],
+// [4 ,  0],
+// [5 ,  0],
+// [6 ,  0],
+// [7 ,  0],
+// [8 ,  0]];
+
+
+
 
 
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -103,12 +119,39 @@ function onDeviceReady() {
     
 }
 
-function load_test_data(){
-    for (var i = 0;i< testdata.length;i++) {
-        var temp_arr = testdata[i];
-        var a_point = new point(temp_arr[0],temp_arr[1])
+function prep_test_data(){
+    _fromStartPoint= _fromStartPoint ? false: true;
+    var temp = testdata;
+    reset();
+    testdata = temp;
+    var c_point = new point(testdata[0][0],testdata[0][1]);
+    for (var i = 1;i< testdata.length;i++) {
+
+        var a_point = new point(testdata[i][0],testdata[i][1]);
+        var b_point = new point(testdata[i-1][0],testdata[i-1][1]);
+
+        // checkPoint(b_point,a_point);
         
-        addDataToChart(a_point);
+        addDataToChart(a_point,b_point);
+        checkPoint(b_point,a_point,c_point);
+    };
+
+
+    
+
+}
+
+function load_test_data(){
+    for (var i = 1;i< testdata.length;i++) {
+
+        var a_point = testdata[i];
+
+        // var b_point = _fromStartPoint ? testdata[0] : testdata[i-1];
+        var b_point =    testdata[i-1];
+
+        checkPoint(b_point,a_point,testdata[0]);
+        
+        // addDataToChart(a_point);
     };
 }
 
