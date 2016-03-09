@@ -54,22 +54,22 @@ function createGraph() {
     multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
     scaleGridLineColor : "#000000",
     scaleFontColor: "#000000"
-    
-
     };
     
     var ctx = document.getElementById("updating-chart").getContext("2d");
     
     window.lineChart = new Chart(ctx).Scatter(data, options);
     if (!lineChart) {console.log("no line");}
-}
+};
     
     
         function pos(){
                         var label = 'First';
-                        var chart = window.lineChart;
-                        var store = chart.store;
+                       	  console.log("call " + label);
+                        var chart = lineChart;
+                        var store = chart.datasets;
                         var finded = false;
+			console.log(chart);
                         for (var i = 0; i < store.length; i++) {
                         console.log("Store name " + store[i][0]);
                         if (store[i][0] === label) {
@@ -92,9 +92,11 @@ function createGraph() {
     
          function vol(){
                         var label = 'Second';
-                        var chart = window.lineChart;
-                        var store = chart.store;
+                       	  console.log("call " + label);
+                        var chart = lineChart;
+                        var store = chart.datasets;
                         var finded = false;
+			console.log(chart);
                         for (var i = 0; i < store.length; i++) {
                         console.log("Store name " + store[i][1]);
                         if (store[i][0] === label) {
@@ -117,15 +119,19 @@ function createGraph() {
     
          function acc(){
                           var label = 'Third';
-                          var chart = window.lineChart;
-                          var store = chart.store;
+                       	  console.log("call " + label);
+                          var chart = lineChart;
+                          var store = chart.datasets;
                           var finded = false;
+			                   console.log(chart);
                           for (var i = 0; i < store.length; i++) {
                           console.log("Store name " + store[i][2]);
                           if (store[i][0] === label) {
                           finded = true;
-                          var restored = store.splice(i, 1)[0][1];
-                          chart.datasets.push(restored);
+			                   chart.datasets[i].pointDot = true;
+			                  chart.datasets[i].datasetStroke = true;
+			                   console.log("readd data");
+
                           }
                           }
                           
@@ -133,17 +139,26 @@ function createGraph() {
                           console.log('Start search dataset with label = ' + label);
                           for (var i = 0; i < chart.datasets.length; i++) {
                           if (chart.datasets[i].label === label) {
-                          chart.store.push([label, chart.datasets.splice(i, 1)[0]]);
+			  chart.datasets[i].pointDot = false;
+			  chart.datasets[i].datasetStroke = false;
+			  console.log(chart.datasets[i].points.length);
+				while (chart.datasets[i].points.length >0){
+			  	console.log(chart.datasets[i].points.length);
+				chart.datasets[i].removePoint(0);
+			}
                           }
                           }
                           }
                           chart.update();
                           } 
         function dis(){
+			 
                           var label = 'Forth';
-                          var chart = window.lineChart;
-                          var store = chart.store;
+                       	  console.log("call " + label);
+                          var chart = lineChart;
+                          var store = chart.datasets;
                           var finded = false;
+			console.log(store);
                           for (var i = 0; i < store.length; i++) {
                           console.log("Store name " + store[i][2]);
                           if (store[i][0] === label) {
@@ -162,10 +177,31 @@ function createGraph() {
                           }
                           }
                           chart.update();
-                          }     
+                          };     
 
 
 
+//whenever i add this even the empty closure add data to graph gets lost
+//var dataStore = {[{
+//    label:"position",
+//    data:[{0, 0}]
+//  },{
+//   label:"rate",
+//    data:[{0,0}]
+//  },{
+//    label:"acceleration",
+//    data:[{0,0}]
+//  },{
+//    label:"distance",
+//    data:[{0,0}]
+//  }]
+  //this.addData =function(setIdx, dataX, dataY){
+  //  this[setIdx][1].push({dataX,dataY});
+  //};
+  //this.dropPoint = function(setIdx){
+  //  this[setIdx][1].shift();
+  //};
+//};
 
 
 function addDataToChart(aPoint){
@@ -181,8 +217,10 @@ function addDataToChart(aPoint){
     var pos = 0.0; // this is not used
     
     distancePoints.push(this.aPoint);
+    //time = aPoint.info()[0]
     
     var  num_dis_points = distancePoints.length;
+
 
     if (num_dis_points>0) {        // once we have atleast 2 lat long we can get a distance
         dist = distancePoints[num_dis_points-1].info()[1];
@@ -190,20 +228,23 @@ function addDataToChart(aPoint){
         if(!total_distance){
             total_distance = dist;
             distance.push(new point(time,total_distance));// make this a point
+            dataStore.addData("distance", time, total_distance)
+
         }else{
             if (_setLocation) {
                 var point_a = startPoss.info();  //last point in array
                 var len = coorPoints.length-1;
                 var point_b = coorPoints[len].info();// second to last point
                 var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]);
-
                 
                 total_distance = temp_dis;
                 distance.push(new point(time,total_distance));// make this a point
+                dataStore.addData("distance", time, total_distance)
                 
             }else{
                 total_distance = total_distance+(Math.abs(dist-distancePoints[num_dis_points-2].info()[1]));
                 distance.push(new point(time,total_distance));// make this a point
+                dataStore.addData("distance", time, total_distance)
             }
             
             if (num_dis_points>1) {
@@ -211,12 +252,13 @@ function addDataToChart(aPoint){
                 console.log(rat);
                 rate.push(rat);
                 ratePoints.push(new point(num_dis_points-2,rat));
+                dataStore.addData("rate", time, rat)
                 var  num_rate_points = ratePoints.length;
                 if (num_rate_points>1) {
                     acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
                     acceleration.push(acc);
                     accelerationPoints.push(new point(num_rate_points-2,acc));
-                    
+                    dataStore.addData("acceleration", time, acc)
                 };
             };
             
@@ -231,6 +273,7 @@ function addDataToChart(aPoint){
                 
                 // lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
                 time = time+1;
+                console.log(dataStore);
             }
 
             if (time>20) {
