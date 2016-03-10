@@ -1,4 +1,4 @@
-
+var points_displayed = 20;
 
 document.addEventListener('deviceready', function () {
 
@@ -15,6 +15,8 @@ function createGraph() {
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(220,220,220,1)",
+               pointDot: true,
+               datasetStroke:true,
                data: [{x : 0,y : 0}]
                },{
                label: "Second",
@@ -24,6 +26,8 @@ function createGraph() {
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(0, 191, 255,1)",
+               pointDot: true,
+               datasetStroke:true,
                data: [{x : 0,y : 0}]
                }, {
                label: "Third",
@@ -33,6 +37,8 @@ function createGraph() {
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(151,187,205,1)",
+               pointDot: true,
+               datasetStroke:true,
                data: [{x : 0,y : 0}]
                }, {
                 label: "Forth",
@@ -42,6 +48,8 @@ function createGraph() {
                pointStrokeColor: "#fff",
                pointHighlightFill: "#fff",
                pointHighlightStroke: "rgba(255, 255, 0,1)",
+               pointDot: true,
+               datasetStroke:true,
                data: [{x : 0,y : 0}]
                }]
     };
@@ -116,41 +124,43 @@ function createGraph() {
                         }
                         chart.update();
                         }
-    
-         function acc(){
-                          var label = 'Third';
-                       	  console.log("call " + label);
-                          var chart = lineChart;
-                          var store = chart.datasets;
-                          var finded = false;
-			                   console.log(chart);
-                          for (var i = 0; i < store.length; i++) {
-                          console.log("Store name " + store[i][2]);
-                          if (store[i][0] === label) {
-                          finded = true;
-			                   chart.datasets[i].pointDot = true;
-			                  chart.datasets[i].datasetStroke = true;
-			                   console.log("readd data");
 
-                          }
-                          }
-                          
-                          if (!finded) {
-                          console.log('Start search dataset with label = ' + label);
-                          for (var i = 0; i < chart.datasets.length; i++) {
-                          if (chart.datasets[i].label === label) {
-			  chart.datasets[i].pointDot = false;
-			  chart.datasets[i].datasetStroke = false;
-			  console.log(chart.datasets[i].points.length);
-				while (chart.datasets[i].points.length >0){
-			  	console.log(chart.datasets[i].points.length);
-				chart.datasets[i].removePoint(0);
-			}
-                          }
-                          }
-                          }
-                          chart.update();
-                          } 
+function acc(){
+    var label = 'Third';
+    console.log("call " + label);
+    var chart = window.lineChart;
+    console.log(chart);
+    finded = true;
+    for (var i = 0; i < chart.datasets.length; i++) {
+        if (chart.datasets[i].label === label) {
+            if (chart.datasets[i].pointDot == false) {
+                chart.datasets[i].pointDot = true;
+                chart.datasets[i].datasetStroke = true;
+                console.log("readd data");
+                while (chart.datasets[i].points.length >0){
+                    console.log(chart.datasets[i].points.length);
+                    chart.datasets[i].removePoint(0);
+                }
+                for (var j = accelerationPoints.length - points_displayed; i < accelerationPoints.length; i++ ){
+                    var accelerationPoint = accelerationPoints[j];
+                    lineChart.datasets[i].addPoint(accelerationPoint.info()[0], accelerationPoint.info()[1]);
+                }
+            }
+
+            else{
+                console.log("remove Line");
+                chart.datasets[i].pointDot = false;
+                chart.datasets[i].datasetStroke = false;
+                console.log(chart.datasets[i].points.length);
+                while (chart.datasets[i].points.length >0){
+                    console.log(chart.datasets[i].points.length);
+                    chart.datasets[i].removePoint(0);
+                }
+            }
+        }
+    }
+    chart.update();
+}
         function dis(){
 			 
                           var label = 'Forth';
@@ -182,26 +192,25 @@ function createGraph() {
 
 
 //whenever i add this even the empty closure add data to graph gets lost
-//var dataStore = {[{
 //    label:"position",
 //    data:[{0, 0}]
 //  },{
 //   label:"rate",
 //    data:[{0,0}]
-//  },{
+ // },{
 //    label:"acceleration",
-//    data:[{0,0}]
+//   data:[{0,0}]
 //  },{
-//    label:"distance",
+ //   label:"distance",
 //    data:[{0,0}]
-//  }]
-  //this.addData =function(setIdx, dataX, dataY){
-  //  this[setIdx][1].push({dataX,dataY});
-  //};
-  //this.dropPoint = function(setIdx){
-  //  this[setIdx][1].shift();
-  //};
-//};
+//  }]//,
+//     addData :function(setIdx, dataX, dataY){
+//        blob[setIdx][1].push({dataX,dataY});
+//  },
+//     dropPoint :function(setIdx){
+//    blob[setIdx][1].shift();
+//  }
+//}
 
 
 function addDataToChart(aPoint){
@@ -228,7 +237,6 @@ function addDataToChart(aPoint){
         if(!total_distance){
             total_distance = dist;
             distance.push(new point(time,total_distance));// make this a point
-            dataStore.addData("distance", time, total_distance)
 
         }else{
             if (_setLocation) {
@@ -239,12 +247,10 @@ function addDataToChart(aPoint){
                 
                 total_distance = temp_dis;
                 distance.push(new point(time,total_distance));// make this a point
-                dataStore.addData("distance", time, total_distance)
                 
             }else{
                 total_distance = total_distance+(Math.abs(dist-distancePoints[num_dis_points-2].info()[1]));
                 distance.push(new point(time,total_distance));// make this a point
-                dataStore.addData("distance", time, total_distance)
             }
             
             if (num_dis_points>1) {
@@ -252,13 +258,11 @@ function addDataToChart(aPoint){
                 console.log(rat);
                 rate.push(rat);
                 ratePoints.push(new point(num_dis_points-2,rat));
-                dataStore.addData("rate", time, rat)
                 var  num_rate_points = ratePoints.length;
                 if (num_rate_points>1) {
                     acc =dv_dt(ratePoints[num_rate_points-1],ratePoints[num_rate_points-2]);
                     acceleration.push(acc);
                     accelerationPoints.push(new point(num_rate_points-2,acc));
-                    dataStore.addData("acceleration", time, acc)
                 };
             };
             
@@ -273,15 +277,14 @@ function addDataToChart(aPoint){
                 
                 // lineChart.addData([distance[time+3].info()[1],rate[time+1],acceleration[time],distancePoints[time+3].info()[1]],time);
                 time = time+1;
-                console.log(dataStore);
             }
 
-            if (time>20) {
+            if (time>points_displayed) {
               // console.log("lineChart.datasets.length:"+lineChart.datasets[0].length);
-              lineChart.datasets[0].removePoint(time-21);
-              lineChart.datasets[1].removePoint(time-21);
-              lineChart.datasets[2].removePoint(time-21);
-              lineChart.datasets[3].removePoint(time-21);
+              lineChart.datasets[0].removePoint(time-points_displayed-1);
+              lineChart.datasets[1].removePoint(time-points_displayed-1);
+              lineChart.datasets[2].removePoint(time-points_displayed-1);
+              lineChart.datasets[3].removePoint(time-points_displayed-1);
               lineChart.update();
               
  
