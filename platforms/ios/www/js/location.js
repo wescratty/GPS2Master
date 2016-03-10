@@ -1,47 +1,9 @@
 function getGeoPosition(position){
-  //if failure increment time and retry to get position and do not return until
-  // look at chart.js to input to x
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
     console.log(" lat: "+ lat+ " lon: "+ lon);
     return new point(lat,lon);
-    
 }
-
-
-// function setLocation(){
-//     _setLocation = !_setLocation ? true: false;
-//     _gpsLocation = false;
-//     transferData();
-// }
-
-// function gpsLocation(){
-
-//     if (!_gpsLocation && !_setLocation) {
-//         _gpsLocation = true;
-//         startLocationPoints();
-//     }else if(_gpsLocation && !_setLocation){
-//         startLocationPoints();
-//          _gpsLocation = false;
-
-//     }else if(_gpsLocation && _setLocation){
-//         _gpsLocation = false;
-//         _setLocation = false;
-
-//     } else if(!_gpsLocation && _setLocation){
-//         transferData();
-//         _gpsLocation = true;
-//         _setLocation = false;
-//     }
-    
-    
-// }
-
-// function gpsLocation(){
-
-//         startLocationPoints();
-   
-// }
 
 function toggle_startp_lastp(){
     console.log("coorPoints.length: "+coorPoints.length);
@@ -50,37 +12,16 @@ function toggle_startp_lastp(){
         transferData();
         console.log("Transfering data");
     }
-    
 }
 
 function transferData(){
-
         var tempArr = _fromStartPoint ? coorPoints : testdata;
         reset();
         testdata = tempArr;
-
         load_test_data();
-
-        // if (_fromStartPoint) {
-        //     testdata = coorPoints;
-        // }
-    
-        // var tempArr = [];
-        // for (var i = 0; i < coorPoints.length; i++) {
-        //     tempArr.push(coorPoints[i]);
-        // }
-        // reset();
-        // if (_fromStartPoint) {
-        //     testdata = tempArr;
-        // }
-        
-        // load_test_data();
-
-    
 }
 
 function getNew(){
-    
     navigator.geolocation.getCurrentPosition(onSuccess, onError);
 }
 
@@ -98,31 +39,24 @@ function locationLock(position){
     currentLoc=getGeoPosition(position);
             var a_point = currentLoc.info();
             var b_point = lastLoc.info();
-            
             var a_x = a_point[0];
             var a_y = a_point[1];
             var b_x = b_point[0];
             var b_y = b_point[1];
             var ax_bx = a_x -b_x;
             var ay_by = a_y -b_y;
-            console.log("ax_bx: "+ax_bx);
-            console.log("ay_by: "+ay_by);
-
-
+            // console.log("ax_bx: "+ax_bx);
+            // console.log("ay_by: "+ay_by);
             if (ax_bx==0&&ay_by==0 ) {
                 goodPoint = true;
                 alert("We have a lock on your position!");
                 // startPoss = currentLoc;
                 buildLatLonPoints(currentLoc);
-
                 currentLoc = un;
-                
             }else{
-                
                 lastLoc = currentLoc;
             }
             return goodPoint;
-
 }
 
 function onSuccess(position) {
@@ -132,69 +66,34 @@ function onSuccess(position) {
     }else{
         
         var len = coorPoints.length;
-        
         currentLoc = getGeoPosition(position);
-        // var a_point = currentLoc.info();
-        // var b_point = coorPoints[len-1].info();
         checkPoint(currentLoc,coorPoints[len-1],coorPoints[0]);
-       
-        
-    
-    }// end outer else if
+    }
 }
 
-
-
 function checkPoint(now,then,start){
-
-
     var a_point = now.info();  
     var b_point = then.info();
     var c_point = start.info();
-
-        var temp_dis = getDistanceFromLatLonInKm(a_point[0],a_point[1],b_point[0],b_point[1]);
-        var disFromStart = getDistanceFromLatLonInKm(a_point[0],a_point[1],c_point[0],c_point[1]);
+    var temp_dis = getDistanceFromLatLonInKm(a_point[0],a_point[1],b_point[0],b_point[1]);
+    var disFromStart = getDistanceFromLatLonInKm(a_point[0],a_point[1],c_point[0],c_point[1]);
      
-
         if (!modeOfTrans(mode,temp_dis)) {
             console.log(temp_dis);
               return;
         }else{
-            // if (!transferingData) {
-                buildLatLonPoints(now);
-            // }
             
-            
+            buildLatLonPoints(now);
             var last_point = new point(time, temp_dis);
             var start_point = new point(time, disFromStart)
-            addDataToChart(last_point, start_point);
+            addDataToChart(last_point, start_point); // only access to add data
         }
-
 }
-
-
-// function coorDist(now,then) {
-    
-//     var point_a = now.info();  //last point 
-//     var point_b = then.info();// second to last point
-    
-//     //creates a point that is the distance covered
-//     var temp_dis = getDistanceFromLatLonInKm(point_a[0],point_a[1],point_b[0],point_b[1]); 
-    
-//     return temp_dis;
-// }
-
-
 
 function onError(error) {
     alert('code: '    + error.code    + '\n' +
           'message: ' + error.message + '\n');
 }
-
-
-
-
-
 
 
 function buildLatLonPoints(aPoint){
@@ -215,6 +114,7 @@ function coorPoints_to_distance (index) {
 }
 
 
+/* found slytly simpler version of this below*/
 
 // function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
 //     var R = 6371; // Radius of the earth in km
@@ -230,6 +130,10 @@ function coorPoints_to_distance (index) {
 //     return d*KILOMETERTOFEET;
 // }
 
+// function deg2rad(deg) {
+//     return deg * (Math.PI/180);
+// }
+
 function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     var radlat1 = Math.PI * lat1/180
     var radlat2 = Math.PI * lat2/180
@@ -241,15 +145,6 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
     dist = dist * 60 * 1.1515
     return dist*5280
 }
-
-
-
-
-
-function deg2rad(deg) {
-    return deg * (Math.PI/180);
-}
-
 
 function point(x,y){
     this.y = y;
@@ -266,11 +161,9 @@ function modeOfTrans(mode,dist){
     }else if (mode =="bike") {
         tolerance = 100;
     }else if (mode =="auto") {
-        tolerance = 10000;
+        tolerance = 10000;  // Thsi is too high but have the 7000 problem 
     }
      
-    
-
     if(dist<tolerance) {
         return true;
     }else{
@@ -278,6 +171,8 @@ function modeOfTrans(mode,dist){
     }
 }
 
+
+/* Do we use this?*/
 function twoPointArr(aPoint,bPoint){
     this.a_point = a_point.info();
     this.b_point = b_point.info();

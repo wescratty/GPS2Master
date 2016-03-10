@@ -19,16 +19,7 @@
 -->
 <html>
     <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+       <!-- Drew: This should all be the same for all html down to...  -->
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -39,20 +30,19 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
-        <!-- <script src="//www.chartjs.org/assets/Chart.min.js"></script> -->
         <script src="js/Chart.js"></script>
-
         <script src="js/location.js"></script>
         <script src="js/index_helper.js"></script>
         <script src="js/graph.js"></script>
         <script src="js/shipping.js"></script>
         <script src="tableView.html"></script>
+
+        <!-- Drew: This should all be the same for all html down to here -->
+        <!-- Seems like we should have a div that surrounds the differances. Not totally sure. -->
         <title> Graph view</title>
 
     </head>
-
     <body>
-            <!-- <h1>Graph View</h1> -->
             <script type="text/javascript" language="JavaScript">
             document.addEventListener('deviceready', function () {setGraphName();});
             function setGraphName(){
@@ -65,110 +55,59 @@
             }
             </script>
                 
-                <!-- <input class="inputBox" id="fi" value="data.c"/> -->
     <div id="page-wrapper">
-    
-
-    
         <div class="wrapper">
          
          <canvas id="updating-chart" width="590px" height="280px"></canvas>
             </div>
 
-<div class="buttonPanel">        
-
-
+        <div class="buttonPanel">        
             <button class="SBP"style="background-color:red"onclick="pos()">&#402</button>
-            <!-- <button class="SBP"style="background-color:yellow"onclick="dis()">&#402</button> -->
             <button class="SBP"style="background-color:blue"onclick="vol()">&#402'</button>
             <button class="SBP"style="background-color:green"onclick="acc()">&#402"</button>
-            
             <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="startLocationPoints()">GPS</button>
             <button class="SBP"style="background-color:rgb(0, 153, 204)"id = "startPoint"onclick="toggle_fromStartPoint()">FLP</button><br>
             <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="prep_test_data()">Upload</button>
-            <!-- <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="changeMode()">Mode</button> -->
             <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="reset()">Reset</button>
             <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="passToTableView();goToTableView()">Export</button>
             <button class="SBP"style="background-color:rgb(0, 153, 204)"id = "modeButton"name="Mode"type="button" value="Walk" class="off" onclick="changeMode()">Walk</button>
-            <!-- <button id = "drawToggle"class="off"onclick="toggledraw(this)">Draw</button> -->
-        <!-- </div> -->
         </div>
 
             
-        
       <script type="text/javascript">
       var modeCount = 0;
       var drawCount = 0;
       
+      function changeMode(){
+        modeCount ++;
+        modeCount = modeCount%3;
 
+        console.log(modeCount);
+        
+        var s = document.getElementById('modeButton');
 
-              function changeMode(){
-                modeCount ++;
-                modeCount = modeCount%3;
+        if (modeCount==0) {
+            mode = "walk";
+            s.childNodes[0].nodeValue= "Walk";
+        }else if (modeCount==1){
+            mode = "bike";
+            s.childNodes[0].nodeValue= "Bike";
+        }else if (modeCount==2){
+            mode = "auto";
+            s.childNodes[0].nodeValue= "Car";
+        }
+      }
 
-                console.log(modeCount);
-                
-                var s = document.getElementById('modeButton');
+      function toggle_fromStartPoint(){
 
-                if (modeCount==0) {
-                    mode = "walk";
-                    s.childNodes[0].nodeValue= "Walk";
-                }else if (modeCount==1){
-                    mode = "bike";
-                    s.childNodes[0].nodeValue= "Bike";
-                }else if (modeCount==2){
-                    mode = "auto";
-                    s.childNodes[0].nodeValue= "Car";
-                }
+          var s = document.getElementById('startPoint');
 
-              }
+          s.childNodes[0].nodeValue = _fromStartPoint ? "FLP" : "FSP" ;
 
+          _fromStartPoint = _fromStartPoint ? false:true;
 
-              // function toggledraw(el){
-               
-              //   console.log(el.className);
-              //   if(el.className == "on") {
-              //       el.className="off";
-    
-              //   }else{
-              //       el.className="on";
-                    
-              //       $(document).mousemove(function(e) {
-                        
-              //           if(e.which==1&&el.className == "on"){
-              //                   drawCount++;
-              //               if (drawCount%3==0) {
-              //                   var div = document.getElementById('updating-chart');
-              //                   var x = e.pageX - div.offsetLeft;
-              //                   var y = (e.pageY - div.offsetTop-150)*-1;
-              //                   var a_point = new point(x,y);
-              //                   drawArray.push(a_point);
-              //                   addDataToChart(a_point);
-              //               }
-              //           }
-                    
-              //       });
-              //       }
-              //   }
-
-                function toggle_fromStartPoint(){
-
-                    var s = document.getElementById('startPoint');
-
-                    s.childNodes[0].nodeValue = _fromStartPoint ? "FLP" : "FSP" ;
-
-                    _fromStartPoint = _fromStartPoint ? false:true;
-
-                    toggle_startp_lastp();
-
-
-
-                }
-                
-                <!-- Start of Jquerry -->
-                $("document").ready(function() {});
-                 <!-- End of Jquerry -->               
-                </script>
+          toggle_startp_lastp();
+      }
 
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script>

@@ -125,39 +125,64 @@ function prep_test_data(){
     reset();
     testdata = temp;
     var c_point = new point(testdata[0][0],testdata[0][1]);
+
     for (var i = 1;i< testdata.length;i++) {
 
         var a_point = new point(testdata[i][0],testdata[i][1]);
         var b_point = new point(testdata[i-1][0],testdata[i-1][1]);
-
-        // checkPoint(b_point,a_point);
         
         addDataToChart(a_point,b_point);
         checkPoint(b_point,a_point,c_point);
     };
-
-
-    
-
 }
 
 function load_test_data(){
     for (var i = 1;i< testdata.length;i++) {
-
         var a_point = testdata[i];
-
-        // var b_point = _fromStartPoint ? testdata[0] : testdata[i-1];
         var b_point =    testdata[i-1];
-
         checkPoint(b_point,a_point,testdata[0]);
-        
-        // addDataToChart(a_point);
     };
 }
 
 
+// function tryEmail(){
+//     console.log("tryEmail called");
+
+//     /* Drew, we need to delete this receive calls and just set from global var noted in index */
+//     var _body = receiverString('body');
+//     var userinfo = receiverString('userinfo').split(/~/);
+//     var attachment;
+
+//     console.log("userinfo:",userinfo);
+//     console.log("_body:",_body);
+//     console.log("userinfo[0]:",userinfo[0]);
+//     console.log("userinfo[1]:",userinfo[1]);
+//     console.log("userinfo[2]:",userinfo[2]);
+
+//     if (!logOb) { 
+//         console.log("no log ob");
+//     }else{
+//         attachment = logOb.nativeURL;
+//     }
+
+//     cordova.plugins.email.isAvailable(
+//     function (isAvailable) {
+        
+//         cordova.plugins.email.open({
+//             to:      userinfo[2],
+//             cc:      userinfo[1],
+//             bcc:     [],
+//             subject: 'Chart data from '+userinfo[0],
+//             body:    _body,
+//             attachments: [attachment]
+//         });
+//     }
+// );
+// }
 function tryEmail(){
     console.log("tryEmail called");
+
+    /* Drew, we need to delete this receive calls and just set from global var noted in index */
     var _body = receiverString('body');
     var userinfo = receiverString('userinfo').split(/~/);
     var attachment;
@@ -168,8 +193,7 @@ function tryEmail(){
     console.log("userinfo[1]:",userinfo[1]);
     console.log("userinfo[2]:",userinfo[2]);
 
-    if (!logOb) {
-        // attachment = image 
+    if (!logOb) { 
         console.log("no log ob");
     }else{
         attachment = logOb.nativeURL;
@@ -179,12 +203,12 @@ function tryEmail(){
     function (isAvailable) {
         
         cordova.plugins.email.open({
-            to:      userinfo[2],
-            cc:      userinfo[1],
+            to:      "userinfo[2]",
+            cc:      "userinfo[1]",
             bcc:     [],
-            subject: 'Chart data from '+userinfo[0],
-            body:    _body,
-            attachments: [attachment]
+            subject: 'Chart data from '+"userinfo[0]",
+            body:    "_body",
+            attachments: logOb.nativeURL
         });
     }
 );

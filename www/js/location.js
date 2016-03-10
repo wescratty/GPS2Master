@@ -1,11 +1,8 @@
 function getGeoPosition(position){
-  //if failure increment time and retry to get position and do not return until
-  // look at chart.js to input to x
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
     console.log(" lat: "+ lat+ " lon: "+ lon);
     return new point(lat,lon);
-    
 }
 
 function toggle_startp_lastp(){
@@ -18,11 +15,9 @@ function toggle_startp_lastp(){
 }
 
 function transferData(){
-
         var tempArr = _fromStartPoint ? coorPoints : testdata;
         reset();
         testdata = tempArr;
-
         load_test_data();
 }
 
@@ -72,10 +67,8 @@ function onSuccess(position) {
         
         var len = coorPoints.length;
         currentLoc = getGeoPosition(position);
-        // var a_point = currentLoc.info();
-        // var b_point = coorPoints[len-1].info();
         checkPoint(currentLoc,coorPoints[len-1],coorPoints[0]);
-    }// end outer else if
+    }
 }
 
 function checkPoint(now,then,start){
@@ -93,7 +86,7 @@ function checkPoint(now,then,start){
             buildLatLonPoints(now);
             var last_point = new point(time, temp_dis);
             var start_point = new point(time, disFromStart)
-            addDataToChart(last_point, start_point);
+            addDataToChart(last_point, start_point); // only access to add data
         }
 }
 
@@ -119,6 +112,9 @@ function coorPoints_to_distance (index) {
     
     return temp_dis;
 }
+
+
+/* found slytly simpler version of this below*/
 
 // function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
 //     var R = 6371; // Radius of the earth in km
@@ -165,7 +161,7 @@ function modeOfTrans(mode,dist){
     }else if (mode =="bike") {
         tolerance = 100;
     }else if (mode =="auto") {
-        tolerance = 10000;
+        tolerance = 10000;  // Thsi is too high but have the 7000 problem 
     }
      
     if(dist<tolerance) {
@@ -175,6 +171,8 @@ function modeOfTrans(mode,dist){
     }
 }
 
+
+/* Do we use this?*/
 function twoPointArr(aPoint,bPoint){
     this.a_point = a_point.info();
     this.b_point = b_point.info();
