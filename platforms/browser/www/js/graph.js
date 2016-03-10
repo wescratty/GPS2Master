@@ -69,30 +69,30 @@ function createGraph() {
 }
     
     
-        function pos(){
-                        var label = 'First';
-                        var chart = window.lineChart;
-                        var store = chart.store;
-                        var finded = false;
-                        for (var i = 0; i < store.length; i++) {
-                        console.log("Store name " + store[i][0]);
-                        if (store[i][0] === label) {
-                        finded = true;
-                        var restored = store.splice(i, 1)[0][1];
-                        chart.datasets.push(restored);
-                        }
-                        }
-                        
-                        if (!finded) {
-                        console.log('Start search dataset with label = ' + label);
-                        for (var i = 0; i < chart.datasets.length; i++) {
-                        if (chart.datasets[i].label === label) {
-                        chart.store.push([label, chart.datasets.splice(i, 1)[0]]);
-                        }
-                        }
-                        }
-                        chart.update();
-                        }
+    function pos(){
+        var label = 'First';
+        var chart = window.lineChart;
+        var store = chart.store;
+        var finded = false;
+        for (var i = 0; i < store.length; i++) {
+            console.log("Store name " + store[i][0]);
+            if (store[i][0] === label) {
+                finded = true;
+                var restored = store.splice(i, 1)[0][1];
+                chart.datasets.push(restored);
+            }
+        }
+        
+        if (!finded) {
+            console.log('Start search dataset with label = ' + label);
+            for (var i = 0; i < chart.datasets.length; i++) {
+                if (chart.datasets[i].label === label) {
+                  chart.store.push([label, chart.datasets.splice(i, 1)[0]]);
+                }
+            }
+        }
+        chart.update();
+    }
     
          function vol(){
                         var label = 'Second';
