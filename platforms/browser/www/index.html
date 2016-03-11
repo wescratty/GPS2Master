@@ -43,10 +43,11 @@
                 var _myEmail; 
                 var _emailTo; 
 
-                document.addEventListener('deviceready', function () {
+                document.addEventListener('deviceready', function () {setUP();});
+                function setUP(){
+                    console.log("success, setUP");
                     window.name = "index";
-
-                });
+                }
 
                 /* we can replace this once on one page */
                 <!-- /* Delet and just set to global var*/ -->

@@ -347,9 +347,10 @@ FileSystemHelper.prototype = {
 		var that = this;
         // console.log("success, readTextFromFile");
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-								 function(logOb) {
+								 function(fileSystem) {
                                     if(!logOb){
                                         logOb=fileSystem;
+                                        console.log("logOb: " +logOb)
                                     }
 									 that._getFileEntry.call(that, logOb, fileName, onSuccess, onError);
 								 },

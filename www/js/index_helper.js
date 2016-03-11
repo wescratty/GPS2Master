@@ -132,7 +132,7 @@ function prep_test_data(){
         var b_point = new point(testdata[i-1][0],testdata[i-1][1]);
         
         addDataToChart(a_point,b_point);
-        checkPoint(b_point,a_point,c_point);
+        // checkPoint(b_point,a_point,c_point);
     };
 }
 
@@ -183,7 +183,8 @@ function tryEmail(){
     console.log("tryEmail called");
 
     /* Drew, we need to delete this receive calls and just set from global var noted in index */
-    var _body = receiverString('body');
+    // var _body = receiverString('body');
+    var _body = "lasef"
     var userinfo = receiverString('userinfo').split(/~/);
     var attachment;
 
@@ -192,6 +193,7 @@ function tryEmail(){
     console.log("userinfo[0]:",userinfo[0]);
     console.log("userinfo[1]:",userinfo[1]);
     console.log("userinfo[2]:",userinfo[2]);
+    console.log("logOb.nativeURL: ",logOb.nativeURL);
 
     if (!logOb) { 
         console.log("no log ob");
@@ -208,7 +210,7 @@ function tryEmail(){
             bcc:     [],
             subject: 'Chart data from '+"userinfo[0]",
             body:    "_body",
-            attachments: logOb.nativeURL
+            attachments: [logOb.nativeURL]
         });
     }
 );

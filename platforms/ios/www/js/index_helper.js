@@ -132,7 +132,7 @@ function prep_test_data(){
         var b_point = new point(testdata[i-1][0],testdata[i-1][1]);
         
         addDataToChart(a_point,b_point);
-        checkPoint(b_point,a_point,c_point);
+        // checkPoint(b_point,a_point,c_point);
     };
 }
 
