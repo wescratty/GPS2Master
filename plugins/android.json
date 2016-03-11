@@ -7,13 +7,13 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-console": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-plugin-geolocation": {
+        "cordova-plugin-email": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
         "cordova-plugin-file": {
@@ -22,10 +22,10 @@
         "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-plugin-console": {
+        "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
-        "cordova-plugin-email": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },

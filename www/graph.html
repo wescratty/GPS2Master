@@ -1,52 +1,55 @@
-        <ons-toolbar>
-            <div class="center">Graph</div>
-             <div class="left">
-            <ons-toolbar-button>
-          <ons-icon icon="ion-navicon" style="font-size: 32px; width: 1em"></ons-icon>
+<ons-toolbar>
+    <div class="center">Graph</div>
+    <div class="left">
+        <ons-toolbar-button>
+            <ons-icon icon="ion-navicon" style="font-size: 32px; width: 1em"></ons-icon>
         </ons-toolbar-button></div>
-        <div class="right">
-            <ons-toolbar-button>
-          <ons-icon icon="ion-ios-play" style="font-size: 32px; width: 1em"></ons-icon>
+    <div class="right">
+        <ons-toolbar-button onclick="startLocationPoints()"><small>start</small>
+            <ons-icon icon="ion-ios-play" style="font-size: 32px; width: 1em"></ons-icon>
         </ons-toolbar-button></div>
-        </ons-toolbar>
+</ons-toolbar>
 
 <!--  <img src="http://www.psdgraphics.com/file/green-business-graph.jpg" alt="W3Schools.com" width="350" height="200">-->
-        <div class="wrapper">
-         
-         <canvas id="updating-chart" width="590px" height="280px"></canvas>
-            </div>
-            <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="prep_test_data()">Upload</button>
+<div class="wrapper" >
+
+    <canvas id="updating-chart" width="320px" height="280px"></canvas>
+</div>
+
+<div class="button-bar" style="width:100%;">
+    <div class="button-bar__item">
+        <button class="button-bar__button" onclick="prep_test_data()">Upload</button>
+    </div>
+    <div class="button-bar__item">
+        <button class="button-bar__button " onclick="reset()">Reset</button>
+    </div>
+    <div class="button-bar__item">
+        <button class="button-bar__button" onclick=console.log("export")>Export</button>
+    </div>
+</div>
+
 <ul class="list">
-  <li class="list__item">
-    Distance 
-    <label class="switch switch--list-item">
-      <input type="checkbox" class="switch__input" checked>
-      <div class="switch__toggle"></div>
-    </label>
-  </li>
-
-  <li class="list__item">
-    Position
-    <label class="switch switch--list-item">
-      <input type="checkbox" class="switch__input">
-      <div class="switch__toggle"></div>
-    </label>
-  </li>
-  
     <li class="list__item">
-    Velocity
-    <label class="switch switch--list-item">
-      <input type="checkbox" class="switch__input">
-      <div class="switch__toggle"></div>
-    </label>
-  </li>
-  
-    <li class="list__item">
-    Acceleration
-    <label class="switch switch--list-item">
-      <input type="checkbox" class="switch__input">
-      <div class="switch__toggle"></div>
-    </label>
-  </li>
+        Position
+        <label class="switch switch--list-item">
+            <input type="checkbox" class="switch__input" onchange="pos()" checked>
+            <div class="switch__toggle"></div>
+        </label>
+    </li>
 
+    <li class="list__item">
+        Velocity
+        <label class="switch switch--list-item">
+            <input type="checkbox" class="switch__input" onchange="vol()" checked>
+            <div class="switch__toggle"></div>
+        </label>
+    </li>
+
+    <li class="list__item">
+        Acceleration
+        <label class="switch switch--list-item">
+            <input type="checkbox" class="switch__input" onchange="acc()" checked>
+            <div class="switch__toggle"></div>
+        </label>
+    </li>
 </ul>
