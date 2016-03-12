@@ -1,0 +1,62 @@
+<script>
+ons.bootstrap();
+
+var app=angular.module('myApp', []);
+
+app.controller("TestCtrl", function($scope){
+  $scope.firstRanger=50;
+  $scope.secondRanger = 150;
+});
+
+</script>
+
+<ons-navigator title="Navigator" var="myNavigator">
+<ons-page>
+
+<ons-toolbar >
+    <div class="center">Export</div>
+</ons-toolbar>
+
+<div class="test" >
+<ons-list>
+    <ons-list-header></ons-list-header>
+    <ons-list-item class="list__item--tappable list__item__line-height" modifier="chevron" ng-click="show('dialog.html')">
+        Write
+    </ons-list-item>
+    <ons-list-item modifier="tappable">
+        Read
+    </ons-list-item>
+    <ons-list-item modifier="tappable">
+        Delete
+    </ons-list-item>
+    <ons-list-item modifier="tappable">
+        Email
+    </ons-list-item>
+</ons-list>
+</div>
+
+</ons-page>
+</ons-navigator>
+<ons-template id="login.html">
+  <ons-dialog var="dialog" cancelable>
+
+    <ons-toolbar inline>
+      <div class="center">
+        Login
+      </div>
+    </ons-toolbar>
+
+    <p>
+      <input placeholder="Username" id="username" class="text-input">
+    </p>
+
+    <p>
+      <input type="password" placeholder="Password" id="username" class="text-input">
+    </p>
+
+    <p>
+      <ons-button modifier="large" ng-click="dialog.hide()">Sign in</ons-button>
+    </p>
+
+  </ons-dialog>
+</ons-template>

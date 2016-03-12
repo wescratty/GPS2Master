@@ -1,63 +1,18 @@
-<ons-page>
-<ons-toolbar>
-    <div class="center">Home</div>
-</ons-toolbar>
- <ons-list ng-controller="DialogController">
-    <ons-list-item ng-click="show('login.html')" modifier="tappable">
-      Login form
-    </ons-list-item>
-    </ons-list>
-</ons-page>
+<ons-navigator title="Navigator" var="myNavigator">
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">Log In</div>
+            <div class="right"><ons-toolbar-button>Close</ons-toolbar-button></div>
+        </ons-toolbar>
 
+        <div class="login-form">
 
-<ons-template id="login.html">
-  <ons-dialog var="dialog" cancelable>
-
-    <ons-toolbar inline>
-      <div class="center">
-        Login
-      </div>
-    </ons-toolbar>
-
-    <p>
-      <input placeholder="Username" id="username" class="text-input">
-    </p>
-
-    <p>
-      <input type="password" placeholder="Password" id="username" class="text-input">
-    </p>
-
-    <p>
-      <ons-button modifier="large" ng-click="dialog.hide()">Sign in</ons-button>
-    </p>
-
-  </ons-dialog>
-</ons-template>
-
-ons-dialog:not([modifier='material']) p {
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-input {
-  width: 100%;
-}
-
-<script>
-
-
-.controller('DialogController', function($scope) {
-  $scope.dialogs = {};
-
-  $scope.show = function(dlg) {
-    if (!$scope.dialogs[dlg]) {
-      ons.createDialog(dlg).then(function(dialog) {
-        $scope.dialogs[dlg] = dialog;
-        dialog.show();
-      });
-    } else {
-      $scope.dialogs[dlg].show();
-    }
-  }
-});
-</script>
+            <input type="email" class="text-input--underbar" placeholder="Email" value="">
+            <input type="password" class="text-input--underbar" placeholder="Password" value="">
+            <br><br>
+            <ons-button modifier="large" class="login-button" style="width:100%">Log In</ons-button>
+            <br><br>
+            <ons-button modifier="quiet" class="forgot-password" style="width:100%">Forgot password?</ons-button>
+        </div>
+    </ons-page>
+</ons-navigator>
