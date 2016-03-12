@@ -1,3 +1,49 @@
 <ons-toolbar>
     <div class="center">Table</div>
 </ons-toolbar>
+<style>
+table {
+    width:100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table#table tr:nth-child(even) {
+    background-color: #eee;
+}
+table#table tr:nth-child(odd) {
+   background-color:#fff;
+}
+table#table th    {
+    background-color: black;
+    color: white;
+}
+</style>
+
+<table>
+    <col width="25%">
+    <col width="25%">
+    <col width="25%">
+    <col width="25%">
+    <thead>
+        <tr>
+            <th>Time</th>
+            <th>Position</th>
+            <th>Velocity</th>
+            <th>Acceleration</th>
+        </tr>
+    </thead>
+</table>
+<div style="height:90%; overflow:auto; width:100%">
+    <table id="dataTable">
+        <col width="25%">
+        <col width="25%">
+        <col width="25%">
+        <col width="25%">
+    </table>
+</div>

@@ -214,6 +214,7 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
     }
 
     void(time>20&&lineChart.removeData());
+    addDataToTable();
         
 }
 
@@ -296,11 +297,3 @@ function passToTableView(){
   shipper('distance',distance);
  
 }
-
-
-
-
-
-
-
-
