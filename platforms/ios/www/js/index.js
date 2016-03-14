@@ -16,6 +16,9 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+
+ /* Drew, I think we should be using this. Right now we dont */
 var app = {
     // Application Constructor
     initialize: function() {

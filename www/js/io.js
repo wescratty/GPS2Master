@@ -1,15 +1,14 @@
 
 
-
 document.addEventListener('deviceready', function () {
     console.log("device is ready in io");
 
-
+/* Drew, will have to delete all of the shipper stuff and just set */
 // ------ need to use shipper to get the file we want and set as global file name else data.csv will get over ridden. -------
 	var locFileName;
 if (window.name =='graph') {
 		console.log('graph opened io');
-		distancePoints=receivingArray('distancePoints');
+		distance=receivingArray('distance');
 		locFileName = "export.csv";
 	}else if(window.name =='tableView'){
 
@@ -57,10 +56,6 @@ var fileApp = new FileApp();
             fileApp.run();
             console.log("Right after run call ");
             setUP();
-
-
-	
-
 });
 
 
@@ -76,7 +71,6 @@ function arrayToCsv(an_array){
     }
     return temp; 
 }
-
 
 // function csvToarray(aString){
 //     var strArr = aString.split(/\n/);
@@ -101,15 +95,9 @@ function arrayToCsv(an_array){
 //     };
 // }
 
-
-
-
 function CSVTable(aString){
-
     var strArr = aString.split(/\n/);
-    
     var firstLine = strArr[0];
-    
     
         if (firstLine.match(/Comment: ([\w\s,]+)/)) {
             console.log("found match ");
@@ -126,7 +114,6 @@ function CSVTable(aString){
     var $line = $( "<h4></h4>" );
     $line.append( $( "<h4></h4>" ).html( comment) );
     $table.append( $line );
-    // get comment
 
     
     console.log("strArr.length: "+strArr.length);
@@ -225,17 +212,15 @@ _writeTextToFile: function() {
      text = "Comment: "+that.textField.value+"\n";
 
      
-     if (distancePoints.length>0) {
-     	text = text+ arrayToCsv(distancePoints);
-         if (that._isValidFileName(fileName)&&!fileSelector) {
-        fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
+     if (distance.length>0) {
+     	text = text+ arrayToCsv(distance);
+        if (that._isValidFileName(fileName)&&!fileSelector) {
+            fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
 
-    }
-
-    else {
-        var error = { code: 44, message: "Invalid filename"};
-        that._onError(error);
-    }
+        }else{
+            var error = { code: 44, message: "Invalid filename"};
+            that._onError(error);
+        }
      }else{
         // text = document.getElementById("result").textContent;
         alert("You have no data yet!");
@@ -362,7 +347,11 @@ FileSystemHelper.prototype = {
 		var that = this;
         // console.log("success, readTextFromFile");
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-								 function(logOb) {
+								 function(fileSystem) {
+                                    if(!logOb){
+                                        logOb=fileSystem;
+                                        console.log("logOb: " +logOb)
+                                    }
 									 that._getFileEntry.call(that, logOb, fileName, onSuccess, onError);
 								 },
 								 function(error) {

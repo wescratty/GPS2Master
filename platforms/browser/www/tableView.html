@@ -19,16 +19,7 @@
 -->
 <html>
     <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+        <!-- Drew: This should all be the same for all html down to...  -->
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -45,6 +36,7 @@
         <script src="js/io.js"></script>
         <script src="js/location.js"></script>
         <script src="js/shipping.js"></script>
+        <!-- Drew: This should all be the same for all html down to here  -->
         
         <title> Table view</title>
     </head>
@@ -59,43 +51,30 @@
             <br/>
             <br/>
             <div id = "fileChooser"></div>
-            <!-- <div class"filechooser">
-            </div> -->
-
-            <!-- Select a file: <input type="file"id="input"name="img"onchange="handleFiles(this.files)">
- -->
             <script type="text/javascript">
 
-                document.addEventListener('deviceready', function () {setUP();
-                });
-            function setUP(){
-                console.log("success, setUP");
-                window.name = "tableView";
-            }
+                document.addEventListener('deviceready', function () {setUP();});
+                function setUP(){
+                    console.log("success, setUP");
+                    window.name = "tableView";
+                }
 
             
                 function checkPlatform(){
-                    if (device.platform == "browser") {
-                        
+                    if (device.platform == "browser") {   
                     }
-
                 }
 
                 function handleFiles(aFile){
                     selectedFile =  aFile[0];
                     document.getElementById('fileNameInput').value = selectedFile.name;
-                    // if (!selectedFile.name.match(/\.(jpg|jpeg|png|gif)$/)){
-
                     FileSystemHelper.prototype._getFileReader2(selectedFile,FileSystemHelper.prototype.onSuccess);
-
-                    // }else{
-                    //TODO send image to email
-                    // }
                 }
+
                 function loadGraph(){
                     window.location = 'graph.html'
-                // TODO take data from result and load in a points array and store thru shipping and then load into testdataarray
                 }
+
             </script>
 
             <br />
@@ -109,8 +88,8 @@
         </div>
         <div class="action-area ch30">
             
-            
         </div>
+        <!-- This is for the io, just has a spot to put out put -->
         <div class="result-area ch40">
             <div class="results"content-type: "text/plain">
                 <div id="result" class="desc"></div>

@@ -99,6 +99,11 @@
       <script type="text/javascript">
       var modeCount = 0;
       var drawCount = 0;
+      document.addEventListener('deviceready', function () {setUP();});
+                function setUP(){
+                    console.log("success, setUP");
+                    window.name = "graph";
+                }
       
 
 

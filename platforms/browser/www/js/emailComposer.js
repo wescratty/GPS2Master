@@ -1,3 +1,6 @@
+
+/* This is not used, it is just here as a referance and maybe could be altered for what we want*/
+
 (function (global) {
     var DemoViewModel,
         app = global.app = global.app || {};
