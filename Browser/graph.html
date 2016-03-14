@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <!--
+        Customize this policy to fit your own app's needs. For more guidance, see:
+            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
+        Some notes:
+            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
+            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
+            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
+                * Enable inline JS: add 'unsafe-inline' to default-src
+        -->
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *"> -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+        <!-- <script src="//www.chartjs.org/assets/Chart.min.js"></script> -->
+        <script src="Chart.js"></script>
+
+        <script src="location.js"></script>
+        <script src="index_helper.js"></script>
+        <script src="graph.js"></script>
+        <script src="io.js"></script>
+        <script src=" index_helper.js"></script>
+        <title> Graph view</title>
+
+    </head>
+
+    <body>
+            <!-- <h1>Graph View</h1> -->
+            <script type="text/javascript" language="JavaScript">
+            document.addEventListener('deviceready', function () {setGraphName();});
+            function setGraphName(){
+                window.name = "graph";
+
+
+            }
+            </script>
+                
+                <!-- <input class="inputBox" id="fi" value="data.c"/> -->
+    <div id="page-wrapper">
+    
+
+    
+        <div class="wrapper">
+         
+         <canvas id="updating-chart" width="590px" height="280px"></canvas>
+            </div>
+
+<div class="buttonPanel">        
+
+
+            <button class="SBP"style="background-color:red"onclick="pos()">&#402</button>
+            <!-- <button class="SBP"style="background-color:yellow"onclick="dis()">&#402</button> -->
+            <button class="SBP"style="background-color:blue"onclick="vol()">&#402'</button>
+            <button class="SBP"style="background-color:green"onclick="acc()">&#402"</button>
+            <button class="SBP"style="background-color:rgb(0, 153, 204)"onclick="reset()">Reset</button>
+        
+        <input type="file" id="files" name="files[]" multiple />
+<output id="list"></output>
+
+<script>
+  var data_array = [];
+  function handleFileSelect(evt) {
+    var files = evt.target.files; // FileList object
+
+    // files is a FileList of File objects. List some properties.
+        loadFile(files)
+  }
+
+  document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
+        </div>
+
+            
+        
+      <script type="text/javascript">
+      var modeCount = 0;
+      var drawCount = 0;
+      var data_array = [];
+
+      
+
+
+              function loadFile(files){
+                  // files is a FileList of File objects. List some properties.
+                  var output = [];
+                  for (var i = 0, f; f = files[i]; i++) {
+                      if(f.type === "text/csv"){
+                          output.push("Good File");
+                          reset();
+                          console.log(f)
+                          FileSystemHelper.prototype._getFileReader2(f,FileSystemHelper.prototype.onSuccess);
+                          prep_test_data();
+                      }
+                      output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
+                              f.size, ' bytes, last modified: ',
+                              f.lastModifiedDate ? f.lastModifiedDate.toLocaleDateString() : 'n/a',
+                              '</li>');
+                  }
+                  document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
+
+              }
+
+
+
+
+              // function toggledraw(el){
+               
+              //   console.log(el.className);
+              //   if(el.className == "on") {
+              //       el.className="off";
+    
+              //   }else{
+              //       el.className="on";
+                    
+              //       $(document).mousemove(function(e) {
+                        
+              //           if(e.which==1&&el.className == "on"){
+              //                   drawCount++;
+              //               if (drawCount%3==0) {
+              //                   var div = document.getElementById('updating-chart');
+              //                   var x = e.pageX - div.offsetLeft;
+              //                   var y = (e.pageY - div.offsetTop-150)*-1;
+              //                   var a_point = new point(x,y);
+              //                   drawArray.push(a_point);
+              //                   addDataToChart(a_point);
+              //               }
+              //           }
+                    
+              //       });
+              //       }
+              //   }
+
+                
+                <!-- Start of Jquerry -->
+                $("document").ready(function() {});
+                 <!-- End of Jquerry -->               
+                </script>
+
+        <script type="text/javascript" src="js/index.js"></script>
+        </div>
+    </body>
+</html>
