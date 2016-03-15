@@ -203,15 +203,26 @@ function tryEmail(){
 
     cordova.plugins.email.isAvailable(
     function (isAvailable) {
-        
+
+
         cordova.plugins.email.open({
-            to:      "userinfo[2]",
-            cc:      "userinfo[1]",
-            bcc:     [],
-            subject: 'Chart data from '+"userinfo[0]",
-            body:    "_body",
-            attachments: [logOb.nativeURL]
-        });
+                    to:          ['wescratty@gmail.com'],
+                    cc:          [],
+                    bcc:         [],
+                    attachments: [attachment],
+                    subject:     'EmailComposer plugin test',
+                    body:        '<h2>Hello!</h2>This is a nice <strong>HTML</strong> email with one attachments.',
+                    isHtml:      true
+                })
+        
+        // cordova.plugins.email.open({
+        //     to:      "userinfo[2]",
+        //     cc:      "userinfo[1]",
+        //     bcc:     [],
+        //     subject: 'Chart data from '+"userinfo[0]",
+        //     body:    "_body",
+        //     attachments: attachment
+        // });
     }
 );
 }

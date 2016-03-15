@@ -5,19 +5,20 @@ document.addEventListener('deviceready', function () {
 
 /* Drew, will have to delete all of the shipper stuff and just set */
 // ------ need to use shipper to get the file we want and set as global file name else data.csv will get over ridden. -------
-	var locFileName;
-if (window.name =='graph') {
-		console.log('graph opened io');
-		distance=receivingArray('distance');
-		locFileName = "export.csv";
-	}else if(window.name =='tableView'){
+	var locFileName = "export.csv";
+    distance=receivingArray('distance');
+// if (window.name =='graph') {
+// 		console.log('graph opened io');
+// 		distance=receivingArray('distance');
+// 		locFileName = "export.csv";
+// 	}else if(window.name =='tableView'){
 
-		console.log('tableView opened io');
-		locFileName = "export.csv";
-	}else if (window.name == "index"){
-		console.log('index opened io');
-		locFileName = "username.txt";
-	}
+// 		console.log('tableView opened io');
+// 		locFileName = "export.csv";
+// 	}else if (window.name == "index"){
+// 		console.log('index opened io');
+// 		locFileName = "username.txt";
+// 	}
 
 
 
