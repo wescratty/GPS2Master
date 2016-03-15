@@ -145,46 +145,11 @@ function load_test_data(){
 }
 
 
-// function tryEmail(){
-//     console.log("tryEmail called");
-
-//     /* Drew, we need to delete this receive calls and just set from global var noted in index */
-//     var _body = receiverString('body');
-//     var userinfo = receiverString('userinfo').split(/~/);
-//     var attachment;
-
-//     console.log("userinfo:",userinfo);
-//     console.log("_body:",_body);
-//     console.log("userinfo[0]:",userinfo[0]);
-//     console.log("userinfo[1]:",userinfo[1]);
-//     console.log("userinfo[2]:",userinfo[2]);
-
-//     if (!logOb) { 
-//         console.log("no log ob");
-//     }else{
-//         attachment = logOb.nativeURL;
-//     }
-
-//     cordova.plugins.email.isAvailable(
-//     function (isAvailable) {
-        
-//         cordova.plugins.email.open({
-//             to:      userinfo[2],
-//             cc:      userinfo[1],
-//             bcc:     [],
-//             subject: 'Chart data from '+userinfo[0],
-//             body:    _body,
-//             attachments: [attachment]
-//         });
-//     }
-// );
-// }
 function tryEmail(){
     console.log("tryEmail called");
 
     /* Drew, we need to delete this receive calls and just set from global var noted in index */
-    // var _body = receiverString('body');
-    var _body = "lasef"
+    var _body = receiverString('body');
     var userinfo = receiverString('userinfo').split(/~/);
     var attachment;
 
@@ -193,7 +158,6 @@ function tryEmail(){
     console.log("userinfo[0]:",userinfo[0]);
     console.log("userinfo[1]:",userinfo[1]);
     console.log("userinfo[2]:",userinfo[2]);
-    console.log("logOb.nativeURL: ",logOb.nativeURL);
 
     if (!logOb) { 
         console.log("no log ob");
@@ -203,29 +167,65 @@ function tryEmail(){
 
     cordova.plugins.email.isAvailable(
     function (isAvailable) {
-
-
-        cordova.plugins.email.open({
-                    to:          ['wescratty@gmail.com'],
-                    cc:          [],
-                    bcc:         [],
-                    attachments: [attachment],
-                    subject:     'EmailComposer plugin test',
-                    body:        '<h2>Hello!</h2>This is a nice <strong>HTML</strong> email with one attachments.',
-                    isHtml:      true
-                })
         
-        // cordova.plugins.email.open({
-        //     to:      "userinfo[2]",
-        //     cc:      "userinfo[1]",
-        //     bcc:     [],
-        //     subject: 'Chart data from '+"userinfo[0]",
-        //     body:    "_body",
-        //     attachments: attachment
-        // });
+        cordova.plugins.email.open({
+            to:      userinfo[2],
+            cc:      userinfo[1],
+            bcc:     [],
+            subject: 'Chart data from '+userinfo[0],
+            body:    _body,
+            attachments: [attachment]
+        });
     }
 );
 }
+// function tryEmail(){
+//     console.log("tryEmail called");
+
+//     /* Drew, we need to delete this receive calls and just set from global var noted in index */
+//     // var _body = receiverString('body');
+//     var _body = "lasef"
+//     var userinfo = receiverString('userinfo').split(/~/);
+//     var attachment;
+
+//     console.log("userinfo:",userinfo);
+//     console.log("_body:",_body);
+//     console.log("userinfo[0]:",userinfo[0]);
+//     console.log("userinfo[1]:",userinfo[1]);
+//     console.log("userinfo[2]:",userinfo[2]);
+//     console.log("logOb.nativeURL: ",logOb.nativeURL);
+
+//     if (!logOb) { 
+//         console.log("no log ob");
+//     }else{
+//         attachment = logOb.nativeURL;
+//     }
+
+//     cordova.plugins.email.isAvailable(
+//     function (isAvailable) {
+
+
+//         cordova.plugins.email.open({
+//                     to:          ['wescratty@gmail.com'],
+//                     cc:          [],
+//                     bcc:         [],
+//                     attachments: [attachment],
+//                     subject:     'EmailComposer plugin test',
+//                     body:        '<h2>Hello!</h2>This is a nice <strong>HTML</strong> email with one attachments.',
+//                     isHtml:      true
+//                 })
+        
+//         // cordova.plugins.email.open({
+//         //     to:      "userinfo[2]",
+//         //     cc:      "userinfo[1]",
+//         //     bcc:     [],
+//         //     subject: 'Chart data from '+"userinfo[0]",
+//         //     body:    "_body",
+//         //     attachments: attachment
+//         // });
+//     }
+// );
+// }
 
 
 
