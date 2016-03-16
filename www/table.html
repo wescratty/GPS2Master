@@ -1,29 +1,16 @@
-<ons-toolbar>
+
+<ons-toolbar fixed-style>
+          <div class="left">
+            <ons-toolbar-button ng-click="menu.toggleMenu()">
+                <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+            </ons-toolbar-button></div>
     <div class="center">Table</div>
+              <div class="right">
+            <ons-toolbar-button onclick="startLocationPoints()"><small>start</small>
+                <ons-icon icon="ion-ios-navigate-outline" style="font-size: 32px; width: 1em"></ons-icon>
+            </ons-toolbar-button></div>
 </ons-toolbar>
-<style>
-table {
-    width:100%;
-}
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-th, td {
-    padding: 5px;
-    text-align: left;
-}
-table#table tr:nth-child(even) {
-    background-color: #eee;
-}
-table#table tr:nth-child(odd) {
-   background-color:#fff;
-}
-table#table th    {
-    background-color: black;
-    color: white;
-}
-</style>
+
 
 <table>
     <col width="25%">
@@ -47,3 +34,28 @@ table#table th    {
         <col width="25%">
     </table>
 </div>
+
+
+<style>
+table {
+    width:100%;
+}
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: left;
+}
+table#table tr:nth-child(even) {
+    background-color: #eee;
+}
+table#table tr:nth-child(odd) {
+   background-color:#fff;
+}
+table#table th    {
+    background-color: black;
+    color: white;
+}
+</style>

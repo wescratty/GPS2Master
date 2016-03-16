@@ -1,23 +1,22 @@
-<ons-toolbar>
-    <div class="center">Graph</div>
-    <div class="left">
-        <ons-toolbar-button>
-            <ons-icon icon="ion-navicon" style="font-size: 32px; width: 1em"></ons-icon>
-        </ons-toolbar-button></div>
-    <div class="right">
-        <ons-toolbar-button onclick="startLocationPoints()"><small>start</small>
-            <ons-icon icon="ion-ios-play" style="font-size: 32px; width: 1em"></ons-icon>
-        </ons-toolbar-button></div>
-</ons-toolbar>
-
-<!--  <img src="http://www.psdgraphics.com/file/green-business-graph.jpg" alt="W3Schools.com" width="350" height="200">-->
-<div class="wrapper" >
+ <ons-page>
+    <ons-toolbar fixed-style>
+          <div class="left">
+            <ons-toolbar-button ng-click="menu.toggleMenu()">
+                <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+            </ons-toolbar-button></div>
+          <div class="center">Graph</div>
+          <div class="right">
+            <ons-toolbar-button onclick="startLocationPoints()"><small>start</small>
+                <ons-icon icon="ion-ios-navigate" style="font-size: 32px; width: 1em"></ons-icon>
+            </ons-toolbar-button></div>
+        </ons-toolbar>
+        <div class="wrapper" >
     <canvas id="updating-chart" width="320px" height="280px"></canvas>
-</div>
+</div>ons-row>
 
 <div class="button-bar" style="width:100%;">
     <div class="button-bar__item">
-        <button class="button-bar__button" onclick="prep_test_data()">Upload</button>
+        <button class="button-bar__button" onclick="prep_test_data()">Load</button>
     </div>
     <div class="button-bar__item">
         <button class="button-bar__button " onclick="reset()">Reset</button>
@@ -49,3 +48,4 @@
         </label>
     </li>
 </ul>
+      </ons-page>

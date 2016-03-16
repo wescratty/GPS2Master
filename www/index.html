@@ -12,7 +12,9 @@
 
     <script src="components/monaca-onsenui/js/onsenui.js"></script>
     
-            <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script type="text/javascript" src="cordova.js"></script>
+    
+        <link rel="stylesheet" type="text/css" href="css/index.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
         <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -23,41 +25,18 @@
         <script src="js/index_helper.js"></script>
         <script src="js/graph.js"></script>
         <script src="js/table.js"></script>
-        <script src="js/shipping.js"></script
+        <script src="js/shipping.js"></script>
         <script src="js/export.js"></script>
-        <!-- <script src="table.html"></script>
-        <script src="graph.html"></script>
-        -->
+        <script src="js/io.js"></script>
+<!--      
+        <script src="slider_table.html"></script>
+        <script src="slider_graph.html"></script>
+-->  
     <script>
         ons.bootstrap();
     </script>
 </head>
 <body>
-    <ons-tabbar var="tabbar">
-        <ons-tabbar-item
-            icon="home"
-            label="Home"
-            page="home.html"
-            active="true"></ons-tabbar-item>
-        <ons-tabbar-item
-            icon="ion-pie-graph"
-            label="Graph"
-            page="graph.html"
-            persistent></ons-tabbar-item>
-        <ons-tabbar-item
-            icon="desktop"
-            label="Table"
-            page="table.html"
-            persistent></ons-tabbar-item>
-        <ons-tabbar-item
-            icon="ion-ios-download-outline"
-            label="Export"
-            page="export.html"></ons-tabbar-item>
-        <ons-tabbar-item
-            icon="gear"
-            label="Settings"
-            page="settings.html"></ons-tabbar-item>
-    </ons-tabbar>
-
+<ons-navigator var="myNavigator" page="login.html"></ons-navigator> 
 </body>
 </html>

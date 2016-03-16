@@ -1,0 +1,19 @@
+<ons-page var="login-page">
+    <ons-toolbar fixed-style>
+        <div class="left">
+        <ons-toolbar-button>
+            <ons-icon icon="ion-navicon" style="font-size: 32px; width: 1em"></ons-icon>
+        </ons-toolbar-button></div>
+        <div class="center">deriv.io</div>    
+    </ons-toolbar>
+
+    <div class="login-form">
+
+        <input type="email" class="text-input--underbar" placeholder="Email" value="">
+        <input type="password" class="text-input--underbar" placeholder="Password" value="">
+        <br><br>
+        <ons-button modifier="large" class="login-button" style="width:100%" onclick="myNavigator.resetToPage('sliding_menu.html', {animation : 'lift' })">Log In</ons-button>
+        <br><br>
+        <ons-button modifier="quiet" class="forgot-password" style="width:100%">Forgot password?</ons-button>
+    </div>
+</ons-page>
