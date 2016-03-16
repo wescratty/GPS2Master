@@ -105,7 +105,7 @@
 
       
 
-
+            // todo look into electron!!!!!
               function loadFile(files){
                   // files is a FileList of File objects. List some properties.
                   var output = [];
@@ -113,8 +113,11 @@
                       if(f.type === "text/csv"){
                           output.push("Good File");
                           reset();
-                          console.log(f)
-                          FileSystemHelper.prototype._getFileReader2(f,FileSystemHelper.prototype.onSuccess);
+                          console.log(f);
+
+                          var file = FileSystemHelper.prototype._getFileReader2(f,FileSystemHelper.prototype.onSuccess);
+
+                          console.log(file);
                           prep_test_data();
                       }
                       output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
