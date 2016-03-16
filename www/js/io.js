@@ -99,6 +99,7 @@ function arrayToCsv(an_array){
 function CSVTable(aString){
     var strArr = aString.split(/\n/);
     var firstLine = strArr[0];
+    console.log("strArr.lengthsdfgsdfgsdfgsdfg: "+strArr.length);
     
         if (firstLine.match(/Comment: ([\w\s,]+)/)) {
             console.log("found match ");
@@ -130,9 +131,19 @@ function CSVTable(aString){
     }
 
     $table.appendTo( $( "#result" ) );
+    passToGraphView(strArr);
     
 // var snd = new Audio("resources/notify.wav"); // buffers automatically when created
 // snd.play();  
+}
+
+
+function passToGraphView(strArr){
+    this.strArr = strArr;
+
+  console.log("strArr.length: "+strArr.length);
+  shipper('strArr',strArr);
+ 
 }
 
 // ********* File read and right below **********

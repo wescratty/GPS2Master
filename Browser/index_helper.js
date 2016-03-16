@@ -133,7 +133,7 @@ function prep_test_data(){
         // checkPoint(b_point,a_point);
         
         addDataToChart(a_point,b_point);
-        checkPoint(b_point,a_point,c_point);
+        // checkPoint(b_point,a_point,c_point);
     };
 
 

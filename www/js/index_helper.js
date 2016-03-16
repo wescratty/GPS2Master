@@ -119,6 +119,10 @@ function onDeviceReady() {
     
 }
 
+function getArray(){
+    testdata=receivingArray('strArr');
+}
+
 function prep_test_data(){
     _fromStartPoint= _fromStartPoint ? false: true;
     var temp = testdata;
@@ -148,7 +152,7 @@ function load_test_data(){
 function tryEmail(){
     console.log("tryEmail called");
 
-    /* Drew, we need to delete this receive calls and just set from global var noted in index */
+    /* Drew, we need to delete these receive calls and just set from global var noted in index */
     var _body = receiverString('body');
     var userinfo = receiverString('userinfo').split(/~/);
     var attachment;
@@ -179,6 +183,8 @@ function tryEmail(){
     }
 );
 }
+
+/* Just leaving for referance*/
 // function tryEmail(){
 //     console.log("tryEmail called");
 

@@ -5,19 +5,20 @@ document.addEventListener('deviceready', function () {
 
 /* Drew, will have to delete all of the shipper stuff and just set */
 // ------ need to use shipper to get the file we want and set as global file name else data.csv will get over ridden. -------
-	var locFileName;
-if (window.name =='graph') {
-		console.log('graph opened io');
-		distance=receivingArray('distance');
-		locFileName = "export.csv";
-	}else if(window.name =='tableView'){
+	var locFileName = "export.csv";
+    distance=receivingArray('distance');
+// if (window.name =='graph') {
+// 		console.log('graph opened io');
+// 		distance=receivingArray('distance');
+// 		locFileName = "export.csv";
+// 	}else if(window.name =='tableView'){
 
-		console.log('tableView opened io');
-		locFileName = "export.csv";
-	}else if (window.name == "index"){
-		console.log('index opened io');
-		locFileName = "username.txt";
-	}
+// 		console.log('tableView opened io');
+// 		locFileName = "export.csv";
+// 	}else if (window.name == "index"){
+// 		console.log('index opened io');
+// 		locFileName = "username.txt";
+// 	}
 
 
 
@@ -98,6 +99,7 @@ function arrayToCsv(an_array){
 function CSVTable(aString){
     var strArr = aString.split(/\n/);
     var firstLine = strArr[0];
+    console.log("strArr.lengthsdfgsdfgsdfgsdfg: "+strArr.length);
     
         if (firstLine.match(/Comment: ([\w\s,]+)/)) {
             console.log("found match ");
@@ -129,9 +131,19 @@ function CSVTable(aString){
     }
 
     $table.appendTo( $( "#result" ) );
+    passToGraphView(strArr);
     
 // var snd = new Audio("resources/notify.wav"); // buffers automatically when created
 // snd.play();  
+}
+
+
+function passToGraphView(strArr){
+    this.strArr = strArr;
+
+  console.log("strArr.length: "+strArr.length);
+  shipper('strArr',strArr);
+ 
 }
 
 // ********* File read and right below **********

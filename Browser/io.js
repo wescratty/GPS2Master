@@ -78,28 +78,29 @@ function arrayToCsv(an_array){
 }
 
 
-// function csvToarray(aString){
-//     var strArr = aString.split(/\n/);
-//     testdata = [];
-//     var tempArr = []
-//     var temp;
+function csvToarray(aString){
+    var strArr = aString.split(/\n/);
+    testdata = [];
+    var tempArr = []
+    var temp;
 
-//     console.log("hasComment");
+    console.log("hasComment");
 
-//     var hasComment = strArr[0].match(/Comment:/) ? strArr[0].match(/Comment: ([\w\s]+)/) : false; 
-//     console.log(hasComment);
-
-
-//     var i = hasComment ? 1:0;
+    var hasComment = strArr[0].match(/Comment:/) ? strArr[0].match(/Comment: ([\w\s]+)/) : false; 
+    console.log(hasComment);
 
 
-//     for (i ; i < strArr.length; i++) {
-//         temp= strArr[i].split(/,/);
-//         tempArr[i]=[parseFloat(temp[0]),parseFloat(temp[1])];
-//         if (!tempArr[i][0]&&!tempArr[i][1]) {continue};// might cause error
-//         testdata.push(tempArr[i]);
-//     };
-// }
+    var i = hasComment ? 1:0;
+
+
+    for (i ; i < strArr.length; i++) {
+        temp= strArr[i].split(/,/);
+        tempArr[i]=[parseFloat(temp[0]),parseFloat(temp[1])];
+        if (!tempArr[i][0]&&!tempArr[i][1]) {continue};// might cause error
+        testdata.push(tempArr[i]);
+    };
+
+}
 
 
 
@@ -420,7 +421,8 @@ FileSystemHelper.prototype = {
 		reader.onload = function(e) { 
 			var textToWrite = reader.result;
 			console.log(textToWrite);
-            CSVTable(textToWrite);
+            csvToarray(textToWrite);
+            // CSVTable(textToWrite);
 			// var notificationBox = document.getElementById("result");
    //      notificationBox.textContent = textToWrite;
 
