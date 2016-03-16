@@ -1,24 +1,24 @@
 
 
-
 document.addEventListener('deviceready', function () {
     console.log("device is ready in io");
 
-
+/* Drew, will have to delete all of the shipper stuff and just set */
 // ------ need to use shipper to get the file we want and set as global file name else data.csv will get over ridden. -------
-	var locFileName;
-if (window.name =='graph') {
-		console.log('graph opened io');
-		distancePoints=receivingArray('distancePoints');
-		locFileName = "export.csv";
-	}else if(window.name =='tableView'){
+	var locFileName = "export.csv";
+    distance=receivingArray('distance');
+// if (window.name =='graph') {
+// 		console.log('graph opened io');
+// 		distance=receivingArray('distance');
+// 		locFileName = "export.csv";
+// 	}else if(window.name =='tableView'){
 
-		console.log('tableView opened io');
-		locFileName = "export.csv";
-	}else if (window.name == "index"){
-		console.log('index opened io');
-		locFileName = "username.txt";
-	}
+// 		console.log('tableView opened io');
+// 		locFileName = "export.csv";
+// 	}else if (window.name == "index"){
+// 		console.log('index opened io');
+// 		locFileName = "username.txt";
+// 	}
 
 
 
@@ -57,10 +57,6 @@ var fileApp = new FileApp();
             fileApp.run();
             console.log("Right after run call ");
             setUP();
-
-
-	
-
 });
 
 
@@ -77,6 +73,7 @@ function arrayToCsv(an_array){
     return temp; 
 }
 
+<<<<<<< HEAD
 
 function csvToarray(aString){
     var strArr = aString.split(/\n/);
@@ -85,6 +82,13 @@ function csvToarray(aString){
     var temp;
 
     console.log("hasComment");
+=======
+// function csvToarray(aString){
+//     var strArr = aString.split(/\n/);
+//     testdata = [];
+//     var tempArr = []
+//     var temp;
+>>>>>>> origin/master
 
     var hasComment = strArr[0].match(/Comment:/) ? strArr[0].match(/Comment: ([\w\s]+)/) : false; 
     console.log(hasComment);
@@ -102,15 +106,9 @@ function csvToarray(aString){
 
 }
 
-
-
-
 function CSVTable(aString){
-
     var strArr = aString.split(/\n/);
-    
     var firstLine = strArr[0];
-    
     
         if (firstLine.match(/Comment: ([\w\s,]+)/)) {
             console.log("found match ");
@@ -127,7 +125,6 @@ function CSVTable(aString){
     var $line = $( "<h4></h4>" );
     $line.append( $( "<h4></h4>" ).html( comment) );
     $table.append( $line );
-    // get comment
 
     
     console.log("strArr.length: "+strArr.length);
@@ -226,17 +223,15 @@ _writeTextToFile: function() {
      text = "Comment: "+that.textField.value+"\n";
 
      
-     if (distancePoints.length>0) {
-     	text = text+ arrayToCsv(distancePoints);
-         if (that._isValidFileName(fileName)&&!fileSelector) {
-        fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
+     if (distance.length>0) {
+     	text = text+ arrayToCsv(distance);
+        if (that._isValidFileName(fileName)&&!fileSelector) {
+            fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
 
-    }
-
-    else {
-        var error = { code: 44, message: "Invalid filename"};
-        that._onError(error);
-    }
+        }else{
+            var error = { code: 44, message: "Invalid filename"};
+            that._onError(error);
+        }
      }else{
         // text = document.getElementById("result").textContent;
         alert("You have no data yet!");
@@ -363,7 +358,11 @@ FileSystemHelper.prototype = {
 		var that = this;
         // console.log("success, readTextFromFile");
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-								 function(logOb) {
+								 function(fileSystem) {
+                                    if(!logOb){
+                                        logOb=fileSystem;
+                                        console.log("logOb: " +logOb)
+                                    }
 									 that._getFileEntry.call(that, logOb, fileName, onSuccess, onError);
 								 },
 								 function(error) {
