@@ -73,8 +73,6 @@ function arrayToCsv(an_array){
     return temp; 
 }
 
-<<<<<<< HEAD
-
 function csvToarray(aString){
     var strArr = aString.split(/\n/);
     testdata = [];
@@ -82,13 +80,7 @@ function csvToarray(aString){
     var temp;
 
     console.log("hasComment");
-=======
-// function csvToarray(aString){
-//     var strArr = aString.split(/\n/);
-//     testdata = [];
-//     var tempArr = []
-//     var temp;
->>>>>>> origin/master
+
 
     var hasComment = strArr[0].match(/Comment:/) ? strArr[0].match(/Comment: ([\w\s]+)/) : false; 
     console.log(hasComment);
