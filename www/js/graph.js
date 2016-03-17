@@ -82,7 +82,7 @@ function pos(){
 
     if (!finded) {
         console.log('Start search dataset with label = ' + label);
-        for (var i = 0; i < chart.datasets.length; i++) {
+        for (i = 0; i < chart.datasets.length; i++) {
             if (chart.datasets[i].label === label) {
               chart.store.push([label, chart.datasets.splice(i, 1)[0]]);
             }
@@ -107,7 +107,7 @@ function vol(){
 
     if (!finded) {
         console.log('Start search dataset with label = ' + label);
-        for (var i = 0; i < chart.datasets.length; i++) {
+        for (i = 0; i < chart.datasets.length; i++) {
             if (chart.datasets[i].label === label) {
             chart.store.push([label, chart.datasets.splice(i, 1)[0]]);
             }
@@ -132,7 +132,7 @@ function acc(){
 
     if (!finded) {
         console.log('Start search dataset with label = ' + label);
-        for (var i = 0; i < chart.datasets.length; i++) {
+        for (i = 0; i < chart.datasets.length; i++) {
             if (chart.datasets[i].label === label) {
                 chart.store.push([label, chart.datasets.splice(i, 1)[0]]);
             }
@@ -172,7 +172,7 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
 
     var lastPoint = disFromLastPoint;
     var startPoint = disFromStartPoint;
-    var dist = 0.0;
+    var dist;
     var rat = 0.0;
     var acc = 0.0;
     var pointToUse = _fromStartPoint ? startPoint : lastPoint;
@@ -197,14 +197,14 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
         console.log(rat);
         rate.push(rat);
         ratePoints.push(new Point(num_dis_points-2,rat));
-    };
+    }
 
     /* could make this a function*/
     if (num_dis_points>2) {
             acc =dv_dt(ratePoints[num_dis_points-2],ratePoints[num_dis_points-3]);
             acceleration.push(acc);
             accelerationPoints.push(new Point(num_dis_points-3,acc)); 
-    };
+    }
             
     
     if (num_dis_points>4) {
@@ -234,11 +234,10 @@ function reset(){
     acceleration = [];
     drawArray = [];
 
-    startTime; // do we use this?
-    currentLoc;
+    startTime = un; // do we use this?
+    currentLoc = un;
 
     count = 0;
-    time = 0;
     time = 0;
 
     total_distance = un;
@@ -246,7 +245,7 @@ function reset(){
     
     
     transferingData = false;
-    _setLocation = false;
+    // _setLocation = false;
     goodPoint = false;
     needsStarted = true;
     
@@ -262,13 +261,13 @@ function reset(){
 
 
 // this was just to test changing existing data on graph
-function add_graph_line(){
-    lineChart.datasets[1].points[0].value = 50;
-    lineChart.datasets[1].points[2].value = 20;
-    lineChart.datasets[2].points[0].value = 30;
-    lineChart.datasets[2].points[2].value = 10;
-    lineChart.update();
-}
+// function add_graph_line(){
+//     lineChart.datasets[1].points[0].value = 50;
+//     lineChart.datasets[1].points[2].value = 20;
+//     lineChart.datasets[2].points[0].value = 30;
+//     lineChart.datasets[2].points[2].value = 10;
+//     lineChart.update();
+// }
 
 // takes derivitave of two points
 function dv_dt(a_point,b_point){
@@ -284,16 +283,16 @@ function dv_dt(a_point,b_point){
     if ((a_x-b_x)==0) {
         return 0;
     }else{
-    var new_rate = (a_y-b_y)/(a_x-b_x);
-    return new_rate;
-    };
+
+    return (a_y-b_y)/(a_x-b_x);
+    }
     
 }
 
 
 /* Delet this after one page*/
-function passToTableView(){
-  console.log("distance.length: "+distance.length);
-  shipper('distance',distance);
- 
-}
+// function passToTableView(){
+//   console.log("distance.length: "+distance.length);
+//   shipper('distance',distance);
+//
+// }

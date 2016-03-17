@@ -11,7 +11,7 @@
             </ons-toolbar-button></div>
         </ons-toolbar>
         <div class="wrapper" >
-    <canvas id="updating-chart" width="320px" height="280px"></canvas>
+    <canvas id="updating-chart" width="320px" height="320px"></canvas>
 </div>ons-row>
 
 <div class="button-bar" style="width:100%;">
@@ -48,4 +48,20 @@
         </label>
     </li>
 </ul>
-      </ons-page>
+
+<style>
+
+    @media screen and (orientation: portrait)
+    {
+        div.wrapper { width:320px; }
+    }
+    @media screen and (orientation: landscape)
+    {
+        div.wrapper { width:520px; }
+    }
+
+</style>
+
+
+
+ </ons-page>

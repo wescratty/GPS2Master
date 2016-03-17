@@ -16,7 +16,8 @@
       <ons-list-item class="menu-item" ng-click="menu.closeMenu()">
         <ons-row>
           <ons-col width="90px">
-            <span style="color: #666">Gender</span></ons-col>
+            <span style="color: #666">Mode</span>
+          </ons-col>
           <ons-col>
 
             <div style="float: right; padding-right: 16px;">
@@ -42,6 +43,20 @@
           </ons-col>
         </ons-row>
       </ons-list-item>
+
+
+          <br><br>
+
+          <span style="color: #666">Point of Comparison </span>
+          <ons-list class="middle-menu-list" >
+            <ons-list-item class="middle-menu-item" modifier="chevron" ng-click="menu.closeMenu()">
+              From Start Point
+            </ons-list-item>
+
+            <ons-list-item class="middle-menu-item" modifier="chevron" ng-click="menu.closeMenu()">
+              From Last Point
+            </ons-list-item>
+          </ons-list>
         
 
 
@@ -106,6 +121,15 @@
 
 .bottom-menu-item:active {
   background-color: rgba(255, 255, 255, 0.1);
+}
+
+.middle-menu-list,
+.middle-menu-item:first-child,
+.middle-menu-item {
+  border-color: #393939;
+  background-color: transparent;
+ background-image: none !important;
+ color: #ccc;
 }
     </style>
         </ons-page>
