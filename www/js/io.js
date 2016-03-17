@@ -5,7 +5,9 @@ document.addEventListener('deviceready', function () {
 
 /* Drew, will have to delete all of the shipper stuff and just set */
 // ------ need to use shipper to get the file we want and set as global file name else data.csv will get over ridden. -------
-	var locFileName= "export.csv";
+	fileName= "export.csv";
+
+	// fileName = locFileName;
 // if (window.name =='graph') {
 // 		console.log('graph opened io');
 // 		distance=receivingArray('distance');
@@ -25,7 +27,7 @@ document.addEventListener('deviceready', function () {
      if (device.platform == "Android") {
         window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dir) {
             console.log("Main Dir android:", dir);
-            dir.getFile(locFileName, {create: true}, function (file) {
+            dir.getFile(fileName, {create: true}, function (file) {
                 console.log("File: ", file);
                 logOb = file;
                 //writeLog("App started");
@@ -36,7 +38,7 @@ document.addEventListener('deviceready', function () {
        
             window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
             console.log("Main Dir:", dir);
-            dir.getFile(locFileName, {create: true}, function (file) {
+            dir.getFile(fileName, {create: true}, function (file) {
                 console.log("File: ", file);
                 logOb = file;
                 //writeLog("App started");
@@ -52,7 +54,7 @@ document.addEventListener('deviceready', function () {
 
 
 console.log("Right before run call ");
-var fileApp = new FileApp();
+     fileApp = new FileApp();
             fileApp.run();
             console.log("Right after run call ");
             // setUP();
@@ -97,23 +99,23 @@ function arrayToCsv(an_array){
 
 function CSVTable(aString){
     var strArr = aString.split(/\n/);
-    var firstLine = strArr[0];
-    
-        if (firstLine.match(/Comment: ([\w\s,]+)/)) {
-            console.log("found match ");
-            comment = firstLine.match(/Comment: ([\w\s,]+)/)[0];
-            var i = 1;
-        }else{
-            var i = 0;
-            comment =  "No Comments";
-        }
+    // var firstLine = strArr[0];
+    //
+    //     if (firstLine.match(/Comment: ([\w\s,]+)/)) {
+    //         console.log("found match ");
+    //         comment = firstLine.match(/Comment: ([\w\s,]+)/)[0];
+    //         var i = 1;
+    //     }else{
+    //         var i = 0;
+    //         comment =  "No Comments";
+    //     }
 
 
     var $table = $( "<table id=\"t01\"><caption>Data Points</caption></table>" );
 
-    var $line = $( "<h4></h4>" );
-    $line.append( $( "<h4></h4>" ).html( comment) );
-    $table.append( $line );
+    // var $line = $( "<h4></h4>" );
+    // $line.append( $( "<h4></h4>" ).html( comment) );
+    // $table.append( $line );
 
     
     console.log("strArr.length: "+strArr.length);
@@ -139,7 +141,7 @@ function FileApp() {}
 
 FileApp.prototype = {
 fileSystemHelper: null,
-fileNameField: null,
+// fileNameField: null,
 textField: null,
     
 run: function() {
@@ -150,7 +152,7 @@ run: function() {
 	// var emailFileButton = document.getElementById("emailFileButton");
     
     // that.fileNameField = document.getElementById("fileNameInput");
-    that.textField = document.getElementById("textInput");
+    // that.textField = document.getElementById("textInput");
 
     
      // writeFileButton.addEventListener("click",
@@ -180,8 +182,8 @@ run: function() {
 },
     
 _deleteFile: function () {
-    var that = this,
-    fileName = that.fileNameField.value;
+    var that = fileApp;
+    // fileName = that.fileNameField.value;
     
     if (that._isValidFileName(fileName)) {
         fileSystemHelper.deleteFile(fileName, that._onSuccess, that._onError);
@@ -193,8 +195,8 @@ _deleteFile: function () {
 },
     
 _readTextFromFile: function() {
-    var that = this,
-    fileName = that.fileNameField.value;
+    var that = fileApp;
+    // fileName = that.fileNameField.value;
     
     if (that._isValidFileName(fileName)) {
         fileSystemHelper.readTextFromFile(fileName, that._onSuccess, that._onError);
@@ -209,14 +211,15 @@ _readTextFromFile: function() {
     
 _writeTextToFile: function() {
     // console.log("success, _writeTextToFile");
-    var that = this,
+    var that = fileApp;
      // fileName = that.fileNameField.value;
-	fileName = locFileName;
-     text = "Comment: "+that.textField.value+"\n";
+	// fileName = locFileName;
+	// that.textField = document.getElementById("text-Input");
+     // text = "Comment: "+that.textField.value+"\n";
 
      
      if (distance.length>0) {
-     	text = text+ arrayToCsv(distance);
+     	text = arrayToCsv(distance);
         if (that._isValidFileName(fileName)&&!fileSelector) {
             fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
 
@@ -248,6 +251,7 @@ _writeTextToFile: function() {
 _onSuccess: function(value) {
     var notificationBox = document.getElementById("result");
     notificationBox.textContent = value;
+	
 },
     
 _onError: function(error) {
@@ -379,7 +383,7 @@ FileSystemHelper.prototype = {
 
 	_getFile: function(logOb, onSuccess, onError) { 
         // console.log("success, _getFile");
-		var that = this; 
+		var that = this;
 		logOb.file(
 			function(file) { 
 				that._getFileReader.call(that, file, onSuccess);

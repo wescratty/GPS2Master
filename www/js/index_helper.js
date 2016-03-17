@@ -23,6 +23,8 @@ var lineChart;
 var canvas;
 var ctx;
 var logOb;
+var fileName;
+var fileApp;
 var _fromStartPoint = false;
 var _gpsLocation = false;
 var startPoss;
@@ -188,12 +190,12 @@ function tryEmail(){
     var userinfo = receiverString('userinfo').split(/~/);
     var attachment;
 
-    console.log("userinfo:",userinfo);
-    console.log("_body:",_body);
-    console.log("userinfo[0]:",userinfo[0]);
-    console.log("userinfo[1]:",userinfo[1]);
-    console.log("userinfo[2]:",userinfo[2]);
-    console.log("logOb.nativeURL: ",logOb.nativeURL);
+    // console.log("userinfo:",userinfo);
+    // console.log("_body:",_body);
+    // console.log("userinfo[0]:",userinfo[0]);
+    // console.log("userinfo[1]:",userinfo[1]);
+    // console.log("userinfo[2]:",userinfo[2]);
+    // console.log("logOb.nativeURL: ",logOb.nativeURL);
 
     if (!logOb) { 
         console.log("no log ob");
@@ -205,11 +207,11 @@ function tryEmail(){
     function (isAvailable) {
         
         cordova.plugins.email.open({
-            to:      "userinfo[2]",
-            cc:      "userinfo[1]",
+            to:      "doranillich@gmail.com",
+            cc:      "wescratty@gmail.com",
             bcc:     [],
-            subject: 'Chart data from '+"userinfo[0]",
-            body:    "_body",
+            subject: 'Chart data from '+"Wes",
+            body:    "This is only a test. This is a test of the...",
             attachments: [logOb.nativeURL]
         });
     }
