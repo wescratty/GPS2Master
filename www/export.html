@@ -6,26 +6,42 @@
     <div class="center">Export</div>
 </ons-toolbar>
 
-    <div class="button-bar" style="width:100%;">
-        <div class="button-bar__item">
-            <button class="button-bar__button" onclick="fileApp._writeTextToFile.call(FileApp)">Write</button>
-        </div>
-        <div class="button-bar__item">
-            <button class="button-bar__button" onclick="fileApp._readTextFromFile.call(FileApp)">Read</button>
-        </div>
-        <div class="button-bar__item">
-            <button class="button-bar__button" onclick="fileApp._deleteFile.call(FileApp)">Delete</button>
-        </div>
-        <div class="button-bar__item">
-            <button class="button-bar__button" onclick="tryEmail()">Email</button>
-        </div>
 
-    </div>
-    <!--<ons-list modifier="inset" style="margin-top: 10px">-->
-        <!--<ons-list-item>-->
-            <!--<textarea class="textarea textarea&#45;&#45;transparent"id="text-Input" placeholder="Message" style="width: 100%; height: 100px;"></textarea>-->
-        <!--</ons-list-item>-->
-    <!--</ons-list>-->
+        <!--<div style="padding: 10px 9px">-->
+            <!--<ons-button modifier="outline" class="login-button" style="width: 100%;" onclick="fileApp._writeTextToFile.call(FileApp)">Write</ons-button>-->
+        <!--</div>-->
+        <!--<div style="padding: 10px 9px">-->
+            <!--<ons-button modifier="outline"class="login-button" style="width: 100%;"onclick="fileApp._readTextFromFile.call(FileApp)">Read</ons-button>-->
+        <!--</div>-->
+        <!--<div style="padding: 10px 9px">-->
+            <!--<ons-button modifier="outline"class="login-button" style="width: 100%;"onclick="fileApp._deleteFile.call(FileApp)">Delete</ons-button>-->
+        <!--</div>-->
+        <!--<div style="padding: 10px 9px">-->
+            <!--<ons-button modifier="outline"class="login-button" style="width: 100%;"onclick="tryEmail()">Email</ons-button>-->
+        <!--</div>-->
+
+
+
+    <ons-list modifier="inset" class="settings-list">
+        <ons-list-item modifier="chevron" onclick="fileApp._writeTextToFile.call(FileApp)">
+            <ons-icon icon="ion-plus-circled" style="opacity: 0.6"></ons-icon>
+            Write
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" onclick="fileApp._readTextFromFile.call(FileApp)">
+            <ons-icon icon="ion-navicon" style="opacity: 0.6"></ons-icon>
+            Read
+        </ons-list-item>
+        <ons-list-item modifier="chevron" onclick="fileApp._deleteFile.call(FileApp)">
+            <ons-icon icon="fa-minus-circle" style="opacity: 0.6"></ons-icon>
+            Delete
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" onclick="tryEmail()">
+        <ons-icon icon="ion-email" style="opacity: 0.6"></ons-icon>
+            Email
+        </ons-list-item>
+    </ons-list>
 
     <div class="result-area ch40">
         <div class="results"content-type="text/plain">
