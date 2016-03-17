@@ -1,14 +1,3 @@
-<script>
-ons.bootstrap();
-
-var app=angular.module('myApp', []);
-
-app.controller("TestCtrl", function($scope){
-  $scope.firstRanger=50;
-  $scope.secondRanger = 150;
-});
-
-</script>
 
 <ons-navigator title="Navigator" var="myNavigator">
 <ons-page>
@@ -17,46 +6,28 @@ app.controller("TestCtrl", function($scope){
     <div class="center">Export</div>
 </ons-toolbar>
 
-<div class="test" >
-<ons-list>
-    <ons-list-header></ons-list-header>
-    <ons-list-item class="list__item--tappable list__item__line-height" modifier="chevron" ng-click="show('dialog.html')">
-        Write
-    </ons-list-item>
-    <ons-list-item modifier="tappable"id="writeFileButton">
-        Read
-    </ons-list-item>
-    <ons-list-item modifier="tappable">
-        Delete
-    </ons-list-item>
-    <ons-list-item modifier="tappable">
-        Email
-    </ons-list-item>
-</ons-list>
-</div>
+    <div class="button-bar" style="width:100%;">
+        <div class="button-bar__item">
+            <button class="button-bar__button" onclick="FileApp.prototype._writeTextToFile.call(FileApp)">Write</button>
+        </div>
+        <div class="button-bar__item">
+            <button class="button-bar__button" onclick="FileApp.prototype._readTextFromFile.call(FileApp)">Read</button>
+        </div>
+        <div class="button-bar__item">
+            <button class="button-bar__button" onclick="FileApp.prototype._deleteFile.call(FileApp)">Delete</button>
+        </div>
+        <div class="button-bar__item">
+            <button class="button-bar__button" onclick="tryEmail()">Email</button>
+        </div>
+    </div>
+
+
+    <div class="result-area ch40">
+        <div class="results"content-type="text/plain">
+            <div id="result" class="desc"></div>
+        </div>
+        <div class="separator"></div>
+    </div>
 
 </ons-page>
 </ons-navigator>
-<ons-template id="login.html">
-  <ons-dialog var="dialog" cancelable>
-
-    <ons-toolbar inline>
-      <div class="center">
-        Login
-      </div>
-    </ons-toolbar>
-
-    <p>
-      <input placeholder="Username" id="username" class="text-input">
-    </p>
-
-    <p>
-      <input type="password" placeholder="Password" id="username" class="text-input">
-    </p>
-
-    <p>
-      <ons-button modifier="large" ng-click="dialog.hide()">Sign in</ons-button>
-    </p>
-
-  </ons-dialog>
-</ons-template>

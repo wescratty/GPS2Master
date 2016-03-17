@@ -5,19 +5,19 @@ document.addEventListener('deviceready', function () {
 
 /* Drew, will have to delete all of the shipper stuff and just set */
 // ------ need to use shipper to get the file we want and set as global file name else data.csv will get over ridden. -------
-	var locFileName;
-if (window.name =='graph') {
-		console.log('graph opened io');
-		distance=receivingArray('distance');
-		locFileName = "export.csv";
-	}else if(window.name =='tableView'){
-
-		console.log('tableView opened io');
-		locFileName = "export.csv";
-	}else if (window.name == "index"){
-		console.log('index opened io');
-		locFileName = "username.txt";
-	}
+	var locFileName= "export.csv";
+// if (window.name =='graph') {
+// 		console.log('graph opened io');
+// 		distance=receivingArray('distance');
+// 		locFileName = "export.csv";
+// 	}else if(window.name =='tableView'){
+//
+// 		console.log('tableView opened io');
+// 		locFileName = "export.csv";
+// 	}else if (window.name == "index"){
+// 		console.log('index opened io');
+// 		locFileName = "username.txt";
+// 	}
 
 
 
@@ -44,8 +44,8 @@ if (window.name =='graph') {
         });
     
     }else if (device.platform == "browser") {
-		    var $chooser = $( "<input type=\"file\"id=\"input\"name=\"img\"onchange=\"handleFiles(this.files)\">" );
-        $chooser.appendTo( $( "#fileChooser" ) );
+		 //    var $chooser = $( "<input type=\"file\"id=\"input\"name=\"img\"onchange=\"handleFiles(this.files)\">" );
+        // $chooser.appendTo( $( "#fileChooser" ) );
      
 
     }// end of iff
@@ -55,7 +55,7 @@ console.log("Right before run call ");
 var fileApp = new FileApp();
             fileApp.run();
             console.log("Right after run call ");
-            setUP();
+            // setUP();
 });
 
 
@@ -143,34 +143,40 @@ fileNameField: null,
 textField: null,
     
 run: function() {
-    var that = this,
-    writeFileButton = document.getElementById("writeFileButton"),
-    readFileButton = document.getElementById("readFileButton"),
-    deleteFileButton = document.getElementById("deleteFileButton");
+    var that = this;
+    // writeFileButton = document.getElementById("writeFileButton"),
+    // readFileButton = document.getElementById("readFileButton"),
+    // deleteFileButton = document.getElementById("deleteFileButton");
+	// var emailFileButton = document.getElementById("emailFileButton");
     
-    that.fileNameField = document.getElementById("fileNameInput");
-    that.textField = document.getElementById("textInput");
-    
-     writeFileButton.addEventListener("click",
-                                         function() { 
-                                             that._writeTextToFile.call(that);
-                                             
-                                        });
-        
-        readFileButton.addEventListener("click",
-                                        function() {
-                                            that._readTextFromFile.call(that);
-                                        });
-        
-        deleteFileButton.addEventListener("click",
-                                          function() {
-                                            that._deleteFile.call(that)
-                                        });
+    // that.fileNameField = document.getElementById("fileNameInput");
+    // that.textField = document.getElementById("textInput");
 
-         emailFileButton.addEventListener("click",
-         								  function() {
-                							tryEmail();
-            							});
+
+if(document.getElementById("writeFileButton")){
+	alert("have button")
+}
+    
+     // writeFileButton.addEventListener("click",
+     //                                     function() {
+     //                                         that._writeTextToFile.call(that);
+     //
+     //                                    });
+     //
+     //    readFileButton.addEventListener("click",
+     //                                    function() {
+     //                                        that._readTextFromFile.call(that);
+     //                                    });
+     //
+     //    deleteFileButton.addEventListener("click",
+     //                                      function() {
+     //                                        that._deleteFile.call(that)
+     //                                    });
+     //
+     //     emailFileButton.addEventListener("click",
+     //     								  function() {
+     //            							tryEmail();
+     //        							});
 
 
     fileSystemHelper = new FileSystemHelper();
