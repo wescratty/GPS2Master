@@ -150,12 +150,8 @@ run: function() {
 	// var emailFileButton = document.getElementById("emailFileButton");
     
     // that.fileNameField = document.getElementById("fileNameInput");
-    // that.textField = document.getElementById("textInput");
+    that.textField = document.getElementById("textInput");
 
-
-if(document.getElementById("writeFileButton")){
-	alert("have button")
-}
     
      // writeFileButton.addEventListener("click",
      //                                     function() {
@@ -214,7 +210,8 @@ _readTextFromFile: function() {
 _writeTextToFile: function() {
     // console.log("success, _writeTextToFile");
     var that = this,
-     fileName = that.fileNameField.value;
+     // fileName = that.fileNameField.value;
+	fileName = locFileName;
      text = "Comment: "+that.textField.value+"\n";
 
      
