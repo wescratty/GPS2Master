@@ -7,7 +7,13 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
         "cordova-plugin-device": {
+            "PACKAGE_NAME": "io.cordova.hellocordova"
+        },
+        "cordova-plugin-email": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
         "cordova-plugin-file": {
@@ -20,12 +26,6 @@
             "PACKAGE_NAME": "io.cordova.hellocordova"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "io.cordova.hellocordova"
-        },
-        "cordova-plugin-email": {
             "PACKAGE_NAME": "io.cordova.hellocordova"
         }
     },
