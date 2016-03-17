@@ -2974,7 +2974,7 @@ function jqLiteDocumentLoaded(action, win) {
   win = win || window;
   if (win.document.readyState === 'complete') {
     // Force the action to be run async for consistent behaviour
-    // from the action's point of view
+    // from the action's Point of view
     // i.e. it will definitely not be in a $apply
     win.setTimeout(action);
   } else {
@@ -15167,7 +15167,7 @@ function $RootScopeProvider() {
        *   see below). Inequality is determined according to reference inequality,
        *   [strict comparison](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators)
        *    via the `!==` Javascript operator, unless `objectEquality == true`
-       *   (see next point)
+       *   (see next Point)
        * - When `objectEquality == true`, inequality of the `watchExpression` is determined
        *   according to the {@link angular.equals} function. To save the value of the object for
        *   later comparison, the {@link angular.copy} function is used. This therefore means that
@@ -15852,7 +15852,7 @@ function $RootScopeProvider() {
        * @kind function
        *
        * @description
-       * Executes the expression on the current scope at a later point in time.
+       * Executes the expression on the current scope at a later Point in time.
        *
        * The `$evalAsync` makes no guarantees as to when the `expression` will be executed, only
        * that:
@@ -18544,7 +18544,7 @@ function formatNumber(number, pattern, groupSep, decimalSep, fractionSize) {
       fractionSize = Math.min(Math.max(pattern.minFrac, fractionLen), pattern.maxFrac);
     }
 
-    // safely round numbers in JS without hitting imprecisions of floating-point arithmetics
+    // safely round numbers in JS without hitting imprecisions of floating-Point arithmetics
     // inspired by:
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round
     number = +(Math.round(+(number.toString() + 'e' + fractionSize)).toString() + 'e' + -fractionSize);
@@ -19465,7 +19465,7 @@ var htmlAnchorDirective = valueFn({
 
           element(by.id('link-3')).click();
 
-          // At this point, we navigate away from an Angular page, so we need
+          Point
           // to use browser.driver to get the base webdriver.
 
           browser.wait(function() {
@@ -19494,7 +19494,7 @@ var htmlAnchorDirective = valueFn({
 
           element(by.id('link-6')).click();
 
-          // At this point, we navigate away from an Angular page, so we need
+          Point
           // to use browser.driver to get the base webdriver.
           browser.wait(function() {
             return browser.driver.getCurrentUrl().then(function(url) {

@@ -59,7 +59,7 @@ function receivingArray(obName){
   var tempArr = [];
 for (var i = 0; i < dp.length; i++) {
   // pushes points and rebuilds array
-  tempArr.push(new point(dp[i].x,dp[i].y));
+  tempArr.push(new Point(dp[i].x,dp[i].y));
   
 }
 return tempArr;

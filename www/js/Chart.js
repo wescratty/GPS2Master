@@ -161,7 +161,7 @@
 			// Number - Pixel radius of the tooltip border
 			tooltipCornerRadius: 6,
 
-			// Number - Pixel offset from point x to tooltip edge
+			// Number - Pixel offset from Point x to tooltip edge
 			tooltipXOffset: 10,
 
 			// String - Template string for single tooltips
@@ -343,11 +343,11 @@
 					return s.split(".")[1].length;
 				}
 				else if(s.indexOf(".") < 0) {
-					// no decimal point, e.g. 1e-9
+					// no decimal Point, e.g. 1e-9
 					return parseInt(s.split("e-")[1]);
 				}
 				else {
-					// exponent and decimal point, e.g. 1.23e-9
+					// exponent and decimal Point, e.g. 1.23e-9
 					var parts = s.split(".")[1].split("e-");
 					return parts[0].length + parseInt(parts[1]);
 				}
@@ -359,7 +359,7 @@
 		toRadians = helpers.radians = function(degrees){
 			return degrees * (Math.PI/180);
 		},
-		// Gets the angle from vertical upright to the point about a centre.
+		// Gets the angle from vertical upright to the Point about a centre.
 		getAngleFromPoint = helpers.getAngleFromPoint = function(centrePoint, anglePoint){
 			var distanceFromXCenter = anglePoint.x - centrePoint.x,
 				distanceFromYCenter = anglePoint.y - centrePoint.y,
@@ -404,7 +404,7 @@
 		},
 		calculateScaleRange = helpers.calculateScaleRange = function(valuesArray, drawingSize, textSize, startFromZero, integersOnly){
 
-			//Set a minimum step of two - a point at the top of the graph, and a point at the base
+			//Set a minimum step of two - a Point at the top of the graph, and a Point at the base
 			var minSteps = 2,
 				maxSteps = Math.floor(drawingSize/(textSize * 1.5)),
 				skipFitting = (minSteps >= maxSteps);
@@ -1598,7 +1598,7 @@
 			this.startPoint = (this.display) ? this.fontSize : 0;
 			this.endPoint = (this.display) ? this.height - (this.fontSize * 1.5) - 5 : this.height; // -5 to pad labels
 
-			// Apply padding settings to the start and end point.
+			// Apply padding settings to the start and end Point.
 			this.startPoint += this.padding;
 			this.endPoint -= this.padding;
 
@@ -1884,12 +1884,12 @@
 			 * Where it does, we store that angle and that index.
 			 *
 			 * After finding the largest index and angle we calculate how much we need to remove
-			 * from the shape radius to move the point inwards by that x.
+			 * from the shape radius to move the Point inwards by that x.
 			 *
 			 * We average the left and right distances to get the maximum shape radius that can fit in the box
 			 * along with labels.
 			 *
-			 * Once we have that, we can find the centre point for the chart, by taking the x text protrusion
+			 * Once we have that, we can find the centre Point for the chart, by taking the x text protrusion
 			 * on each side, removing that from the size, halving it and adding the left x protrusion width.
 			 *
 			 * This will mean we have a shape fitted to the canvas, as large as it can be with the labels
@@ -2341,7 +2341,7 @@
 				});
 			}
 
-			//Declare the extension of the default point, to cater for the options passed in to the constructor
+			//Declare the extension of the default Point, to cater for the options passed in to the constructor
 			this.BarClass = Chart.Rectangle.extend({
 				strokeWidth : this.options.barStrokeWidth,
 				showStroke : this.options.barShowStroke,
@@ -2361,7 +2361,7 @@
 				this.datasets.push(datasetObject);
 
 				helpers.each(dataset.data,function(dataPoint,index){
-					//Add a new point for each piece of data, passing any required data to draw.
+					//Add a new Point for each piece of data, passing any required data to draw.
 					datasetObject.bars.push(new this.BarClass({
 						value : dataPoint,
 						label : data.labels[index],
@@ -2487,7 +2487,7 @@
 		addData : function(valuesArray,label){
 			//Map the values array for each of the datasets
 			helpers.each(valuesArray,function(value,datasetIndex){
-				//Add a new point for each piece of data, passing any required data to draw.
+				//Add a new Point for each piece of data, passing any required data to draw.
 				this.datasets[datasetIndex].bars.push(new this.BarClass({
 					value : value,
 					label : label,
@@ -2778,16 +2778,16 @@
 		//Number - Tension of the bezier curve between points
 		bezierCurveTension : 0.4,
 
-		//Boolean - Whether to show a dot for each point
+		//Boolean - Whether to show a dot for each Point
 		pointDot : true,
 
-		//Number - Radius of each point dot in pixels
+		//Number - Radius of each Point dot in pixels
 		pointDotRadius : 4,
 
-		//Number - Pixel width of point dot stroke
+		//Number - Pixel width of Point dot stroke
 		pointDotStrokeWidth : 1,
 
-		//Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+		//Number - amount extra to add to the radius to cater for hit detection outside the drawn Point
 		pointHitDetectionRadius : 20,
 
 		//Boolean - Whether to show a stroke for datasets
@@ -2802,7 +2802,7 @@
 		//String - A legend template
 		legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>",
 
-		//Boolean - Whether to horizontally center the label and point dot inside the grid
+		//Boolean - Whether to horizontally center the label and Point dot inside the grid
 		offsetGridLines : false
 
 	};
@@ -2812,7 +2812,7 @@
 		name: "Line",
 		defaults : defaultConfig,
 		initialize:  function(data){
-			//Declare the extension of the default point, to cater for the options passed in to the constructor
+			//Declare the extension of the default Point, to cater for the options passed in to the constructor
 			this.PointClass = Chart.Point.extend({
 				offsetGridLines : this.options.offsetGridLines,
 				strokeWidth : this.options.pointDotStrokeWidth,
@@ -2858,7 +2858,7 @@
 
 
 				helpers.each(dataset.data,function(dataPoint,index){
-					//Add a new point for each piece of data, passing any required data to draw.
+					//Add a new Point for each piece of data, passing any required data to draw.
 					datasetObject.points.push(new this.PointClass({
 						value : dataPoint,
 						label : data.labels[index],
@@ -2977,7 +2977,7 @@
 			//Map the values array for each of the datasets
 
 			helpers.each(valuesArray,function(value,datasetIndex){
-				//Add a new point for each piece of data, passing any required data to draw.
+				//Add a new Point for each piece of data, passing any required data to draw.
 				this.datasets[datasetIndex].points.push(new this.PointClass({
 					value : value,
 					label : label,
@@ -3032,7 +3032,7 @@
 			helpers.each(this.datasets,function(dataset){
 				var pointsWithValues = helpers.where(dataset.points, hasValue);
 
-				//Transition each point first so that the line and point drawing isn't out of sync
+				//Transition each Point first so that the line and Point drawing isn't out of sync
 				//We can use this extra loop to calculate the control points of this dataset also in this loop
 
 				helpers.each(dataset.points, function(point, index){
@@ -3045,8 +3045,8 @@
 				},this);
 
 
-				// Control points need to be calculated in a separate loop, because we need to know the current x/y of the point
-				// This would cause issues when there is no animation, because the y of the next point would be 0, so beziers would be skewed
+				// Control points need to be calculated in a separate loop, because we need to know the current x/y of the Point
+				// This would cause issues when there is no animation, because the y of the next Point would be 0, so beziers would be skewed
 				if (this.options.bezierCurve){
 					helpers.each(pointsWithValues, function(point, index){
 						var tension = (index > 0 && index < pointsWithValues.length - 1) ? this.options.bezierCurveTension : 0;
@@ -3121,7 +3121,7 @@
 
 				//Now draw the points over the line
 				//A little inefficient double looping, but better than the line
-				//lagging behind the point positions
+				//lagging behind the Point positions
 				helpers.each(pointsWithValues,function(point){
 					point.draw();
 				});
@@ -3395,7 +3395,7 @@
 	Chart.Type.extend({
 		name: "Radar",
 		defaults:{
-			//Boolean - Whether to show lines for each scale point
+			//Boolean - Whether to show lines for each scale Point
 			scaleShowLine : true,
 
 			//Boolean - Whether we show the angle lines out of the radar
@@ -3425,16 +3425,16 @@
 			//String - Point label font colour
 			pointLabelFontColor : "#666",
 
-			//Boolean - Whether to show a dot for each point
+			//Boolean - Whether to show a dot for each Point
 			pointDot : true,
 
-			//Number - Radius of each point dot in pixels
+			//Number - Radius of each Point dot in pixels
 			pointDotRadius : 3,
 
-			//Number - Pixel width of point dot stroke
+			//Number - Pixel width of Point dot stroke
 			pointDotStrokeWidth : 1,
 
-			//Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+			//Number - amount extra to add to the radius to cater for hit detection outside the drawn Point
 			pointHitDetectionRadius : 20,
 
 			//Boolean - Whether to show a stroke for datasets
@@ -3496,7 +3496,7 @@
 				this.datasets.push(datasetObject);
 
 				helpers.each(dataset.data,function(dataPoint,index){
-					//Add a new point for each piece of data, passing any required data to draw.
+					//Add a new Point for each piece of data, passing any required data to draw.
 					var pointPosition;
 					if (!this.scale.animation){
 						pointPosition = this.scale.getPointPosition(index, this.scale.calculateCenterOffset(dataPoint));
@@ -3681,7 +3681,7 @@
 
 			helpers.each(this.datasets,function(dataset){
 
-				//Transition each point first so that the line and point drawing isn't out of sync
+				//Transition each Point first so that the line and Point drawing isn't out of sync
 				helpers.each(dataset.points,function(point,index){
 					if (point.hasValue()){
 						point.transition(this.scale.getPointPosition(index, this.scale.calculateCenterOffset(point.value)), easeDecimal);
@@ -3711,7 +3711,7 @@
 				}
 				//Now draw the points over the line
 				//A little inefficient double looping, but better than the line
-				//lagging behind the point positions
+				//lagging behind the Point positions
 				helpers.each(dataset.points,function(point){
 					if (point.hasValue()){
 						point.draw();

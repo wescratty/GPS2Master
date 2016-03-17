@@ -516,7 +516,7 @@
 				return false;
 			}
 
-			// No point in attempting to focus disabled inputs
+			// No Point in attempting to focus disabled inputs
 			return !target.disabled && !target.readOnly;
 		default:
 			return (/\bneedsfocus\b/).test(target.className);
@@ -2592,14 +2592,14 @@ Hammer.Instance.prototype = {
                     if(inst.options.dragDistanceCorrection && ev.distance > 0) {
                         // When a drag is triggered, set the event center to dragMinDistance pixels from the original event center.
                         // Without this correction, the dragged distance would jumpstart at dragMinDistance pixels instead of at 0.
-                        // It might be useful to save the original start point somewhere
+                        // It might be useful to save the original start Point somewhere
                         var factor = Math.abs(inst.options.dragMinDistance / ev.distance);
                         startCenter.pageX += ev.deltaX * factor;
                         startCenter.pageY += ev.deltaY * factor;
                         startCenter.clientX += ev.deltaX * factor;
                         startCenter.clientY += ev.deltaY * factor;
 
-                        // recalculate event data using new start point
+                        // recalculate event data using new start Point
                         ev = Detection.extendEventData(ev);
                     }
                 }
@@ -2668,7 +2668,7 @@ Hammer.Instance.prototype = {
             dragMinDistance: 10,
 
             /**
-             * Set dragDistanceCorrection to true to make the starting point of the drag
+             * Set dragDistanceCorrection to true to make the starting Point of the drag
              * be calculated from where the drag was triggered, not from where the touch started.
              * Useful to avoid a jerk-starting drag, which can make fine-adjustments
              * through dragging difficult, and be visually unappealing.

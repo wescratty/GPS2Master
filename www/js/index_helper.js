@@ -25,25 +25,22 @@ var ctx;
 var logOb;
 var fileName;
 var fileApp;
-var _fromStartPoint = false;
-var _gpsLocation = false;
 var startPoss;
+
+var _fromStartPoint = false;
 var fileSelector = false;
 var goodPoint = false;
 var currentLoc;
-var lastLoc = new point(0,0);
+var lastLoc = new Point(0,0);
 var needsStarted = true;
-var fromStartPoint = false;
+
 var transferingData = false;
 
-
-const KILOMETERTOFEET = 3280.84;
-const KILOTOMILE = 0.621371
 const K_MILL_SEC = 1000;
 
 
 
-var mode = "walk"
+var mode = 'drive';
 
 
 // this is x^3
@@ -75,67 +72,29 @@ var testdata = [
 [ 24 ,  0.0 ]
                 ];
 
-// var testdata = [
-// [ 0 ,  -3 ],
-// [ 1 ,  0 ],
-// [ 2 ,  3 ],
-// [ 3 ,  6 ],
-// [ 4 ,  8 ],
-// [ 5 ,  8 ],
-// [ 6 ,  7 ],
-// [ 7 ,  7 ],
-// [ 8 ,  7 ],
-// [ 9 ,  7 ],
-// [ 10 ,  7 ],
-// [ 11 ,  7 ],
-// [ 12 ,  7 ],
-// [ 13 ,  7 ],
-// [ 14 ,  7 ],
-// [ 15 ,  7 ],
-// [ 16 ,  7 ],
-// [ 17 ,  7 ],
-// [ 18 ,  7 ] ];
-
-
-// var testdata = [
-// [0 ,  0.3114525280390794],
-// [1 ,  0.3114525280390794],
-// [2 ,  10.949671641027079],
-// [3 ,  0],
-// [4 ,  0],
-// [5 ,  0],
-// [6 ,  0],
-// [7 ,  0],
-// [8 ,  0]];
-
-
-
-
 
 document.addEventListener("deviceready", onDeviceReady, false);
-// document.addEventListener("touchstart", function() {}, false);
 
 
 function onDeviceReady() {
   console.log("device is ready in helper");
-    
 }
 
 function prep_test_data(){
-    _fromStartPoint= _fromStartPoint ? false: true;
+    _fromStartPoint= !_fromStartPoint;
     var temp = testdata;
     reset();
     testdata = temp;
-    var c_point = new point(testdata[0][0],testdata[0][1]);
+    var c_point = new Point(testdata[0][0],testdata[0][1]);
 
     for (var i = 1;i< testdata.length;i++) {
 
-        var a_point = new point(testdata[i][0],testdata[i][1]);
-        var b_point = new point(testdata[i-1][0],testdata[i-1][1]);
+        var a_point = new Point(testdata[i][0],testdata[i][1]);
+        var b_point = new Point(testdata[i-1][0],testdata[i-1][1]);
         
         addDataToChart(a_point,b_point);
         // checkPoint(b_point,a_point,c_point);
-    };
+    }
 }
 
 function load_test_data(){
@@ -143,68 +102,25 @@ function load_test_data(){
         var a_point = testdata[i];
         var b_point =    testdata[i-1];
         checkPoint(b_point,a_point,testdata[0]);
-    };
+    }
 }
 
-
-// function tryEmail(){
-//     console.log("tryEmail called");
-
-//     /* Drew, we need to delete this receive calls and just set from global var noted in index */
-//     var _body = receiverString('body');
-//     var userinfo = receiverString('userinfo').split(/~/);
-//     var attachment;
-
-//     console.log("userinfo:",userinfo);
-//     console.log("_body:",_body);
-//     console.log("userinfo[0]:",userinfo[0]);
-//     console.log("userinfo[1]:",userinfo[1]);
-//     console.log("userinfo[2]:",userinfo[2]);
-
-//     if (!logOb) { 
-//         console.log("no log ob");
-//     }else{
-//         attachment = logOb.nativeURL;
-//     }
-
-//     cordova.plugins.email.isAvailable(
-//     function (isAvailable) {
-        
-//         cordova.plugins.email.open({
-//             to:      userinfo[2],
-//             cc:      userinfo[1],
-//             bcc:     [],
-//             subject: 'Chart data from '+userinfo[0],
-//             body:    _body,
-//             attachments: [attachment]
-//         });
-//     }
-// );
-// }
 function tryEmail(){
-    console.log("tryEmail called");
 
-    /* Drew, we need to delete this receive calls and just set from global var noted in index */
-    // var _body = receiverString('body');
-    var _body = "lasef"
+    /* TODO Drew, we need to get user email from sign in */
+
     var userinfo = receiverString('userinfo').split(/~/);
     var attachment;
 
-    // console.log("userinfo:",userinfo);
-    // console.log("_body:",_body);
-    // console.log("userinfo[0]:",userinfo[0]);
-    // console.log("userinfo[1]:",userinfo[1]);
-    // console.log("userinfo[2]:",userinfo[2]);
-    // console.log("logOb.nativeURL: ",logOb.nativeURL);
 
     if (!logOb) { 
-        console.log("no log ob");
+        alert("You havent made a file yet. Please conseider returning to graph and pressing start. Then go to expoert and save data.");
     }else{
         attachment = logOb.nativeURL;
     }
 
     cordova.plugins.email.isAvailable(
-    function (isAvailable) {
+    function () {
         
         cordova.plugins.email.open({
             to:      "doranillich@gmail.com",
@@ -212,7 +128,7 @@ function tryEmail(){
             bcc:     [],
             subject: 'Chart data from '+"Wes",
             body:    "This is only a test. This is a test of the...",
-            attachments: [logOb.nativeURL]
+            attachments: [attachment]
         });
     }
 );

@@ -55,7 +55,7 @@ function createGraph() {
       // String - Template string for multiple tooltips
       // multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
       pointDotRadius : 3,
-      scaleGridLineColor : "#000000",
+      // scaleGridLineColor : "#000000",
       scaleFontColor: "#000000"
     };
     
@@ -178,7 +178,7 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
     var pointToUse = _fromStartPoint ? startPoint : lastPoint;
 
 
-    distancePoints.push(lastPoint); // distance from the last point
+    distancePoints.push(lastPoint); // distance from the last Point
 
     var  num_dis_points = distancePoints.length;
     dist = pointToUse.info()[1];
@@ -189,21 +189,21 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
         total_distance = _fromStartPoint ? dist : total_distance+dist;
     }
 
-    distance.push(new point(time,total_distance));// make this a point
+    distance.push(new Point(time,total_distance));// make this a Point
 
     /* could make this a function*/
     if (num_dis_points>1) {
         rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
         console.log(rat);
         rate.push(rat);
-        ratePoints.push(new point(num_dis_points-2,rat));
+        ratePoints.push(new Point(num_dis_points-2,rat));
     };
 
     /* could make this a function*/
     if (num_dis_points>2) {
             acc =dv_dt(ratePoints[num_dis_points-2],ratePoints[num_dis_points-3]);
             acceleration.push(acc);
-            accelerationPoints.push(new point(num_dis_points-3,acc)); 
+            accelerationPoints.push(new Point(num_dis_points-3,acc)); 
     };
             
     
@@ -250,7 +250,7 @@ function reset(){
     goodPoint = false;
     needsStarted = true;
     
-    lastLoc = new point(0,0); // do we use this?
+    lastLoc = new Point(0,0); // do we use this?
     
         
     if (lineChart) {
