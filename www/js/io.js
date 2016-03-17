@@ -249,9 +249,9 @@ _writeTextToFile: function() {
 },
     
 _onSuccess: function(value) {
-    var notificationBox = document.getElementById("result");
-    notificationBox.textContent = value;
-	
+    // var notificationBox = document.getElementById("result");
+    // notificationBox.textContent = value;
+	alert(value);
 },
     
 _onError: function(error) {
