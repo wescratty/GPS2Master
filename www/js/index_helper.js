@@ -26,6 +26,8 @@ var logOb;
 var fileName;
 var fileApp;
 var startPoss;
+var user_email;
+var user_password;
 
 var _fromStartPoint = false;
 var fileSelector = false;
@@ -72,7 +74,7 @@ var testdata = [
 [ 24 ,  0.0 ]
                 ];
 
-
+// var app = angular.module('app', ['ngMessages']);
 document.addEventListener("deviceready", onDeviceReady, false);
 
 
@@ -134,6 +136,22 @@ function tryEmail(){
 );
 }
 
+function grabCredentials() {
+    
+    // if(document.getElementById("useremail").value && document.getElementById("password").value){
+    //     user_email = document.getElementById("useremail").value;
+    //     user_password = document.getElementById("password").value;
+    //     console.log("user_email: ",user_email);
+    //     console.log("user_password: ",user_password);
+    //     myNavigator.resetToPage('sliding_menu.html', {animation : 'lift' });
+    //
+    // } else{
+    //     alert("User name and password required");
+    //
+    // }
+    
+
+}
 
 
 

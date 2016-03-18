@@ -9,11 +9,13 @@
 
     <div class="login-form">
 
-        <input type="email" class="text-input--underbar" placeholder="Email" value="">
-        <input type="password" class="text-input--underbar" placeholder="Password" value="">
+        <input type="email" id = "useremail" class="text-input--underbar"  placeholder="Email" value="">
+        <input type="password" id = "userpassword"  class="text-input--underbar"  placeholder="Password" value="">
         <br><br>
-        <ons-button modifier="large" class="login-button" style="width:100%" onclick="myNavigator.resetToPage('sliding_menu.html', {animation : 'lift' })">Log In</ons-button>
+        <ons-button  class="login-button" style="width:100%" onclick="grabCredentials(); myNavigator.resetToPage('sliding_menu.html', {animation : 'lift' })">Log In</ons-button>
         <br><br>
         <ons-button modifier="quiet" class="forgot-password" style="width:100%">Forgot password?</ons-button>
     </div>
+
+
 </ons-page>
