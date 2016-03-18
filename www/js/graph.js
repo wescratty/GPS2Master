@@ -1,5 +1,9 @@
 
 
+
+Chart.defaults.global.responsive = true;
+
+
 document.addEventListener('deviceready', function () {
 
     console.log("device is ready in graph");}, false);
