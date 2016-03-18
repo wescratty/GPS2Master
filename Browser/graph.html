@@ -114,11 +114,14 @@
                           output.push("Good File");
                           reset();
                           console.log(f);
-
+                          /*var onSuccess = function(){
+                              console.log("in onSuccess")
+                              prep_test_data();
+                          }*/
                           var file = FileSystemHelper.prototype._getFileReader2(f,FileSystemHelper.prototype.onSuccess);
+                          var filedata = testdata
+                          console.log(filedata)
 
-                          console.log(file);
-                          prep_test_data();
                       }
                       output.push('<li><strong>', escape(f.name), '</strong> (', f.type || 'n/a', ') - ',
                               f.size, ' bytes, last modified: ',
