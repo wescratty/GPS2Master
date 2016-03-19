@@ -1,9 +1,4 @@
-function getGeoPosition(position){
-    var lat = position.coords.latitude;
-    var lon = position.coords.longitude;
-    console.log(" lat: "+ lat+ " lon: "+ lon);
-    return new Point(lat,lon);
-}
+
 
 function toggle_startp_lastp(){
     console.log("coorPoints.length: "+coorPoints.length);
@@ -21,11 +16,9 @@ function transferData(){
         load_test_data();
 }
 
-function getNew(){
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
-}
-
 function startLocationPoints(){
+    // show_dialoge("Connecting...");
+
     
     if (refreshIntervalId == null){
         refreshIntervalId = setInterval(getNew, K_MILL_SEC);
@@ -33,6 +26,45 @@ function startLocationPoints(){
         clearInterval(refreshIntervalId);
         refreshIntervalId = null;
     }
+}
+
+function getNew(){
+    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+}
+
+function onSuccess(position) {
+    if (!goodPoint) {
+        locationLock(position);
+
+    }else{
+
+        var len = coorPoints.length;
+        currentLoc = getGeoPosition(position);
+        checkPoint(currentLoc,coorPoints[len-1],coorPoints[0]);
+    }
+}
+
+function getGeoPosition(position){
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
+    console.log(" lat: "+ lat+ " lon: "+ lon);
+    return new Point(lat,lon);
+}
+
+function checkPoint(now,then,start){
+    var a_point = now.info();
+    var b_point = then.info();
+    var c_point = start.info();
+    var temp_dis = getDistanceFromLatLonInKm(a_point[0],a_point[1],b_point[0],b_point[1]);
+    var disFromStart = getDistanceFromLatLonInKm(a_point[0],a_point[1],c_point[0],c_point[1]);
+
+    if (modeOfTrans(mode, temp_dis)) {
+        console.log("good to go");
+        buildLatLonPoints(now);
+        var last_point = new Point(time, temp_dis);
+        var start_point = new Point(time, disFromStart);
+        addDataToChart(last_point, start_point); // only access to add data
+    } else console.log(temp_dis);
 }
 
 function locationLock(position){
@@ -49,7 +81,9 @@ function locationLock(position){
             // console.log("ay_by: "+ay_by);
             if (ax_bx<5&&ay_by<5 ) {
                 goodPoint = true;
-                alert("We have a lock on your position!");
+                modal.hide()
+                // show_dialoge("We have a lock on your position!");
+                // destroy_dialoge();
 
                 buildLatLonPoints(currentLoc);
                 currentLoc = un;
@@ -59,33 +93,9 @@ function locationLock(position){
             return goodPoint;
 }
 
-function onSuccess(position) {
-    if (!goodPoint) {
-        locationLock(position);
-            
-    }else{
-        
-        var len = coorPoints.length;
-        currentLoc = getGeoPosition(position);
-        checkPoint(currentLoc,coorPoints[len-1],coorPoints[0]);
-    }
-}
 
-function checkPoint(now,then,start){
-    var a_point = now.info();  
-    var b_point = then.info();
-    var c_point = start.info();
-    var temp_dis = getDistanceFromLatLonInKm(a_point[0],a_point[1],b_point[0],b_point[1]);
-    var disFromStart = getDistanceFromLatLonInKm(a_point[0],a_point[1],c_point[0],c_point[1]);
 
-    if (modeOfTrans(mode, temp_dis)) {
-        console.log("good to go");
-        buildLatLonPoints(now);
-        var last_point = new Point(time, temp_dis);
-        var start_point = new Point(time, disFromStart);
-        addDataToChart(last_point, start_point); // only access to add data
-    } else console.log(temp_dis);
-}
+
 
 function onError(error) {
     alert('code: '    + error.code    + '\n' +
@@ -137,4 +147,19 @@ function modeOfTrans(mode,dist){
     return iss;
 }
 
+function show_dialoge(mess) {
 
+
+    ons.createAlertDialog('alert.html').then(function(alertDialog) {
+        alertDialog.show();
+    });
+
+    // ons.notification.alert({
+    //     message: mess,
+    //     modifier: true ? 'material' : undefined
+    // });
+}
+function destroy_dialoge() {
+
+    alertDialog.destroy();
+}

@@ -1,4 +1,12 @@
- <ons-page>
+
+<ons-modal var="modal">
+    <ons-icon icon="ion-load-c" spin="true"></ons-icon>
+    <br>
+    <br> Please wait...
+    <br>Finding your location.
+</ons-modal>
+<ons-navigator>
+<ons-page id="my-page">
     <ons-toolbar fixed-style>
           <div class="left">
             <ons-toolbar-button ng-click="menu.toggleMenu()">
@@ -6,9 +14,10 @@
             </ons-toolbar-button></div>
           <div class="center">Graph</div>
           <div class="right">
-            <ons-toolbar-button onclick="startLocationPoints()"><small>start</small>
+            <ons-toolbar-button id="show-modal" onclick="startLocationPoints()"><small>start</small>
                 <ons-icon icon="ion-ios-navigate" style="font-size: 32px; width: 1em"></ons-icon>
-            </ons-toolbar-button></div>
+            </ons-toolbar-button>
+          </div>
         </ons-toolbar>
         <div class="wrapper" >
 
@@ -55,3 +64,4 @@
 
 
  </ons-page>
+</ons-navigator>

@@ -49,11 +49,11 @@
 
           <span style="color: #666">Point of Comparison </span>
           <ons-list class="middle-menu-list" >
-            <ons-list-item class="middle-menu-item" modifier="chevron" ng-click="menu.closeMenu()">
+            <ons-list-item class="middle-menu-item" modifier="chevron" ng-click="set_fromStartPoint_true();menu.closeMenu()">
               From Start Point
             </ons-list-item>
 
-            <ons-list-item class="middle-menu-item" modifier="chevron" ng-click="menu.closeMenu()">
+            <ons-list-item class="middle-menu-item" modifier="chevron" ng-click="set_fromStartPoint_false();menu.closeMenu()">
               From Last Point
             </ons-list-item>
           </ons-list>
@@ -77,6 +77,14 @@
 
       </ons-page>
     </ons-template>
+
+
+
+
+
+
+
+
 
     <style>
         .page--menu-page__background {

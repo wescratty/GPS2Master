@@ -3,6 +3,17 @@
 
 Chart.defaults.global.responsive = true;
 
+var modal;
+ons.ready(function() {
+$(document.body).on("pageinit", '#my-page', function() {
+    $("#show-modal", this).click(function() {
+        
+        if(!goodPoint){
+            modal.show();
+        }
+    });
+});
+});
 
 document.addEventListener('deviceready', function () {
 

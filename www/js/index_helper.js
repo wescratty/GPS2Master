@@ -37,6 +37,7 @@ var lastLoc = new Point(0,0);
 var needsStarted = true;
 
 var transferingData = false;
+var alertDialog;
 
 const K_MILL_SEC = 1000;
 
@@ -107,6 +108,12 @@ function load_test_data(){
     }
 }
 
+function set_fromStartPoint_true(){
+    _fromStartPoint = true;
+}
+function set_fromStartPoint_false(){
+    _fromStartPoint = false;
+}
 function tryEmail(){
 
     /* TODO Drew, we need to get user email from sign in */
@@ -154,7 +161,14 @@ function grabCredentials() {
 }
 
 
-
-
+function Create_overlay() {
+    $(document.body).on("pageinit", '#my-page', function() {
+        $("#start", this).click(function() {
+            modal.show();
+            setTimeout('modal.hide()', 2000);
+        });
+    });
+    
+}
 
 
