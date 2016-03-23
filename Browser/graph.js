@@ -168,7 +168,7 @@ function createGraph() {
         //                   }     
 
 
-function addDataToChart(disFromLastPoint, disFromStartPoint){
+function addDataToChart(disFromLastPoint, disFromStartPoint) {
     if (!lineChart) {
         createGraph();
     }
@@ -183,53 +183,56 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
 
     distancePoints.push(lastPoint); // distance from the last point
 
-    var  num_dis_points = distancePoints.length;
+    var num_dis_points = distancePoints.length;
 
 
     dist = pointToUse.info()[1];
 
-    if(!total_distance){
+    if (!total_distance) {
         total_distance = dist;
-    }else{
+    } else {
 
         // var disFromStart = 
-        total_distance = _fromStartPoint ? dist : total_distance+dist;
+        total_distance = _fromStartPoint ? dist : total_distance + dist;
         // total_distance = total_distance+dist;
     }
+    // todo we need to figure out how this cant be time as x, with this being time the dv_dt function returns 0 for the first 4 points every time
+    distance.push(new point(time, total_distance));// make this a point
 
-    distance.push(new point(time,total_distance));// make this a point
 
-
-    if (num_dis_points>1) {
-        rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
+    if (num_dis_points > 1) {
+        rat = dv_dt(distance[num_dis_points - 1], distance[num_dis_points - 2]);
         console.log(rat);
         rate.push(rat);
-        ratePoints.push(new point(num_dis_points-2,rat));
+        ratePoints.push(new point(num_dis_points - 2, rat));
         // var  num_rate_points = ratePoints.length;
-        
-    };
 
-    if (num_dis_points>2) {
-            acc =dv_dt(ratePoints[num_dis_points-2],ratePoints[num_dis_points-3]);
-            acceleration.push(acc);
-            accelerationPoints.push(new point(num_dis_points-3,acc));
-            
-    };
-            
-            
-    if (num_dis_points>4) {
-        lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time]],time);
+    }
+    ;
+
+    if (num_dis_points > 2) {
+        acc = dv_dt(ratePoints[num_dis_points - 2], ratePoints[num_dis_points - 3]);
+        acceleration.push(acc);
+        accelerationPoints.push(new point(num_dis_points - 3, acc));
+
+    }
+    ;
+
+
+    if (num_dis_points > 4) {
+        lineChart.addData([distance[time + 2].info()[1], rate[time + 1], acceleration[time]], time);
+        console.log(distance);
+        console.log(rate);
+        console.log(acceleration);
+        console.log(time);
         // lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time],distancePoints[time+2].info()[1]],time);
-        time = time+1;
+        time = time + 1;
     }
 
-    void(time>20&&lineChart.removeData());
-        
+    void(time > 20 && lineChart.removeData());
+
 }
-
-
-
-
+        
 function reset(){
             
     dataOutArray = [];
