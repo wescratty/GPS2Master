@@ -23,7 +23,7 @@ var lineChart;
 var canvas;
 var ctx;
 var logOb;
-var _fromStartPoint = false;
+var _fromStartPoint = true;
 var _gpsLocation = false;
 var startPoss;
 var fileSelector = false;
@@ -31,7 +31,6 @@ var goodPoint = false;
 var currentLoc;
 var lastLoc = new point(0,0);
 var needsStarted = true;
-var fromStartPoint = false;
 var transferingData = false;
 
 
@@ -120,7 +119,6 @@ function onDeviceReady() {
 }
 
 function prep_test_data(){
-    _fromStartPoint= _fromStartPoint ? false: true;
     var temp = testdata;
     reset();
     testdata = temp;
