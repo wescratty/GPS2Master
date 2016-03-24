@@ -220,7 +220,7 @@ function addDataToChart(disFromLastPoint, disFromStartPoint) {
 
 
     if (num_dis_points > 4) {
-        lineChart.addData([distance[time-1 ].info()[1], rate[time - 2], acceleration[time-3]], time);
+        lineChart.addData([distance[time-1 ].info()[1], rate[time - 2], acceleration[time-3]], time-4);
         console.log(distance);
         console.log(rate);
         console.log(acceleration);
