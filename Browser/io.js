@@ -413,6 +413,8 @@ FileSystemHelper.prototype = {
 			var textToWrite = reader.result;
 			console.log(textToWrite);
             csvToarray(textToWrite);
+            //THIS IS BAD WE NEED TO FIX
+            prep_test_data();
             // CSVTable(textToWrite);
 			// var notificationBox = document.getElementById("result");
    //      notificationBox.textContent = textToWrite;
