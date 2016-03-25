@@ -23,7 +23,7 @@ var lineChart;
 var canvas;
 var ctx;
 var logOb;
-var _fromStartPoint = false;
+var _fromStartPoint = true;
 var _gpsLocation = false;
 var startPoss;
 var fileSelector = false;
@@ -31,8 +31,9 @@ var goodPoint = false;
 var currentLoc;
 var lastLoc = new point(0,0);
 var needsStarted = true;
-var fromStartPoint = false;
+var fromStartPoint = true;
 var transferingData = false;
+var _correct = false;
 
 
 const KILOMETERTOFEET = 3280.84;
@@ -127,11 +128,13 @@ function getArray(){
 }
 
 function prep_test_data(){
-    _fromStartPoint= _fromStartPoint ? false: true;
-    testdata= _fromStartPoint ? wrongdata:correctdata
+    //_fromStartPoint= _fromStartPoint ? false: true;
+    _correct = _correct ? false: true;
+    testdata= _correct ? wrongdata:correctdata;
     var temp = testdata;
     reset();
     testdata = temp;
+    console.log(testdata)
     var c_point = new point(testdata[0][0],testdata[0][1]);
 
     for (var i = 1;i< testdata.length;i++) {
