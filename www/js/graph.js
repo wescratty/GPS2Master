@@ -265,7 +265,7 @@ function reset(){
     needsStarted = true;
     
     lastLoc = new Point(0,0); // do we use this?
-    
+    loadGoodMockDataToArray();
         
     if (lineChart) {
       window.lineChart.destroy();
