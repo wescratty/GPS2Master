@@ -1,4 +1,52 @@
+var mockLocationArray = [];
+loadGoodMockDataToArray();
 
+function loadGoodMockDataToArray() {
+    console.log("mocking good data");
+    mockLocationArray = [
+        0,0.1,0.2,0.3,0.4,0.5, // get the array started
+        3.010299957,
+        4.771212547,
+        6.020599913,
+        6.989700043,
+        7.781512504,
+        8.4509804,
+        9.03089987,
+        9.542425094,
+        10,
+        10.41392685,
+        10.79181246,
+        11.13943352,
+        11.46128036,
+        11.76091259,
+        12.04119983,
+        12.30448921
+    ];
+    mockLocationArray.reverse();
+}
+
+function loadBadMockDataToArray() {
+    console.log("mocking bad data");
+    mockLocationArray = [
+        0,0.1,0.2,0.3,0.4,0.5, // get the array started
+        3.010299957,
+        4.771212547,
+        6.020599913,
+        6.989700043,
+        7.781512504,
+        8.4509804,
+        9.03089987,
+        9.542425094,
+        10,
+        10.41392685,
+        10.79181246,
+        11.13943352,
+        11.46128036,
+        11.76091259,
+        12.04119983,
+        12.30448921
+    ];
+}
 
 function toggle_startp_lastp(){
     console.log("coorPoints.length: "+coorPoints.length);
@@ -10,16 +58,16 @@ function toggle_startp_lastp(){
 }
 
 function transferData(){
-        var tempArr = _fromStartPoint ? coorPoints : testdata;
-        reset();
-        testdata = tempArr;
-        load_test_data();
+    var tempArr = _fromStartPoint ? coorPoints : testdata;
+    reset();
+    testdata = tempArr;
+    load_test_data();
 }
 
 function startLocationPoints(){
     // show_dialoge("Connecting...");
 
-    
+
     if (refreshIntervalId == null){
         refreshIntervalId = setInterval(getNew, K_MILL_SEC);
     }else{
@@ -45,8 +93,11 @@ function onSuccess(position) {
 }
 
 function getGeoPosition(position){
-    var lat = position.coords.latitude;
-    var lon = position.coords.longitude;
+    //var lat = position.coords.latitude;
+    //var lon = position.coords.longitude;
+    var loc = mockLocationArray.pop();
+    var lat = loc / 500000; // GPS lat conversion factor
+    var lon = 0.0
     console.log(" lat: "+ lat+ " lon: "+ lon);
     return new Point(lat,lon);
 }
@@ -69,28 +120,28 @@ function checkPoint(now,then,start){
 
 function locationLock(position){
     currentLoc=getGeoPosition(position);
-            var a_point = currentLoc.info();
-            var b_point = lastLoc.info();
-            var a_x = a_point[0];
-            var a_y = a_point[1];
-            var b_x = b_point[0];
-            var b_y = b_point[1];
-            var ax_bx = Math.abs(a_x -b_x);
-            var ay_by = Math.abs(a_y -b_y);
-            // console.log("ax_bx: "+ax_bx);
-            // console.log("ay_by: "+ay_by);
-            if (ax_bx<5&&ay_by<5 ) {
-                goodPoint = true;
-                modal.hide()
-                // show_dialoge("We have a lock on your position!");
-                // destroy_dialoge();
+    var a_point = currentLoc.info();
+    var b_point = lastLoc.info();
+    var a_x = a_point[0];
+    var a_y = a_point[1];
+    var b_x = b_point[0];
+    var b_y = b_point[1];
+    var ax_bx = Math.abs(a_x -b_x);
+    var ay_by = Math.abs(a_y -b_y);
+    // console.log("ax_bx: "+ax_bx);
+    // console.log("ay_by: "+ay_by);
+    if (ax_bx<5&&ay_by<5 ) {
+        goodPoint = true;
+        modal.hide()
+        // show_dialoge("We have a lock on your position!");
+        // destroy_dialoge();
 
-                buildLatLonPoints(currentLoc);
-                currentLoc = un;
-            }else{
-                lastLoc = currentLoc;
-            }
-            return goodPoint;
+        buildLatLonPoints(currentLoc);
+        currentLoc = un;
+    }else{
+        lastLoc = currentLoc;
+    }
+    return goodPoint;
 }
 
 
@@ -99,14 +150,14 @@ function locationLock(position){
 
 function onError(error) {
     alert('code: '    + error.code    + '\n' +
-          'message: ' + error.message + '\n');
+        'message: ' + error.message + '\n');
 }
 
 
 function buildLatLonPoints(aPoint){
     this.aPoint = aPoint;
     coorPoints.push(this.aPoint);
-    
+
 }
 
 
@@ -141,7 +192,7 @@ function modeOfTrans(mode,dist){
     }else if (mode =="drive") {
         tolerance = 10000;  // Thsi is too high but have the 7000 problem 
     }
-     var iss = dist<tolerance;
+    var iss = dist<tolerance;
     console.log(iss);
 
     return iss;
