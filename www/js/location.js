@@ -1,4 +1,23 @@
-
+var mockLocationArray = [
+    0,0.1,0.2,0.3,0.4,0.5, // get the array started
+    3.010299957,
+    4.771212547,
+    6.020599913,
+    6.989700043,
+    7.781512504,
+    8.4509804,
+    9.03089987,
+    9.542425094,
+    10,
+    10.41392685,
+    10.79181246,
+    11.13943352,
+    11.46128036,
+    11.76091259,
+    12.04119983,
+    12.30448921
+];
+mockLocationArray.reverse();
 
 function toggle_startp_lastp(){
     console.log("coorPoints.length: "+coorPoints.length);
@@ -45,8 +64,11 @@ function onSuccess(position) {
 }
 
 function getGeoPosition(position){
-    var lat = position.coords.latitude;
-    var lon = position.coords.longitude;
+    //var lat = position.coords.latitude;
+    //var lon = position.coords.longitude;
+    var loc = mockLocationArray.pop();
+    var lat = loc / 500000; // GPS lat conversion factor
+    var lon = 0.0
     console.log(" lat: "+ lat+ " lon: "+ lon);
     return new Point(lat,lon);
 }
