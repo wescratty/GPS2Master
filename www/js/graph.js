@@ -180,6 +180,57 @@ function acc(){
         //                   chart.update();
         //                   }     
 
+// function addDataToChart(disFromLastPoint, disFromStartPoint){
+//     if (!lineChart) {
+//         createGraph();
+//     }
+//
+//     var lastPoint = disFromLastPoint;
+//     var startPoint = disFromStartPoint;
+//     var dist;
+//     var rat = 0.0;
+//     var acc = 0.0;
+//     var pointToUse = _fromStartPoint ? startPoint : lastPoint;
+//
+//
+//     distancePoints.push(lastPoint); // distance from the last Point
+//
+//     var  num_dis_points = distancePoints.length;
+//     dist = pointToUse.info()[1];
+//
+//     if(!total_distance){  // if not instantiated
+//         total_distance = dist;
+//     }else{
+//         total_distance = _fromStartPoint ? dist : total_distance+dist;
+//     }
+//
+//     distance.push(new Point(time,total_distance));// make this a Point
+//
+//     /* could make this a function*/
+//     if (num_dis_points>1) {
+//         rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
+//         console.log(rat);
+//         rate.push(rat);
+//         ratePoints.push(new Point(num_dis_points-2,rat));
+//     }
+//
+//     /* could make this a function*/
+//     if (num_dis_points>2) {
+//             acc =dv_dt(ratePoints[num_dis_points-2],ratePoints[num_dis_points-3]);
+//             acceleration.push(acc);
+//             accelerationPoints.push(new Point(num_dis_points-3,acc));
+//     }
+//
+//
+//     time = time+1;
+//     if (num_dis_points>2) {
+//         lineChart.addData([distance[time-3].info()[1],rate[time-3],acceleration[time-3]],time-3);
+//     }
+//
+//     void(time>20&&lineChart.removeData());
+//     addDataToTable();
+//
+// }
 function addDataToChart(disFromLastPoint, disFromStartPoint){
     if (!lineChart) {
         createGraph();
@@ -187,15 +238,18 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
 
     var lastPoint = disFromLastPoint;
     var startPoint = disFromStartPoint;
+    console.log("lastPoint: ",lastPoint);
+    console.log("startPoint: ",startPoint);
+    console.log("_fromStartPoint: ",_fromStartPoint);
     var dist;
     var rat = 0.0;
     var acc = 0.0;
     var pointToUse = _fromStartPoint ? startPoint : lastPoint;
 
 
-    distancePoints.push(lastPoint); // distance from the last Point
+    distancePoints.push(pointToUse); // distance from the last Point
 
-    var  num_dis_points = distancePoints.length;
+    var  lastIndex = distancePoints.length-1;
     dist = pointToUse.info()[1];
 
     if(!total_distance){  // if not instantiated
@@ -204,32 +258,40 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
         total_distance = _fromStartPoint ? dist : total_distance+dist;
     }
 
-    distance.push(new Point(time,total_distance));// make this a Point
+    distance.push(new Point(lastIndex,total_distance));// make this a Point
 
     /* could make this a function*/
-    if (num_dis_points>1) {
-        rat = dv_dt(distance[num_dis_points-1],distance[num_dis_points-2]);
+    if (lastIndex>0) {
+        rat = dv_dt(distance[lastIndex],distance[lastIndex-1]);
         console.log(rat);
         rate.push(rat);
-        ratePoints.push(new Point(num_dis_points-2,rat));
+        ratePoints.push(new Point(lastIndex-1,rat));
+    }else{
+        rate.push(0);
+        ratePoints.push(new Point(0,0));
+        acceleration.push(0);
     }
 
     /* could make this a function*/
-    if (num_dis_points>2) {
-            acc =dv_dt(ratePoints[num_dis_points-2],ratePoints[num_dis_points-3]);
-            acceleration.push(acc);
-            accelerationPoints.push(new Point(num_dis_points-3,acc)); 
+    if (lastIndex>1) {
+        acc =dv_dt(ratePoints[lastIndex],ratePoints[lastIndex-1]);
+        acceleration.push(acc);
+        // accelerationPoints.push(new Point(lastIndex-3,acc));
+    }else if(lastIndex==1){
+        acceleration.push(rat);
+        // accelerationPoints.push(new Point(0,0));
     }
 
 
-    time = time+1;
-    if (num_dis_points>2) {
-        lineChart.addData([distance[time-3].info()[1],rate[time-3],acceleration[time-3]],time-3);
+
+    if (lastIndex>1) {
+        lineChart.addData([distance[time].info()[1],rate[time],acceleration[time]],time);
+        time = time+1;
     }
-    
+
     void(time>20&&lineChart.removeData());
     addDataToTable();
-        
+
 }
 
 

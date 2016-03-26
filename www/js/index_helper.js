@@ -75,8 +75,8 @@ var mode = 'drive';
 // [ 24 ,  0.0 ]
 //                 ];
 var testdata = [
-    
-    [ 4 ,  0 ],
+
+    [ 0 ,  0 ],
     [ 5 ,  1.732868 ],
     [ 6 ,  2.7465307 ],
     [ 7 ,  3.4657359 ],
@@ -99,6 +99,19 @@ var testdata = [
 
 
 ];
+// var testdata = [
+//
+//     [ 0 ,  0 ],
+//     [ 1 ,  6 ],
+//     [ 2 ,  10 ],
+//     [ 3 ,  12 ],
+//     [ 4 ,  14 ],
+//     [ 5 ,  18 ],
+//     [ 6 ,  24 ],
+//     [ 7 ,  30 ]
+//
+//
+// ];
 
 // var app = angular.module('app', ['ngMessages']);
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -109,7 +122,7 @@ function onDeviceReady() {
 }
 
 function prep_test_data(){
-    _fromStartPoint= !_fromStartPoint;
+    // _fromStartPoint= !_fromStartPoint;
     var temp = testdata;
     reset();
     testdata = temp;
@@ -120,7 +133,7 @@ function prep_test_data(){
         var a_point = new Point(testdata[i][0],testdata[i][1]);
         var b_point = new Point(testdata[i-1][0],testdata[i-1][1]);
         
-        addDataToChart(a_point,b_point);
+        addDataToChart(b_point,b_point);
         // checkPoint(b_point,a_point,c_point);
     }
 }
@@ -134,9 +147,11 @@ function load_test_data(){
 }
 
 function set_fromStartPoint_true(){
+
     _fromStartPoint = true;
 }
 function set_fromStartPoint_false(){
+    // alert("false");
     _fromStartPoint = false;
 }
 function tryEmail(){

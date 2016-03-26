@@ -48,21 +48,21 @@ function loadBadMockDataToArray() {
     ];
 }
 
-function toggle_startp_lastp(){
-    console.log("coorPoints.length: "+coorPoints.length);
-    if(coorPoints.length>0){
-        transferingData = true;
-        transferData();
-        console.log("Transfering data");
-    }
-}
-
-function transferData(){
-    var tempArr = _fromStartPoint ? coorPoints : testdata;
-    reset();
-    testdata = tempArr;
-    load_test_data();
-}
+// function toggle_startp_lastp(){
+//     console.log("coorPoints.length: "+coorPoints.length);
+//     if(coorPoints.length>0){
+//         transferingData = true;
+//         transferData();
+//         console.log("Transfering data");
+//     }
+// }
+//
+// function transferData(){
+//     var tempArr = _fromStartPoint ? coorPoints : testdata;
+//     reset();
+//     testdata = tempArr;
+//     load_test_data();
+// }
 
 function startLocationPoints(){
     // show_dialoge("Connecting...");
@@ -93,11 +93,11 @@ function onSuccess(position) {
 }
 
 function getGeoPosition(position){
-    //var lat = position.coords.latitude;
-    //var lon = position.coords.longitude;
-    var loc = mockLocationArray.pop();
-    var lat = loc / 500000; // GPS lat conversion factor
-    var lon = 0.0
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
+    // var loc = mockLocationArray.pop();
+    // var lat = loc / 500000; // GPS lat conversion factor
+    // var lon = 0.0
     console.log(" lat: "+ lat+ " lon: "+ lon);
     return new Point(lat,lon);
 }
