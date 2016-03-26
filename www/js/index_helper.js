@@ -120,7 +120,7 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 
 function onDeviceReady() {
-  console.log("device is ready in helper");
+  // console.log("device is ready in helper");
 }
 
 function prep_test_data(){

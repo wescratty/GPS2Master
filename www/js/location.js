@@ -2,7 +2,7 @@ var mockLocationArray = [];
 loadGoodMockDataToArray();
 
 function loadGoodMockDataToArray() {
-    console.log("mocking good data");
+    // console.log("mocking good data");
     mockLocationArray = [
         0,0.1,0.2,0.3,0.4,0.5, // get the array started
         3.010299957,
@@ -26,7 +26,7 @@ function loadGoodMockDataToArray() {
 }
 
 function loadBadMockDataToArray() {
-    console.log("mocking bad data");
+    // console.log("mocking bad data");
     mockLocationArray = [
         0,0.1,0.2,0.3,0.4,0.5, // get the array started
         3.010299957,
@@ -98,8 +98,8 @@ function getGeoPosition(position){
     // var loc = mockLocationArray.pop();
     // var lat = loc / 500000; // GPS lat conversion factor
     // var lon = 0.0
-    console.log(" lat: "+ lat+ " lon: "+ lon);
-    console.log(position.coords.accuracy+"m");
+    // console.log(" lat: "+ lat+ " lon: "+ lon);
+    // console.log(position.coords.accuracy+"m");
     return new Point(lat,lon);
 }
 
@@ -111,7 +111,7 @@ function checkPoint(now,then,start){
     var disFromStart = getDistanceFromLatLonInKm(a_point[0],a_point[1],c_point[0],c_point[1]);
 
     if (modeOfTrans(mode, temp_dis)) {
-        console.log("good to go");
+        // console.log("good to go");
         buildLatLonPoints(now);
         var last_point = new Point(time, temp_dis);
         var start_point = new Point(time, disFromStart);
@@ -184,7 +184,7 @@ function Point(x, y){
 }
 
 function modeOfTrans(mode,dist){
-    console.log("mode,dist:", mode,dist);
+    // console.log("mode,dist:", mode,dist);
     var tolerance;
     if (mode =="walk") {
         tolerance = 20;
@@ -194,7 +194,7 @@ function modeOfTrans(mode,dist){
         tolerance = 10000;  // Thsi is too high but have the 7000 problem 
     }
     var iss = dist<tolerance;
-    console.log(iss);
+    // console.log(iss);
 
     return iss;
 }

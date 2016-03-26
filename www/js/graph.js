@@ -12,9 +12,9 @@ $(document.body).on("pageinit", '#my-page', function() {
             modal.show();
         }
 
-        hideStart = !hideStart;
-
-        hideStop = !hideStop;
+        // hideStart = !hideStart;
+        //
+        // hideStop = !hideStop;
 
 
     });
@@ -93,7 +93,7 @@ function pos(){
     var store = chart.store;
     var finded = false;
     for (var i = 0; i < store.length; i++) {
-        console.log("Store name " + store[i][0]);
+        // console.log("Store name " + store[i][0]);
         if (store[i][0] === label) {
             finded = true;
             var restored = store.splice(i, 1)[0][1];
@@ -102,7 +102,7 @@ function pos(){
     }
 
     if (!finded) {
-        console.log('Start search dataset with label = ' + label);
+        // console.log('Start search dataset with label = ' + label);
         for (i = 0; i < chart.datasets.length; i++) {
             if (chart.datasets[i].label === label) {
               chart.store.push([label, chart.datasets.splice(i, 1)[0]]);
@@ -118,7 +118,7 @@ function vol(){
     var store = chart.store;
     var finded = false;
     for (var i = 0; i < store.length; i++) {
-        console.log("Store name " + store[i][1]);
+        // console.log("Store name " + store[i][1]);
         if (store[i][0] === label) {
             finded = true;
             var restored = store.splice(i, 1)[0][1];
@@ -127,7 +127,7 @@ function vol(){
     }
 
     if (!finded) {
-        console.log('Start search dataset with label = ' + label);
+        // console.log('Start search dataset with label = ' + label);
         for (i = 0; i < chart.datasets.length; i++) {
             if (chart.datasets[i].label === label) {
             chart.store.push([label, chart.datasets.splice(i, 1)[0]]);
@@ -143,7 +143,7 @@ function acc(){
     var store = chart.store;
     var finded = false;
     for (var i = 0; i < store.length; i++) {
-        console.log("Store name " + store[i][2]);
+        // console.log("Store name " + store[i][2]);
         if (store[i][0] === label) {
             finded = true;
             var restored = store.splice(i, 1)[0][1];
@@ -152,7 +152,7 @@ function acc(){
     }
 
     if (!finded) {
-        console.log('Start search dataset with label = ' + label);
+        // console.log('Start search dataset with label = ' + label);
         for (i = 0; i < chart.datasets.length; i++) {
             if (chart.datasets[i].label === label) {
                 chart.store.push([label, chart.datasets.splice(i, 1)[0]]);
@@ -244,9 +244,9 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
 
     var lastPoint = disFromLastPoint;
     var startPoint = disFromStartPoint;
-    console.log("lastPoint: ",lastPoint);
-    console.log("startPoint: ",startPoint);
-    console.log("_fromStartPoint: ",_fromStartPoint);
+    // console.log("lastPoint: ",lastPoint);
+    // console.log("startPoint: ",startPoint);
+    // console.log("_fromStartPoint: ",_fromStartPoint);
     var dist;
     var rat = 0.0;
     var acc = 0.0;
@@ -295,7 +295,7 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
     }
 
     void(time>20&&lineChart.removeData());
-    addDataToTable();
+    // addDataToTable();
 
 }
 
