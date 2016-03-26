@@ -11,6 +11,7 @@ $(document.body).on("pageinit", '#my-page', function() {
         if(!goodPoint){
             modal.show();
         }
+        console.log("in graph");
 
         // hideStart = !hideStart;
         //
@@ -295,7 +296,7 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
     }
 
     void(time>20&&lineChart.removeData());
-    // addDataToTable();
+    addDataToTable();
 
 }
 
