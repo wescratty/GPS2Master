@@ -11,6 +11,12 @@ $(document.body).on("pageinit", '#my-page', function() {
         if(!goodPoint){
             modal.show();
         }
+
+        hideStart = !hideStart;
+
+        hideStop = !hideStop;
+
+
     });
 });
 });
@@ -263,7 +269,6 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
     /* could make this a function*/
     if (lastIndex>0) {
         rat = dv_dt(distance[lastIndex],distance[lastIndex-1]);
-        console.log(rat);
         rate.push(rat);
         ratePoints.push(new Point(lastIndex-1,rat));
     }else{

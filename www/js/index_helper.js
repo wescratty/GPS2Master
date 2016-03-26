@@ -29,6 +29,8 @@ var startPoss;
 var user_email;
 var user_password;
 
+var hideStart = false;
+var hideStop = true;
 var _fromStartPoint = false;
 var fileSelector = false;
 var goodPoint = false;
@@ -199,5 +201,7 @@ function grabCredentials() {
     
 
 }
+
+
 
 

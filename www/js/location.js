@@ -77,7 +77,7 @@ function startLocationPoints(){
 }
 
 function getNew(){
-    navigator.geolocation.getCurrentPosition(onSuccess, onError);
+    navigator.geolocation.getCurrentPosition(onSuccess, onError,{ enableHighAccuracy: true});
 }
 
 function onSuccess(position) {
@@ -99,6 +99,7 @@ function getGeoPosition(position){
     // var lat = loc / 500000; // GPS lat conversion factor
     // var lon = 0.0
     console.log(" lat: "+ lat+ " lon: "+ lon);
+    console.log(position.coords.accuracy+"m");
     return new Point(lat,lon);
 }
 
