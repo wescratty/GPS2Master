@@ -7,21 +7,6 @@ document.addEventListener('deviceready', function () {
 // ------ need to use shipper to get the file we want and set as global file name else data.csv will get over ridden. -------
 	fileName= "export.csv";
 
-	// fileName = locFileName;
-// if (window.name =='graph') {
-// 		console.log('graph opened io');
-// 		distance=receivingArray('distance');
-// 		locFileName = "export.csv";
-// 	}else if(window.name =='tableView'){
-//
-// 		console.log('tableView opened io');
-// 		locFileName = "export.csv";
-// 	}else if (window.name == "index"){
-// 		console.log('index opened io');
-// 		locFileName = "username.txt";
-// 	}
-
-
 
  console.log(device.platform);
      if (device.platform == "Android") {
@@ -45,12 +30,7 @@ document.addEventListener('deviceready', function () {
             });
         });
     
-    }else if (device.platform == "browser") {
-		 //    var $chooser = $( "<input type=\"file\"id=\"input\"name=\"img\"onchange=\"handleFiles(this.files)\">" );
-        // $chooser.appendTo( $( "#fileChooser" ) );
-     
-
-    }// end of iff
+    }else if (device.platform == "browser") {}// end of iff
 
 
 console.log("Right before run call ");
@@ -99,30 +79,12 @@ function arrayToCsv(an_array){
 
 function CSVTable(aString){
     var strArr = aString.split(/\n/);
-    // var firstLine = strArr[0];
-    //
-    //     if (firstLine.match(/Comment: ([\w\s,]+)/)) {
-    //         console.log("found match ");
-    //         comment = firstLine.match(/Comment: ([\w\s,]+)/)[0];
-    //         var i = 1;
-    //     }else{
-    //         var i = 0;
-    //         comment =  "No Comments";
-    //     }
-
-
+    $("#result").empty();
     var $table = $( "<table id=\"t01\"><caption>Data Points</caption></table>" );
 
-    // var $line = $( "<h4></h4>" );
-    // $line.append( $( "<h4></h4>" ).html( comment) );
-    // $table.append( $line );
-
-    
-    console.log("strArr.length: "+strArr.length);
-    for (i; i < strArr.length; i++ ) {
+    for (var i=0; i < strArr.length; i++ ) {
 
         var dat = strArr[i].split(/,/);
-        console.log("dat[0]: "+dat[0]);
         var $line = $( "<tr></tr>" );
 
         $line.append( $( "<td></td>" ).html( dat[0]) );
@@ -141,49 +103,15 @@ function FileApp() {}
 
 FileApp.prototype = {
 fileSystemHelper: null,
-// fileNameField: null,
 textField: null,
     
 run: function() {
     var that = this;
-    // writeFileButton = document.getElementById("writeFileButton"),
-    // readFileButton = document.getElementById("readFileButton"),
-    // deleteFileButton = document.getElementById("deleteFileButton");
-	// var emailFileButton = document.getElementById("emailFileButton");
-    
-    // that.fileNameField = document.getElementById("fileNameInput");
-    // that.textField = document.getElementById("textInput");
-
-    
-     // writeFileButton.addEventListener("click",
-     //                                     function() {
-     //                                         that._writeTextToFile.call(that);
-     //
-     //                                    });
-     //
-     //    readFileButton.addEventListener("click",
-     //                                    function() {
-     //                                        that._readTextFromFile.call(that);
-     //                                    });
-     //
-     //    deleteFileButton.addEventListener("click",
-     //                                      function() {
-     //                                        that._deleteFile.call(that)
-     //                                    });
-     //
-     //     emailFileButton.addEventListener("click",
-     //     								  function() {
-     //            							tryEmail();
-     //        							});
-
-
     fileSystemHelper = new FileSystemHelper();
-
 },
     
 _deleteFile: function () {
     var that = fileApp;
-    // fileName = that.fileNameField.value;
     
     if (that._isValidFileName(fileName)) {
         fileSystemHelper.deleteFile(fileName, that._onSuccess, that._onError);
@@ -196,7 +124,6 @@ _deleteFile: function () {
     
 _readTextFromFile: function() {
     var that = fileApp;
-    // fileName = that.fileNameField.value;
     
     if (that._isValidFileName(fileName)) {
         fileSystemHelper.readTextFromFile(fileName, that._onSuccess, that._onError);
@@ -206,18 +133,10 @@ _readTextFromFile: function() {
         that._onError(error);
     }
 },
-    
-    
-    
-_writeTextToFile: function() {
-    // console.log("success, _writeTextToFile");
-    var that = fileApp;
-     // fileName = that.fileNameField.value;
-	// fileName = locFileName;
-	// that.textField = document.getElementById("text-Input");
-     // text = "Comment: "+that.textField.value+"\n";
 
-     
+_writeTextToFile: function() {
+    var that = fileApp;
+
      if (distance.length>0) {
      	text = arrayToCsv(distance);
         if (that._isValidFileName(fileName)&&!fileSelector) {
@@ -228,48 +147,21 @@ _writeTextToFile: function() {
             that._onError(error);
         }
      }else{
-        // text = document.getElementById("result").textContent;
-        alert("You have no data yet!");
-        console.log("trying to add data but no data");
-     	// text = that.textField.value;
+         show_dialoge("You have no data yet!");
      }
-     
-    
-    // var body = that.textField.value;
-    // if (!body) {
-    // 	console.log("no body message");
-
-    // }else{
-    // 	shipper('body',body);
-    // }
-    
-
-    
-   
 },
     
 _onSuccess: function(value) {
-    // var notificationBox = document.getElementById("result");
-    // notificationBox.textContent = value;
-	alert(value);
+    show_dialoge(value);
 },
     
 _onError: function(error) {
-    
-    var errorCodeDiv = document.createElement("div"),
-    errorMessageDiv = document.createElement("div"),
-    notificationBox = document.getElementById("result");
-    
-    errorCodeDiv.textContent = "Error code: " + error.name;
-    errorMessageDiv.textContent = "Message: " + error.message;
-    
-    notificationBox.innerHTML = "";
-    notificationBox.appendChild(errorCodeDiv);
-    notificationBox.appendChild(errorMessageDiv);
+    var mess1 = "Error code: " + error.name;
+    var mess2 =  "Message: " + error.message;
+    show_dialoge(mess1+"\n"+mess2);
 },
     
 _isValidFileName: function(fileName) {
-    //var patternFileName = /^[\w]+\.[\w]{1,5}$/;
     
     return fileName.length > 2;
 }
@@ -301,8 +193,7 @@ FileSystemHelper.prototype = {
 								 });
 	},
     
-	_createFile: function(fileSystem, fileName, text, onSuccess, onError) { 
-        // console.log("success, _createFile");
+	_createFile: function(fileSystem, fileName, text, onSuccess, onError) {
 		var that = this;
 		var options = {
 			create: true, 
@@ -315,9 +206,6 @@ FileSystemHelper.prototype = {
 		fileSystem.root.getFile(fileName, options,
 								function(logOb) {
 									that._createFileWriter.call(that, logOb, text, onSuccess, onError);
-									//--------------------------- Is this the
-									// logOb = fileSystem.root;
-//									logOb = fileEntry;
 
                                 console.log("line 65");
 
@@ -331,7 +219,6 @@ FileSystemHelper.prototype = {
 
     
 	_createFileWriter: function(logOb, text, onSuccess, onError) {
-        // console.log("success, _createFileWriter");
 		var that = this;
 		logOb.createWriter(function(fileWriter) {
                                     var len = fileWriter.length;
@@ -352,7 +239,6 @@ FileSystemHelper.prototype = {
     //Reading operations
 	readTextFromFile : function(fileName, onSuccess, onError) {
 		var that = this;
-        // console.log("success, readTextFromFile");
 		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
 								 function(fileSystem) {
                                     if(!logOb){
@@ -368,7 +254,6 @@ FileSystemHelper.prototype = {
 	},
     
 	_getFileEntry: function(logOb, fileName, onSuccess, onError) {
-        // console.log("success, _getFileEntry");
 		var that = this;
 		// Get existing file, don't create a new one.
 		logOb.root.getFile(fileName, null,
@@ -381,8 +266,7 @@ FileSystemHelper.prototype = {
 								});
 	},
 
-	_getFile: function(logOb, onSuccess, onError) { 
-        // console.log("success, _getFile");
+	_getFile: function(logOb, onSuccess, onError) {
 		var that = this;
 		logOb.file(
 			function(file) { 
@@ -396,13 +280,12 @@ FileSystemHelper.prototype = {
 	},
 
 	_getFileReader: function(file, onSuccess) {
-        // console.log("success, _getFileReader");
 		var that = this;
 		var reader = new FileReader();
-		reader.onloadend = function(evt) { 
-			var textToWrite = evt.target.result;
-		CSVTable(textToWrite); 
-			// onSuccess.call(that, textToWrite);
+		reader.onloadend = function(evt) {
+            var textToWrite = evt.target.result;
+		    CSVTable(textToWrite);
+
 		
 		};
         
@@ -411,18 +294,12 @@ FileSystemHelper.prototype = {
 
     // coming from file
 	_getFileReader2: function(file, onSuccess) {
-		// console.log(file);
 		var reader = new FileReader();
 		reader.onload = function(e) { 
 			var textToWrite = reader.result;
-			console.log(textToWrite);
             CSVTable(textToWrite);
-			// var notificationBox = document.getElementById("result");
-   //      notificationBox.textContent = textToWrite;
-
 		};
-		
-        
+
 		reader.readAsText(file);
 	},
    
@@ -456,6 +333,7 @@ FileSystemHelper.prototype = {
 		var that = this;
 		logOb.remove(function (entry) {
                 			var message = "File removed.";
+                            $("#result").empty();
                 			onSuccess.call(that, message);
                 		}, function (error) {
                 			error.message = "Unable to remove the file.";

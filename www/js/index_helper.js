@@ -102,21 +102,7 @@ var testdata = [
 
 
 ];
-// var testdata = [
-//
-//     [ 0 ,  0 ],
-//     [ 1 ,  6 ],
-//     [ 2 ,  10 ],
-//     [ 3 ,  12 ],
-//     [ 4 ,  14 ],
-//     [ 5 ,  18 ],
-//     [ 6 ,  24 ],
-//     [ 7 ,  30 ]
-//
-//
-// ];
 
-// var app = angular.module('app', ['ngMessages']);
 document.addEventListener("deviceready", onDeviceReady, false);
 
 

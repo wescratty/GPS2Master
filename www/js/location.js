@@ -191,31 +191,26 @@ function modeOfTrans(mode,dist){
     return iss;
 }
 
-// function show_dialoge(mess) {
-//
-//
-//     ons.createAlertDialog('alert.html').then(function(alertDialog) {
-//         alertDialog.show();
-//     });
-//
-//     // ons.notification.alert({
-//     //     message: mess,
-//     //     modifier: true ? 'material' : undefined
-//     // });
-// }
-// function destroy_dialoge() {
-//
-//     alertDialog.destroy();
-// }
+/* Can use instead of alert(), makes a iOS style alert */
+function show_dialoge(mess) {
+    // ons.createAlertDialog('alert.html').then(function(alertDialog) {
+    //     alertDialog.show();
+    // });
+
+    ons.notification.alert({
+        message: mess
+    });
+}
+function destroy_dialoge() {
+
+    alertDialog.destroy();
+}
 
 function errorCallback_highAccuracy(error) {
     accuracy_high = false;
     console.log(error)
     if (error.code == error.TIMEOUT)
     {
-        // Attempt to get GPS loc timed out after 5 seconds, modal
-        // try low accuracy location
-        // $('ons-modal').append("attempting to get low accuracy location");
         $('#modalMessage').append("\<br> Switching to low accuracy location...");
         navigator.geolocation.getCurrentPosition(
             onSuccess,
