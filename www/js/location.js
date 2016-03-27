@@ -77,7 +77,7 @@ function startLocationPoints(){
 }
 
 function getNew(){
-    navigator.geolocation.getCurrentPosition(onSuccess, errorCallback_highAccuracy,{maximumAge:600000, timeout:4000, enableHighAccuracy: accuracy_high});
+    navigator.geolocation.getCurrentPosition(onSuccess, errorCallback_highAccuracy,{maximumAge:600000, timeout:6000, enableHighAccuracy: accuracy_high});
 }
 
 function onSuccess(position) {
@@ -129,8 +129,6 @@ function locationLock(position){
     var b_y = b_point[1];
     var ax_bx = Math.abs(a_x -b_x);
     var ay_by = Math.abs(a_y -b_y);
-    // console.log("ax_bx: "+ax_bx);
-    // console.log("ay_by: "+ay_by);
     if (ax_bx<5&&ay_by<5 ) {
         goodPoint = true;
         modal.hide();
@@ -246,7 +244,7 @@ function errorCallback_highAccuracy(error) {
 
 }
 
-function errorCallback_lowAccuracy(position) {
+function errorCallback_lowAccuracy(error) {
     var msg = "<p>Can't get your location (low accuracy attempt). Error = ";
     if (error.code == 1)
         msg += "PERMISSION_DENIED";

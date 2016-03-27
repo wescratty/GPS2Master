@@ -141,13 +141,13 @@ function prep_test_data(){
     }
 }
 
-function load_test_data(){
-    for (var i = 1;i< testdata.length;i++) {
-        var a_point = testdata[i];
-        var b_point =    testdata[i-1];
-        checkPoint(b_point,a_point,testdata[0]);
-    }
-}
+// function load_test_data(){
+//     for (var i = 1;i< testdata.length;i++) {
+//         var a_point = testdata[i];
+//         var b_point =    testdata[i-1];
+//         checkPoint(b_point,a_point,testdata[0]);
+//     }
+// }
 
 function set_fromStartPoint_true(){
 
@@ -161,7 +161,7 @@ function tryEmail(){
 
     /* TODO Drew, we need to get user email from sign in */
 
-    var userinfo = receiverString('userinfo').split(/~/);
+    var userinfo;
     var attachment;
 
 
