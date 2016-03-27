@@ -7,18 +7,13 @@ var modal;
 ons.ready(function() {
 $(document.body).on("pageinit", '#my-page', function() {
     $("#show-modal", this).click(function() {
-        $('#modalMessage').append("\<br>Finding high accuracy location... ");
+        $('#modalMessage').append("\<br>Please wait... <br> Finding high accuracy location... ");
         
         if(!goodPoint){
             modal.show();
         }
         console.log("in graph");
-
-        // hideStart = !hideStart;
-        //
-        // hideStop = !hideStop;
-
-
+        
     });
 });
 });
@@ -246,9 +241,6 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
 
     var lastPoint = disFromLastPoint;
     var startPoint = disFromStartPoint;
-    // console.log("lastPoint: ",lastPoint);
-    // console.log("startPoint: ",startPoint);
-    // console.log("_fromStartPoint: ",_fromStartPoint);
     var dist;
     var rat = 0.0;
     var acc = 0.0;
@@ -303,7 +295,13 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
 
 
 function reset(){
-            
+
+
+    /*todo: we need a way to reset the table*/
+    $("#dataTable").empty();
+    $("#modalMessage").empty();
+
+    
     dataOutArray = [];
     pointsArray = [];
     coorPoints = [];
@@ -325,12 +323,10 @@ function reset(){
 
     total_distance = un;
     startPoss = un;
-    
-    
     transferingData = false;
-    // _setLocation = false;
     goodPoint = false;
     needsStarted = true;
+    accuracy_high = true;
     
     lastLoc = new Point(0,0); // do we use this?
     loadGoodMockDataToArray();
@@ -341,16 +337,6 @@ function reset(){
     }
 }
 
-
-
-// this was just to test changing existing data on graph
-// function add_graph_line(){
-//     lineChart.datasets[1].points[0].value = 50;
-//     lineChart.datasets[1].points[2].value = 20;
-//     lineChart.datasets[2].points[0].value = 30;
-//     lineChart.datasets[2].points[2].value = 10;
-//     lineChart.update();
-// }
 
 // takes derivitave of two points
 function dv_dt(a_point,b_point){
@@ -371,11 +357,3 @@ function dv_dt(a_point,b_point){
     }
     
 }
-
-
-/* Delet this after one page*/
-// function passToTableView(){
-//   console.log("distance.length: "+distance.length);
-//   shipper('distance',distance);
-//
-// }

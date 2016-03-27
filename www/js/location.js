@@ -77,7 +77,7 @@ function startLocationPoints(){
 }
 
 function getNew(){
-    navigator.geolocation.getCurrentPosition(onSuccess, errorCallback_highAccuracy,{maximumAge:600000, timeout:5000, enableHighAccuracy: accuracy_high});
+    navigator.geolocation.getCurrentPosition(onSuccess, errorCallback_highAccuracy,{maximumAge:600000, timeout:4000, enableHighAccuracy: accuracy_high});
 }
 
 function onSuccess(position) {
@@ -143,9 +143,6 @@ function locationLock(position){
 }
 
 
-
-
-
 function onError(error) {
     alert('code: '    + error.code    + '\n' +
         'message: ' + error.message + '\n');
@@ -196,22 +193,22 @@ function modeOfTrans(mode,dist){
     return iss;
 }
 
-function show_dialoge(mess) {
-
-
-    ons.createAlertDialog('alert.html').then(function(alertDialog) {
-        alertDialog.show();
-    });
-
-    // ons.notification.alert({
-    //     message: mess,
-    //     modifier: true ? 'material' : undefined
-    // });
-}
-function destroy_dialoge() {
-
-    alertDialog.destroy();
-}
+// function show_dialoge(mess) {
+//
+//
+//     ons.createAlertDialog('alert.html').then(function(alertDialog) {
+//         alertDialog.show();
+//     });
+//
+//     // ons.notification.alert({
+//     //     message: mess,
+//     //     modifier: true ? 'material' : undefined
+//     // });
+// }
+// function destroy_dialoge() {
+//
+//     alertDialog.destroy();
+// }
 
 function errorCallback_highAccuracy(error) {
     accuracy_high = false;
@@ -223,16 +220,16 @@ function errorCallback_highAccuracy(error) {
         // $('ons-modal').append("attempting to get low accuracy location");
         $('#modalMessage').append("\<br> Switching to low accuracy location...");
         navigator.geolocation.getCurrentPosition(
-            successCallback,
+            onSuccess,
             errorCallback_lowAccuracy,
-            {maximumAge:600000, timeout:10000, enableHighAccuracy: accuracy_high});
+            {maximumAge:600000, timeout:6000, enableHighAccuracy: accuracy_high});
         return;
     }
 
     var msg = "<p>Can't get your location. Reason = ";
     if (error.code == 1) {
         msg += "PERMISSION_DENIED";
-        
+
     }else if (error.code == 2){
         msg += "POSITION_UNAVAILABLE";
     msg += ", msg = " + error.message;
@@ -241,11 +238,7 @@ function errorCallback_highAccuracy(error) {
     }
 
     setTimeout(function(){
-
         modal.hide();
-
-
-
     }, 2000);
     startLocationPoints();
     $('#modalMessage').append(msg);
@@ -253,54 +246,20 @@ function errorCallback_highAccuracy(error) {
 
 }
 
+function errorCallback_lowAccuracy(position) {
+    var msg = "<p>Can't get your location (low accuracy attempt). Error = ";
+    if (error.code == 1)
+        msg += "PERMISSION_DENIED";
+    else if (error.code == 2)
+        msg += "POSITION_UNAVAILABLE";
+    else if (error.code == 3)
+        msg += "TIMEOUT";
+    msg += ", msg = "+error.message;
 
-//found this, I think we should integrate the error handling.
+    setTimeout(function(){
+        modal.hide();
+    }, 2000);
+    startLocationPoints();
+    $('#modalMessage').append(msg);
+}
 
-/*navigator.geolocation.getCurrentPosition(
- successCallback,
- errorCallback_highAccuracy,
- {maximumAge:600000, timeout:5000, enableHighAccuracy: true}
-
- );
-
- function errorCallback_highAccuracy(position) {
- if (error.code == error.TIMEOUT)
- {
- // Attempt to get GPS loc timed out after 5 seconds,
- // try low accuracy location
- $('body').append("attempting to get low accuracy location");
- navigator.geolocation.getCurrentPosition(
- successCallback,
- errorCallback_lowAccuracy,
- {maximumAge:600000, timeout:10000, enableHighAccuracy: false});
- return;
- }
-
- var msg = "<p>Can't get your location (high accuracy attempt). Error = ";
- if (error.code == 1)
- msg += "PERMISSION_DENIED";
- else if (error.code == 2)
- msg += "POSITION_UNAVAILABLE";
- msg += ", msg = "+error.message;
-
- $('body').append(msg);
- }
-
- function errorCallback_lowAccuracy(position) {
- var msg = "<p>Can't get your location (low accuracy attempt). Error = ";
- if (error.code == 1)
- msg += "PERMISSION_DENIED";
- else if (error.code == 2)
- msg += "POSITION_UNAVAILABLE";
- else if (error.code == 3)
- msg += "TIMEOUT";
- msg += ", msg = "+error.message;
-
- $('body').append(msg);
- }
-
- function successCallback(position) {
- var latitude = position.coords.latitude;
- var longitude = position.coords.longitude;
- $('body').append("<p>Your location is: " + latitude + "," + longitude+" </p><p>Accuracy="+position.coords.accuracy+"m");
- }*/
