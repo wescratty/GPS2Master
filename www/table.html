@@ -1,43 +1,45 @@
+<body ng-controller="AppController" ng-init="init()">
 <ons-navigator>
     <ons-page id="tabel-page">
-<ons-toolbar fixed-style>
-    <div class="left">
-        <ons-toolbar-button ng-click="menu.toggleMenu()">
-            <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
-        </ons-toolbar-button></div>
-    <div class="center">Table</div>
-    <div class="right">
-        <ons-toolbar-button onclick="startLocationPoints()"><small>start</small>
-            <ons-icon icon="ion-ios-navigate" style="font-size: 32px; width: 1em"></ons-icon>
-        </ons-toolbar-button></div>
-</ons-toolbar>
+        <ons-toolbar fixed-style>
+            <div class="left">
+                <ons-toolbar-button ng-click="menu.toggleMenu()">
+                    <ons-icon icon="ion-navicon" size="28px" fixed-width="false"></ons-icon>
+                </ons-toolbar-button></div>
+            <div class="center">Table</div>
+            <div class="right">
+                <ons-toolbar-button onclick="startLocationPoints()"><small>start</small>
+                    <ons-icon icon="ion-ios-navigate" style="font-size: 32px; width: 1em"></ons-icon>
+                </ons-toolbar-button></div>
+        </ons-toolbar>
 
 
-<table>
-    <col width="15%">
-    <col width="25%">
-    <col width="25%">
-    <col width="35%">
-    <thead>
-    <tr>
-        <th>Time</th>
-        <th>Position</th>
-        <th>Velocity</th>
-        <th>Acceleration</th>
-    </tr>
-    </thead>
-</table>
-<div style="height:90%; overflow:auto; width:100%">
-    <table id="dataTable">
-        <col width="15%">
-        <col width="25%">
-        <col width="25%">
-        <col width="35%">
-    </table>
-</div>
+        <table>
+            <col width="15%">
+            <col width="25%">
+            <col width="25%">
+            <col width="35%">
+            <thead>
+            <tr>
+                <th>Time</th>
+                <th>Position</th>
+                <th>Velocity</th>
+                <th>Acceleration</th>
+            </tr>
+            </thead>
+        </table>
+        <div style="height:90%; overflow:auto; width:100%">
+            <table id="dataTable">
+                <col width="15%">
+                <col width="25%">
+                <col width="25%">
+                <col width="35%">
+            </table>
+        </div>
 
     </ons-page>
 </ons-navigator>
+</body>
 
 
 <style>

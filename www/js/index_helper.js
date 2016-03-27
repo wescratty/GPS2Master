@@ -37,6 +37,7 @@ var goodPoint = false;
 var currentLoc;
 var lastLoc = new Point(0,0);
 var needsStarted = true;
+var accuracy_high = true;
 
 var transferingData = false;
 var alertDialog;
