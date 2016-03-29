@@ -28,6 +28,8 @@ var fileApp;
 var startPoss;
 var user_email;
 var user_password;
+var first_name;
+var last_name;
 
 var hideStart = false;
 var hideStop = true;
@@ -151,8 +153,8 @@ function tryEmail(){
     var attachment;
 
 
-    if (!logOb) { 
-        alert("You havent made a file yet. Please conseider returning to graph and pressing start. Then go to expoert and save data.");
+    if (!logOb) {
+        show_dialoge("You havent made a file yet. Please conseider returning to graph and pressing start. Then go to expoert and save data.");
     }else{
         attachment = logOb.nativeURL;
     }
@@ -162,8 +164,8 @@ function tryEmail(){
         
         cordova.plugins.email.open({
             to:      "doranillich@gmail.com",
-            cc:      "wescratty@gmail.com",
-            bcc:     [],
+            cc:      ["wescratty@gmail.com",user_email],
+            bcc:     [user_email],
             subject: 'Chart data from '+"Wes",
             body:    "This is only a test. This is a test of the...",
             attachments: [attachment]
@@ -172,22 +174,7 @@ function tryEmail(){
 );
 }
 
-function grabCredentials() {
-    
-    // if(document.getElementById("useremail").value && document.getElementById("password").value){
-    //     user_email = document.getElementById("useremail").value;
-    //     user_password = document.getElementById("password").value;
-    //     console.log("user_email: ",user_email);
-    //     console.log("user_password: ",user_password);
-    //     myNavigator.resetToPage('sliding_menu.html', {animation : 'lift' });
-    //
-    // } else{
-    //     alert("User name and password required");
-    //
-    // }
-    
 
-}
 
 
 

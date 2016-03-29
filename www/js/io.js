@@ -1,15 +1,14 @@
 
-
 document.addEventListener('deviceready', function () {
     console.log("device is ready in io");
 
-/* Drew, will have to delete all of the shipper stuff and just set */
+    /* Drew, will have to delete all of the shipper stuff and just set */
 // ------ need to use shipper to get the file we want and set as global file name else data.csv will get over ridden. -------
-	fileName= "export.csv";
+    fileName= "export.csv";
 
 
- console.log(device.platform);
-     if (device.platform == "Android") {
+    console.log(device.platform);
+    if (device.platform == "Android") {
         window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dir) {
             console.log("Main Dir android:", dir);
             dir.getFile(fileName, {create: true}, function (file) {
@@ -20,8 +19,8 @@ document.addEventListener('deviceready', function () {
         });
     }
     else if (device.platform == "iOS") {
-       
-            window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
+
+        window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
             console.log("Main Dir:", dir);
             dir.getFile(fileName, {create: true}, function (file) {
                 console.log("File: ", file);
@@ -29,15 +28,15 @@ document.addEventListener('deviceready', function () {
                 //writeLog("App started");
             });
         });
-    
+
     }else if (device.platform == "browser") {}// end of iff
 
 
-console.log("Right before run call ");
-     fileApp = new FileApp();
-            fileApp.run();
-            console.log("Right after run call ");
-            // setUP();
+    console.log("Right before run call ");
+    fileApp = new FileApp();
+    fileApp.run();
+    console.log("Right after run call ");
+    // setUP();
 });
 
 
@@ -45,13 +44,13 @@ console.log("Right before run call ");
 function arrayToCsv(an_array){
     var temp ;
     var dat = an_array[0];
-        temp = dat.info()+"\n"; 
+    temp = dat.info()+"\n";
 
     for (var i = 1; i< an_array.length; i++) {
         dat = an_array[i];
         temp = temp+dat.info()+"\n";
     }
-    return temp; 
+    return temp;
 }
 
 // function csvToarray(aString){
@@ -62,7 +61,7 @@ function arrayToCsv(an_array){
 
 //     console.log("hasComment");
 
-//     var hasComment = strArr[0].match(/Comment:/) ? strArr[0].match(/Comment: ([\w\s]+)/) : false; 
+//     var hasComment = strArr[0].match(/Comment:/) ? strArr[0].match(/Comment: ([\w\s]+)/) : false;
 //     console.log(hasComment);
 
 
@@ -93,251 +92,252 @@ function CSVTable(aString){
     }
 
     $table.appendTo( $( "#result" ) );
-    
+
 // var snd = new Audio("resources/notify.wav"); // buffers automatically when created
-// snd.play();  
+// snd.play();
 }
 
 // ********* File read and right below **********
 function FileApp() {}
 
 FileApp.prototype = {
-fileSystemHelper: null,
-textField: null,
-    
-run: function() {
-    var that = this;
-    fileSystemHelper = new FileSystemHelper();
-},
-    
-_deleteFile: function () {
-    var that = fileApp;
-    
-    if (that._isValidFileName(fileName)) {
-        fileSystemHelper.deleteFile(fileName, that._onSuccess, that._onError);
-    }
-    else {
-        var error = { code: 44, message: "Invalid filename"};
-        that._onError(error);
-    }
-},
-    
-_readTextFromFile: function() {
-    var that = fileApp;
-    
-    if (that._isValidFileName(fileName)) {
-        fileSystemHelper.readTextFromFile(fileName, that._onSuccess, that._onError);
-    }
-    else {
-        var error = { code: 44, message: "Invalid filename"};
-        that._onError(error);
-    }
-},
+    fileSystemHelper: null,
+    textField: null,
 
-_writeTextToFile: function() {
-    var that = fileApp;
+    run: function() {
+        var that = this;
+        fileSystemHelper = new FileSystemHelper();
+    },
 
-     if (distance.length>0) {
-     	text = arrayToCsv(distance);
-        if (that._isValidFileName(fileName)&&!fileSelector) {
-            fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
+    _deleteFile: function () {
+        var that = fileApp;
 
-        }else{
+        if (that._isValidFileName(fileName)) {
+            fileSystemHelper.deleteFile(fileName, that._onSuccess, that._onError);
+        }
+        else {
             var error = { code: 44, message: "Invalid filename"};
             that._onError(error);
         }
-     }else{
-         show_dialoge("You have no data yet!");
-     }
-},
-    
-_onSuccess: function(value) {
-    show_dialoge(value);
-},
-    
-_onError: function(error) {
-    var mess1 = "Error code: " + error.name;
-    var mess2 =  "Message: " + error.message;
-    show_dialoge(mess1+"\n"+mess2);
-},
-    
-_isValidFileName: function(fileName) {
-    
-    return fileName.length > 2;
+    },
+
+    _readTextFromFile: function() {
+        var that = fileApp;
+
+        if (that._isValidFileName(fileName)) {
+            fileSystemHelper.readTextFromFile(fileName, that._onSuccess, that._onError);
+        }
+        else {
+            var error = { code: 44, message: "Invalid filename"};
+            that._onError(error);
+        }
+    },
+
+    _writeTextToFile: function() {
+        var that = fileApp;
+
+        if (distance.length>0) {
+            text = arrayToCsv(distance);
+            if (that._isValidFileName(fileName)&&!fileSelector) {
+                fileSystemHelper.writeLine(fileName, text, that._onSuccess, that._onError)
+
+            }else{
+                var error = { code: 44, message: "Invalid filename"};
+                that._onError(error);
+            }
+        }else{
+            show_dialoge("You have no data yet!");
+        }
+    },
+
+    _onSuccess: function(value) {
+        show_dialoge(value);
+    },
+
+    _onError: function(error) {
+        var mess1 = "Error code: " + error.name;
+        var mess2 =  "Message: " + error.message;
+        show_dialoge(mess1+"\n"+mess2);
+    },
+
+    _isValidFileName: function(fileName) {
+
+        return fileName.length > 2;
+    }
 }
-}
 
 
 
 
 
-function FileSystemHelper() { 
+function FileSystemHelper() {
 }
 
 FileSystemHelper.prototype = {
-	
+
     //Writing operations
     writeLine: function(fileName, text, onSuccess, onError) {
         console.log("success, text", text);
-		var that = this;
-		var grantedBytes = 0;
+        var that = this;
+        var grantedBytes = 0;
 
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, grantedBytes,
-								 function(fileSystem) {
-									 that._createFile.call(that, fileSystem, fileName, text, onSuccess, onError);
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, grantedBytes,
+            function(fileSystem) {
+                that._createFile.call(that, fileSystem, fileName, text, onSuccess, onError);
 
-								 },
-								 function(error) {
-									 error.message = "Request file system failed.";
-									 onError.call(that, error);
-								 });
-	},
-    
-	_createFile: function(fileSystem, fileName, text, onSuccess, onError) {
-		var that = this;
-		var options = {
-			create: true, 
-			exclusive: false
-		};
-		if(!logOb){
-			logOb=fileSystem;
-		}
+            },
+            function(error) {
+                error.message = "Request file system failed.";
+                onError.call(that, error);
+            });
+    },
 
-		fileSystem.root.getFile(fileName, options,
-								function(logOb) {
-									that._createFileWriter.call(that, logOb, text, onSuccess, onError);
+    _createFile: function(fileSystem, fileName, text, onSuccess, onError) {
+        var that = this;
+        var options = {
+            create: true,
+            exclusive: false
+        };
+        if(!logOb){
+            logOb=fileSystem;
+        }
+        logOb=fileSystem;
 
-                                console.log("line 65");
+        fileSystem.root.getFile(fileName, options,
+            function(logOb) {
+                that._createFileWriter.call(that, logOb, text, onSuccess, onError);
 
-								},
-								function (error) {
-									error.message = "Failed creating file.";
-									onError.call(that, error);
-								});
-	},
+                console.log("line 65");
 
-
-    
-	_createFileWriter: function(logOb, text, onSuccess, onError) {
-		var that = this;
-		logOb.createWriter(function(fileWriter) {
-                                    var len = fileWriter.length;
-                                    fileWriter.seek(len);
-                                    fileWriter.write(text + '\n');
-                                    var message = "Wrote to file " ;
-                                    onSuccess.call(that, message);
-                                },
-                    			function(error) {
-                    				error.message = "Unable to create file writer.";
-                    				onError.call(that, error);
-                    			});
-        
-	},
+            },
+            function (error) {
+                error.message = "Failed creating file.";
+                onError.call(that, error);
+            });
+    },
 
 
-    
+
+    _createFileWriter: function(logOb, text, onSuccess, onError) {
+        var that = this;
+        logOb.createWriter(function(fileWriter) {
+                var len = fileWriter.length;
+                fileWriter.seek(len);
+                fileWriter.write(text + '\n');
+                var message = "Wrote to file " ;
+                onSuccess.call(that, message);
+            },
+            function(error) {
+                error.message = "Unable to create file writer.";
+                onError.call(that, error);
+            });
+
+    },
+
+
+
     //Reading operations
-	readTextFromFile : function(fileName, onSuccess, onError) {
-		var that = this;
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-								 function(fileSystem) {
-                                    if(!logOb){
-                                        logOb=fileSystem;
-                                        console.log("logOb: " +logOb)
-                                    }
-									 that._getFileEntry.call(that, logOb, fileName, onSuccess, onError);
-								 },
-								 function(error) {
-									 error.message = "Unable to request file system.";
-									 onError.call(that, error);
-								 });
-	},
-    
-	_getFileEntry: function(logOb, fileName, onSuccess, onError) {
-		var that = this;
-		// Get existing file, don't create a new one.
-		logOb.root.getFile(fileName, null,
-								function(logOb) {
-									that._getFile.call(that, logOb, onSuccess, onError);
-								}, 
-								function(error) {
-									error.message = "Unable to get file entry for reading.";
-									onError.call(that, error);
-								});
-	},
+    readTextFromFile : function(fileName, onSuccess, onError) {
+        var that = this;
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
+            function(fileSystem) {
+                if(!logOb){
+                    logOb=fileSystem;
+                    console.log("logOb: " +logOb)
+                }
+                that._getFileEntry.call(that, logOb, fileName, onSuccess, onError);
+            },
+            function(error) {
+                error.message = "Unable to request file system.";
+                onError.call(that, error);
+            });
+    },
 
-	_getFile: function(logOb, onSuccess, onError) {
-		var that = this;
-		logOb.file(
-			function(file) { 
-				that._getFileReader.call(that, file, onSuccess);
-				
-			},
-			function(error) {
-				error.message = "Unable to get file for reading.";
-				onError.call(that, error);
-			});
-	},
+    _getFileEntry: function(logOb, fileName, onSuccess, onError) {
+        var that = this;
+        // Get existing file, don't create a new one.
+        logOb.root.getFile(fileName, null,
+            function(logOb) {
+                that._getFile.call(that, logOb, onSuccess, onError);
+            },
+            function(error) {
+                error.message = "Unable to get file entry for reading.";
+                onError.call(that, error);
+            });
+    },
 
-	_getFileReader: function(file, onSuccess) {
-		var that = this;
-		var reader = new FileReader();
-		reader.onloadend = function(evt) {
+    _getFile: function(logOb, onSuccess, onError) {
+        var that = this;
+        logOb.file(
+            function(file) {
+                that._getFileReader.call(that, file, onSuccess);
+
+            },
+            function(error) {
+                error.message = "Unable to get file for reading.";
+                onError.call(that, error);
+            });
+    },
+
+    _getFileReader: function(file, onSuccess) {
+        var that = this;
+        var reader = new FileReader();
+        reader.onloadend = function(evt) {
             var textToWrite = evt.target.result;
-		    CSVTable(textToWrite);
+            CSVTable(textToWrite);
 
-		
-		};
-        
-		reader.readAsText(file);
-	},
+
+        };
+
+        reader.readAsText(file);
+    },
 
     // coming from file
-	_getFileReader2: function(file, onSuccess) {
-		var reader = new FileReader();
-		reader.onload = function(e) { 
-			var textToWrite = reader.result;
+    _getFileReader2: function(file, onSuccess) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var textToWrite = reader.result;
             CSVTable(textToWrite);
-		};
+        };
 
-		reader.readAsText(file);
-	},
-   
+        reader.readAsText(file);
+    },
+
     //Deleting operations
-	deleteFile: function(fileName, onSuccess, onError) {
-		var that = this;
-       
-		window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, 
-                                function(fileSystem) {
-                        			that._getFileEntryForDelete.call(that, fileSystem, fileName, onSuccess, onError);
-                        		}, function(error) {
-                        			error.message = "Unable to retrieve file system.";
-                        			onError.call(that, error);
-                        		});
-	}, 
-    
-	_getFileEntryForDelete: function(fileSystem, fileName, onSuccess, onError) { 
-		var that = this;
-		fileSystem.root.getFile(fileName, 
-                                null, 
-								function (logOb) {
-									that._removeFile.call(that, logOb, onSuccess, onError);
-								},
-								function(error) {
-									error.message = "Unable to find the file.";
-									onError.call(that, error)
-								});
-	},
-    
-	_removeFile : function(logOb, onSuccess, onError) {
-		var that = this;
-		logOb.remove(function (entry) {
-                			var message = "File removed.";
-                            $("#result").empty();
-                			onSuccess.call(that, message);
-                		}, function (error) {
-                			error.message = "Unable to remove the file.";
-                			onError.call(that, error)
-                		});
-	}
+    deleteFile: function(fileName, onSuccess, onError) {
+        var that = this;
+
+        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
+            function(fileSystem) {
+                that._getFileEntryForDelete.call(that, fileSystem, fileName, onSuccess, onError);
+            }, function(error) {
+                error.message = "Unable to retrieve file system.";
+                onError.call(that, error);
+            });
+    },
+
+    _getFileEntryForDelete: function(fileSystem, fileName, onSuccess, onError) {
+        var that = this;
+        fileSystem.root.getFile(fileName,
+            null,
+            function (logOb) {
+                that._removeFile.call(that, logOb, onSuccess, onError);
+            },
+            function(error) {
+                error.message = "Unable to find the file.";
+                onError.call(that, error)
+            });
+    },
+
+    _removeFile : function(logOb, onSuccess, onError) {
+        var that = this;
+        logOb.remove(function (entry) {
+            var message = "File removed.";
+            $("#result").empty();
+            onSuccess.call(that, message);
+        }, function (error) {
+            error.message = "Unable to remove the file.";
+            onError.call(that, error)
+        });
+    }
 };
