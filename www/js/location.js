@@ -269,8 +269,8 @@ function showPosition(position) {
 
     }
 
-    var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
-        +latlon1+"&zoom=18&size=400x300&maptype=satellite&markers=color:red"+latlonStr+"&sensor=false";
+    img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
+        +latlon1+"&zoom=19&size=320x320&maptype=satellite&markers=size:tiny|color:red"+latlonStr+"&sensor=false";
     document.getElementById("result").innerHTML = "<img src='"+img_url+"'>";
 }
 

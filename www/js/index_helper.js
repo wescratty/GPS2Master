@@ -30,6 +30,7 @@ var user_email;
 var user_password;
 var first_name;
 var last_name;
+var img_url;
 
 var hideStart = false;
 var hideStop = true;
@@ -167,7 +168,7 @@ function tryEmail(){
             cc:      "wescratty@gmail.com",
             bcc:     [],
             subject: 'Chart data from '+"Wes",
-            body:    "This is only a test. This is a test of the...",
+            body:    "Here is the google map: "+img_url,
             attachments: [logOb.nativeURL]
         });
     }
