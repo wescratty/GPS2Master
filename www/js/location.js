@@ -263,7 +263,10 @@ function showPosition(position) {
     var latlonStr = "|"+coorPoints[0].info()[0] + "," + coorPoints[0].info()[1];
 
     for(var i =1;i<coorPoints.length;i++){
-        latlonStr=latlonStr+ "|"+coorPoints[i].info()[0] + "," + coorPoints[i].info()[1];
+        if(coorPoints[i].info()[0]!==coorPoints[i-1].info()[0]&&coorPoints[i].info()[1]!==coorPoints[i-1].info()[1]){
+            latlonStr=latlonStr+ "|"+coorPoints[i].info()[0] + "," + coorPoints[i].info()[1];
+        }
+
     }
 
     var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
