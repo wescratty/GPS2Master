@@ -29,7 +29,11 @@ document.addEventListener('deviceready', function () {
             });
         });
 
-    }else if (device.platform == "browser") {}// end of iff
+    }else if (device.platform == "browser") {
+
+
+
+    }// end of iff
 
 
     console.log("Right before run call ");
@@ -151,6 +155,7 @@ FileApp.prototype = {
     },
 
     _onSuccess: function(value) {
+        showPosition();
         show_dialoge(value);
     },
 
@@ -181,6 +186,8 @@ FileSystemHelper.prototype = {
         var that = this;
         var grantedBytes = 0;
 
+
+
         window.requestFileSystem(LocalFileSystem.PERSISTENT, grantedBytes,
             function(fileSystem) {
                 that._createFile.call(that, fileSystem, fileName, text, onSuccess, onError);
@@ -198,16 +205,22 @@ FileSystemHelper.prototype = {
             create: true,
             exclusive: false
         };
-        if(!logOb){
+
+        if (device.platform == "browser") {
             logOb=fileSystem;
+        }else{
+            // fileSystem=logOb;
         }
-        logOb=fileSystem;
+        // if(!logOb){
+        //     logOb=fileSystem;
+        // }
+        // logOb=fileSystem;
 
         fileSystem.root.getFile(fileName, options,
             function(logOb) {
                 that._createFileWriter.call(that, logOb, text, onSuccess, onError);
 
-                console.log("line 65");
+                console.log("line 222");
 
             },
             function (error) {
@@ -244,6 +257,10 @@ FileSystemHelper.prototype = {
                 if(!logOb){
                     logOb=fileSystem;
                     console.log("logOb: " +logOb)
+                }
+                //------------------------- some thing is wrong here -----------------------------------------------------------
+                if(device.platform !== "browser"){
+                    fileSystem=logOb;
                 }
                 that._getFileEntry.call(that, logOb, fileName, onSuccess, onError);
             },

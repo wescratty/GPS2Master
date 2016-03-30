@@ -7,7 +7,7 @@ var modal;
 ons.ready(function() {
 $(document.body).on("pageinit", '#my-page', function() {
     $("#show-modal", this).click(function() {
-        $('#modalMessage').append("\<br>Please wait... <br> Finding high accuracy location... ");
+        $('#modalMessage').append("\<br>Please wait... <br> Finding your location... ");
         
         if(!goodPoint){
             modal.show();

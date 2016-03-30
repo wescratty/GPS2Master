@@ -77,7 +77,7 @@ function startLocationPoints(){
 }
 
 function getNew(){
-    navigator.geolocation.getCurrentPosition(onSuccess, errorCallback_highAccuracy,{maximumAge:600000, timeout:6000, enableHighAccuracy: accuracy_high});
+    navigator.geolocation.getCurrentPosition(onSuccess, errorCallback_highAccuracy,{timeout:6000, enableHighAccuracy: accuracy_high});
 }
 
 function onSuccess(position) {
@@ -98,8 +98,8 @@ function getGeoPosition(position){
     // var loc = mockLocationArray.pop();
     // var lat = loc / 500000; // GPS lat conversion factor
     // var lon = 0.0
-    // console.log(" lat: "+ lat+ " lon: "+ lon);
-    // console.log(position.coords.accuracy+"m");
+    console.log(" lat: "+ lat+ " lon: "+ lon);
+    console.log(position.coords.accuracy+"m");
     return new Point(lat,lon);
 }
 
@@ -254,5 +254,20 @@ function errorCallback_lowAccuracy(error) {
     }, 2000);
     startLocationPoints();
     $('#modalMessage').append(msg);
+}
+
+function showPosition(position) {
+     var latlon1 = coorPoints[0].info()[0] + "," + coorPoints[0].info()[1];
+    // var latlon2 = coorPoints[1].info()[0] + "," + coorPoints[1].info()[1];
+
+    var latlonStr = "|"+coorPoints[0].info()[0] + "," + coorPoints[0].info()[1];
+
+    for(var i =1;i<coorPoints.length;i++){
+        latlonStr=latlonStr+ "|"+coorPoints[i].info()[0] + "," + coorPoints[i].info()[1];
+    }
+
+    var img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
+        +latlon1+"&zoom=18&size=400x300&maptype=satellite&markers=color:red"+latlonStr+"&sensor=false";
+    document.getElementById("result").innerHTML = "<img src='"+img_url+"'>";
 }
 

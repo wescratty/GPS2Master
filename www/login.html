@@ -8,7 +8,7 @@
     </ons-toolbar>
 
     <div class="login-form">
-
+        <form  method="get" autocomplete="on">
         <input type="email" id = "useremail" class="text-input--underbar"  placeholder="first.last@u.edu" value="">
         <input type="password" id = "userpassword"  class="text-input--underbar"  placeholder="Password" value="">
         <br><br>
@@ -17,6 +17,7 @@
         <ons-button  class="login-button" style="width:100%" onclick="return validateForm(); getUserName()">Log In</ons-button>
         <br><br>
         <ons-button modifier="quiet" class="forgot-password" style="width:100%">Forgot password?</ons-button>
+        </form>
     </div>
 
 

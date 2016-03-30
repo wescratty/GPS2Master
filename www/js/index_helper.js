@@ -150,7 +150,7 @@ function tryEmail(){
     /* TODO Drew, we need to get user email from sign in */
 
     var userinfo;
-    var attachment;
+    var attachment = logOb.nativeURL;
 
 
     if (!logOb) {
@@ -161,14 +161,14 @@ function tryEmail(){
 
     cordova.plugins.email.isAvailable(
     function () {
-        
+
         cordova.plugins.email.open({
             to:      "doranillich@gmail.com",
-            cc:      ["wescratty@gmail.com",user_email],
-            bcc:     [user_email],
+            cc:      "wescratty@gmail.com",
+            bcc:     [],
             subject: 'Chart data from '+"Wes",
             body:    "This is only a test. This is a test of the...",
-            attachments: [attachment]
+            attachments: [logOb.nativeURL]
         });
     }
 );
