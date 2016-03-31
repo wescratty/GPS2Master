@@ -9,14 +9,18 @@
 
     <div class="login-form">
         <form  method="get" autocomplete="on">
-        <input type="email" id = "useremail" class="text-input--underbar"  placeholder="first.last@u.edu" value="">
-        <input type="password" id = "userpassword"  class="text-input--underbar"  placeholder="Password" value="">
+        <input type="email" id = "useremail" class="text-input--underbar"  placeholder="Instructor Email" value="">
+            <br><br>
+            <input type="text" id = "firstName"  class="text-input--underbar"  placeholder="First Name" value="">
+            <br><br>
+            <input type="text" id = "lastName"  class="text-input--underbar"  placeholder="Last Name" value="">
+        <!--<input type="password" id = "userpassword"  class="text-input&#45;&#45;underbar"  placeholder="Password" value="">-->
         <br><br>
         <!--<ons-button  class="login-button" style="width:100%" onclick=" getUserName(); myNavigator.resetToPage('sliding_menu.html', {animation : 'lift' })">Log In</ons-button>-->
 
         <ons-button  class="login-button" style="width:100%" onclick="return getUserName()">Log In</ons-button>
         <br><br>
-        <ons-button modifier="quiet" class="forgot-password" style="width:100%">Forgot password?</ons-button>
+        <!--<ons-button modifier="quiet" class="forgot-password" style="width:100%">Forgot password?</ons-button>-->
         </form>
     </div>
 

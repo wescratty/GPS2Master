@@ -116,7 +116,10 @@ function checkPoint(now,then,start){
         var last_point = new Point(time, temp_dis);
         var start_point = new Point(time, disFromStart);
         addDataToChart(last_point, start_point); // only access to add data
-    } else console.log("dist> tolerance");
+    } else{
+        console.log("dist> tolerance");
+        console.log("temp_dis: ",temp_dis);
+    }
 }
 
 function locationLock(position){
@@ -129,7 +132,8 @@ function locationLock(position){
     var b_y = b_point[1];
     var ax_bx = Math.abs(a_x -b_x);
     var ay_by = Math.abs(a_y -b_y);
-    if (ax_bx<5&&ay_by<5 ) {
+    if (ax_bx==0&&ay_by==0 ) {
+        console.log("ay_by: ",ay_by,"\n ax_bx: ",ax_bx);
         goodPoint = true;
         modal.hide();
         buildLatLonPoints(currentLoc);

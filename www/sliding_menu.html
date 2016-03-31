@@ -21,19 +21,19 @@
 
             <div style="float: right; padding-right: 16px; color:white;">
               <label class="radio-button">
-                <input type="radio" name="level" ng-model="selectedLevel" ng-click="menu.closeMenu()">
+                <input type="radio" name="level" ng-model="selectedLevel" onclick="set_mode_walk();menu.closeMenu()">
                 <div class="radio-button__checkmark"></div>
                 Walk
               </label>
 
               <label class="radio-button">
-                <input type="radio" name="level" ng-model="selectedLevel" ng-click="menu.closeMenu()">
+                <input type="radio" name="level" ng-model="selectedLevel" onclick="set_mode_bike();menu.closeMenu()">
                 <div class="radio-button__checkmark"></div>
                 Bike
               </label>
 
               <label class="radio-button">
-                <input type="radio" name="level" ng-model="selectedLevel" ng-click="menu.closeMenu()">
+                <input type="radio" name="level" ng-model="selectedLevel" onclick="set_mode_drive();menu.closeMenu()">
                 <div class="radio-button__checkmark"></div>
                 Drive
               </label>

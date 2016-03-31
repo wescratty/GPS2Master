@@ -25,8 +25,8 @@ function getUserName() {
 
 
 
-    first_name =  username[1].substring(0, lastPoint);
-    last_name = username[1].substring(lastPoint + 1);
+    first_name =  document.getElementById("firstName").value;
+    last_name = document.getElementById("lastName").value;
 
     first_name=capitalizeFirstLetter(first_name);
     last_name=capitalizeFirstLetter(last_name);
@@ -61,27 +61,17 @@ function capitalizeFirstLetter(string) {
 
 function validateForm() {
     var x = document.getElementById("useremail").value;
-    var y = document.getElementById("userpassword").value;
 
 
-    if(x.match(/(\D+)@/)){
-        var username = x.match(/(\D+)@/);
-        var lastPoint = username[1].lastIndexOf(".");
 
-    }else{
-        show_dialoge("School Email must be filled out in the form \"first.last@yourSchool.edu\"");
+    if(!x.match(/(\D+)@/)){
+        
+        show_dialoge("Instructor Email must be filled out");
         return false;
     }
 
-    if (x == null || x == ""||y == null || y == "") {
-        show_dialoge("School Email and a password must be filled out");
-        return false;
-    }else if(y.length<6){
-        show_dialoge("Your password must be at least 6 digits");
-        return false;
-
-    }else if (lastPoint == null || lastPoint == "" ) {
-        show_dialoge("School Email must be filled out in the form \"first.last@yourSchool.edu\"");
+    if (x == null || x == "") {
+        show_dialoge("Instructor Email must be filled out");
         return false;
     }else{
        return myNavigator.resetToPage('sliding_menu.html', {animation : 'lift' });
