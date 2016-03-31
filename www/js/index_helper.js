@@ -26,11 +26,13 @@ var logOb;
 var fileName;
 var fileApp;
 var startPoss;
+var receiver_email;
 var user_email;
 var user_password;
 var first_name;
 var last_name;
 var img_url;
+var max = 0;
 
 var hideStart = false;
 var hideStop = true;
@@ -146,33 +148,76 @@ function set_fromStartPoint_false(){
     // alert("false");
     _fromStartPoint = false;
 }
-function tryEmail(){
+function tryEmail() {
 
     /* TODO Drew, we need to get user email from sign in */
 
-    var userinfo;
+    var email;
     var attachment = logOb.nativeURL;
+    var first;
+    var last;
+    var teacher_email;
+
+
+    if (receiver_email !== "" || receiver_email !== null) {
+        teacher_email = receiver_email;
+    } else {
+        teacher_email = "doranillich@gmail.com";
+    }
+    if (first_name !== "" || first_name !== null) {
+        first = first_name;
+    } else {
+        first = "Unknown";
+    }
+    if (last_name !== "" || last_name !== null) {
+        last = last_name;
+    } else {
+        last = "Unknown";
+    }
+    if (user_email !== "" || user_email !== null) {
+        email = user_email;
+    } else {
+        email = "Unknown";
+    }
+    if (img_url !== "" || img_url !== null) {
+        var str = "Google Map";
+        var result = str.link(img_url);
+        var _body = result;
+    } else {
+        var _body = "";
+    }
+
+    var _subject = 'Chart data from ' + first + ' ' + last;
+
 
 
     if (!logOb) {
         show_dialoge("You havent made a file yet. Please conseider returning to graph and pressing start. Then go to expoert and save data.");
-    }else{
+        attachment = "";
+    } else {
         attachment = logOb.nativeURL;
     }
 
-    cordova.plugins.email.isAvailable(
-    function () {
+    if (device.platform == "browser") {
+        console.log("in email");
+        // window.location.href = "mailto:" + teacher_email+"?subject="+img_url;
+        window.location="https://mail.google.com/mail?view=cm&tf=0"+teacher_email+"&su"+_subject+"&body"+_body;
+    } else{
 
-        cordova.plugins.email.open({
-            to:      "doranillich@gmail.com",
-            cc:      "wescratty@gmail.com",
-            bcc:     [],
-            subject: 'Chart data from '+"Wes",
-            body:    "Here is the google map: "+img_url,
-            attachments: [logOb.nativeURL]
-        });
-    }
-);
+        cordova.plugins.email.isAvailable(
+            function () {
+
+                cordova.plugins.email.open({
+                    to: teacher_email,
+                    cc: email,
+                    bcc: [],
+                    subject: _subject,
+                    body: _body,
+                    attachments: [attachment]
+                });
+            }
+        );
+}
 }
 
 

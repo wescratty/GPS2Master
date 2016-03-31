@@ -14,7 +14,7 @@ function getUserName() {
     // console.log("first_name: ",first_name);
     // console.log("last_name: ",last_name);
 
-
+    var result = validateForm();
 
 
 
@@ -33,6 +33,8 @@ function getUserName() {
 
     console.log("first_name: ",first_name);
     console.log("last_name: ",last_name);
+    
+    return result;
 
 
 

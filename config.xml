@@ -16,6 +16,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <access origin="mailto:*" launch-external="yes"/>
     <preference name="BackupWebStorage" value="local"/>
 
     <access origin="cdvfile://*" />

@@ -11,16 +11,18 @@
     <ons-list modifier="inset" class="settings-list">
         <ons-list-item modifier="chevron" onclick="fileApp._writeTextToFile.call(FileApp)">
             <ons-icon icon="ion-plus-circled" style="opacity: 0.6"></ons-icon>
-            Write
+            Save Data
         </ons-list-item>
 
-        <ons-list-item modifier="chevron" onclick="fileApp._readTextFromFile.call(FileApp)">
-            <ons-icon icon="ion-navicon" style="opacity: 0.6"></ons-icon>
-            Read
-        </ons-list-item>
         <ons-list-item modifier="chevron" onclick="fileApp._deleteFile.call(FileApp)">
             <ons-icon icon="fa-minus-circle" style="opacity: 0.6"></ons-icon>
-            Delete
+            Delete Data
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" onclick="showPosition()">
+            <!--fileApp._readTextFromFile.call(FileApp)-->
+            <ons-icon icon="ion-navicon" style="opacity: 0.6"></ons-icon>
+            Show on Map
         </ons-list-item>
 
         <ons-list-item modifier="chevron" onclick="tryEmail()">

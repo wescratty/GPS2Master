@@ -196,6 +196,14 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
     var acc = 0.0;
     var pointToUse = _fromStartPoint ? startPoint : lastPoint;
 
+    
+    if(startPoint.info()[1]>max){
+        max=startPoint.info()[1];
+
+    }
+    console.log("Max in graph: ",max);
+    console.log("startPoint: ",startPoint.info()[1]);
+
 
     distancePoints.push(pointToUse); // distance from the last Point
 
@@ -269,6 +277,7 @@ function reset(){
 
     count = 0;
     time = 0;
+    max = 0;
 
     total_distance = un;
     startPoss = un;

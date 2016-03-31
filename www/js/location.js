@@ -77,7 +77,7 @@ function startLocationPoints(){
 }
 
 function getNew(){
-    navigator.geolocation.getCurrentPosition(onSuccess, errorCallback_highAccuracy,{timeout:6000, enableHighAccuracy: accuracy_high});
+    navigator.geolocation.getCurrentPosition(onSuccess, errorCallback_highAccuracy,{maximumAge:1000,timeout:5000, enableHighAccuracy: accuracy_high});
 }
 
 function onSuccess(position) {
@@ -116,7 +116,7 @@ function checkPoint(now,then,start){
         var last_point = new Point(time, temp_dis);
         var start_point = new Point(time, disFromStart);
         addDataToChart(last_point, start_point); // only access to add data
-    } else console.log(temp_dis);
+    } else console.log("dist> tolerance");
 }
 
 function locationLock(position){
@@ -183,10 +183,10 @@ function modeOfTrans(mode,dist){
     }else if (mode =="bike") {
         tolerance = 100;
     }else if (mode =="drive") {
-        tolerance = 10000;  // Thsi is too high but have the 7000 problem 
+        tolerance = 1000000;  // Thsi is too high but have the 7000 problem
     }
     var iss = dist<tolerance;
-    // console.log(iss);
+    console.log("mode: ",mode);
 
     return iss;
 }
@@ -257,7 +257,7 @@ function errorCallback_lowAccuracy(error) {
 }
 
 function showPosition(position) {
-     var latlon1 = coorPoints[0].info()[0] + "," + coorPoints[0].info()[1];
+     // var latlon1 = coorPoints[0].info()[0] + "," + coorPoints[0].info()[1];
     // var latlon2 = coorPoints[1].info()[0] + "," + coorPoints[1].info()[1];
 
     var latlonStr = "|"+coorPoints[0].info()[0] + "," + coorPoints[0].info()[1];
@@ -268,9 +268,79 @@ function showPosition(position) {
         }
 
     }
+    var meanPoint = findMeanLatLon();
+    console.log(meanPoint);
 
     img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
-        +latlon1+"&zoom=19&size=320x320&maptype=satellite&markers=size:tiny|color:red"+latlonStr+"&sensor=false";
+        +meanPoint+"&zoom="+getZoom()+"&size=320x320&maptype=satellite&markers=size:tiny|color:red"+latlonStr+"&sensor=false";
     document.getElementById("result").innerHTML = "<img src='"+img_url+"'>";
 }
+
+function findMeanLatLon() {
+    var latsum = coorPoints[0].info()[0];
+    var longsum = coorPoints[0].info()[1];
+    var i =1;
+    var index=1;
+
+    for(i;i<coorPoints.length;i++){
+        if(coorPoints[i].info()[0]!==coorPoints[i-1].info()[0]&&coorPoints[i].info()[1]!==coorPoints[i-1].info()[1]){
+            latsum=latsum+ coorPoints[i].info()[0];
+            longsum=longsum+ coorPoints[i].info()[1];
+            index++;
+        }
+
+    }
+    // index = (index>0)?index:1;
+    latsum=latsum/index;
+    longsum=longsum/index;
+    console.log("index: ",index);
+
+    return latsum + "," + longsum;
+
+}
+
+function getZoom() {
+    var zoom;
+    console.log("max: ",max);
+    if(max<500){
+        zoom=18;
+    }else if(max<1000){
+        zoom=14;
+    }else if(max<2500){
+        zoom=12;
+    }else if(max<5000){
+        zoom=11;
+    }else if(max<8000){
+        zoom=10;
+    }else if(max<5000){
+        zoom=9;
+    }else{
+        zoom=8;
+    }
+    console.log("zoom: ",zoom);
+    return zoom;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

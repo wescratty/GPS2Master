@@ -155,7 +155,7 @@ FileApp.prototype = {
     },
 
     _onSuccess: function(value) {
-        showPosition();
+        // showPosition();
         show_dialoge(value);
     },
 
