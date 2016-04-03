@@ -53,7 +53,9 @@ app.service('sharedProperties', function () {
                                 var onsList = $("#popMessage");
                                 for (var i=0; i<file_entries.length; i++) {
                                     if (file_entries[i].name !== "NoCloud" && file_entries[i].name !== "Backups") {
-                                     onsList.append('<ons-list-item modifier="tappable" id = ' + i + ' onclick="showButtonId(this.id)" class="list__item ons-list-item-inner">' + file_entries[i].name + '</ons-list-item>');
+                                    var file_name = file_entries[i].name.match(/(\w{17})\./);
+                                     onsList.append('<ons-list-item modifier="tappable" id = ' + i + ' onclick="showButtonId(this.id)" class="list__item ons-list-item-inner">' + file_name[1] + '</ons-list-item>');
+                                    console.log(file_name[1]);
                                     }
                                 }
                             },
@@ -175,6 +177,9 @@ function tryEmail() {
     }
     if (img_url !== "" || img_url !== null) {
         var str = "Google Map";
+        if(!img_url){
+        img_url=makeImgUrl();
+        }
         var result = str.link(img_url);
         var _body = result;
     } else {
@@ -202,8 +207,8 @@ function tryEmail() {
             function () {
 
                 cordova.plugins.email.open({
-                    to: teacher_email,
-                    cc: email,
+                    to: email,
+                    cc: "",
                     bcc: [],
                     subject: _subject,
                     body: _body,

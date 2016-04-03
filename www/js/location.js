@@ -242,7 +242,13 @@ function errorCallback_lowAccuracy(error) {
 }
 
 function showPosition(position) {
-     // var latlon1 = coorPoints[0].info()[0] + "," + coorPoints[0].info()[1];
+
+
+    document.getElementById("result").innerHTML = "<img src='"+makeImgUrl()+"'>";
+}
+
+function makeImgUrl(){
+  // var latlon1 = coorPoints[0].info()[0] + "," + coorPoints[0].info()[1];
     // var latlon2 = coorPoints[1].info()[0] + "," + coorPoints[1].info()[1];
 
     var latlonStr = "|"+coorPoints[0].info()[0] + "," + coorPoints[0].info()[1];
@@ -258,7 +264,8 @@ function showPosition(position) {
 
     img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
         +meanPoint+"&zoom="+getZoom()+"&size=320x320&maptype=satellite&markers=size:tiny|color:red"+latlonStr+"&sensor=false";
-    document.getElementById("result").innerHTML = "<img src='"+img_url+"'>";
+        return img_url;
+
 }
 
 function findMeanLatLon() {
@@ -275,7 +282,7 @@ function findMeanLatLon() {
         }
 
     }
-    // index = (index>0)?index:1;
+
     latsum=latsum/index;
     longsum=longsum/index;
     console.log("index: ",index);
@@ -321,7 +328,14 @@ function getZoom() {
 
 }
 
+function set_fromStartPoint_true(){
 
+    _fromStartPoint = true;
+}
+function set_fromStartPoint_false(){
+
+    _fromStartPoint = false;
+}
 
 
 

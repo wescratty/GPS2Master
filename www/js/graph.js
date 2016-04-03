@@ -7,7 +7,7 @@ var modal;
 ons.ready(function() {
 $(document.body).on("pageinit", '#my-page', function() {
     $("#show-modal", this).click(function() {
-        $('#modalMessage').append("\<br>Please wait... <br> Finding your location... ");
+        $('#modalMessage').append("<br>Please wait... <br> Finding your location... ");
         
         if(!goodPoint){
             modal.show();
@@ -254,8 +254,6 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
 
 function reset(){
 
-
-    /*todo: we need a way to reset the table*/
     $("#dataTable").empty();
     $("#modalMessage").empty();
     

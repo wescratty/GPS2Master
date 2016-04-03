@@ -132,14 +132,7 @@ function prep_test_data(){
     }
 }
 
-function set_fromStartPoint_true(){
 
-    _fromStartPoint = true;
-}
-function set_fromStartPoint_false(){
-    // alert("false");
-    _fromStartPoint = false;
-}
 
 
 

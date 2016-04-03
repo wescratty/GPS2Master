@@ -20,7 +20,6 @@ function initIo() {
             dir.getFile(fileName, {create: true}, function (file) {
                 console.log("File: ", file);
                 logOb = file;
-                //writeLog("App started");
             });
         });
     }
@@ -33,7 +32,6 @@ function initIo() {
             dir.getFile(fileName, {create: true}, function (file) {
                 console.log("File: ", file);
                 logOb = file;
-                //writeLog("App started");
             });
         });
 
@@ -274,16 +272,6 @@ FileSystemHelper.prototype = {
                 onError.call(that, error);
             });
     },
-    // _getDir: function(logOb, onSuccess, onError) {
-    //     var that = this;
-    //     logOb.root.readdir( function(err, items) {
-    //         console.log(items);
-    //
-    //         for (var i=0; i<items.length; i++) {
-    //             console.log(items[i]);
-    //         }
-    //     });
-    // },
 
     _getFile: function(logOb, onSuccess, onError) {
         var that = this;
