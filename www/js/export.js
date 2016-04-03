@@ -8,6 +8,9 @@ app.controller('DropdownController', function($scope, sharedProperties) {
 
 
 $scope.go = function($event) {
+console.log("-----------------action: ",$event.target.attributes.id.value);
+setAction = $event.target.attributes.id.value;
+//    sharedProperties.setAction(action);
     sharedProperties.listDir();
 //    sharedProperties.addToPopList();
     $scope.popover.show($event);
@@ -65,6 +68,11 @@ app.service('sharedProperties', function () {
                     }
                 );
         }
+//,
+//        setAction: function(action){
+//        setAction = action;
+//            console.log("setAction: ",action);
+//        }
     };
 
 
@@ -75,11 +83,11 @@ app.service('sharedProperties', function () {
 
 
 // exportInfo(this.id)
-function setAction(that){
-    setAction = that;
-    console.log("setAction: ",that);
-
-}
+//function setAction(that){
+//    setAction = that;
+//    console.log("setAction: ",that);
+//
+//}
 function test(num){
 console.log("the number is : ",num);
 }
