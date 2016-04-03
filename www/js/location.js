@@ -48,21 +48,6 @@ function loadBadMockDataToArray() {
     ];
 }
 
-// function toggle_startp_lastp(){
-//     console.log("coorPoints.length: "+coorPoints.length);
-//     if(coorPoints.length>0){
-//         transferingData = true;
-//         transferData();
-//         console.log("Transfering data");
-//     }
-// }
-//
-// function transferData(){
-//     var tempArr = _fromStartPoint ? coorPoints : testdata;
-//     reset();
-//     testdata = tempArr;
-//     load_test_data();
-// }
 
 function startLocationPoints(){
     // show_dialoge("Connecting...");
@@ -95,11 +80,13 @@ function onSuccess(position) {
 function getGeoPosition(position){
     var lat = position.coords.latitude;
     var lon = position.coords.longitude;
+
+    // for mock data, may be removed after testing?
     // var loc = mockLocationArray.pop();
     // var lat = loc / 500000; // GPS lat conversion factor
     // var lon = 0.0
-    console.log(" lat: "+ lat+ " lon: "+ lon);
-    console.log(position.coords.accuracy+"m");
+//    console.log(" lat: "+ lat+ " lon: "+ lon);
+//    console.log(position.coords.accuracy+"m");
     return new Point(lat,lon);
 }
 
@@ -202,10 +189,7 @@ function show_dialoge(mess) {
         message: mess
     });
 }
-// function destroy_dialoge() {
-//
-//     alertDialog.destroy();
-// }
+
 
 function errorCallback_highAccuracy(error) {
     accuracy_high = false;

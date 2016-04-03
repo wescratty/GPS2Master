@@ -8,8 +8,8 @@ function initIo() {
     // got to be a cleaner way...
     var d = new Date().toLocaleString().replace(/,/g , "").replace(/ /g , "").replace(/\//g , "").replace(/:/g , "");
     fileName= first_name+last_name+d+".csv";
-    console.log("first_name+last_name: "+first_name+last_name);
-    console.log(fileName);
+//    console.log("first_name+last_name: "+first_name+last_name);
+//    console.log(fileName);
 
 
     console.log(device.platform);

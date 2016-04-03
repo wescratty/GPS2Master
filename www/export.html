@@ -8,21 +8,6 @@
 </ons-toolbar>
 
 
-
-
-
-    <!--<ons-toolbar ng-controller="DropdownController">-->
-        <!--<div class="right">-->
-            <!--<ons-toolbar-button ng-click="popover.show($event);"><ons-icon icon="ion-navicon" style="font-size: 32px; width: 1em;"></ons-icon></ons-toolbar-button>-->
-        <!--</div>-->
-        <!--<div class="center">Dropdown test</div>-->
-    <!--</ons-toolbar>-->
-
-
-
-
-
-
     <ons-list ng-controller="DropdownController" modifier="inset" class="settings-list">
 
         <ons-list-item modifier="chevron" onclick="save()">
@@ -34,10 +19,7 @@
             <ons-icon icon="ion-minus-circled" style="opacity: 0.6"></ons-icon>
             Remove File
         </ons-list-item>
-        <!--onclick="fileApp._readTextFromFile.call(FileApp)"-->
-        <!--fileApp._writeTextToFile.call(FileApp)-->
-        <!--showPosition-->
-        <!--fileApp._deleteFile.call(FileApp)-->
+
         <ons-list-item  modifier="chevron" onclick="showPosition()">
             <ons-icon icon="fa-map-marker" style="opacity: 0.6"></ons-icon>
             Show Rout in Google Maps
@@ -46,7 +28,7 @@
 
         <ons-list-item id="selectForEmail" modifier="chevron"  ng-click="go($event);">
 
-        <!--<ons-list-item id="show-pop" modifier="chevron" onclick="tryEmail()">-->
+
         <ons-icon icon="ion-email" style="opacity: 0.6"></ons-icon>
             Select File and Send Email
         </ons-list-item>

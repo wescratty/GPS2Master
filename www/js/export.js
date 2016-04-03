@@ -1,18 +1,18 @@
 
 
 var app = ons.bootstrap();
-
+var pop;
 
 
 app.controller('DropdownController', function($scope, sharedProperties) {
 
 
 $scope.go = function($event) {
-console.log("-----------------action: ",$event.target.attributes.id.value);
-setAction = $event.target.attributes.id.value;
-//    sharedProperties.setAction(action);
+    //console.log("action: ",$event.target.attributes.id.value);
+    setAction = $event.target.attributes.id.value;
+
     sharedProperties.listDir();
-//    sharedProperties.addToPopList();
+
     $scope.popover.show($event);
 
 
@@ -20,14 +20,12 @@ setAction = $event.target.attributes.id.value;
     ons.createPopover('popover.html').then(function(popover) {
     console.log("fired pop");
         $scope.popover = popover;
+        pop=$scope.popover;
 
 
         
     });
 });
-
-
-
 
 
 app.service('sharedProperties', function () {
@@ -68,26 +66,10 @@ app.service('sharedProperties', function () {
                     }
                 );
         }
-//,
-//        setAction: function(action){
-//        setAction = action;
-//            console.log("setAction: ",action);
-//        }
     };
-
-
 });
 
 
-
-
-
-// exportInfo(this.id)
-//function setAction(that){
-//    setAction = that;
-//    console.log("setAction: ",that);
-//
-//}
 function test(num){
 console.log("the number is : ",num);
 }
@@ -107,6 +89,7 @@ function showButtonId(that) {
 
 
 function exportInfo(that,callBack){
+    pop.hide();
     console.log("exportInfo");
     fileName = file_entries[that].name;
     console.log("fileName: ",fileName);
@@ -131,25 +114,12 @@ function exportInfo(that,callBack){
 }
 
 
-//function addToPopList() {
-//    console.log("in addToPopList: ");
-//    // $("#popMessage").empty();
-//    var onsList = $("#popMessage");
-//    for (var i=0; i<file_entries.length; i++) {
-//        if (file_entries[i].name !== "NoCloud" && file_entries[i].name !== "Backups") {
-//            onsList.append('<ons-list-item modifier="tappable" id = ' + i + ' onclick="showButtonId(this.id)" class="list__item ons-list-item-inner">' + file_entries[i].name + '</ons-list-item>');
-//        }
-//    }
+//ons.ready(function() {
+//    $(document.body).on("pageinit", '#export-page', function($scope) {
 //
-//}
-
-
-ons.ready(function() {
-    $(document.body).on("pageinit", '#export-page', function($scope) {
-
-        // listDir();
-    });
-});
+//        // listDir();
+//    });
+//});
 
 
 function save() {
@@ -171,36 +141,6 @@ function _delete(fileName) {
 
     }
 }
-
-
-//function listDir(){
-//    console.log("in listDir");
-//    // file_entries = un;
-//
-//    var path = directory.nativeURL;
-//    window.resolveLocalFileSystemURL(path,
-//        function (fileSystem) {
-//            var reader = fileSystem.createReader();
-//            reader.readEntries(
-//                function (entries) {
-//                    file_entries = entries;
-//                    var i;
-//                    for (i=0; i<entries.length; i++) {
-//                        console.log(entries[i].name);
-//                    }
-//                    // console.log(entries);
-//
-//                     addToPopList();
-//                },
-//                function (err) {
-//                    console.log(err);
-//                }
-//            );
-//        }, function (err) {
-//            console.log(err);
-//        }
-//    );
-//}
 
 
 function tryEmail() {
@@ -273,3 +213,49 @@ function tryEmail() {
         );
     }
 }
+
+
+
+// just for reference
+
+//function listDir(){
+//    console.log("in listDir");
+//    // file_entries = un;
+//
+//    var path = directory.nativeURL;
+//    window.resolveLocalFileSystemURL(path,
+//        function (fileSystem) {
+//            var reader = fileSystem.createReader();
+//            reader.readEntries(
+//                function (entries) {
+//                    file_entries = entries;
+//                    var i;
+//                    for (i=0; i<entries.length; i++) {
+//                        console.log(entries[i].name);
+//                    }
+//                    // console.log(entries);
+//
+//                     addToPopList();
+//                },
+//                function (err) {
+//                    console.log(err);
+//                }
+//            );
+//        }, function (err) {
+//            console.log(err);
+//        }
+//    );
+//}
+
+
+//function addToPopList() {
+//    console.log("in addToPopList: ");
+//    // $("#popMessage").empty();
+//    var onsList = $("#popMessage");
+//    for (var i=0; i<file_entries.length; i++) {
+//        if (file_entries[i].name !== "NoCloud" && file_entries[i].name !== "Backups") {
+//            onsList.append('<ons-list-item modifier="tappable" id = ' + i + ' onclick="showButtonId(this.id)" class="list__item ons-list-item-inner">' + file_entries[i].name + '</ons-list-item>');
+//        }
+//    }
+//
+//}
