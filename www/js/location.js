@@ -197,25 +197,22 @@ function modeOfTrans(mode,dist){
 
 /* Can use instead of alert(), makes a iOS style alert */
 function show_dialoge(mess) {
-    // ons.createAlertDialog('alert.html').then(function(alertDialog) {
-    //     alertDialog.show();
-    // });
-
+    
     ons.notification.alert({
         message: mess
     });
 }
-function destroy_dialoge() {
-
-    alertDialog.destroy();
-}
+// function destroy_dialoge() {
+//
+//     alertDialog.destroy();
+// }
 
 function errorCallback_highAccuracy(error) {
     accuracy_high = false;
     console.log(error)
     if (error.code == error.TIMEOUT)
     {
-        $('#modalMessage').append("\<br> Switching to low accuracy location...");
+        $('#modalMessage').append("<br> Switching to low accuracy location...");
         navigator.geolocation.getCurrentPosition(
             onSuccess,
             errorCallback_lowAccuracy,
@@ -306,21 +303,35 @@ function findMeanLatLon() {
 function getZoom() {
     var zoom;
     console.log("max: ",max);
-    if(max<500){
-        zoom=18;
-    }else if(max<1000){
-        zoom=14;
-    }else if(max<2500){
-        zoom=12;
-    }else if(max<5000){
-        zoom=11;
-    }else if(max<8000){
-        zoom=10;
-    }else if(max<5000){
-        zoom=9;
+    
+    if(_autoZoom) {
+        if (max < 500) {
+            zoom = 18;
+        } else if (max < 1000) {
+            zoom = 17;
+        } else if (max < 2000) {
+            zoom = 16;
+        } else if (max < 3000) {
+            zoom = 15;
+        } else if (max < 4000) {
+            zoom = 14;
+        } else if (max < 5000) {
+            zoom = 13;
+        } else if (max < 6000) {
+            zoom = 12;
+        } else if (max < 7000) {
+            zoom = 11;
+        } else if (max < 8000) {
+            zoom = 10;
+        } else if (max < 9000) {
+            zoom = 9;
+        } else {
+            zoom = 8;
+        }
     }else{
-        zoom=8;
+        zoom = customZoom;
     }
+    currentZoom =zoom;
     console.log("zoom: ",zoom);
     return zoom;
 

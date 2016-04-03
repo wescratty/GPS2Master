@@ -1,33 +1,54 @@
 
 <body ng-controller="AppController" ng-init="init()">
 <ons-navigator title="Navigator" var="myNavigator">
-<ons-page>
+<ons-page id="export-page">
 
 <ons-toolbar >
     <div class="center">Export</div>
 </ons-toolbar>
 
 
-    <ons-list modifier="inset" class="settings-list">
-        <ons-list-item modifier="chevron" onclick="fileApp._writeTextToFile.call(FileApp)">
+
+
+
+    <!--<ons-toolbar ng-controller="DropdownController">-->
+        <!--<div class="right">-->
+            <!--<ons-toolbar-button ng-click="popover.show($event);"><ons-icon icon="ion-navicon" style="font-size: 32px; width: 1em;"></ons-icon></ons-toolbar-button>-->
+        <!--</div>-->
+        <!--<div class="center">Dropdown test</div>-->
+    <!--</ons-toolbar>-->
+
+
+
+
+
+
+    <ons-list ng-controller="DropdownController" modifier="inset" class="settings-list">
+
+        <ons-list-item modifier="chevron" onclick="save()">
             <ons-icon icon="ion-plus-circled" style="opacity: 0.6"></ons-icon>
-            Save Data
+            Save Most Recent Data
         </ons-list-item>
 
-        <ons-list-item modifier="chevron" onclick="fileApp._deleteFile.call(FileApp)">
-            <ons-icon icon="fa-minus-circle" style="opacity: 0.6"></ons-icon>
-            Delete Data
+        <ons-list-item id="selectForDelete" modifier="chevron" onclick= "setAction(this.id)" ng-click="go($event);">
+            <ons-icon icon="ion-minus-circled" style="opacity: 0.6"></ons-icon>
+            Remove File
+        </ons-list-item>
+        <!--onclick="fileApp._readTextFromFile.call(FileApp)"-->
+        <!--fileApp._writeTextToFile.call(FileApp)-->
+        <!--showPosition-->
+        <!--fileApp._deleteFile.call(FileApp)-->
+        <ons-list-item  modifier="chevron" onclick="showPosition()">
+            <ons-icon icon="fa-map-marker" style="opacity: 0.6"></ons-icon>
+            Show Rout in Google Maps
         </ons-list-item>
 
-        <ons-list-item modifier="chevron" onclick="showPosition()">
-            <!--fileApp._readTextFromFile.call(FileApp)-->
-            <ons-icon icon="ion-navicon" style="opacity: 0.6"></ons-icon>
-            Show on Map
-        </ons-list-item>
 
-        <ons-list-item modifier="chevron" onclick="tryEmail()">
+        <ons-list-item id="selectForEmail" modifier="chevron" onclick= "setAction(this.id)" ng-click="go($event);">
+
+        <!--<ons-list-item id="show-pop" modifier="chevron" onclick="tryEmail()">-->
         <ons-icon icon="ion-email" style="opacity: 0.6"></ons-icon>
-            Email
+            Select File and Send Email
         </ons-list-item>
     </ons-list>
 
@@ -40,5 +61,16 @@
 
 
 </ons-page>
+
+
+
+    <ons-template  id="popover.html">
+        <ons-popover  direction="down" cancelable>
+
+            <ons-list id = popMessage>
+            </ons-list>
+
+        </ons-popover>
+    </ons-template>
 </ons-navigator>
 </body>

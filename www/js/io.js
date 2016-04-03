@@ -2,15 +2,21 @@
 document.addEventListener('deviceready', function () {
     console.log("device is ready in io");
 
-    /* Drew, will have to delete all of the shipper stuff and just set */
-// ------ need to use shipper to get the file we want and set as global file name else data.csv will get over ridden. -------
-    fileName= "export.csv";
+});
+
+function initIo() {
+    // got to be a cleaner way...
+    var d = new Date().toLocaleString().replace(/,/g , "").replace(/ /g , "").replace(/\//g , "").replace(/:/g , "");
+    fileName= first_name+last_name+d+".csv";
+    console.log("first_name+last_name: "+first_name+last_name);
+    console.log(fileName);
 
 
     console.log(device.platform);
     if (device.platform == "Android") {
         window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dir) {
             console.log("Main Dir android:", dir);
+            directory = dir;
             dir.getFile(fileName, {create: true}, function (file) {
                 console.log("File: ", file);
                 logOb = file;
@@ -22,6 +28,8 @@ document.addEventListener('deviceready', function () {
 
         window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
             console.log("Main Dir:", dir);
+            directory = dir;
+            console.log("directory: ",directory);
             dir.getFile(fileName, {create: true}, function (file) {
                 console.log("File: ", file);
                 logOb = file;
@@ -30,19 +38,23 @@ document.addEventListener('deviceready', function () {
         });
 
     }else if (device.platform == "browser") {
+        // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
+        //
+        //         console.log("Main Dir:", fileSystem);
+        //         directory = fileSystem;
+        //         console.log("directory: ",directory);
+        //     fileSystem.getFile(fileName, {create: true}, function (file) {
+        //             console.log("File: ", file);
+        //             logOb = file;
+        //
+        //     });
+        // });
 
-
-
-    }// end of iff
-
-
-    console.log("Right before run call ");
+    }
+    
     fileApp = new FileApp();
     fileApp.run();
-    console.log("Right after run call ");
-    // setUP();
-});
-
+}
 
 
 function arrayToCsv(an_array){
@@ -57,28 +69,6 @@ function arrayToCsv(an_array){
     return temp;
 }
 
-// function csvToarray(aString){
-//     var strArr = aString.split(/\n/);
-//     testdata = [];
-//     var tempArr = []
-//     var temp;
-
-//     console.log("hasComment");
-
-//     var hasComment = strArr[0].match(/Comment:/) ? strArr[0].match(/Comment: ([\w\s]+)/) : false;
-//     console.log(hasComment);
-
-
-//     var i = hasComment ? 1:0;
-
-
-//     for (i ; i < strArr.length; i++) {
-//         temp= strArr[i].split(/,/);
-//         tempArr[i]=[parseFloat(temp[0]),parseFloat(temp[1])];
-//         if (!tempArr[i][0]&&!tempArr[i][1]) {continue};// might cause error
-//         testdata.push(tempArr[i]);
-//     };
-// }
 
 function CSVTable(aString){
     var strArr = aString.split(/\n/);
@@ -114,6 +104,7 @@ FileApp.prototype = {
     },
 
     _deleteFile: function () {
+        console.log("in io delete file");
         var that = fileApp;
 
         if (that._isValidFileName(fileName)) {
@@ -191,6 +182,7 @@ FileSystemHelper.prototype = {
         window.requestFileSystem(LocalFileSystem.PERSISTENT, grantedBytes,
             function(fileSystem) {
                 that._createFile.call(that, fileSystem, fileName, text, onSuccess, onError);
+                logOb = fileSystem;
 
             },
             function(error) {
@@ -218,7 +210,7 @@ FileSystemHelper.prototype = {
 
         fileSystem.root.getFile(fileName, options,
             function(logOb) {
-                that._createFileWriter.call(that, logOb, text, onSuccess, onError);
+                that._createFileWriter.call(that,fileName, logOb, text, onSuccess, onError);
 
                 console.log("line 222");
 
@@ -231,13 +223,13 @@ FileSystemHelper.prototype = {
 
 
 
-    _createFileWriter: function(logOb, text, onSuccess, onError) {
+    _createFileWriter: function(fileName, logOb, text, onSuccess, onError) {
         var that = this;
         logOb.createWriter(function(fileWriter) {
                 var len = fileWriter.length;
                 fileWriter.seek(len);
                 fileWriter.write(text + '\n');
-                var message = "Wrote to file " ;
+                var message = "Wrote to file "+fileName ;
                 onSuccess.call(that, message);
             },
             function(error) {
@@ -282,6 +274,16 @@ FileSystemHelper.prototype = {
                 onError.call(that, error);
             });
     },
+    // _getDir: function(logOb, onSuccess, onError) {
+    //     var that = this;
+    //     logOb.root.readdir( function(err, items) {
+    //         console.log(items);
+    //
+    //         for (var i=0; i<items.length; i++) {
+    //             console.log(items[i]);
+    //         }
+    //     });
+    // },
 
     _getFile: function(logOb, onSuccess, onError) {
         var that = this;

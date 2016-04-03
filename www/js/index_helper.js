@@ -1,9 +1,21 @@
 // globa vars 
-var refreshIntervalId = null;
+
+
+// sort these as find or delete if not used
+var non_lat_long_Points = [];
+var drawArray = [];
+var hideStart = false;
+var hideStop = true;
+var fileSelector = false;
+var needsStarted = true;
+var transferingData = false;
+var alertDialog;
+
+
+
+// graph
 var dataOutArray = [];
 var pointsArray = [];
-var coorPoints = [];
-var non_lat_long_Points = [];
 var distancePoints = [];
 var accelerationPoints = [];
 var positionPoints = [];
@@ -11,77 +23,64 @@ var ratePoints = [];
 var distance = [];
 var rate = [];
 var acceleration = [];
-var drawArray = [];
-
+var total_distance;
+var lineChart;
+var canvas;
+var ctx;
 var startTime;
 var count = 0;
 var time = 0;
 var un;// used to reset things
 
-var total_distance;
-var lineChart;
-var canvas;
-var ctx;
+var max = 0;
+
+var _fromStartPoint = false;
+
+// export
+var file_entries;
+var indexId;
+var setAction;
+
+// index
+
+// index_helper
+var img_url;
+
+// io
 var logOb;
 var fileName;
 var fileApp;
-var startPoss;
-var receiver_email;
-var user_email;
-var user_password;
-var first_name;
-var last_name;
-var img_url;
-var max = 0;
+var directory;
+var fs;
 
-var hideStart = false;
-var hideStop = true;
-var _fromStartPoint = false;
-var fileSelector = false;
+// location
+var coorPoints = [];
+var refreshIntervalId = null;
+var startPoss;
 var goodPoint = false;
+var accuracy_high = true;
 var currentLoc;
 var lastLoc = new Point(0,0);
-var needsStarted = true;
-var accuracy_high = true;
-
-var transferingData = false;
-var alertDialog;
-
 const K_MILL_SEC = 1000;
-
-
-
 var mode = "drive";
 
 
-// this is x^3
-// var testdata = [
-// [ 0 ,  0 ],
-// [ 1 ,  0.258819 ],
-// [ 2 ,  0.5 ],
-// [ 3 ,  0.7071068 ],
-// [ 4 ,  0.8660254 ],
-// [ 5 ,  0.9659258 ],
-// [ 6 ,  1 ],
-// [ 7 ,  0.9659258 ],
-// [ 8 ,  0.8660254 ],
-// [ 9 ,  0.7071068 ],
-// [ 10 ,  0.5 ],
-// [ 11 ,  0.258819 ],
-// [ 12 ,  0.0 ],
-// [ 13 ,  -0.258819 ],
-// [ 14 ,  -0.5 ],
-// [ 15 ,  -0.7071068 ],
-// [ 16 ,  -0.8660254 ],
-// [ 17 ,  -0.9659258 ],
-// [ 18 ,  -1 ],
-// [ 19 ,  -0.9659258 ],
-// [ 20 ,  -0.8660254 ],
-// [ 21 ,  -0.7071068 ],
-// [ 22 ,  -0.5 ],
-// [ 23 ,  -0.258819 ],
-// [ 24 ,  0.0 ]
-//                 ];
+// login
+var first_name;
+var last_name;
+var receiver_email;
+var user_email;
+
+
+// settings
+var _autoZoom = true;
+var currentZoom = 0;
+var customZoom = 0;
+
+// sliding menu
+
+// tabel
+
 var testdata = [
 
     [ 0 ,  0 ],
@@ -128,17 +127,10 @@ function prep_test_data(){
         var b_point = new Point(testdata[i-1][0],testdata[i-1][1]);
         
         addDataToChart(b_point,b_point);
+        /* TODO: once test data is lat lon point send through checkpoint instead of addDataTochart*/
         // checkPoint(b_point,a_point,c_point);
     }
 }
-
-// function load_test_data(){
-//     for (var i = 1;i< testdata.length;i++) {
-//         var a_point = testdata[i];
-//         var b_point =    testdata[i-1];
-//         checkPoint(b_point,a_point,testdata[0]);
-//     }
-// }
 
 function set_fromStartPoint_true(){
 
@@ -147,77 +139,6 @@ function set_fromStartPoint_true(){
 function set_fromStartPoint_false(){
     // alert("false");
     _fromStartPoint = false;
-}
-function tryEmail() {
-
-    /* TODO Drew, we need to get user email from sign in */
-
-    var email;
-    var attachment = logOb.nativeURL;
-    var first;
-    var last;
-    var teacher_email;
-
-
-    if (receiver_email !== "" || receiver_email !== null) {
-        teacher_email = receiver_email;
-    } else {
-        teacher_email = "doranillich@gmail.com";
-    }
-    if (first_name !== "" || first_name !== null) {
-        first = first_name;
-    } else {
-        first = "Unknown";
-    }
-    if (last_name !== "" || last_name !== null) {
-        last = last_name;
-    } else {
-        last = "Unknown";
-    }
-    if (user_email !== "" || user_email !== null) {
-        email = user_email;
-    } else {
-        email = "Unknown";
-    }
-    if (img_url !== "" || img_url !== null) {
-        var str = "Google Map";
-        var result = str.link(img_url);
-        var _body = result;
-    } else {
-        var _body = "";
-    }
-
-    var _subject = 'Chart data from ' + first + ' ' + last;
-
-
-
-    if (!logOb) {
-        show_dialoge("You havent made a file yet. Please conseider returning to graph and pressing start. Then go to expoert and save data.");
-        attachment = "";
-    } else {
-        attachment = logOb.nativeURL;
-    }
-
-    if (device.platform == "browser") {
-        console.log("in email");
-        // window.location.href = "mailto:" + teacher_email+"?subject="+img_url;
-        window.location="https://mail.google.com/mail?view=cm&tf=0"+teacher_email+"&su"+_subject+"&body"+_body;
-    } else{
-
-        cordova.plugins.email.isAvailable(
-            function () {
-
-                cordova.plugins.email.open({
-                    to: teacher_email,
-                    cc: email,
-                    bcc: [],
-                    subject: _subject,
-                    body: _body,
-                    attachments: [attachment]
-                });
-            }
-        );
-}
 }
 
 

@@ -2,63 +2,16 @@
  * Created by wescratty on 3/18/16.
  */
 
-// var app=angular.module('myApp', ['onsen.directives']);
-//     app.controller( function($scope) {
-//         $scope.alert = function(material) {
-//             ons.notification.alert({
-//                 message: 'An error has occurred!',
-//                 modifier: material ? 'material' : undefined
-//             });
-//         }
-//
-//         $scope.confirm = function(material) {
-//             var mod = material ? 'material' : undefined;
-//
-//             ons.notification.confirm({
-//                 message: 'Are you sure you want to continue?',
-//                 modifier: mod,
-//                 callback: function(idx) {
-//                     switch (idx) {
-//                         case 0:
-//                             ons.notification.alert({
-//                                 message: 'You pressed "Cancel".',
-//                                 modifier: mod
-//                             });
-//                             break;
-//                         case 1:
-//                             ons.notification.alert({
-//                                 message: 'You pressed "OK".',
-//                                 modifier: mod
-//                             });
-//                             break;
-//                     }
-//                 }
-//             });
-//         }
-//
-//         $scope.prompt = function(material) {
-//             var mod = material ? 'material' : undefined;
-//             ons.notification.prompt({
-//                 message: "Please enter your age",
-//                 modifier: mod,
-//                 callback: function(age) {
-//                     ons.notification.alert({
-//                         message: 'You are ' + parseInt(age || 0) + ' years old.',
-//                         modifier: mod
-//                     });
-//                 }
-//             });
-//         }
-//     });
-
 function set_mode_walk(){
     mode = "walk";
     console.log("changed mode walk");
 }
+
 function set_mode_bike(){
     mode = "bike";
     console.log("changed mode bike");
 }
+
 function set_mode_drive(){
     mode = "drive";
     console.log("changed mode drive");
