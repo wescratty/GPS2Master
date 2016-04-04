@@ -242,14 +242,23 @@ function errorCallback_lowAccuracy(error) {
 }
 
 function showPosition(position) {
+    img_url = makeImgUrl();
 
+    if(img_url){
+        document.getElementById("result").innerHTML = "<img src='"+img_url+"'>";
+    }else{
+        show_dialoge("You have no location points yet!");
+    }
 
-    document.getElementById("result").innerHTML = "<img src='"+makeImgUrl()+"'>";
 }
 
 function makeImgUrl(){
   // var latlon1 = coorPoints[0].info()[0] + "," + coorPoints[0].info()[1];
     // var latlon2 = coorPoints[1].info()[0] + "," + coorPoints[1].info()[1];
+
+    if(coorPoints.length<1){
+    return false;
+    }else{
 
     var latlonStr = "|"+coorPoints[0].info()[0] + "," + coorPoints[0].info()[1];
 
@@ -265,6 +274,7 @@ function makeImgUrl(){
     img_url = "http://maps.googleapis.com/maps/api/staticmap?center="
         +meanPoint+"&zoom="+getZoom()+"&size=320x320&maptype=satellite&markers=size:tiny|color:red"+latlonStr+"&sensor=false";
         return img_url;
+        }
 
 }
 

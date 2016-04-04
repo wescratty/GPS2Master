@@ -13,18 +13,19 @@ $scope.go = function($event) {
 
     sharedProperties.listDir();
 
-    $scope.popover.show($event);
-
+    if(pop){
+        pop.show($event);
+    }
 
   }
     ons.createPopover('popover.html').then(function(popover) {
-    console.log("fired pop");
+    if(!pop){
+        console.log("fired pop");
         $scope.popover = popover;
         pop=$scope.popover;
-
-
-        
+    }
     });
+
 });
 
 
@@ -35,16 +36,11 @@ app.service('sharedProperties', function () {
         listDir: function() {
             console.log("in listDir");
             $("#popMessage").empty();
-                // file_entries = un;
 
                 var path = directory.nativeURL;
 
-
                 if (device.platform == "browser"){
                 window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
-
-
-
                                     function (fileSystem) {
                                         var reader = fileSystem.root.createReader();
                                         reader.readEntries(
@@ -54,7 +50,7 @@ app.service('sharedProperties', function () {
                                                 for (i=0; i<entries.length; i++) {
                                                     console.log(entries[i].name);
                                                 }
-                                                // console.log(entries);
+//                                                 console.log(entries);
 
                                                 var onsList = $("#popMessage");
                                                 for (var i=0; i<file_entries.length; i++) {
@@ -64,6 +60,7 @@ app.service('sharedProperties', function () {
                                                     console.log(file_name[1]);
                                                     }
                                                 }
+//                                                pop.show();
                                             },
                                             function (err) {
                                                 console.log(err);
@@ -75,12 +72,6 @@ app.service('sharedProperties', function () {
                                 );
 
                 }else{
-
-
-
-
-
-
                 window.resolveLocalFileSystemURL(path,
                     function (fileSystem) {
                         var reader = fileSystem.createReader();
@@ -91,7 +82,7 @@ app.service('sharedProperties', function () {
                                 for (i=0; i<entries.length; i++) {
                                     console.log(entries[i].name);
                                 }
-                                // console.log(entries);
+//                                 console.log(entries);
 
                                 var onsList = $("#popMessage");
                                 for (var i=0; i<file_entries.length; i++) {
@@ -101,6 +92,7 @@ app.service('sharedProperties', function () {
                                     console.log(file_name[1]);
                                     }
                                 }
+//                                pop.show();
                             },
                             function (err) {
                                 console.log(err);
@@ -112,13 +104,10 @@ app.service('sharedProperties', function () {
                 );
                 }
         }
+//
     };
 });
 
-
-//function prepare(){
-//    initIo();
-//}
 
 function showButtonId(that) {
     console.log("showButtonId that: ",that);
@@ -140,9 +129,6 @@ function exportInfo(that,callBack){
     fileName = file_entries[that].name;
     console.log("fileName: ",fileName);
 
-
-
-
     if(setAction=='selectForDelete'){
         console.log("selectForDelete");
         _delete(fileName);
@@ -155,7 +141,6 @@ function exportInfo(that,callBack){
 
                         }
                         );
-
     }
 }
 
@@ -170,13 +155,6 @@ function exportInfo(that,callBack){
 
 function save() {
      initIo();
-//     var func= initIo();
-//    func();
-
-
-    console.log("in save");
-
-
 }
 
 
