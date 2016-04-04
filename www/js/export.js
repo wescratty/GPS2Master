@@ -38,6 +38,49 @@ app.service('sharedProperties', function () {
                 // file_entries = un;
 
                 var path = directory.nativeURL;
+
+
+                if (device.platform == "browser"){
+                window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,
+
+
+
+                                    function (fileSystem) {
+                                        var reader = fileSystem.root.createReader();
+                                        reader.readEntries(
+                                            function (entries) {
+                                                file_entries = entries;
+                                                var i;
+                                                for (i=0; i<entries.length; i++) {
+                                                    console.log(entries[i].name);
+                                                }
+                                                // console.log(entries);
+
+                                                var onsList = $("#popMessage");
+                                                for (var i=0; i<file_entries.length; i++) {
+                                                    if (file_entries[i].name !== "NoCloud" && file_entries[i].name !== "Backups") {
+                                                    var file_name = file_entries[i].name.match(/(\w{17})\./);
+                                                     onsList.append('<ons-list-item modifier="tappable" id = ' + i + ' onclick="showButtonId(this.id)" class="list__item ons-list-item-inner">' + file_name[1] + '</ons-list-item>');
+                                                    console.log(file_name[1]);
+                                                    }
+                                                }
+                                            },
+                                            function (err) {
+                                                console.log(err);
+                                            }
+                                        );
+                                    }, function (err) {
+                                        console.log(err);
+                                    }
+                                );
+
+                }else{
+
+
+
+
+
+
                 window.resolveLocalFileSystemURL(path,
                     function (fileSystem) {
                         var reader = fileSystem.createReader();
@@ -67,6 +110,7 @@ app.service('sharedProperties', function () {
                         console.log(err);
                     }
                 );
+                }
         }
     };
 });

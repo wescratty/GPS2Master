@@ -36,17 +36,16 @@ function initIo() {
         });
 
     }else if (device.platform == "browser") {
-        // window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function(fileSystem) {
-        //
-        //         console.log("Main Dir:", fileSystem);
-        //         directory = fileSystem;
-        //         console.log("directory: ",directory);
-        //     fileSystem.getFile(fileName, {create: true}, function (file) {
-        //             console.log("File: ", file);
-        //             logOb = file;
-        //
-        //     });
-        // });
+     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,function(fileSystem) {
+
+                       console.log("Main Dir:", fileSystem);
+                                   directory = fileSystem;
+                                   console.log("directory: ",directory);
+                                   fileSystem.root.getFile(fileName, {create: true}, function (file) {
+                                       console.log("File: ", file);
+                                       logOb = file;
+                                   });
+                               });
 
     }
     
