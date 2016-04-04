@@ -116,9 +116,9 @@ app.service('sharedProperties', function () {
 });
 
 
-function test(num){
-console.log("the number is : ",num);
-}
+//function prepare(){
+//    initIo();
+//}
 
 function showButtonId(that) {
     console.log("showButtonId that: ",that);
@@ -169,10 +169,14 @@ function exportInfo(that,callBack){
 
 
 function save() {
+     initIo();
+//     var func= initIo();
+//    func();
+
 
     console.log("in save");
 
-    fileApp._writeTextToFile.call(FileApp);
+
 }
 
 

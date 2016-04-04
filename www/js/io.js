@@ -1,56 +1,57 @@
 
 document.addEventListener('deviceready', function () {
     console.log("device is ready in io");
+     console.log(device.platform);
+        if (device.platform == "Android") {
+            window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dir) {
+                console.log("Main Dir android:", dir);
+                directory = dir;
+
+            });
+        }
+        else if (device.platform == "iOS") {
+
+            window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
+                console.log("Main Dir:", dir);
+                directory = dir;
+                console.log("directory: ",directory);
+
+            });
+
+        }else if (device.platform == "browser") {
+         window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,function(fileSystem) {
+
+                           console.log("Main Dir:", fileSystem);
+                                       directory = fileSystem.root;
+                                       console.log("directory: ",directory);
+
+                                   });
+
+        }
+
+        fileApp = new FileApp();
+        fileApp.run();
+
 
 });
 
 function initIo() {
-    // got to be a cleaner way...
+
+if (distance.length>0) {
     var d = new Date().toLocaleString().replace(/,/g , "").replace(/ /g , "").replace(/\//g , "").replace(/:/g , "");
     fileName= first_name+last_name+d+".csv";
-//    console.log("first_name+last_name: "+first_name+last_name);
-//    console.log(fileName);
 
+    directory.getFile(fileName, {create: true}, function (file) {
+                    console.log("File: ", file);
+                    logOb = file;
+                });
 
-    console.log(device.platform);
-    if (device.platform == "Android") {
-        window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function (dir) {
-            console.log("Main Dir android:", dir);
-            directory = dir;
-            dir.getFile(fileName, {create: true}, function (file) {
-                console.log("File: ", file);
-                logOb = file;
-            });
-        });
-    }
-    else if (device.platform == "iOS") {
+            fileApp._writeTextToFile.call(FileApp);
 
-        window.resolveLocalFileSystemURL(cordova.file.documentsDirectory, function (dir) {
-            console.log("Main Dir:", dir);
-            directory = dir;
-            console.log("directory: ",directory);
-            dir.getFile(fileName, {create: true}, function (file) {
-                console.log("File: ", file);
-                logOb = file;
-            });
-        });
+        }else{
+            show_dialoge("You have no data yet!");
+        }
 
-    }else if (device.platform == "browser") {
-     window.requestFileSystem(LocalFileSystem.PERSISTENT, 0,function(fileSystem) {
-
-                       console.log("Main Dir:", fileSystem);
-                                   directory = fileSystem;
-                                   console.log("directory: ",directory);
-                                   fileSystem.root.getFile(fileName, {create: true}, function (file) {
-                                       console.log("File: ", file);
-                                       logOb = file;
-                                   });
-                               });
-
-    }
-    
-    fileApp = new FileApp();
-    fileApp.run();
 }
 
 

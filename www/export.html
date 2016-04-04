@@ -1,6 +1,6 @@
 
-<body ng-controller="AppController" ng-init="init()">
-<ons-navigator title="Navigator" var="myNavigator">
+<!--<body ng-controller="AppController" ng-init="init()">-->
+<!--<ons-navigator title="Navigator" var="myNavigator">-->
 <ons-page id="export-page">
 
 <ons-toolbar >
@@ -12,15 +12,15 @@
 
         <ons-list-item modifier="chevron" onclick="save()">
             <ons-icon icon="ion-plus-circled" style="opacity: 0.6"></ons-icon>
-            Save Most Recent Data
+            Save Data in New File
         </ons-list-item>
 
         <ons-list-item id="selectForDelete" modifier="chevron"  ng-click="go($event);">
             <ons-icon icon="ion-minus-circled" style="opacity: 0.6"></ons-icon>
-            Remove File
+            Remove a File
         </ons-list-item>
 
-        <ons-list-item  modifier="chevron" onclick="showPosition()">
+        <ons-list-item id="showPos" modifier="chevron" onclick="showPosition()">
             <ons-icon icon="fa-map-marker" style="opacity: 0.6"></ons-icon>
             Show Rout in Google Maps
         </ons-list-item>
@@ -29,7 +29,7 @@
         <ons-list-item id="selectForEmail" modifier="chevron"  ng-click="go($event);">
 
 
-        <ons-icon icon="ion-email" style="opacity: 0.6"></ons-icon>
+        <ons-icon icon="ion-email"  style="opacity: 0.6"></ons-icon>
             Select File and Send Email
         </ons-list-item>
     </ons-list>
@@ -43,10 +43,11 @@
 
 
 </ons-page>
-</ons-navigator>
+<!--</ons-navigator>-->
 
 
     <ons-template  id="popover.html">
+        <ons-page>
         <ons-popover  direction="down" cancelable>
             <div class="center">Time of File Creation</div>
 
@@ -54,7 +55,8 @@
             </ons-list>
 
         </ons-popover>
+        </ons-page>
     </ons-template>
 
 
-</body>
+<!--</body>-->
