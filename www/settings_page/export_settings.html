@@ -1,0 +1,27 @@
+<ons-page>
+    <ons-toolbar fixed-style>
+        <div class="left"><ons-back-button>Settings</ons-back-button></div>
+        <div class="center">Export Settings</div>
+    </ons-toolbar>
+    <ons-list class="menu-list">
+        <span style="color: #666">Map Zoom Level</span>
+        <ons-list-item >
+            Auto
+            <label class="switch switch--list-item">
+                <input type="checkbox" class="switch__input" onchange="autoZoom()" checked>
+                <div class="switch__toggle"></div>
+            </label>
+            <!--<ons-icon icon="fa-plus"></ons-icon>-->
+        </ons-list-item>
+
+        <ons-list-item >
+            <ons-icon icon="fa-bookmark"></ons-icon>
+            Bookmark
+        </ons-list-item>
+
+        <ons-list-item >
+            <ons-icon icon="fa-twitter"></ons-icon>
+            Official Twitter
+        </ons-list-item>
+    </ons-list>
+</ons-page>
