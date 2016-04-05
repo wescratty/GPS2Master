@@ -27,6 +27,9 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "edu.umontana.derivio"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "edu.umontana.derivio"
         }
     },
     "dependent_plugins": {}

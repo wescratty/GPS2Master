@@ -159,12 +159,11 @@ function save() {
 
 
 function _delete(fileName) {
-    console.log("in _delete");
 
     if(fileName=="NoCloud"||fileName=="Backups"){
         show_dialoge("Please select a different file.");
     }else{
-        console.log("after else");
+
         fileApp._deleteFile.call(FileApp);
 
     }
@@ -174,8 +173,8 @@ function _delete(fileName) {
 function tryEmail() {
 
     var email;
-    var attachment = logOb.nativeURL;
-    console.log("attachment: ",attachment);
+//    var attachment = logOb.nativeURL;
+//    console.log("attachment: ",attachment);
     var first;
     var last;
     var teacher_email;
@@ -184,7 +183,7 @@ function tryEmail() {
     if (receiver_email !== "" || receiver_email !== null) {
         teacher_email = receiver_email;
     } else {
-        teacher_email = "doranillich@gmail.com";
+        teacher_email = "";
     }
     if (first_name !== "" || first_name !== null) {
         first = first_name;
@@ -225,11 +224,10 @@ function tryEmail() {
 
     if (device.platform == "browser") {
 
+
         window.location.href ='mailto:'+email+'?'+'subject='+_subject+'&body='+_body;
 
     } else{
-    console.log("in email else-------------");
-
         cordova.plugins.email.isAvailable(
             function () {
 
