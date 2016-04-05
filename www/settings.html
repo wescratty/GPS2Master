@@ -20,17 +20,17 @@
 
     <ons-list modifier="inset" class="settings-list">
 
-        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('graph_settings.html', {animation : 'slide'})">
+        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('settings_page/graph_settings.html', {animation : 'slide'})">
             <ons-icon icon="ion-pie-graph" style="opacity: 0.6"></ons-icon>
             Graph
         </ons-list-item>
 
-        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('table_settings.html', {animation : 'slide'})">
+        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('settings_page/table_settings.html', {animation : 'slide'})">
             <ons-icon icon="desktop" style="opacity: 0.6"></ons-icon>
             Table
         </ons-list-item>
 
-        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('export_settings.html', {animation : 'slide'})">
+        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('settings_page/export_settings.html', {animation : 'slide'})">
             <ons-icon icon="ion-ios-download-outline" style="opacity: 0.6"></ons-icon>
             Export
         </ons-list-item>
@@ -39,12 +39,12 @@
     <div class="settings-header">Info</div>
 
     <ons-list modifier="inset" class="settings-list">
-        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('help.html', {animation : 'slide'})">
+        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('settings_page/help.html', {animation : 'slide'})">
             <ons-icon icon="ion-ios-help" style="opacity: 0.6"></ons-icon>
             Help
         </ons-list-item>
 
-        <ons-list-item modifier="chevron">
+        <ons-list-item modifier="chevron" onclick="window.open('http://www.math.umt.edu/roscoe/', '_system')">
             <ons-icon icon="ion-ios-world-outline" style="opacity: 0.6"></ons-icon>
             Website
         </ons-list-item>
@@ -61,112 +61,6 @@
     </ons-list>
 </ons-page>
 <!--</ons-navigator>-->
-
-<ons-template id="graph_settings.html">
-    <ons-page>
-        <ons-toolbar fixed-style>
-            <div class="left"><ons-back-button>Settings</ons-back-button></div>
-            <div class="center">Graph Preferences</div>
-        </ons-toolbar>
-        <ons-list class="menu-list">
-            <ons-list-item >
-                <ons-icon icon="fa-plus"></ons-icon>
-                New Post
-            </ons-list-item>
-
-            <ons-list-item >
-                <ons-icon icon="fa-bookmark"></ons-icon>
-                Bookmark
-            </ons-list-item>
-
-            <ons-list-item >
-                <ons-icon icon="fa-twitter"></ons-icon>
-                Official Twitter
-            </ons-list-item>
-        </ons-list>
-    </ons-page>
-</ons-template>
-
-<ons-template id="table_settings.html">
-    <ons-page>
-        <ons-toolbar fixed-style>
-            <div class="left"><ons-back-button>Settings</ons-back-button></div>
-            <div class="center">Table Preferences</div>
-        </ons-toolbar>
-        <ons-list class="menu-list">
-            <ons-list-item >
-                <ons-icon icon="fa-plus"></ons-icon>
-                New Post
-            </ons-list-item>
-
-            <ons-list-item >
-                <ons-icon icon="fa-bookmark"></ons-icon>
-                Bookmark
-            </ons-list-item>
-
-            <ons-list-item >
-                <ons-icon icon="fa-twitter"></ons-icon>
-                Official Twitter
-            </ons-list-item>
-        </ons-list>
-    </ons-page>
-</ons-template>
-
-
-<ons-template id="export_settings.html">
-    <ons-page>
-        <ons-toolbar fixed-style>
-            <div class="left"><ons-back-button>Settings</ons-back-button></div>
-            <div class="center">Export Settings</div>
-        </ons-toolbar>
-        <ons-list class="menu-list">
-            <span style="color: #666">Map Zoom Level</span>
-            <ons-list-item >
-                Auto
-                <label class="switch switch--list-item">
-                    <input type="checkbox" class="switch__input" onchange="autoZoom()" checked>
-                    <div class="switch__toggle"></div>
-                </label>
-                <!--<ons-icon icon="fa-plus"></ons-icon>-->
-            </ons-list-item>
-
-            <ons-list-item >
-                <ons-icon icon="fa-bookmark"></ons-icon>
-                Bookmark
-            </ons-list-item>
-
-            <ons-list-item >
-                <ons-icon icon="fa-twitter"></ons-icon>
-                Official Twitter
-            </ons-list-item>
-        </ons-list>
-    </ons-page>
-</ons-template>
-
-<ons-template id="help.html">
-    <ons-page>
-        <ons-toolbar fixed-style>
-            <div class="left"><ons-back-button>Settings</ons-back-button></div>
-            <div class="center">Help</div>
-        </ons-toolbar>
-        <ons-list class="menu-list">
-            <ons-list-item >
-                <ons-icon icon="fa-plus"></ons-icon>
-                New Post
-            </ons-list-item>
-
-            <ons-list-item >
-                <ons-icon icon="fa-bookmark"></ons-icon>
-                Bookmark
-            </ons-list-item>
-
-            <ons-list-item >
-                <ons-icon icon="fa-twitter"></ons-icon>
-                Official Twitter
-            </ons-list-item>
-        </ons-list>
-    </ons-page>
-</ons-template>
 
 <style>
     .profile-wrapper {
