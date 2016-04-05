@@ -224,8 +224,9 @@ function tryEmail() {
     }
 
     if (device.platform == "browser") {
-        console.log("in email");
-        window.location="https://mail.google.com/mail?view=cm&tf=0"+teacher_email+"&su"+_subject+"&body"+_body;
+
+        window.location.href ='mailto:'+email+'?'+'subject='+_subject+'&body='+_body;
+
     } else{
     console.log("in email else-------------");
 
