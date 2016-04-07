@@ -1,6 +1,17 @@
 /**
  * Created by wescratty on 3/29/16.
  */
+$(document).ready(function() {
+    //alert("hi");
+
+});
+
+function loadLocalStorage() {
+    document.getElementById("useremail").value = localStorage.email;
+    document.getElementById("firstName").value = localStorage.first_name;
+    document.getElementById("lastName").value = localStorage.last_name;
+
+}
 
 function getUserName() {
     return validateForm();
@@ -47,6 +58,9 @@ function validateForm() {
         console.log("last_name: ",last_name);
 //        initIo();
 
+        localStorage.email = user_email;
+        localStorage.first_name = first_name;
+        localStorage.last_name = last_name;
         return myNavigator.resetToPage('sliding_menu.html', {animation : 'lift' });
     }
 }
