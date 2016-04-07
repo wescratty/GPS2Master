@@ -5,20 +5,32 @@
         </div>
         <div class="center">Graph Preferences</div>
     </ons-toolbar>
+    <button onclick="loadLocalStorageGraphSettings()">Load Data</button>
     <ons-list class="menu-list">
         <ons-list-item>
             <ons-icon icon="fa-plus"></ons-icon>
-            Position Color <input type="color" id="c1" onchange="changeGraphColor(0,this.value)">
+            Position Color <input type="color" id="positionColor" onchange="changeGraphColor(0,this.value);
+                saveLocalStorageGraphSettings()">
         </ons-list-item>
 
         <ons-list-item>
             <ons-icon icon="fa-bookmark"></ons-icon>
-            Velocity Color <input type="color" id="c2" onchange="changeGraphColor(1,this.value)">
+            Velocity Color <input type="color" id="velocityColor" onchange="changeGraphColor(1,this.value);
+                saveLocalStorageGraphSettings()">
         </ons-list-item>
 
         <ons-list-item>
             <ons-icon icon="fa-twitter"></ons-icon>
-            Acceleration Color <input type="color" id="c3" onchange="changeGraphColor(2,this.value)">
+            Acceleration Color <input type="color" id="accelerationColor" onchange="changeGraphColor(2,this.value);
+                saveLocalStorageGraphSettings()">
+        </ons-list-item>
+
+        <ons-list-item>
+            Adjust graph scale
+            <label class="switch switch--list-item">
+                <input type="checkbox" class="switch__input" onchange="changeGraphScale(-10,10,5)">
+                <div class="switch__toggle"></div>
+            </label>
         </ons-list-item>
     </ons-list>
 </ons-page>

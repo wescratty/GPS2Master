@@ -6,7 +6,7 @@ $(document).ready(function() {
 
 });
 
-function loadLocalStorage() {
+function loadLocalStorageLogin() {
     document.getElementById("useremail").value = localStorage.email;
     document.getElementById("firstName").value = localStorage.first_name;
     document.getElementById("lastName").value = localStorage.last_name;
