@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "main.js",
   "dependencies": {
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "grunt-cli": "^1.2.0"
   }
 }
