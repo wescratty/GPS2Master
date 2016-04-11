@@ -1,10 +1,14 @@
 /**
  * Created by wescratty on 3/29/16.
  */
-$(document).ready(function() {
-    //alert("hi");
 
+
+ons.ready(function() {
+$(document.body).on("pageinit", '#login-page', function() {
+    loadLocalStorageLogin();
 });
+});
+
 
 function loadLocalStorageLogin() {
     document.getElementById("useremail").value = localStorage.email;
@@ -56,7 +60,7 @@ function validateForm() {
 
         console.log("first_name: ",first_name);
         console.log("last_name: ",last_name);
-//        initIo();
+
 
         localStorage.email = user_email;
         localStorage.first_name = first_name;
