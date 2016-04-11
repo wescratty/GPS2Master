@@ -1,5 +1,8 @@
 {
   "name": "Derive.IO",
   "version": "0.0.1",
-  "main"    : "main.js"
+  "main": "main.js",
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
 }
