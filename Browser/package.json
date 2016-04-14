@@ -1,5 +1,21 @@
 {
-  "name": "Derive.IO",
+  "name": "deriveio",
   "version": "0.0.1",
-  "main"    : "main.js"
+  "description": "A package for vizualizing DeriveIO  output files on a Personal Computer",
+  "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wescratty/GPS2Master.git"
+  },
+  "scripts": {
+    "start": "node main.js"
+  },
+  "bugs": {
+    "url": "https://github.com/wescratty/GPS2Master/issues"
+  },
+  "homepage": "https://github.com/wescratty/GPS2Master#readme",
+  "dependencies": {"electron":">0.3.0"},
+  "devDependencies": {"electron":">0.3.0"},
+  "author": "Brian Trethewey Wes Cratty Drew MacLean",
+  "license": "ISC"
 }

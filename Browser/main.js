@@ -1,9 +1,13 @@
 /**
  * Created by sinless on 3/27/16.
  */
-'use strict';
+
 
 const electron = require('electron');
+module.paths.push(path.resolve('node_modules'));
+module.paths.push(path.resolve('../node_modules'));
+module.paths.push(path.resolve(__dirname, '..', '..', '..', '..', 'resources', 'app', 'node_modules'));
+module.paths.push(path.resolve(__dirname, '..', '..', '..', '..', 'resources', 'app.asar', 'node_modules'));
 const app = electron.app;  // Module to control application life.
 const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
 
@@ -28,7 +32,7 @@ app.on('ready', function() {
 
 
     // and load the index.html of the app.
-    mainWindow.loadURL('file://' + __dirname + '/graph.html');
+    mainWindow.loadURL('file://' + __dirname + '/index.html');
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools();

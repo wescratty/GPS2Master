@@ -219,15 +219,15 @@ function addDataToChart(disFromLastPoint, disFromStartPoint) {
     ;
 
 
-    time = time+1;
-    if (num_dis_points>2) {
-        lineChart.addData([distance[time - 3].info()[1], rate[time - 3], acceleration[time - 3]], time - 3);
+    if (num_dis_points > 4) {
+        lineChart.addData([distance[time-1 ].info()[1], rate[time - 2], acceleration[time-3]], time-4);
         console.log(distance);
         console.log(rate);
         console.log(acceleration);
         console.log(time);
-    }
         // lineChart.addData([distance[time+2].info()[1],rate[time+1],acceleration[time],distancePoints[time+2].info()[1]],time);
+    }
+    time = time + 1;
     void(time > 20 && lineChart.removeData());
 
 }
