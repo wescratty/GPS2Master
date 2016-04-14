@@ -14,8 +14,11 @@
     "url": "https://github.com/wescratty/GPS2Master/issues"
   },
   "homepage": "https://github.com/wescratty/GPS2Master#readme",
-  "dependencies": {"electron":">0.3.0"},
+  "dependencies": {"electron":">0.3.0",
+    "bootstrap": "^3.3.6",
+    "grunt-cli": "^1.2.0"},
   "devDependencies": {"electron":">0.3.0"},
   "author": "Brian Trethewey Wes Cratty Drew MacLean",
   "license": "ISC"
+
 }
