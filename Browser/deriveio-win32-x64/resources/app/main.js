@@ -4,13 +4,15 @@
 
 
 const electron = require('electron');
+const app = require('app');
+const BrowserWindow = require('browser-window')
 const path = require('path');
 module.paths.push(path.resolve('node_modules'));
 module.paths.push(path.resolve('../node_modules'));
 module.paths.push(path.resolve(__dirname, '..', '..', '..', '..', 'resources', 'app', 'node_modules'));
 module.paths.push(path.resolve(__dirname, '..', '..', '..', '..', 'resources', 'app.asar', 'node_modules'));
-const app = electron.app;  // Module to control application life.
-const BrowserWindow = electron.BrowserWindow;  // Module to create native browser window.
+console.log(electron)
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
