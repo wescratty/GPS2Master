@@ -103,9 +103,11 @@
             // todo look into electron!!!!!
               function loadFile(files){
                   // files is a FileList of File objects. List some properties.
+                  var regex = new RegExp('.*\.csv');
                   var output = [];
                   for (var i = 0, f; f = files[i]; i++) {
-                      if(f.type === "text/csv"){
+                  	console.log(regex.test(f.name))
+                      if(f.type === "text/csv" ||regex.test(f.name)){
                           output.push("Good File");
                           reset();
                           console.log(f);
