@@ -16,6 +16,7 @@
   "homepage": "https://github.com/wescratty/GPS2Master#readme",
   "dependencies": {
     "bootstrap": "^3.3.6",
+    "bootstrapper": "^0.1.3",
     "electron": "^0.4.1",
     "electron-prebuilt": "^0.37.5",
     "grunt-cli": "^1.2.0",
