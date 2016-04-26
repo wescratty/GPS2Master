@@ -3,6 +3,7 @@
 
 Chart.defaults.global.responsive = true;
 
+
 var modal;
 ons.ready(function() {
 $(document.body).on("pageinit", '#my-page', function() {
@@ -95,6 +96,7 @@ function createGraph() {
       // String - Template string for multiple tooltips
       // multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
       pointDotRadius : 3,
+      scaleLabel: "          <%=value%> ft.",
       // scaleGridLineColor : "#000000",
       scaleFontColor: "#000000"
     };
@@ -264,7 +266,7 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
 
 
     if (lastIndex>1) {
-        lineChart.addData([distance[time].info()[1],rate[time],acceleration[time]],time);
+        lineChart.addData([distance[time].info()[1],rate[time],acceleration[time]],time+" sec.");
         time = time+1;
     }
 
