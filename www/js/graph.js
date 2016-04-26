@@ -15,6 +15,11 @@ $(document.body).on("pageinit", '#my-page', function() {
         console.log("in graph");
         
     });
+
+    $("#show-modal").on('click',function(){
+        var currentText = $("#show-modal .btn-text").text();
+        $("#show-modal .btn-text").text( currentText == "Start" ? "Stop" : "Start");
+    });
 });
 });
 
