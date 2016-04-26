@@ -41,28 +41,41 @@
     <li class="list__item">
         Position
         <label class="switch switch--list-item">
-            <input type="checkbox" class="switch__input" onchange="pos()" checked>
-            <div class="switch__toggle"></div>
+            <input type="checkbox" class="switch__input" id="Pswitch"   onchange="pos()" checked>
+            <div class="switch__toggle" style="background-color:red;"></div>
         </label>
     </li>
+    <!--style="background-color:#f50a41;"-->
 
     <li class="list__item">
         Velocity
         <label class="switch switch--list-item">
-            <input type="checkbox" class="switch__input" onchange="vol()" checked>
-            <div class="switch__toggle"></div>
+            <input type="checkbox" class="switch__input" id="Vswitch" onchange="vol()" checked>
+            <div class="switch__toggle"  style="background-color:blue;"></div>
         </label>
     </li>
 
     <li class="list__item">
         Acceleration
         <label class="switch switch--list-item">
-            <input type="checkbox" class="switch__input" onchange="acc()" checked>
-            <div class="switch__toggle"></div>
+            <input type="checkbox" class="switch__input" id="Aswitch" onchange="acc()" checked>
+            <div class="switch__toggle"  style="background-color:green;"></div>
         </label>
     </li>
 </ul>
  </ons-page>
+
+<style>
+
+    .switch__input:disabled + .switch__toggle {
+    opacity: 0.3;
+    cursor: default;
+    pointer-events: none;
+    }
+
+
+
+</style>
 
 <!--</ons-navigator>-->
 <!--</body>-->
