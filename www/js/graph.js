@@ -15,6 +15,9 @@ $(document.body).on("pageinit", '#my-page', function() {
         console.log("in graph");
         
     });
+        document.getElementById("Pswitch").disabled=true;
+        document.getElementById("Vswitch").disabled=true;
+        document.getElementById("Aswitch").disabled=true;
 
 
     $("#show-modal").on('click',function(){
