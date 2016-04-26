@@ -1,4 +1,3 @@
-
 <ons-modal var="modal" ng-init="init()">
     <div id = modalMessage>
     <ons-icon icon="ion-load-c" spin="true"></ons-icon>
@@ -16,8 +15,11 @@
             </ons-toolbar-button></div>
           <div class="center">Graph</div>
           <div class="right">
-            <ons-toolbar-button id="show-modal" onclick="startLocationPoints()"><small>start</small>
-                <ons-icon icon="ion-ios-navigate" style="font-size: 32px; width: 1em"></ons-icon>
+            <ons-toolbar-button id="show-modal" onclick="startLocationPoints()">
+                <small><span class="btn-text">Start</span></small>
+                <span class="btn-icon">
+                    <ons-icon id="show-modal-icon" icon="ion-ios-navigate" style="font-size: 32px; width: 1em"></ons-icon>
+                </span>
             </ons-toolbar-button>
           </div>
         </ons-toolbar>
@@ -60,11 +62,7 @@
         </label>
     </li>
 </ul>
-
-
-
-
-
  </ons-page>
+
 <!--</ons-navigator>-->
 <!--</body>-->
