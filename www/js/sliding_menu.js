@@ -16,3 +16,7 @@ function set_mode_drive(){
     mode = "drive";
     console.log("changed mode drive");
 }
+
+function displayInstructions(){
+    show_dialoge("Push start button to start gathering data. It should take less then 5 seconds to start getting points. If no points are gathered try changing the mode to bike or drive.");
+}
