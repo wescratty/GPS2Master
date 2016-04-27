@@ -16,30 +16,36 @@ $(document.body).on("pageinit", '#my-page', function() {
         console.log("in graph");
         
     });
-        document.getElementById("Pswitch").disabled=true;
-        document.getElementById("Vswitch").disabled=true;
-        document.getElementById("Aswitch").disabled=true;
 
+    disableToggle();
 
     $("#show-modal").on('click',function(){
         var currentText = $("#show-modal .btn-text").text();
         $("#show-modal .btn-text").text( currentText == "Start" ? "Stop" : "Start");
         if(currentText == "Start"){
         console.log(" stop")
-//            $('#switch__input ' ).disabled('true');
-            document.getElementById("Pswitch").disabled=true;
-            document.getElementById("Vswitch").disabled=true;
-            document.getElementById("Aswitch").disabled=true;
+          disableToggle();
         }else{
-            document.getElementById("Pswitch").disabled=false;
-            document.getElementById("Vswitch").disabled=false;
-            document.getElementById("Aswitch").disabled=false;
+            enableToggle();
         }
 
 
     });
 });
 });
+
+function disableToggle(){
+    document.getElementById("Pswitch").disabled=true;
+    document.getElementById("Vswitch").disabled=true;
+    document.getElementById("Aswitch").disabled=true;
+
+}
+
+function enableToggle(){
+    document.getElementById("Pswitch").disabled=false;
+    document.getElementById("Vswitch").disabled=false;
+    document.getElementById("Aswitch").disabled=false;
+}
 
 document.addEventListener('deviceready', function () {
 

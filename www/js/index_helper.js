@@ -116,6 +116,7 @@ function onDeviceReady() {
 
 function prep_test_data(){
     // _fromStartPoint= !_fromStartPoint;
+    enableToggle();
     var temp = testdata;
     reset();
     testdata = temp;
