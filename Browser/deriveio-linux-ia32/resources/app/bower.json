@@ -1,0 +1,19 @@
+{
+  "name": "DeriveIO",
+  "version": "0.0.1",
+  "homepage": "https://github.com/wescratty/GPS2Master",
+  "authors": [
+    "Brian_Trethewey <brian.trethewey@umontana.edu>"
+  ],
+  "description": "A package for vizualizing DeriveIO  output files on a Personal Computer",
+  "main": "main.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
