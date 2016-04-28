@@ -47,18 +47,17 @@ function createGraph() {
                // }
                ]
     };
-    
-    
+
+
     var options = {
         // String - Template string for single tooltips
-    // tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
+        // tooltipTemplate: "<%if (label){%><%=label %>: <%}%><%= value + ' %' %>",
         // String - Template string for multiple tooltips
-    // multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
-    pointDotRadius : 3,
-    scaleGridLineColor : "#000000",
-    scaleFontColor: "#000000"
-    
-
+        // multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
+        pointDotRadius : 3,
+        scaleLabel: "          <%=value%> ft.",
+        // scaleGridLineColor : "#000000",
+        scaleFontColor: "#000000"
     };
     
     var ctx = document.getElementById("updating-chart").getContext("2d");
@@ -233,7 +232,8 @@ function addDataToChart(disFromLastPoint, disFromStartPoint) {
 }
         
 function reset(){
-            
+    $("#dataTable").empty();
+
     dataOutArray = [];
     pointsArray = [];
     coorPoints = [];
