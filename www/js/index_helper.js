@@ -31,6 +31,7 @@ var startTime;
 var count = 0;
 var time = 0;
 var un;// used to reset things
+var x_range =20;
 
 var max = 0;
 

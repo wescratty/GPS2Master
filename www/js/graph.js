@@ -103,6 +103,7 @@ function createGraph() {
       // multiTooltipTemplate: "<%= value + ' %' %>",pointDotRadius : 1,
       pointDotRadius : 3,
       scaleLabel: "          <%=value%> ft.",
+
       // scaleGridLineColor : "#000000",
       scaleFontColor: "#000000"
     };
@@ -110,7 +111,9 @@ function createGraph() {
     var ctx = document.getElementById("updating-chart").getContext("2d");
     
     window.lineChart = new Chart(ctx).Line(data, options);
+
     window.lineChart.store = new Array();
+
 }
     
     
@@ -276,7 +279,7 @@ function addDataToChart(disFromLastPoint, disFromStartPoint){
         time = time+1;
     }
 
-    void(time>20&&lineChart.removeData());
+    void(time>x_range&&lineChart.removeData());
     addDataToTable();
 
 }

@@ -26,3 +26,8 @@ function changeGraphColor(ds, color) {
     window.lineChart.datasets[ds].pointHighlightFill = color;
     window.lineChart.update();
 }
+
+function changeXRange(){
+
+x_range = document.getElementById("xRange").value;
+}

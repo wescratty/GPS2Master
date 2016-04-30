@@ -6,7 +6,33 @@
         <div class="center">Graph Preferences</div>
     </ons-toolbar>
     <button onclick="loadLocalStorageGraphSettings()">Load Data</button>
+    <ons-row></ons-row>
     <ons-list class="menu-list">
+
+
+        <br>
+
+        <ons-list-item>
+            <div class="center">X Range</div>
+            <ons-row>
+                <ons-col width="40px">
+                    10
+                    <!--<ons-icon icon="fa-moon-o" class="lower"></ons-icon>-->
+                </ons-col>
+                <ons-col class="range-wrapper">
+                    <input type="range" id="xRange" value="20" class="range" onchange="changeXRange()">
+                </ons-col>
+                <ons-col width="40px">
+                    <!--<ons-icon icon="fa-moon-o"></ons-icon>-->
+                    100
+                </ons-col>
+            </ons-row>
+        </ons-list-item>
+        <!--<ons-list-item class="bottom-menu-item" modifier="chevron" ng-click="menu.closeMenu()">-->
+            <!--&lt;!&ndash;onclick="displayInstructions()"&ndash;&gt;-->
+            <!--X Axis Range-->
+            <!--<input type="range" class="range">-->
+        <!--</ons-list-item>-->
         <ons-list-item>
             <ons-icon icon="fa-plus"></ons-icon>
             Position Color <input type="color" id="positionColor" onchange="changeGraphColor(0,this.value);
