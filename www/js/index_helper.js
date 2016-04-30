@@ -55,6 +55,7 @@ var fs;
 
 // location
 var coorPoints = [];
+var alertArgs = new Array(10,true);
 var refreshIntervalId = null;
 var startPoss;
 var goodPoint = false;

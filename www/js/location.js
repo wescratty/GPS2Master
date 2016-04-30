@@ -190,6 +190,27 @@ function show_dialoge(mess) {
     });
 }
 
+// need to add load function
+//function show_choice(mess,caller) {
+//    if(!alertArgs[caller]){
+//    ons.notification.confirm({
+//        message: mess
+//    callback: function(answer) {
+//          if(answer ==  true){
+//             alertArgs[caller]=1;
+//          }
+//        }
+//      });
+//    }
+//}
+
+
+// ons.notification.confirm({
+//    message: 'Are you ready?'
+//    callback: function(answer) {
+//      // Do something here.
+//    }
+//  });
 
 function errorCallback_highAccuracy(error) {
     accuracy_high = false;

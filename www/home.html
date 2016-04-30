@@ -1,5 +1,90 @@
+
+
+
+
 <ons-page>
-  <ons-toolbar fixed-style>
-    <div class="center">Home</div>
-  </ons-toolbar>
+    <ons-toolbar fixed-style>
+        <div class="center">Home</div>
+    </ons-toolbar>
+
+    <!--<ons-row class="profile-wrapper">-->
+    <!--&lt;!&ndash;<ons-col width="60px" class="profile-image-wrapper">&ndash;&gt;-->
+    <!--&lt;!&ndash;<img src="resources/calculator.png" class="profile-image">&ndash;&gt;-->
+    <!--&lt;!&ndash;</ons-col>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<ons-col>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="profile-name">Samuel Calculator</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;<div class="profile-email">scalc@example.com</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</ons-col>&ndash;&gt;-->
+
+    <!--</ons-row>-->
+    <h1>Info page</h1>
+    <h4>For operation information tap the section of interest</h4>
+
+    <div class="settings-header">Info</div>
+
+    <ons-list modifier="inset" class="settings-list">
+
+        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('Info_page/GraphInfo.html', {animation : 'slide'})">
+            <ons-icon icon="ion-pie-graph" style="opacity: 0.6"></ons-icon>
+            Graph
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('Info_page/TableInfo.html', {animation : 'slide'})">
+            <ons-icon icon="desktop" style="opacity: 0.6"></ons-icon>
+            Table
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('Info_page/ExportINfo.html', {animation : 'slide'})">
+            <ons-icon icon="ion-ios-download-outline" style="opacity: 0.6"></ons-icon>
+            Export
+        </ons-list-item>
+
+        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('Info_page/SettingsInfo.html', {animation : 'slide'})">
+            <ons-icon icon="ion-ios-settings" style="opacity: 0.6"></ons-icon>
+            Settings
+        </ons-list-item>
+        <ons-list-item modifier="chevron" onclick="myNavigator.pushPage('Info_page/SlidingMenuInfo.html', {animation : 'slide'})">
+            <ons-icon icon="fa-mail-forward" style="opacity: 0.6"></ons-icon>
+            Sliding Menu
+        </ons-list-item>
+    </ons-list>
+
+
+
 </ons-page>
+<!--</ons-navigator>-->
+
+<style>
+    .profile-wrapper {
+    padding: 16px 10px 0 10px;
+    }
+    .profile-image {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -border: inset 1px rgba(0, 0, 0, 0.3);
+    }
+    .profile-name {
+    font-size: 18px;
+    padding: 4px 0 2px 0;
+    }
+    .profile-email {
+    font-size: 15px;
+    opacity: 0.4;
+    }
+    .switch--list-item {
+    margin-right: 0px;
+    }
+    .settings-header {
+    font-weight: 500;
+    font-size: 14px;
+    opacity: 0.4;
+    padding: 10px 0 0px 10px;
+    margin-bottom: -4px;
+    }
+    .settings-list {
+    margin-top: 10px;
+    }
+</style>

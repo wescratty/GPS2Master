@@ -24,7 +24,7 @@ $(document.body).on("pageinit", '#my-page', function() {
         $("#show-modal .btn-text").text( currentText == "Start" ? "Stop" : "Start");
         if(currentText == "Start"){
         console.log(" stop")
-          disableToggle();
+            disableToggle();
         }else{
             enableToggle();
         }
