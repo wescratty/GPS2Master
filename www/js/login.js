@@ -11,10 +11,15 @@ $(document.body).on("pageinit", '#login-page', function() {
 
 
 function loadLocalStorageLogin() {
-    document.getElementById("useremail").value = localStorage.email;
-    document.getElementById("firstName").value = localStorage.first_name;
-    document.getElementById("lastName").value = localStorage.last_name;
-
+    if (localStorage.getItem("email") !== null) {
+        document.getElementById("useremail").value = localStorage.email;
+    }
+    if (localStorage.getItem("first_name") !== null) {
+        document.getElementById("firstName").value = localStorage.first_name;
+    }
+    if (localStorage.getItem("last_name") !== null) {
+        document.getElementById("lastName").value = localStorage.last_name;
+    }
 }
 
 function getUserName() {
@@ -47,19 +52,20 @@ function validateForm() {
         last_name = document.getElementById("lastName").value;
 
         if (first_name == null || first_name == "") {
-            first_name="John";
-
+            show_dialoge("First name must be filled out");
+            return false;
         }
 
         if (last_name == null || last_name == "") {
-            last_name = "Doe";
+            show_dialoge("Last name must be filled out");
+            return false;
         }
 
         first_name=capitalizeFirstLetter(first_name);
         last_name=capitalizeFirstLetter(last_name);
 
-        console.log("first_name: ",first_name);
-        console.log("last_name: ",last_name);
+/*        console.log("first_name: ",first_name);
+        console.log("last_name: ",last_name);*/
 
 
         localStorage.email = user_email;
