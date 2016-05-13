@@ -12,6 +12,6 @@ Clone UI branch
 Install cordova and required modules:
 https://cordova.apache.org/#getstarted
 ###To run the instructor view:
-Clone Master branch
-Run executable in Browser/”OS Version”/derivio.exe
+*   Clone Master branch
+*   Run executable in Browser/”OS Version”/derivio.exe
 
