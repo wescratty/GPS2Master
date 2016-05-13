@@ -2,9 +2,9 @@
 
 ##Link to app stores: 
 ###iTunes
-![iTunes](https://itunes.apple.com/us/app/deriv.io/id1098930135?mt=8)
+https://itunes.apple.com/us/app/deriv.io/id1098930135?mt=8
 ###Android
-![Android](https://play.google.com/store/apps/details?id=edu.umontana.derivio)
+https://play.google.com/store/apps/details?id=edu.umontana.derivio
 
 ##User Installation:
 To compile app from source:
