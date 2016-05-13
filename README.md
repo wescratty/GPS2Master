@@ -1,4 +1,4 @@
-# GPS2Master
+# deriv.io
 
 ##Link to app stores: 
 ###iTunes
