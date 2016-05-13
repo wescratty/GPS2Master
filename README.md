@@ -8,8 +8,8 @@ https://play.google.com/store/apps/details?id=edu.umontana.derivio
 
 ##User Installation:
 ###To compile app from source:
-Clone UI branch
-Install cordova and required modules:
+*   Clone UI branch
+*   Install cordova and required modules:
 https://cordova.apache.org/#getstarted
 ###To run the instructor view:
 *   Clone Master branch
